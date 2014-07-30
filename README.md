@@ -15,8 +15,134 @@ Installation
 % npm install protean
 ~~~
 
+API
+---
 
-### Dependencies ###
+<a name="module_Protean"></a>
+####Protean
+**Members**
+
+* [Protean](#module_Protean)
+  * [Protean.alias(name, [scope], [...arg])](#module_Protean.alias)
+  * [Protean.augment(...obj)](#module_Protean.augment)
+  * [Protean.classify([subclass], props, [properties])](#module_Protean.classify)
+  * [Protean.enumerate()](#module_Protean.enumerate)
+  * [Protean.hashify()](#module_Protean.hashify)
+  * [Protean.inherit(superclass, [subclass], [props], [properties])](#module_Protean.inherit)
+  * [Protean.instantiate(fn, [args])](#module_Protean.instantiate)
+  * [callback: Protean~ClassExtend](#module_Protean..ClassExtend)
+  * [callback: Protean~ClassExtended](#module_Protean..ClassExtended)
+  * [callback: Protean~Class](#module_Protean..Class)
+
+<a name="module_Protean.alias"></a>
+#####Protean.alias(name, [scope], [...arg])
+Alias a named method. If a scope is not given, the current `this` will be used
+to determine the method to call, otherwise it will use the supplied scope.
+
+The function that is returned has one method on it `as(method)` that allows you to
+finalize the alias. Basically it updates the receiving object with the bound
+function.
+
+**Params**
+
+- name `String` - Name of the function to alias.  
+- \[scope\] `Object` | `String` - Optional scope to use. If not given, or is
+falsey, will use the current 'this'. If a `String` will look up `this[scope]`
+to determine the object to use as the scope. This allows for delegation.  
+- \[...arg\] `Mixed` - Optional, additional arguments to prepend when calling
+the aliased function.  
+
+**Returns**: `function`  
+**Example**  
+{ foo: alias('bar', '_delegate').as('foo') };
+
+<a name="module_Protean.augment"></a>
+#####Protean.augment(...obj)
+Like 'extend', but it preserves getters and setters, and will not overwrite
+existing properties defined directly on the source object.
+
+**Params**
+
+- ...obj `Object`  
+
+**Returns**: `Object`  
+<a name="module_Protean.classify"></a>
+#####Protean.classify([subclass], props, [properties])
+**Params**
+
+- \[subclass\] `function` - The subclass constructor function.  
+- props `Object` - Bare properties for the constructor's prototype.  
+- \[properties\] `Object` - Object.defineProperty property definitions.  
+
+**Returns**: [Class](#module_Protean..Class)  
+<a name="module_Protean.enumerate"></a>
+#####Protean.enumerate()
+Takes an argument list of strings and returns an object with those keys, and their
+values being the index of that key plus one.
+
+**Params**
+
+- ... `String`  
+
+**Returns**: `Object`  
+<a name="module_Protean.hashify"></a>
+#####Protean.hashify()
+Takes an argument list of strings and returns an object of key => key
+
+**Params**
+
+- ... `String`  
+
+**Returns**: `Object`  
+<a name="module_Protean.inherit"></a>
+#####Protean.inherit(superclass, [subclass], [props], [properties])
+**Params**
+
+- superclass `function` - The function to inherit from.  
+- \[subclass=Function\] `function` - The Subclass constructor function.
+If omitted, and a `constructor` property is not defined in `props`, defaults
+to a function that calls the superclass' constructor function.  
+- \[props\] `Object` - Bare properties to initialize the prototype with.  
+- \[properties={}\] `Object` - Object.defineProperty property definitions.  
+
+**Returns**: [Class](#module_Protean..Class) - The constructor function.  
+<a name="module_Protean.instantiate"></a>
+#####Protean.instantiate(fn, [args])
+Create a new object and then apply the constructor function with the arguments.
+
+**Params**
+
+- fn `function` - The constructor function  
+- \[args\] `Array.<Mixed>` - Arguments to pass to the constructor function  
+
+**Returns**: `Object` - The new instance  
+<a name="module_Protean..ClassExtend"></a>
+#####callback: Protean~ClassExtend
+**Params**
+
+- \[subclass\] `function`  
+- \[props\] `Object`  
+- \[properties\] `Object`  
+
+**Scope**: inner typedef of [Protean](#module_Protean)  
+**Type**: `function`  
+**Returns**: [Class](#module_Protean..Class)  
+<a name="module_Protean..ClassExtended"></a>
+#####callback: Protean~ClassExtended
+**Params**
+
+- subclass `function`  
+
+**Scope**: inner typedef of [Protean](#module_Protean)  
+**Type**: `function`  
+<a name="module_Protean..Class"></a>
+#####callback: Protean~Class
+**Scope**: inner typedef of [Protean](#module_Protean)  
+**Type**: `function`  
+
+
+Dependencies
+------------
 
 These are installed when **protean** is installed.
 
@@ -30,12 +156,13 @@ underscore: 1.4.x
 Installed when you run `npm link` in the package directory.
 
 ~~~
-mocha:      1.x.x
-should:     3.x.x
-del:        *
-gulp:       3.x.x
-gulp-ejs:   0.x.x
-gulp-jsdoc: 0.x.x
+mocha:             1.x.x
+should:            3.x.x
+del:               *
+gulp:              3.x.x
+gulp-ejs:          0.x.x
+gulp-jsdoc:        0.x.x
+jsdoc-to-markdown: 0.x.x
 ~~~
 
 

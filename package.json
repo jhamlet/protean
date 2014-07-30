@@ -13,10 +13,12 @@
         "del":          "*",
         "gulp":         "3.x.x",
         "gulp-ejs":     "0.x.x",
-        "gulp-jsdoc":   "0.x.x"
+        "gulp-jsdoc":   "0.x.x",
+        "jsdoc-to-markdown": "0.x.x"
     },
     "scripts": {
         "build": "./node_modules/.bin/gulp",
+        "clean": "./node_modules/.bin/gulp clean",
         "test": "./node_modules/.bin/mocha -R spec test/test-*.js"
     },
     "licenses": [
