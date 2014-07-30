@@ -1,0 +1,35 @@
+{
+    "name": "protean",
+    "description": "An ever changing set of utilities.",
+    "version": "0.2.0",
+    "keywords": ["utility", "underscore", "etc..."],
+    "main": "./lib/index.js",
+    "dependencies": {
+        "underscore":   "1.4.x"
+    },
+    "devDependencies": {
+        "mocha":        "1.x.x",
+        "should":       "3.x.x",
+        "del":          "*",
+        "gulp":         "3.x.x",
+        "gulp-ejs":     "0.x.x",
+        "gulp-jsdoc":   "0.x.x"
+    },
+    "scripts": {
+        "build": "./node_modules/.bin/gulp",
+        "test": "./node_modules/.bin/mocha -R spec test/test-*.js"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://github.com/jhamlet/protean/raw/master/LICENSE"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/jhamlet/protean.git"
+    },
+    "bugs": {
+        "url": "http://github.com/jhamlet/protean/issues"
+    }
+}
