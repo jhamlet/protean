@@ -6,10 +6,10 @@ var gulp     = require('gulp'),
     fs       = require('fs'),
     path     = require('path'),
     pkgInfo  = require('./package.json'),
-    CLEAN    = [];
+    CLOBBER  = [];
     
-gulp.task('clean', function (done) {
-    clean(CLEAN, done);
+gulp.task('clobber', function (done) {
+    clean(CLOBBER, done);
 });
 
 gulp.task('api.md', function () {
@@ -17,7 +17,7 @@ gulp.task('api.md', function () {
         render('lib/**/*.js', { 'heading-depth': 4 }).
         pipe(fs.createWriteStream('api.md'));
 });
-CLEAN.push('api.md');
+CLOBBER.push('api.md');
 
 gulp.task('readme', ['api.md'], function () {
     return gulp.src('src/tmpl/README.ejs').
@@ -30,7 +30,7 @@ gulp.task('readme', ['api.md'], function () {
         })).
         pipe(gulp.dest('./'));
 });
-CLEAN.push('README.md');
+CLOBBER.push('README.md');
 
 gulp.task('docs', ['readme'], function () {
     return gulp.src(['./lib/**/*.js', 'README.md']).
@@ -64,7 +64,7 @@ gulp.task('docs', ['readme'], function () {
             }
         ));
 });
-CLEAN.push('docs/**/*');
-CLEAN.push('docs');
+CLOBBER.push('docs/**/*');
+CLOBBER.push('docs');
 
-gulp.task('default', ['clean', 'docs']);
+gulp.task('default', ['api.md', 'docs']);

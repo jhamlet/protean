@@ -147,7 +147,7 @@ Dependencies
 These are installed when **protean** is installed.
 
 ~~~
-underscore: 1.4.x
+underscore: 1.x.x
 ~~~
 
 
