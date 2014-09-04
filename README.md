@@ -27,6 +27,7 @@ API
   * [Protean.augment(...obj)](#module_Protean.augment)
   * [Protean.classify([subclass], props, [properties])](#module_Protean.classify)
   * [Protean.enumerate()](#module_Protean.enumerate)
+  * [Protean.guid()](#module_Protean.guid)
   * [Protean.hashify()](#module_Protean.hashify)
   * [Protean.inherit(superclass, [subclass], [props], [properties])](#module_Protean.inherit)
   * [Protean.instantiate(fn, [args])](#module_Protean.instantiate)
@@ -85,6 +86,13 @@ values being the index of that key plus one.
 - ... `String`  
 
 **Returns**: `Object`  
+<a name="module_Protean.guid"></a>
+#####Protean.guid()
+Fast GUID generator, RFC4122 version 4 compliant.
+
+**Returns**: `String`  
+**Author**: Jeff Ward (jcward.com).  
+**License**: MIT license  
 <a name="module_Protean.hashify"></a>
 #####Protean.hashify()
 Takes an argument list of strings and returns an object of key => key
