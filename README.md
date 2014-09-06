@@ -27,13 +27,17 @@ API
   * [Protean.augment(...obj)](#module_Protean.augment)
   * [Protean.classify([subclass], props, [properties])](#module_Protean.classify)
   * [Protean.enumerate()](#module_Protean.enumerate)
+  * [Protean.execute(...fnOrArgument)](#module_Protean.execute)
   * [Protean.guid()](#module_Protean.guid)
   * [Protean.hashify()](#module_Protean.hashify)
   * [Protean.inherit(superclass, [subclass], [props], [properties])](#module_Protean.inherit)
   * [Protean.instantiate(fn, [args])](#module_Protean.instantiate)
+  * [Protean.invoke(name, [...arg])](#module_Protean.invoke)
   * [callback: Protean~ClassExtend](#module_Protean..ClassExtend)
   * [callback: Protean~ClassExtended](#module_Protean..ClassExtended)
   * [callback: Protean~Class](#module_Protean..Class)
+  * [callback: Protean~executor](#module_Protean..executor)
+  * [callback: Protean~invoker](#module_Protean..invoker)
 
 <a name="module_Protean.alias"></a>
 #####Protean.alias(name, [scope], [...arg])
@@ -86,6 +90,13 @@ values being the index of that key plus one.
 - ... `String`  
 
 **Returns**: `Object`  
+<a name="module_Protean.execute"></a>
+#####Protean.execute(...fnOrArgument)
+**Params**
+
+- ...fnOrArgument `function` | `Mixed`  
+
+**Returns**: [executor](#module_Protean..executor)  
 <a name="module_Protean.guid"></a>
 #####Protean.guid()
 Fast GUID generator, RFC4122 version 4 compliant.
@@ -124,6 +135,14 @@ Create a new object and then apply the constructor function with the arguments.
 - \[args\] `Array.<Mixed>` - Arguments to pass to the constructor function  
 
 **Returns**: `Object` - The new instance  
+<a name="module_Protean.invoke"></a>
+#####Protean.invoke(name, [...arg])
+**Params**
+
+- name `String` - The property name of the method to invoke  
+- \[...arg\] `Mixed` - Additional arguments to pass to the invoked function  
+
+**Returns**: [invoker](#module_Protean..invoker)  
 <a name="module_Protean..ClassExtend"></a>
 #####callback: Protean~ClassExtend
 **Params**
@@ -145,6 +164,22 @@ Create a new object and then apply the constructor function with the arguments.
 **Type**: `function`  
 <a name="module_Protean..Class"></a>
 #####callback: Protean~Class
+**Scope**: inner typedef of [Protean](#module_Protean)  
+**Type**: `function`  
+<a name="module_Protean..executor"></a>
+#####callback: Protean~executor
+**Params**
+
+- ...arg `Mixed` - Additional arguments to pass to the first function  
+
+**Scope**: inner typedef of [Protean](#module_Protean)  
+**Type**: `function`  
+<a name="module_Protean..invoker"></a>
+#####callback: Protean~invoker
+**Params**
+
+- obj `Object`  
+
 **Scope**: inner typedef of [Protean](#module_Protean)  
 **Type**: `function`  
 
