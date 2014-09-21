@@ -7,7 +7,6 @@
   * [ProteanFiniteStateMachine.State](#ProteanFiniteStateMachine.State)
   * [proteanFiniteStateMachine.current](#ProteanFiniteStateMachine#current)
   * [proteanFiniteStateMachine.triggers](#ProteanFiniteStateMachine#triggers)
-  * [proteanFiniteStateMachine.history](#ProteanFiniteStateMachine#history)
   * [proteanFiniteStateMachine.add(name, opts)](#ProteanFiniteStateMachine#add)
   * [proteanFiniteStateMachine.remove(name)](#ProteanFiniteStateMachine#remove)
   * [proteanFiniteStateMachine.has(name)](#ProteanFiniteStateMachine#has)
@@ -15,7 +14,6 @@
   * [proteanFiniteStateMachine.trigger(trigger)](#ProteanFiniteStateMachine#trigger)
   * [proteanFiniteStateMachine.next(name)](#ProteanFiniteStateMachine#next)
   * [proteanFiniteStateMachine.enter(name)](#ProteanFiniteStateMachine#enter)
-  * [proteanFiniteStateMachine.exit()](#ProteanFiniteStateMachine#exit)
   * [proteanFiniteStateMachine.valueOf()](#ProteanFiniteStateMachine#valueOf)
   * [type: ProteanFiniteStateMachine~Transition](#ProteanFiniteStateMachine..Transition)
 * [class: ProteanFiniteState](#ProteanFiniteState)
@@ -23,9 +21,11 @@
   * [proteanFiniteState.name](#ProteanFiniteState#name)
   * [proteanFiniteState.triggers](#ProteanFiniteState#triggers)
   * [proteanFiniteState.can(trigger)](#ProteanFiniteState#can)
+  * [proteanFiniteState.state(trigger)](#ProteanFiniteState#state)
   * [proteanFiniteState.add(trigger, state)](#ProteanFiniteState#add)
   * [proteanFiniteState.remove(trigger)](#ProteanFiniteState#remove)
   * [proteanFiniteState.removeState(state)](#ProteanFiniteState#removeState)
+  * [proteanFiniteState.destroy()](#ProteanFiniteState#destroy)
   * [type: ProteanFiniteState~StateOptions](#ProteanFiniteState..StateOptions)
  
 <a name="ProteanFiniteStateMachine"></a>
@@ -38,7 +38,6 @@
   * [ProteanFiniteStateMachine.State](#ProteanFiniteStateMachine.State)
   * [proteanFiniteStateMachine.current](#ProteanFiniteStateMachine#current)
   * [proteanFiniteStateMachine.triggers](#ProteanFiniteStateMachine#triggers)
-  * [proteanFiniteStateMachine.history](#ProteanFiniteStateMachine#history)
   * [proteanFiniteStateMachine.add(name, opts)](#ProteanFiniteStateMachine#add)
   * [proteanFiniteStateMachine.remove(name)](#ProteanFiniteStateMachine#remove)
   * [proteanFiniteStateMachine.has(name)](#ProteanFiniteStateMachine#has)
@@ -46,7 +45,6 @@
   * [proteanFiniteStateMachine.trigger(trigger)](#ProteanFiniteStateMachine#trigger)
   * [proteanFiniteStateMachine.next(name)](#ProteanFiniteStateMachine#next)
   * [proteanFiniteStateMachine.enter(name)](#ProteanFiniteStateMachine#enter)
-  * [proteanFiniteStateMachine.exit()](#ProteanFiniteStateMachine#exit)
   * [proteanFiniteStateMachine.valueOf()](#ProteanFiniteStateMachine#valueOf)
   * [type: ProteanFiniteStateMachine~Transition](#ProteanFiniteStateMachine..Transition)
 
@@ -64,9 +62,6 @@ Emits `FiniteStateMachine~Transition` objects.
 - \[opts\] `Object`  
   - \[initial\] `String`  
   - \[states={}\] `Object.<String, ProteanFiniteState~StateOptions>`  
-  - \[history=false\] `Boolean` | `Array.<ProteanFiniteState~Transition>` - If
-a boolean, the state-machine will track the transition history. If an Array,
-will use that as its history and initialize the machine to that history.  
   - \[stateless=false\] `Boolean` - Allow the machine to be in a
 stateless state. Default false.  
 
@@ -84,10 +79,6 @@ The current state object
 Get the currently available triggers
 
 **Read only**: true  
-<a name="ProteanFiniteStateMachine#history"></a>
-##proteanFiniteStateMachine.history
-An observable of the current history and all future transtions
-
 <a name="ProteanFiniteStateMachine#add"></a>
 ##proteanFiniteStateMachine.add(name, opts)
 **Params**
@@ -98,9 +89,7 @@ An observable of the current history and all future transtions
 **Returns**: [ProteanFiniteStateMachine](#ProteanFiniteStateMachine) - the current instance  
 <a name="ProteanFiniteStateMachine#remove"></a>
 ##proteanFiniteStateMachine.remove(name)
-Remove the named state. If the state is the current one, it will try to
-exit it first, and if it does so, will then destroy the state. If it can
-not, it will not.
+Remove the named state unless the state is the current one.
 
 **Params**
 
@@ -146,12 +135,6 @@ Enter the named state
 - name `String`  
 
 **Returns**: [ProteanFiniteStateMachine](#ProteanFiniteStateMachine) - the current instance  
-<a name="ProteanFiniteStateMachine#exit"></a>
-##proteanFiniteStateMachine.exit()
-Exit the current state and return to the previous one. This will only
-work if the state-machine is tracking its transition history.
-
-**Returns**: [ProteanFiniteStateMachine](#ProteanFiniteStateMachine) - the current instance  
 <a name="ProteanFiniteStateMachine#valueOf"></a>
 ##proteanFiniteStateMachine.valueOf()
 Returns the current object-value of the state-machine
@@ -169,9 +152,11 @@ Returns the current object-value of the state-machine
   * [proteanFiniteState.name](#ProteanFiniteState#name)
   * [proteanFiniteState.triggers](#ProteanFiniteState#triggers)
   * [proteanFiniteState.can(trigger)](#ProteanFiniteState#can)
+  * [proteanFiniteState.state(trigger)](#ProteanFiniteState#state)
   * [proteanFiniteState.add(trigger, state)](#ProteanFiniteState#add)
   * [proteanFiniteState.remove(trigger)](#ProteanFiniteState#remove)
   * [proteanFiniteState.removeState(state)](#ProteanFiniteState#removeState)
+  * [proteanFiniteState.destroy()](#ProteanFiniteState#destroy)
   * [type: ProteanFiniteState~StateOptions](#ProteanFiniteState..StateOptions)
 
 <a name="new_ProteanFiniteState"></a>
@@ -193,6 +178,15 @@ Returns the current object-value of the state-machine
 - trigger `String`  
 
 **Returns**: `Boolean`  
+<a name="ProteanFiniteState#state"></a>
+##proteanFiniteState.state(trigger)
+Retrieve the state for the given trigger
+
+**Params**
+
+- trigger `String`  
+
+**Returns**: `String`  
 <a name="ProteanFiniteState#add"></a>
 ##proteanFiniteState.add(trigger, state)
 **Params**
@@ -217,6 +211,8 @@ Remove all triggers with the given state
 - state `String`  
 
 **Returns**: `FiniteState` - the current instance  
+<a name="ProteanFiniteState#destroy"></a>
+##proteanFiniteState.destroy()
 <a name="ProteanFiniteState..StateOptions"></a>
 ##type: ProteanFiniteState~StateOptions
 **Scope**: inner typedef of [ProteanFiniteState](#ProteanFiniteState)  

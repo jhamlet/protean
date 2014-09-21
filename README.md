@@ -35,7 +35,6 @@ These are installed when **protean-fsm** is installed.
 
 ~~~
 underscore:      1.x.x
-rx:              2.x.x
 protean:         >=0.2.0
 protean-subject: >=0.1.0
 ~~~
