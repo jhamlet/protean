@@ -8,11 +8,15 @@ describe('ProteanFiniteStateMachine', function () {
     describe('#constructor()', function () {
         it('should throw an error if not given initial state', function () {
             var m;
+            // no initial, no state
             (function () { m = new Machine(); }).should.throw;
+            // initial but no state
             (function () { m = new Machine({ initial: 'foo' }); }).should.throw;
+            // stateless
             (function () {
                 m = new Machine({ stateless: true });
             }).should.not.throw;
+            // initial and state
             (function () {
                 m = new Machine({
                     initial: 'foo',
@@ -24,12 +28,12 @@ describe('ProteanFiniteStateMachine', function () {
     });
 
     describe('#valueOf()', function () {
-        it('should ', function () {
+        it('should return an object representation of the state machine', function () {
             var m = new Machine({
                     initial: 'foo',
                     states: {
-                        foo: { triggers: { tick: 'bar' } },
-                        bar: { triggers: { tock: 'foo' } }
+                        foo: { actions: { tick: 'bar' } },
+                        bar: { actions: { tock: 'foo' } }
                     }
                 });
 
@@ -38,8 +42,8 @@ describe('ProteanFiniteStateMachine', function () {
                 current: 'foo',
                 stateless: false,
                 states: {
-                    foo: { name: 'foo', triggers: { tick: 'bar' } },
-                    bar: { name: 'bar', triggers: { tock: 'foo' } }
+                    foo: { name: 'foo', actions: { tick: 'bar' } },
+                    bar: { name: 'bar', actions: { tock: 'foo' } }
                 }
             });
         });
@@ -50,8 +54,8 @@ describe('ProteanFiniteStateMachine', function () {
             var m = new Machine({
                     initial: 'foo',
                     states: {
-                        foo: { triggers: { tick: 'bar' } },
-                        bar: { triggers: { tock: 'foo' } }
+                        foo: { actions: { tick: 'bar' } },
+                        bar: { actions: { tock: 'foo' } }
                     }
                 }),
                 count = 0;
@@ -61,12 +65,12 @@ describe('ProteanFiniteStateMachine', function () {
                     // console.log('transition: %j', transition);
                     switch (count) {
                     case 0:
-                        transition.trigger.should.equal('tick');
+                        transition.type.should.equal('tick');
                         transition.from.should.equal('foo');
                         transition.to.should.equal('bar');
                         break;
                     case 1:
-                        transition.trigger.should.equal('tock');
+                        transition.type.should.equal('tock');
                         transition.from.should.equal('bar');
                         transition.to.should.equal('foo');
                         break;

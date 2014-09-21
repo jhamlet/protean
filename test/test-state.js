@@ -6,13 +6,13 @@ describe('ProteanFiniteState', function () {
     describe('#constructor()', function () {
         it('should set appropriate properties', function () {
             var s = new State('foo', {
-                    triggers: {
+                    actions: {
                         'tick': 'bar'
                     }
                 });
 
             s.name.should.equal('foo');
-            s.triggers.should.include('tick');
+            s.actions.should.include('tick');
             s.can('tick').should.be.true;
             s.state('tick').should.equal('bar');
         });
@@ -29,31 +29,31 @@ describe('ProteanFiniteState', function () {
         });
     });
 
-    describe('#add(trigger, state)', function () {
-        it('should add the appropriate trigger', function () {
+    describe('#add(action, state)', function () {
+        it('should add the appropriate action', function () {
             var s = new State('foo');
             s.add('tick', 'bar');
         });
 
-        it('should not overwrite a trigger', function () {
-            var s = new State('foo', { triggers: { tick: 'bar' } });
+        it('should not overwrite an action', function () {
+            var s = new State('foo', { actions: { tick: 'bar' } });
             s.add('tick', 'baz');
             s.state('tick').should.equal('bar');
         });
     });
 
-    describe('#remove(trigger)', function () {
-        it('should remove an existing trigger', function () {
-            var s = new State('foo', { triggers: { tick: 'bar' } });
+    describe('#remove(action)', function () {
+        it('should remove an existing action', function () {
+            var s = new State('foo', { actions: { tick: 'bar' } });
             s.remove('tick');
             s.can('tick').should.be.false;
         });
     });
 
     describe('#removeState(state)', function () {
-        it('should remove all triggers with the given state', function () {
+        it('should remove all actions with the given state', function () {
             var s = new State('foo', {
-                    triggers: {
+                    actions: {
                         tick: 'bar',
                         tock: 'bar'
                     }
@@ -61,15 +61,15 @@ describe('ProteanFiniteState', function () {
 
             s.removeState('bar');
 
-            s.triggers.should.not.include('tick');
-            s.triggers.should.not.include('tock');
+            s.actions.should.not.include('tick');
+            s.actions.should.not.include('tock');
         });
     });
 
     describe('#valueOf()', function () {
         it('should return an object representation of the state', function () {
             var s = new State('foo', {
-                    triggers: {
+                    actions: {
                         tick: 'bar',
                         tock: 'bar'
                     }
@@ -77,7 +77,7 @@ describe('ProteanFiniteState', function () {
 
             s.valueOf().should.eql({
                 name: 'foo',
-                triggers: {
+                actions: {
                     tick: 'bar',
                     tock: 'bar'
                 }
