@@ -2,7 +2,7 @@
     "name": "protean-fsm",
     "fullname": "Protean Finite State Machine",
     "description": "A simple, reactive, finite state machine",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "keywords": ["state", "machine", "finite", "rx", "reactive"],
     "main": "./lib/index.js",
     "dependencies": {

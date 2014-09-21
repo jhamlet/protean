@@ -35,6 +35,7 @@ describe('ProteanFiniteStateMachine', function () {
 
             m.valueOf().should.eql({
                 initial: 'foo',
+                current: 'foo',
                 stateless: false,
                 states: {
                     foo: { name: 'foo', triggers: { tick: 'bar' } },
