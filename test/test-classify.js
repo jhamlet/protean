@@ -62,6 +62,29 @@ describe('Protean', function () {
             obj.should.have.property('_events');
             obj.should.have.property('_maxListeners', 10);
         });
+
+        it('should set up the extended static chain', function () {
+            function A () {}
+            A.extended = function (sc) {
+                var scp = sc.prototype;
+
+                scp.extensions = [];
+                scp.extensions.push('A');
+            };
+            protean.classify(A, { extensions: [] });
+
+            function B () {}
+            B.extended = function (sc) {
+                sc.prototype.extensions.push('B');
+            };
+            A.extend(B);
+
+            function C () {}
+            B.extend(C);
+
+            C.prototype.extensions[0].should.equal('A');
+            C.prototype.extensions[1].should.equal('B');
+        });
     });
     
     describe('.classify(props, [properties])', function () {
