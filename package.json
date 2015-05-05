@@ -1,15 +1,16 @@
 {
     "name": "protean",
     "description": "An ever changing set of utilities.",
-    "version": "0.2.5",
-    "keywords": ["utility", "underscore", "etc..."],
+    "version": "0.2.6",
+    "keywords": ["utility", "underscore", "rx", "etc..."],
     "main": "./lib/index.js",
     "dependencies": {
-        "underscore":   "1.x.x"
+        "underscore":   "1.x",
+        "rx":           "2.x"
     },
     "devDependencies": {
-        "mocha":        "1.x.x",
-        "should":       "3.x.x",
+        "mocha":        "2.x",
+        "should":       "6.x",
         "del":          "*",
         "gulp":         "3.x.x",
         "gulp-ejs":     "0.x.x",
@@ -19,7 +20,7 @@
     "scripts": {
         "build": "./node_modules/.bin/gulp",
         "clean": "./node_modules/.bin/gulp clean",
-        "test": "./node_modules/.bin/mocha -R spec test/test-*.js"
+        "test": "./node_modules/.bin/mocha -R spec test/**/*.js"
     },
     "licenses": [
         {
