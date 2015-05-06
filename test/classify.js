@@ -1,9 +1,10 @@
-/*globals describe, it, before, after, beforeEach, afterEach */
+/*globals describe, it, before */
 
-var should = require('should'),
-    protean = require('../'),
+var protean = require('../'),
     classify = protean.classify;
 
+require('should'),
+    
 describe('Protean', function () {
     var Foo;
     
@@ -58,9 +59,9 @@ describe('Protean', function () {
             obj = new Foo();
             
             obj.should.be.an.instanceof(EM);
-            obj.should.have.property('domain', null);
+            obj.should.have.property('domain');
             obj.should.have.property('_events');
-            obj.should.have.property('_maxListeners', 10);
+            obj.should.have.property('_maxListeners');
         });
 
         it('should set up the extended static chain', function () {
