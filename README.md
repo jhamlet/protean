@@ -28,7 +28,7 @@ API
   * [Protean.Rx](#module_Protean.Rx)
   * [Protean.rx](#module_Protean.rx)
   * [Protean.MapProxy](#module_Protean.MapProxy)
-  * [Protean.MapImmutableProxy](#module_Protean.MapImmutableProxy)
+  * [Protean.ImmutableMapProxy](#module_Protean.ImmutableMapProxy)
   * [Protean.alias(name, [scope], [...arg])](#module_Protean.alias)
   * [Protean.augment(...obj)](#module_Protean.augment)
   * [Protean.classify([subclass], props, [properties])](#module_Protean.classify)
@@ -42,10 +42,20 @@ API
 
 **Classes**
 
-* [class: MapImmutableProxy](#MapImmutableProxy)
-  * [new MapImmutableProxy([...keyValue])](#new_MapImmutableProxy)
-  * [mapImmutableProxy.extend(...map)](#MapImmutableProxy#extend)
-  * [mapImmutableProxy.set(key, value)](#MapImmutableProxy#set)
+* [class: ImmutableMapProxy](#ImmutableMapProxy)
+  * [new ImmutableMapProxy([...keyValue])](#new_ImmutableMapProxy)
+  * [immutableMapProxy.extend(...map)](#ImmutableMapProxy#extend)
+  * [immutableMapProxy.set(key, value)](#ImmutableMapProxy#set)
+  * [immutableMapProxy.clear()](#ImmutableMapProxy#clear)
+  * [immutableMapProxy.has(key)](#ImmutableMapProxy#has)
+  * [immutableMapProxy.get(key)](#ImmutableMapProxy#get)
+  * [immutableMapProxy.delete(key)](#ImmutableMapProxy#delete)
+  * [immutableMapProxy.keys()](#ImmutableMapProxy#keys)
+  * [immutableMapProxy.values()](#ImmutableMapProxy#values)
+  * [immutableMapProxy.valueOf()](#ImmutableMapProxy#valueOf)
+  * [immutableMapProxy.entries()](#ImmutableMapProxy#entries)
+  * [immutableMapProxy.map(fn, [scope])](#ImmutableMapProxy#map)
+  * [immutableMapProxy.forEach(fn, [scope])](#ImmutableMapProxy#forEach)
 * [class: MapProxy](#MapProxy)
   * [new MapProxy([...keyValue])](#new_MapProxy)
   * [mapProxy.clear()](#MapProxy#clear)
@@ -71,7 +81,7 @@ API
   * [Protean.Rx](#module_Protean.Rx)
   * [Protean.rx](#module_Protean.rx)
   * [Protean.MapProxy](#module_Protean.MapProxy)
-  * [Protean.MapImmutableProxy](#module_Protean.MapImmutableProxy)
+  * [Protean.ImmutableMapProxy](#module_Protean.ImmutableMapProxy)
   * [Protean.alias(name, [scope], [...arg])](#module_Protean.alias)
   * [Protean.augment(...obj)](#module_Protean.augment)
   * [Protean.classify([subclass], props, [properties])](#module_Protean.classify)
@@ -93,8 +103,8 @@ API
 #####Protean.rx
 <a name="module_Protean.MapProxy"></a>
 #####Protean.MapProxy
-<a name="module_Protean.MapImmutableProxy"></a>
-#####Protean.MapImmutableProxy
+<a name="module_Protean.ImmutableMapProxy"></a>
+#####Protean.ImmutableMapProxy
 <a name="module_Protean.alias"></a>
 #####Protean.alias(name, [scope], [...arg])
 Alias a named method. If a scope is not given, the current `this` will be used
@@ -198,37 +208,98 @@ values being the index of that key plus one.
 #####callback: Protean~Class
 **Scope**: inner typedef of [Protean](#module_Protean)  
 **Type**: `function`  
-<a name="MapImmutableProxy"></a>
-####class: MapImmutableProxy
-**Extends**: `Map`  
+<a name="ImmutableMapProxy"></a>
+####class: ImmutableMapProxy
+**Extends**: `MapProxy`  
 **Members**
 
-* [class: MapImmutableProxy](#MapImmutableProxy)
-  * [new MapImmutableProxy([...keyValue])](#new_MapImmutableProxy)
-  * [mapImmutableProxy.extend(...map)](#MapImmutableProxy#extend)
-  * [mapImmutableProxy.set(key, value)](#MapImmutableProxy#set)
+* [class: ImmutableMapProxy](#ImmutableMapProxy)
+  * [new ImmutableMapProxy([...keyValue])](#new_ImmutableMapProxy)
+  * [immutableMapProxy.extend(...map)](#ImmutableMapProxy#extend)
+  * [immutableMapProxy.set(key, value)](#ImmutableMapProxy#set)
+  * [immutableMapProxy.clear()](#ImmutableMapProxy#clear)
+  * [immutableMapProxy.has(key)](#ImmutableMapProxy#has)
+  * [immutableMapProxy.get(key)](#ImmutableMapProxy#get)
+  * [immutableMapProxy.delete(key)](#ImmutableMapProxy#delete)
+  * [immutableMapProxy.keys()](#ImmutableMapProxy#keys)
+  * [immutableMapProxy.values()](#ImmutableMapProxy#values)
+  * [immutableMapProxy.valueOf()](#ImmutableMapProxy#valueOf)
+  * [immutableMapProxy.entries()](#ImmutableMapProxy#entries)
+  * [immutableMapProxy.map(fn, [scope])](#ImmutableMapProxy#map)
+  * [immutableMapProxy.forEach(fn, [scope])](#ImmutableMapProxy#forEach)
 
-<a name="new_MapImmutableProxy"></a>
-#####new MapImmutableProxy([...keyValue])
+<a name="new_ImmutableMapProxy"></a>
+#####new ImmutableMapProxy([...keyValue])
 **Params**
 
 - \[...keyValue\] `String` | `Mixed`  
 
-**Extends**: `Map`  
-<a name="MapImmutableProxy#extend"></a>
-#####mapImmutableProxy.extend(...map)
+**Extends**: `MapProxy`  
+<a name="ImmutableMapProxy#extend"></a>
+#####immutableMapProxy.extend(...map)
 Merge all given objects into this map
 
 **Params**
 
 - ...map `Object` | `Map`  
 
-<a name="MapImmutableProxy#set"></a>
-#####mapImmutableProxy.set(key, value)
+<a name="ImmutableMapProxy#set"></a>
+#####immutableMapProxy.set(key, value)
 **Params**
 
 - key `String`  
 - value `Mixed`  
+
+<a name="ImmutableMapProxy#clear"></a>
+#####immutableMapProxy.clear()
+Clear out all keys and values
+
+<a name="ImmutableMapProxy#has"></a>
+#####immutableMapProxy.has(key)
+**Params**
+
+- key `String`  
+
+**Returns**: `Boolean`  
+<a name="ImmutableMapProxy#get"></a>
+#####immutableMapProxy.get(key)
+**Params**
+
+- key `String`  
+
+**Returns**: `Mixed`  
+<a name="ImmutableMapProxy#delete"></a>
+#####immutableMapProxy.delete(key)
+**Params**
+
+- key `String`  
+
+<a name="ImmutableMapProxy#keys"></a>
+#####immutableMapProxy.keys()
+**Returns**: `Array.<String>`  
+<a name="ImmutableMapProxy#values"></a>
+#####immutableMapProxy.values()
+**Returns**: `Array.<Mixed>`  
+<a name="ImmutableMapProxy#valueOf"></a>
+#####immutableMapProxy.valueOf()
+**Returns**: `Object.<String, Mixed>`  
+<a name="ImmutableMapProxy#entries"></a>
+#####immutableMapProxy.entries()
+**Returns**: `Array.<Array.<String, Mixed>>`  
+<a name="ImmutableMapProxy#map"></a>
+#####immutableMapProxy.map(fn, [scope])
+**Params**
+
+- fn `function`  
+- \[scope\] `Object`  
+
+**Returns**: `Array.<Mixed>`  
+<a name="ImmutableMapProxy#forEach"></a>
+#####immutableMapProxy.forEach(fn, [scope])
+**Params**
+
+- fn `function`  
+- \[scope\] `Object`  
 
 <a name="MapProxy"></a>
 ####class: MapProxy
