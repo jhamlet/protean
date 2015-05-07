@@ -27,6 +27,8 @@ API
   * [Protean._](#module_Protean._)
   * [Protean.Rx](#module_Protean.Rx)
   * [Protean.rx](#module_Protean.rx)
+  * [Protean.MapProxy](#module_Protean.MapProxy)
+  * [Protean.MapImmutableProxy](#module_Protean.MapImmutableProxy)
   * [Protean.alias(name, [scope], [...arg])](#module_Protean.alias)
   * [Protean.augment(...obj)](#module_Protean.augment)
   * [Protean.classify([subclass], props, [properties])](#module_Protean.classify)
@@ -68,6 +70,8 @@ API
   * [Protean._](#module_Protean._)
   * [Protean.Rx](#module_Protean.Rx)
   * [Protean.rx](#module_Protean.rx)
+  * [Protean.MapProxy](#module_Protean.MapProxy)
+  * [Protean.MapImmutableProxy](#module_Protean.MapImmutableProxy)
   * [Protean.alias(name, [scope], [...arg])](#module_Protean.alias)
   * [Protean.augment(...obj)](#module_Protean.augment)
   * [Protean.classify([subclass], props, [properties])](#module_Protean.classify)
@@ -87,6 +91,10 @@ API
 #####Protean.Rx
 <a name="module_Protean.rx"></a>
 #####Protean.rx
+<a name="module_Protean.MapProxy"></a>
+#####Protean.MapProxy
+<a name="module_Protean.MapImmutableProxy"></a>
+#####Protean.MapImmutableProxy
 <a name="module_Protean.alias"></a>
 #####Protean.alias(name, [scope], [...arg])
 Alias a named method. If a scope is not given, the current `this` will be used
@@ -351,7 +359,7 @@ Report an Issue
 License
 -------
 
-> Copyright (c) 2013 Jerry Hamlet <jerry@hamletink.com>
+> Copyright (c) 2015 Jerry Hamlet <jerry@hamletink.com>
 > 
 > Permission is hereby granted, free of charge, to any person
 > obtaining a copy of this software and associated documentation
@@ -375,3 +383,4 @@ License
 > WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 > FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 > OTHER DEALINGS IN THE SOFTWARE.
+> 
