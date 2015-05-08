@@ -2,10 +2,9 @@
     "name": "protean",
     "description": "An ever changing set of utilities.",
     "version": "0.2.6",
-    "keywords": ["utility", "underscore", "rx", "etc..."],
+    "keywords": ["utility", "lodash", "rx", "etc..."],
     "main": "./lib/index.js",
     "dependencies": {
-        "underscore":   "1.x",
         "lodash":       "3.x",
         "rx":           "2.x"
     },
