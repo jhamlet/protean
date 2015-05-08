@@ -230,6 +230,10 @@ values being the index of that key plus one.
 
 <a name="new_ImmutableMapProxy"></a>
 #####new ImmutableMapProxy([...keyValue])
+A utility class to handle immutable maps. When setting, or extending the
+keys/values of this map, the underlying object/map will be created anew if
+the values have changed, otherwise it will not.
+
 **Params**
 
 - \[...keyValue\] `String` | `Mixed`  
@@ -322,6 +326,8 @@ Clear out all keys and values
 
 <a name="new_MapProxy"></a>
 #####new MapProxy([values], [keyValues])
+A utility class for handling a map of key/values.
+
 **Params**
 
 - \[values\] `Object`  
