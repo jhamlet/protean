@@ -1,7 +1,7 @@
 {
     "name": "protean",
     "description": "An ever changing set of utilities.",
-    "version": "0.2.6",
+    "version": "0.3.0",
     "keywords": ["utility", "lodash", "rx", "etc..."],
     "main": "./lib/index.js",
     "dependencies": {
@@ -20,7 +20,7 @@
     "scripts": {
         "build": "./node_modules/.bin/gulp",
         "clean": "./node_modules/.bin/gulp clean",
-        "test": "./node_modules/.bin/mocha -R spec test/**/*.js"
+        "test": "./node_modules/.bin/mocha -R spec test/*.js test/**/*.js"
     },
     "licenses": [
         {
