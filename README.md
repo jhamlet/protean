@@ -23,7 +23,7 @@ API
 **Modules**
 
 * [Protean](#module_Protean)
-  * [Protean.underscore](#module_Protean.underscore)
+  * [Protean.lodash](#module_Protean.lodash)
   * [Protean._](#module_Protean._)
   * [Protean.Rx](#module_Protean.Rx)
   * [Protean.rx](#module_Protean.rx)
@@ -57,7 +57,7 @@ API
   * [immutableMapProxy.map(fn, [scope])](#ImmutableMapProxy#map)
   * [immutableMapProxy.forEach(fn, [scope])](#ImmutableMapProxy#forEach)
 * [class: MapProxy](#MapProxy)
-  * [new MapProxy([...keyValue])](#new_MapProxy)
+  * [new MapProxy([values], [keyValues])](#new_MapProxy)
   * [mapProxy.clear()](#MapProxy#clear)
   * [mapProxy.extend(...map)](#MapProxy#extend)
   * [mapProxy.has(key)](#MapProxy#has)
@@ -76,7 +76,7 @@ API
 **Members**
 
 * [Protean](#module_Protean)
-  * [Protean.underscore](#module_Protean.underscore)
+  * [Protean.lodash](#module_Protean.lodash)
   * [Protean._](#module_Protean._)
   * [Protean.Rx](#module_Protean.Rx)
   * [Protean.rx](#module_Protean.rx)
@@ -93,8 +93,8 @@ API
   * [callback: Protean~ClassExtended](#module_Protean..ClassExtended)
   * [callback: Protean~Class](#module_Protean..Class)
 
-<a name="module_Protean.underscore"></a>
-#####Protean.underscore
+<a name="module_Protean.lodash"></a>
+#####Protean.lodash
 <a name="module_Protean._"></a>
 #####Protean._
 <a name="module_Protean.Rx"></a>
@@ -306,7 +306,7 @@ Clear out all keys and values
 **Members**
 
 * [class: MapProxy](#MapProxy)
-  * [new MapProxy([...keyValue])](#new_MapProxy)
+  * [new MapProxy([values], [keyValues])](#new_MapProxy)
   * [mapProxy.clear()](#MapProxy#clear)
   * [mapProxy.extend(...map)](#MapProxy#extend)
   * [mapProxy.has(key)](#MapProxy#has)
@@ -321,10 +321,11 @@ Clear out all keys and values
   * [mapProxy.forEach(fn, [scope])](#MapProxy#forEach)
 
 <a name="new_MapProxy"></a>
-#####new MapProxy([...keyValue])
+#####new MapProxy([values], [keyValues])
 **Params**
 
-- \[...keyValue\] `String` | `Mixed`  
+- \[values\] `Object`  
+- \[keyValues\] `Array.<String, Mixed>`  
 
 <a name="MapProxy#clear"></a>
 #####mapProxy.clear()
@@ -400,8 +401,8 @@ Dependencies
 These are installed when **protean** is installed.
 
 ~~~
-underscore: 1.x
-rx:         2.x
+lodash: 3.x
+rx:     2.x
 ~~~
 
 
