@@ -4,8 +4,12 @@ var MapProxy = require('../').MapProxy;
 require('should');
 
 describe('MapProxy', function () {
-    describe('#constructor(...[key, value])', function () {
-        var m = new MapProxy('foo', 'foo', 'bar', 'bar', 'baz', 'baz');
+    describe('#constructor([values])', function () {
+        var m = new MapProxy({
+                foo: 'foo',
+                bar: 'bar',
+                baz: 'baz'
+            });
 
         it('should have the given keys', function () {
             m.keys().should.eql(['foo', 'bar', 'baz']);
@@ -62,7 +66,7 @@ describe('MapProxy', function () {
         var m;
 
         beforeEach(function () {
-            m = new MapProxy('foo', 'foo');
+            m = new MapProxy({ foo: 'foo' });
         });
 
         it('should return true if it has the given key', function () {
@@ -78,7 +82,7 @@ describe('MapProxy', function () {
         var m;
 
         beforeEach(function () {
-            m = new MapProxy('foo', 'foo');
+            m = new MapProxy({ foo: 'foo' });
         });
 
         it('should return the value for the given key', function () {
@@ -97,7 +101,10 @@ describe('MapProxy', function () {
         var m;
 
         beforeEach(function () {
-            m = new MapProxy('foo', 'foo', 'bar', 'bar', 'baz', 'baz');
+            m = new MapProxy();
+            m.set('foo', 'foo');
+            m.set('bar', 'bar');
+            m.set('baz', 'baz');
         });
 
         it('should return the values in the correct order', function () {

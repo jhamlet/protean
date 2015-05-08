@@ -1,11 +1,11 @@
 /*globals describe, it */
 
 var protean = require('../../'),
-    _ = protean.underscore;
+    _ = protean.lodash;
 
 require('should');
 
-describe('Protean.underscore', function () {
+describe('Protean.lodash', function () {
     describe('.enumerate(...args)', function () {
         it('should return an object with keys from arguments and values enumerated', function () {
             var obj = _.enumerate('A', 'B', 'C');

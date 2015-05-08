@@ -1,11 +1,11 @@
 /*globals describe, it */
 
 var protean = require('../../'),
-    _ = protean.underscore;
+    _ = protean.lodash;
 
 require('should');
 
-describe('Protean.underscore', function () {
+describe('Protean.lodash', function () {
     
     describe('.enmap(...args)', function () {
         it('should create an object from a list of alternating keys and values', function () {
