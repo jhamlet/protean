@@ -6,6 +6,7 @@
     "main": "./lib/index.js",
     "dependencies": {
         "underscore":   "1.x",
+        "lodash":       "3.x",
         "rx":           "2.x"
     },
     "devDependencies": {
