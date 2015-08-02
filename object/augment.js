@@ -1,4 +1,4 @@
-var _ = require('./lodash'),
+var rest = require('lodash/array/rest'),
     doesGetSet = Boolean(Object.prototype.__lookupGetter__);
 /**
  * Like 'extend', but it preserves getters and setters, and will not overwrite
@@ -9,8 +9,7 @@ var _ = require('./lodash'),
  * @returns {Object}
  */
 function augment () {
-    return _.
-        rest(arguments, 1).
+    return rest(arguments, 1).
         reduce(function (acc, obj) {
             var key, getter, setter, props;
 

@@ -1,15 +1,14 @@
 /*globals describe, it */
 
-var protean = require('../../'),
-    _ = protean.lodash;
+var enmap = require('protean/utility/enmap');
 
 require('should');
 
-describe('Protean.lodash', function () {
-    
+describe('Protean', function () {
+
     describe('.enmap(...args)', function () {
         it('should create an object from a list of alternating keys and values', function () {
-            _.enmap('foo', 'foo', 'bar', 'bar').
+            enmap('foo', 'foo', 'bar', 'bar').
                 should.
                 eql({
                     foo: 'foo',

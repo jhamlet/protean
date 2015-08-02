@@ -22,6 +22,10 @@
  * @property {Object} superproto A reference to this class' superclass prototype
  */
 /**
+ * Create a constructor function passing in it's prototype methods.
+ *
+ * **file**: protean/function/classify
+ *
  * @member module:Protean.classify
  * @function
  * @param {Function} [subclass] The subclass constructor function.

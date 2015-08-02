@@ -1,12 +1,11 @@
 {
     "name": "protean",
     "description": "An ever changing set of utilities.",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "keywords": ["utility", "lodash", "rx", "etc..."],
-    "main": "./lib/index.js",
+    "main": "./protean.js",
     "dependencies": {
-        "lodash":       "3.x",
-        "rx":           "2.x"
+        "lodash":       "3.x"
     },
     "devDependencies": {
         "mocha":        "2.x",

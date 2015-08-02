@@ -1,6 +1,11 @@
-var augment = require('./augment'),
-    _ = require('./lodash');
+var augment = require('protean/object/augment'),
+    wrap = require('lodash/function/wrap');
 /**
+ * Create a constructor function that inherits properties and methods from the
+ * given super constructor.
+ *
+ * **file**: protean/function/inherit
+ *
  * @member module:Protean.inherit
  * @function
  * @param {Function} superclass The function to inherit from.
@@ -13,7 +18,7 @@ var augment = require('./augment'),
  */
 function inherit (superclass, subclass, props, properties) {
     var hasCtor, superproto, proto;
-    
+
     if (arguments.length < 4 && typeof subclass !== 'function') {
         properties = props;
         props = subclass;
@@ -48,7 +53,7 @@ function inherit (superclass, subclass, props, properties) {
     }
 
     subclass.extended = subclass.extended ?
-        _.wrap(subclass.extended.bind(subclass), function (f, sc) {
+        wrap(subclass.extended.bind(subclass), function (f, sc) {
             superclass.extended && superclass.extended(sc);
             f(sc);
         }) :

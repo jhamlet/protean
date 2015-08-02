@@ -6,15 +6,18 @@ var gulp     = require('gulp'),
     fs       = require('fs'),
     path     = require('path'),
     pkgInfo  = require('./package.json'),
+    FACETS   = ['array', 'collection', 'function', 'object', 'string', 'utility'],
+    PATHS    = ['./*.js', './{' + FACETS.join(',') + '}/*.js'],
+    LICENSE  = fs.readFileSync('LICENSE', 'utf8'),
     CLOBBER  = [];
-    
+
 gulp.task('clobber', function (done) {
     clean(CLOBBER, done);
 });
 
 gulp.task('api.md', function () {
     return jsdoc2md.
-        render('lib/**/*.js', { 'heading-depth': 4 }).
+        render(PATHS, { 'heading-depth': 4 }).
         pipe(fs.createWriteStream('api.md'));
 });
 CLOBBER.push('api.md');
@@ -24,7 +27,7 @@ gulp.task('readme', ['api.md'], function () {
         pipe(ejs({
             pkg: pkgInfo,
             documentation: fs.readFileSync('api.md', 'utf8'),
-            license: fs.readFileSync('LICENSE', 'utf8')
+            license: LICENSE
         }, {
             ext: '.md'
         })).
@@ -33,14 +36,14 @@ gulp.task('readme', ['api.md'], function () {
 CLOBBER.push('README.md');
 
 gulp.task('docs', ['readme'], function () {
-    return gulp.src(['./lib/**/*.js', 'README.md']).
+    return gulp.src([PATHS, 'README.md']).
         pipe(jsdoc(
             path.join('docs', pkgInfo.version),
             {
                 path:                  'ink-docstrap',
                 systemName:            'Protean',
                 footer:                '',
-                copyright:             'Copyright © 2014 Jerry Hamlet',
+                copyright:             LICENSE.split(/\n/).shift(),
                 navType:               'vertical',
                 theme:                 'spacelab',
                 linenums:              true,
@@ -52,9 +55,7 @@ gulp.task('docs', ['readme'], function () {
                 syntaxTheme:           'dark'
             },
             {
-                licenses: [
-                    fs.readFileSync('./LICENSE', 'utf8')
-                ],
+                licenses: [ LICENSE ],
                 version: pkgInfo.version
             },
             {

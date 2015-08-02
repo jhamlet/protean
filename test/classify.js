@@ -1,13 +1,13 @@
 /*globals describe, it, before */
 
-var protean = require('../'),
-    classify = protean.classify;
+var classify = require('protean/function/classify'),
+    inherit = require('protean/function/inherit');
 
-require('should'),
-    
+require('should');
+
 describe('Protean', function () {
     var Foo;
-    
+
     before(function () {
         Foo = classify({
                 constructor: function (arg) {
@@ -18,13 +18,13 @@ describe('Protean', function () {
 
     describe('.inherit(superclass, [subclass], [props], [properties])', function () {
         it('should correctly inherit from superclass', function () {
-            var Bar = protean.inherit(Foo);
+            var Bar = inherit(Foo);
             Bar.superproto.should.equal(Foo.prototype);
             (new Bar()).should.be.an.instanceof(Foo);
         });
-        
+
         it('getters/setters should be preserved', function () {
-            var Bar = protean.inherit(Foo, {
+            var Bar = inherit(Foo, {
                     constructor: function (arg) {
                         Bar.superclass.call(this, arg);
                     },
@@ -36,28 +36,28 @@ describe('Protean', function () {
                     }
                 }),
                 obj;
-            
+
             Bar.prototype.__lookupGetter__('bar').should.be.function;
             Bar.prototype.__lookupSetter__('bar').should.be.function;
-            
+
             obj = new Bar('bar');
             obj.bar.should.equal('bar');
             obj.bar = 'buz';
             obj.foo.should.equal('buz');
         });
-        
+
         it('should extend non-protean classes', function () {
             var EM = require('events').EventEmitter,
                 Foo, obj;
-            
-            Foo = protean.inherit(EM, {
+
+            Foo = inherit(EM, {
                 constructor: function Foo () {
                     Foo.superclass.call(this);
                 }
             });
-            
+
             obj = new Foo();
-            
+
             obj.should.be.an.instanceof(EM);
             obj.should.have.property('domain');
             obj.should.have.property('_events');
@@ -72,7 +72,7 @@ describe('Protean', function () {
                 scp.extensions = [];
                 scp.extensions.push('A');
             };
-            protean.classify(A, { extensions: [] });
+            classify(A, { extensions: [] });
 
             function B () {}
             B.extended = function (sc) {
@@ -87,17 +87,17 @@ describe('Protean', function () {
             C.prototype.extensions[1].should.equal('B');
         });
     });
-    
+
     describe('.classify(props, [properties])', function () {
         it('should return a constructor function', function () {
             Foo.should.be.function;
             (new Foo()).should.be.an.instanceof(Foo);
         });
-        
+
         it('should correctly call the constructor function', function () {
             (new Foo('foo')).foo.should.equal('foo');
         });
-        
+
         it('should have an \'extend\' method', function () {
             Foo.extend.should.be.function;
         });
@@ -108,7 +108,7 @@ describe('Protean', function () {
                 Foo.superproto.should.equal(Object.prototype);
             }
         );
-        
+
         it('extending a class should be an instance of the superclass', function () {
             var Bar = Foo.extend({});
             Bar.superproto.should.equal(Foo.prototype);
@@ -116,5 +116,5 @@ describe('Protean', function () {
             (new Bar()).should.be.an.instanceof(Foo);
         });
     });
-    
+
 });
