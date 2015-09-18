@@ -14,11 +14,12 @@
 /**
  * @typedef module:Protean~Class
  * @type {Function}
- * @property {module:Protean~ClassExtend} extend A function to extend this class into
- * another one
- * @property {module:Protean~ClassExtended} [extended] A function that will be called
- * when the class is extended into another
- * @property {Function} superclass A reference to this class' superclass constructor
+ * @property {module:Protean~ClassExtend} extend A function to extend this class
+ * into another one
+ * @property {module:Protean~ClassExtended} [extended] A function that will be
+ * called when the class is extended into another
+ * @property {Function} superclass A reference to this class' superclass
+ * constructor
  * @property {Object} superproto A reference to this class' superclass prototype
  */
 /**
