@@ -1,5 +1,5 @@
 var reduce = require('lodash/collection/reduce'),
-    extend = require('lodash/object/extend');
+    assign = require('lodash/object/assign');
 /**
  * @module Protean
  */
@@ -10,5 +10,5 @@ reduce([
     require('./object'),
     require('./string'),
     require('./utility')
-], extend, exports);
+], assign, exports);
 
