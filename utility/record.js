@@ -1,7 +1,7 @@
 var classify = require('protean/function/classify');
 var keys = require('lodash/object/keys');
 /**
- * @class Record
+ * @class module:Protean.Record
  * @param {Object} [data]
  */
 function Record (data) {
@@ -10,7 +10,7 @@ function Record (data) {
     data && this.merge(data);
 }
 
-module.exports = classify(Record,/** @lends Record# */{
+module.exports = classify(Record,/** @lends module:Protean.Record# */{
     /**
      * @property {Integer}
      * @readonly

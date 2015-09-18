@@ -8,13 +8,14 @@ var Rx = require('rx');
 var Observable = Rx.Observable;
 
 /**
- * @class FiniteStateMachine
+ * @class module:Protean.FiniteStateMachine
  * @extends external:Rx.Observable
  * @mixes external:Rx.Observer
  * @param {Object} [opts]
- * @param {String} [opts.initial]
- * @param {String} [opts.current]
- * @param {Object<String,Object>} [opts.states={}]
+ * @param {String} [opts.initial] The initial state to begin in
+ * @param {String} [opts.current] Alias for initial
+ * @param {Object<String,Object>} [opts.states={}] A map of state names to
+ * objects that have inputs as keys, and resulting state names as values.
  * @param {Boolean} [opts.stateless=false] Allow the machine to be in a
  * stateless state. Default false.
  * @throws {Error} "ProteanFiniteStateMachine needs an initial state" If no
@@ -22,9 +23,7 @@ var Observable = Rx.Observable;
  */
 function FiniteStateMachine (opts) {
     FiniteStateMachine.superclass.call(this, this._subscribe.bind(this));
-    /**
-     * @property {external:Rx.ReplaySubject}
-     */
+
     this.transitions = new Rx.ReplaySubject(1);
 
     opts = this.options = defaults({}, opts || { states: {} }, this.options);
@@ -43,7 +42,7 @@ function FiniteStateMachine (opts) {
     }
 }
 
-module.exports = inherit(Observable, FiniteStateMachine, /** @lends FiniteStateMachine# */{
+module.exports = inherit(Observable, FiniteStateMachine,/** @lends module:Protean.FiniteStateMachine# */{
     /**
      * Default options
      * @property {Object}
@@ -66,6 +65,10 @@ module.exports = inherit(Observable, FiniteStateMachine, /** @lends FiniteStateM
          */
         states: null
     },
+    /**
+     * @property {external:Rx.ReplaySubject}
+     */
+    transitions: null,
     /**
      * The current state
      * @property {String}
@@ -157,7 +160,7 @@ module.exports = inherit(Observable, FiniteStateMachine, /** @lends FiniteStateM
     input: function (input) { return this.onNext(input); },
     /**
      * @param {String} name
-     * @returns Boolean
+     * @returns {Boolean}
      */
     enter: function (name) {
         var current = this.currentState;

@@ -11,10 +11,10 @@
         "mocha":        "2.x",
         "should":       "6.x",
         "del":          "*",
-        "gulp":         "3.x.x",
-        "gulp-ejs":     "0.x.x",
-        "gulp-jsdoc":   "0.x.x",
-        "jsdoc-to-markdown": "0.x.x"
+        "gulp":         "3.x",
+        "gulp-ejs":     "1.x",
+        "gulp-jsdoc":   "0.x",
+        "jsdoc-to-markdown": "1.x"
     },
     "scripts": {
         "build": "./node_modules/.bin/gulp",

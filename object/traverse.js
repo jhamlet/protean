@@ -5,6 +5,8 @@ var SKIP     = 'skip';
 var CONTINUE = 'continue';
 var BREAK    = 'break';
 /**
+ * @member module:Protean.traverse
+ * @function 
  * @param {Object} obj
  * @param {Function} visitor
  * @param {Boolean} [post=false]

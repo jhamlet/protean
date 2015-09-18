@@ -19,122 +19,734 @@ API
 ---
 
 <a name="module_Protean"></a>
-####Protean
-**Members**
+## Protean
 
 * [Protean](#module_Protean)
-  * [Protean.classify([subclass], props, [properties])](#module_Protean.classify)
-  * [Protean.inherit(superclass, [subclass], [props], [properties])](#module_Protean.inherit)
-  * [Protean.instantiate(fn, [args])](#module_Protean.instantiate)
-  * [Protean.augment(...obj)](#module_Protean.augment)
-  * [Protean.enmap(...args)](#module_Protean.enmap)
-  * [Protean.enumerate()](#module_Protean.enumerate)
-  * [Protean.guid()](#module_Protean.guid)
-  * [callback: Protean~ClassExtend](#module_Protean..ClassExtend)
-  * [callback: Protean~ClassExtended](#module_Protean..ClassExtended)
-  * [callback: Protean~Class](#module_Protean..Class)
+  * _static_
+    * [.Collection](#module_Protean.Collection)
+      * [new Collection([rec])](#new_module_Protean.Collection_new)
+      * [.idKey](#module_Protean.Collection+idKey)
+      * [.comparator](#module_Protean.Collection+comparator)
+      * [.length](#module_Protean.Collection+length)
+      * [.records](#module_Protean.Collection+records)
+      * [.has(id)](#module_Protean.Collection+has) ⇒ <code>Boolean</code>
+      * [.add(obj)](#module_Protean.Collection+add) ⇒ <code>Collection</code>
+      * [.remove(id)](#module_Protean.Collection+remove) ⇒ <code>Record</code>
+      * [.at(idx)](#module_Protean.Collection+at) ⇒ <code>Record</code>
+      * [.removeAt(idx)](#module_Protean.Collection+removeAt) ⇒ <code>Record</code>
+      * [.get(id)](#module_Protean.Collection+get) ⇒ <code>Record</code>
+      * [.indexOf(idOrRecord)](#module_Protean.Collection+indexOf) ⇒ <code>Integer</code>
+      * [.clear()](#module_Protean.Collection+clear) ⇒ <code>Collection</code>
+      * [.valueOf()](#module_Protean.Collection+valueOf) ⇒ <code>Array.&lt;Object&gt;</code>
+      * [.find(predicate)](#module_Protean.Collection+find) ⇒ <code>Record</code>
+      * [.sort([comparator])](#module_Protean.Collection+sort) ⇒ <code>Collection</code>
+      * [.map(iteratee)](#module_Protean.Collection+map) ⇒ <code>Collection</code>
+      * [.each(iteratee)](#module_Protean.Collection+each)
+      * [.where(predicate)](#module_Protean.Collection+where) ⇒ <code>Collection</code>
+      * [.by(comparator)](#module_Protean.Collection+by) ⇒ <code>Collection</code>
+      * [.clone()](#module_Protean.Collection+clone) ⇒ <code>Collection</code>
+      * [.cloneDeep()](#module_Protean.Collection+cloneDeep) ⇒ <code>Collection</code>
+    * [.FiniteStateMachine](#module_Protean.FiniteStateMachine) ⇐ <code>external:Rx.Observable</code>
+      * [new FiniteStateMachine([opts])](#new_module_Protean.FiniteStateMachine_new)
+      * [.options](#module_Protean.FiniteStateMachine+options)
+        * [.initial](#module_Protean.FiniteStateMachine+options.initial)
+        * [.current](#module_Protean.FiniteStateMachine+options.current)
+        * [.stateless](#module_Protean.FiniteStateMachine+options.stateless)
+        * [.states](#module_Protean.FiniteStateMachine+options.states)
+      * [.transitions](#module_Protean.FiniteStateMachine+transitions)
+      * [.currentState](#module_Protean.FiniteStateMachine+currentState)
+      * [.currentInputs](#module_Protean.FiniteStateMachine+currentInputs)
+      * [.add(name, transitions)](#module_Protean.FiniteStateMachine+add) ⇒ <code>FiniteStateMachine</code>
+      * [.remove(name)](#module_Protean.FiniteStateMachine+remove) ⇒ <code>FiniteStateMachine</code>
+      * [.has(name)](#module_Protean.FiniteStateMachine+has) ⇒ <code>Boolean</code>
+      * [.can(input)](#module_Protean.FiniteStateMachine+can) ⇒ <code>Boolean</code>
+      * [.will(input)](#module_Protean.FiniteStateMachine+will) ⇒ <code>String</code> &#124; <code>false</code>
+      * [.onNext(input)](#module_Protean.FiniteStateMachine+onNext) ⇒ <code>Boolean</code>
+      * [.onError(error)](#module_Protean.FiniteStateMachine+onError)
+      * [.onCompleted()](#module_Protean.FiniteStateMachine+onCompleted)
+      * [.dispose()](#module_Protean.FiniteStateMachine+dispose)
+      * [.input(input)](#module_Protean.FiniteStateMachine+input) ⇒ <code>Boolean</code>
+      * [.enter(name)](#module_Protean.FiniteStateMachine+enter) ⇒ <code>Boolean</code>
+      * [.transition(input, from, to)](#module_Protean.FiniteStateMachine+transition) ⇒ <code>FiniteStateMachine</code>
+      * [.valueOf()](#module_Protean.FiniteStateMachine+valueOf) ⇒ <code>Object</code>
+    * [.Record](#module_Protean.Record)
+      * [new Record([data])](#new_module_Protean.Record_new)
+      * [.length](#module_Protean.Record+length)
+      * [.get(key)](#module_Protean.Record+get) ⇒ <code>Mixed</code>
+      * [.set(keyOrRecord, [value])](#module_Protean.Record+set) ⇒ <code>Record</code>
+      * [.merge(record)](#module_Protean.Record+merge) ⇒ <code>Record</code>
+      * [.remove(key)](#module_Protean.Record+remove) ⇒ <code>Mixed</code>
+      * [.has(key)](#module_Protean.Record+has) ⇒ <code>Boolean</code>
+      * [.clear()](#module_Protean.Record+clear) ⇒ <code>Record</code>
+      * [.key(idx)](#module_Protean.Record+key) ⇒ <code>String</code>
+      * [.valueOf()](#module_Protean.Record+valueOf) ⇒ <code>Object</code>
+      * [.clone([values])](#module_Protean.Record+clone) ⇒ <code>Record</code>
+    * [.classify([subclass], props, [properties])](#module_Protean.classify) ⇒ <code>[Class](#module_Protean..Class)</code>
+    * [.inherit(superclass, [subclass], [props], [properties])](#module_Protean.inherit) ⇒ <code>[Class](#module_Protean..Class)</code>
+    * [.instantiate(fn, [args])](#module_Protean.instantiate) ⇒ <code>Object</code>
+    * [.augment(...obj)](#module_Protean.augment) ⇒ <code>Object</code>
+    * [.traverse(obj, visitor, [post])](#module_Protean.traverse)
+    * [.enmap(...args)](#module_Protean.enmap) ⇒ <code>Object</code>
+    * [.enumerate()](#module_Protean.enumerate) ⇒ <code>Object</code>
+    * [.guid()](#module_Protean.guid) ⇒ <code>String</code>
+  * _inner_
+    * [~ClassExtend](#module_Protean..ClassExtend) ⇒ <code>[Class](#module_Protean..Class)</code>
+    * [~ClassExtended](#module_Protean..ClassExtended) : <code>function</code>
+    * [~Class](#module_Protean..Class) : <code>function</code>
+
+<a name="module_Protean.Collection"></a>
+### Protean.Collection
+**Kind**: static class of <code>[Protean](#module_Protean)</code>  
+
+  * [.Collection](#module_Protean.Collection)
+    * [new Collection([rec])](#new_module_Protean.Collection_new)
+    * [.idKey](#module_Protean.Collection+idKey)
+    * [.comparator](#module_Protean.Collection+comparator)
+    * [.length](#module_Protean.Collection+length)
+    * [.records](#module_Protean.Collection+records)
+    * [.has(id)](#module_Protean.Collection+has) ⇒ <code>Boolean</code>
+    * [.add(obj)](#module_Protean.Collection+add) ⇒ <code>Collection</code>
+    * [.remove(id)](#module_Protean.Collection+remove) ⇒ <code>Record</code>
+    * [.at(idx)](#module_Protean.Collection+at) ⇒ <code>Record</code>
+    * [.removeAt(idx)](#module_Protean.Collection+removeAt) ⇒ <code>Record</code>
+    * [.get(id)](#module_Protean.Collection+get) ⇒ <code>Record</code>
+    * [.indexOf(idOrRecord)](#module_Protean.Collection+indexOf) ⇒ <code>Integer</code>
+    * [.clear()](#module_Protean.Collection+clear) ⇒ <code>Collection</code>
+    * [.valueOf()](#module_Protean.Collection+valueOf) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.find(predicate)](#module_Protean.Collection+find) ⇒ <code>Record</code>
+    * [.sort([comparator])](#module_Protean.Collection+sort) ⇒ <code>Collection</code>
+    * [.map(iteratee)](#module_Protean.Collection+map) ⇒ <code>Collection</code>
+    * [.each(iteratee)](#module_Protean.Collection+each)
+    * [.where(predicate)](#module_Protean.Collection+where) ⇒ <code>Collection</code>
+    * [.by(comparator)](#module_Protean.Collection+by) ⇒ <code>Collection</code>
+    * [.clone()](#module_Protean.Collection+clone) ⇒ <code>Collection</code>
+    * [.cloneDeep()](#module_Protean.Collection+cloneDeep) ⇒ <code>Collection</code>
+
+<a name="new_module_Protean.Collection_new"></a>
+#### new Collection([rec])
+
+| Param | Type |
+| --- | --- |
+| [rec] | <code>Record</code> &#124; <code>Object</code> | 
+
+<a name="module_Protean.Collection+idKey"></a>
+#### collection.idKey
+The unique identifier key to use for records
+
+**Kind**: instance property of <code>[Collection](#module_Protean.Collection)</code>  
+**Default**: <code>&#x27;id&#x27;</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>String</code> | 
+
+<a name="module_Protean.Collection+comparator"></a>
+#### collection.comparator
+Used to keep the collection ordered when adding items
+
+**Kind**: instance property of <code>[Collection](#module_Protean.Collection)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>function</code> | 
+
+<a name="module_Protean.Collection+length"></a>
+#### collection.length
+**Kind**: instance property of <code>[Collection](#module_Protean.Collection)</code>  
+**Read only**: true  
+**Properties**
+
+| Type |
+| --- |
+| <code>Integer</code> | 
+
+<a name="module_Protean.Collection+records"></a>
+#### collection.records
+**Kind**: instance property of <code>[Collection](#module_Protean.Collection)</code>  
+**Read only**: true  
+**Properties**
+
+| Type |
+| --- |
+| <code>Array.&lt;Record&gt;</code> | 
+
+<a name="module_Protean.Collection+has"></a>
+#### collection.has(id) ⇒ <code>Boolean</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type |
+| --- | --- |
+| id | <code>String</code> | 
+
+<a name="module_Protean.Collection+add"></a>
+#### collection.add(obj) ⇒ <code>Collection</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type |
+| --- | --- |
+| obj | <code>Object</code> &#124; <code>Record</code> | 
+
+<a name="module_Protean.Collection+remove"></a>
+#### collection.remove(id) ⇒ <code>Record</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type |
+| --- | --- |
+| id | <code>String</code> | 
+
+<a name="module_Protean.Collection+at"></a>
+#### collection.at(idx) ⇒ <code>Record</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type |
+| --- | --- |
+| idx | <code>Integer</code> | 
+
+<a name="module_Protean.Collection+removeAt"></a>
+#### collection.removeAt(idx) ⇒ <code>Record</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type |
+| --- | --- |
+| idx | <code>Integer</code> | 
+
+<a name="module_Protean.Collection+get"></a>
+#### collection.get(id) ⇒ <code>Record</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type |
+| --- | --- |
+| id | <code>String</code> | 
+
+<a name="module_Protean.Collection+indexOf"></a>
+#### collection.indexOf(idOrRecord) ⇒ <code>Integer</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type |
+| --- | --- |
+| idOrRecord | <code>String</code> &#124; <code>Record</code> | 
+
+<a name="module_Protean.Collection+clear"></a>
+#### collection.clear() ⇒ <code>Collection</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+<a name="module_Protean.Collection+valueOf"></a>
+#### collection.valueOf() ⇒ <code>Array.&lt;Object&gt;</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+<a name="module_Protean.Collection+find"></a>
+#### collection.find(predicate) ⇒ <code>Record</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type |
+| --- | --- |
+| predicate | <code>function</code> | 
+
+<a name="module_Protean.Collection+sort"></a>
+#### collection.sort([comparator]) ⇒ <code>Collection</code>
+Mutates the collection to sorted based on the given comparator, or the
+one defined on itself.
+
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [comparator] | <code>function</code> | <code>this.comparator</code> | 
+
+<a name="module_Protean.Collection+map"></a>
+#### collection.map(iteratee) ⇒ <code>Collection</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type |
+| --- | --- |
+| iteratee | <code>function</code> | 
+
+<a name="module_Protean.Collection+each"></a>
+#### collection.each(iteratee)
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type |
+| --- | --- |
+| iteratee | <code>function</code> | 
+
+<a name="module_Protean.Collection+where"></a>
+#### collection.where(predicate) ⇒ <code>Collection</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type |
+| --- | --- |
+| predicate | <code>function</code> | 
+
+<a name="module_Protean.Collection+by"></a>
+#### collection.by(comparator) ⇒ <code>Collection</code>
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+
+| Param | Type |
+| --- | --- |
+| comparator | <code>function</code> | 
+
+<a name="module_Protean.Collection+clone"></a>
+#### collection.clone() ⇒ <code>Collection</code>
+Returns a copy of the collection with all the records (the records are
+not cloned)
+
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+<a name="module_Protean.Collection+cloneDeep"></a>
+#### collection.cloneDeep() ⇒ <code>Collection</code>
+Returns a Collection with all records cloned.
+
+**Kind**: instance method of <code>[Collection](#module_Protean.Collection)</code>  
+<a name="module_Protean.FiniteStateMachine"></a>
+### Protean.FiniteStateMachine ⇐ <code>external:Rx.Observable</code>
+**Kind**: static class of <code>[Protean](#module_Protean)</code>  
+**Extends:** <code>external:Rx.Observable</code>  
+**Mixes**: <code>external:Rx.Observer</code>  
+
+  * [.FiniteStateMachine](#module_Protean.FiniteStateMachine) ⇐ <code>external:Rx.Observable</code>
+    * [new FiniteStateMachine([opts])](#new_module_Protean.FiniteStateMachine_new)
+    * [.options](#module_Protean.FiniteStateMachine+options)
+      * [.initial](#module_Protean.FiniteStateMachine+options.initial)
+      * [.current](#module_Protean.FiniteStateMachine+options.current)
+      * [.stateless](#module_Protean.FiniteStateMachine+options.stateless)
+      * [.states](#module_Protean.FiniteStateMachine+options.states)
+    * [.transitions](#module_Protean.FiniteStateMachine+transitions)
+    * [.currentState](#module_Protean.FiniteStateMachine+currentState)
+    * [.currentInputs](#module_Protean.FiniteStateMachine+currentInputs)
+    * [.add(name, transitions)](#module_Protean.FiniteStateMachine+add) ⇒ <code>FiniteStateMachine</code>
+    * [.remove(name)](#module_Protean.FiniteStateMachine+remove) ⇒ <code>FiniteStateMachine</code>
+    * [.has(name)](#module_Protean.FiniteStateMachine+has) ⇒ <code>Boolean</code>
+    * [.can(input)](#module_Protean.FiniteStateMachine+can) ⇒ <code>Boolean</code>
+    * [.will(input)](#module_Protean.FiniteStateMachine+will) ⇒ <code>String</code> &#124; <code>false</code>
+    * [.onNext(input)](#module_Protean.FiniteStateMachine+onNext) ⇒ <code>Boolean</code>
+    * [.onError(error)](#module_Protean.FiniteStateMachine+onError)
+    * [.onCompleted()](#module_Protean.FiniteStateMachine+onCompleted)
+    * [.dispose()](#module_Protean.FiniteStateMachine+dispose)
+    * [.input(input)](#module_Protean.FiniteStateMachine+input) ⇒ <code>Boolean</code>
+    * [.enter(name)](#module_Protean.FiniteStateMachine+enter) ⇒ <code>Boolean</code>
+    * [.transition(input, from, to)](#module_Protean.FiniteStateMachine+transition) ⇒ <code>FiniteStateMachine</code>
+    * [.valueOf()](#module_Protean.FiniteStateMachine+valueOf) ⇒ <code>Object</code>
+
+<a name="new_module_Protean.FiniteStateMachine_new"></a>
+#### new FiniteStateMachine([opts])
+**Throws**:
+
+- <code>Error</code> "ProteanFiniteStateMachine needs an initial state" If no
+initial state is given and `stateless` is false.
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [opts] | <code>Object</code> |  |  |
+| [opts.initial] | <code>String</code> |  | The initial state to begin in |
+| [opts.current] | <code>String</code> |  | Alias for initial |
+| [opts.states] | <code>Object.&lt;String, Object&gt;</code> | <code>{}</code> | A map of state names to objects that have inputs as keys, and resulting state names as values. |
+| [opts.stateless] | <code>Boolean</code> | <code>false</code> | Allow the machine to be in a stateless state. Default false. |
+
+<a name="module_Protean.FiniteStateMachine+options"></a>
+#### finiteStateMachine.options
+Default options
+
+**Kind**: instance property of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>Object</code> | 
+
+
+* [.options](#module_Protean.FiniteStateMachine+options)
+  * [.initial](#module_Protean.FiniteStateMachine+options.initial)
+  * [.current](#module_Protean.FiniteStateMachine+options.current)
+  * [.stateless](#module_Protean.FiniteStateMachine+options.stateless)
+  * [.states](#module_Protean.FiniteStateMachine+options.states)
+
+<a name="module_Protean.FiniteStateMachine+options.initial"></a>
+##### options.initial
+**Kind**: static property of <code>[options](#module_Protean.FiniteStateMachine+options)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>String</code> | 
+
+<a name="module_Protean.FiniteStateMachine+options.current"></a>
+##### options.current
+**Kind**: static property of <code>[options](#module_Protean.FiniteStateMachine+options)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>String</code> | 
+
+<a name="module_Protean.FiniteStateMachine+options.stateless"></a>
+##### options.stateless
+**Kind**: static property of <code>[options](#module_Protean.FiniteStateMachine+options)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>Boolean</code> | 
+
+<a name="module_Protean.FiniteStateMachine+options.states"></a>
+##### options.states
+**Kind**: static property of <code>[options](#module_Protean.FiniteStateMachine+options)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>Object.&lt;String, Object&gt;</code> | 
+
+<a name="module_Protean.FiniteStateMachine+transitions"></a>
+#### finiteStateMachine.transitions
+**Kind**: instance property of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>external:Rx.ReplaySubject</code> | 
+
+<a name="module_Protean.FiniteStateMachine+currentState"></a>
+#### finiteStateMachine.currentState
+The current state
+
+**Kind**: instance property of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>String</code> | 
+
+<a name="module_Protean.FiniteStateMachine+currentInputs"></a>
+#### finiteStateMachine.currentInputs
+Get the currently available inputs
+
+**Kind**: instance property of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+**Read only**: true  
+**Properties**
+
+| Type |
+| --- |
+| <code>Array.&lt;String&gt;</code> | 
+
+<a name="module_Protean.FiniteStateMachine+add"></a>
+#### finiteStateMachine.add(name, transitions) ⇒ <code>FiniteStateMachine</code>
+Add a state and its available transitions
+
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+
+| Param | Type |
+| --- | --- |
+| name | <code>String</code> | 
+| transitions | <code>Object.&lt;String, String&gt;</code> | 
+
+<a name="module_Protean.FiniteStateMachine+remove"></a>
+#### finiteStateMachine.remove(name) ⇒ <code>FiniteStateMachine</code>
+Remove a state and its transitions
+
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+
+| Param | Type |
+| --- | --- |
+| name | <code>String</code> | 
+
+<a name="module_Protean.FiniteStateMachine+has"></a>
+#### finiteStateMachine.has(name) ⇒ <code>Boolean</code>
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+
+| Param | Type |
+| --- | --- |
+| name | <code>String</code> | 
+
+<a name="module_Protean.FiniteStateMachine+can"></a>
+#### finiteStateMachine.can(input) ⇒ <code>Boolean</code>
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+
+| Param | Type |
+| --- | --- |
+| input | <code>String</code> | 
+
+<a name="module_Protean.FiniteStateMachine+will"></a>
+#### finiteStateMachine.will(input) ⇒ <code>String</code> &#124; <code>false</code>
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+**Returns**: <code>String</code> &#124; <code>false</code> - the name of the resulting state, or false  
+
+| Param | Type |
+| --- | --- |
+| input | <code>String</code> | 
+
+<a name="module_Protean.FiniteStateMachine+onNext"></a>
+#### finiteStateMachine.onNext(input) ⇒ <code>Boolean</code>
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+
+| Param | Type |
+| --- | --- |
+| input | <code>String</code> | 
+
+<a name="module_Protean.FiniteStateMachine+onError"></a>
+#### finiteStateMachine.onError(error)
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Error</code> | 
+
+<a name="module_Protean.FiniteStateMachine+onCompleted"></a>
+#### finiteStateMachine.onCompleted()
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+<a name="module_Protean.FiniteStateMachine+dispose"></a>
+#### finiteStateMachine.dispose()
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+<a name="module_Protean.FiniteStateMachine+input"></a>
+#### finiteStateMachine.input(input) ⇒ <code>Boolean</code>
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+
+| Param | Type |
+| --- | --- |
+| input | <code>String</code> | 
+
+<a name="module_Protean.FiniteStateMachine+enter"></a>
+#### finiteStateMachine.enter(name) ⇒ <code>Boolean</code>
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+
+| Param | Type |
+| --- | --- |
+| name | <code>String</code> | 
+
+<a name="module_Protean.FiniteStateMachine+transition"></a>
+#### finiteStateMachine.transition(input, from, to) ⇒ <code>FiniteStateMachine</code>
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+
+| Param | Type |
+| --- | --- |
+| input | <code>String</code> | 
+| from | <code>String</code> | 
+| to | <code>String</code> | 
+
+<a name="module_Protean.FiniteStateMachine+valueOf"></a>
+#### finiteStateMachine.valueOf() ⇒ <code>Object</code>
+**Kind**: instance method of <code>[FiniteStateMachine](#module_Protean.FiniteStateMachine)</code>  
+<a name="module_Protean.Record"></a>
+### Protean.Record
+**Kind**: static class of <code>[Protean](#module_Protean)</code>  
+
+  * [.Record](#module_Protean.Record)
+    * [new Record([data])](#new_module_Protean.Record_new)
+    * [.length](#module_Protean.Record+length)
+    * [.get(key)](#module_Protean.Record+get) ⇒ <code>Mixed</code>
+    * [.set(keyOrRecord, [value])](#module_Protean.Record+set) ⇒ <code>Record</code>
+    * [.merge(record)](#module_Protean.Record+merge) ⇒ <code>Record</code>
+    * [.remove(key)](#module_Protean.Record+remove) ⇒ <code>Mixed</code>
+    * [.has(key)](#module_Protean.Record+has) ⇒ <code>Boolean</code>
+    * [.clear()](#module_Protean.Record+clear) ⇒ <code>Record</code>
+    * [.key(idx)](#module_Protean.Record+key) ⇒ <code>String</code>
+    * [.valueOf()](#module_Protean.Record+valueOf) ⇒ <code>Object</code>
+    * [.clone([values])](#module_Protean.Record+clone) ⇒ <code>Record</code>
+
+<a name="new_module_Protean.Record_new"></a>
+#### new Record([data])
+
+| Param | Type |
+| --- | --- |
+| [data] | <code>Object</code> | 
+
+<a name="module_Protean.Record+length"></a>
+#### record.length
+**Kind**: instance property of <code>[Record](#module_Protean.Record)</code>  
+**Read only**: true  
+**Properties**
+
+| Type |
+| --- |
+| <code>Integer</code> | 
+
+<a name="module_Protean.Record+get"></a>
+#### record.get(key) ⇒ <code>Mixed</code>
+**Kind**: instance method of <code>[Record](#module_Protean.Record)</code>  
+
+| Param | Type |
+| --- | --- |
+| key | <code>String</code> | 
+
+<a name="module_Protean.Record+set"></a>
+#### record.set(keyOrRecord, [value]) ⇒ <code>Record</code>
+**Kind**: instance method of <code>[Record](#module_Protean.Record)</code>  
+
+| Param | Type |
+| --- | --- |
+| keyOrRecord | <code>String</code> &#124; <code>Record</code> &#124; <code>Object</code> | 
+| [value] | <code>Mixed</code> | 
+
+<a name="module_Protean.Record+merge"></a>
+#### record.merge(record) ⇒ <code>Record</code>
+**Kind**: instance method of <code>[Record](#module_Protean.Record)</code>  
+
+| Param | Type |
+| --- | --- |
+| record | <code>Record</code> &#124; <code>Object</code> | 
+
+<a name="module_Protean.Record+remove"></a>
+#### record.remove(key) ⇒ <code>Mixed</code>
+**Kind**: instance method of <code>[Record](#module_Protean.Record)</code>  
+
+| Param | Type |
+| --- | --- |
+| key | <code>String</code> | 
+
+<a name="module_Protean.Record+has"></a>
+#### record.has(key) ⇒ <code>Boolean</code>
+**Kind**: instance method of <code>[Record](#module_Protean.Record)</code>  
+
+| Param | Type |
+| --- | --- |
+| key | <code>String</code> | 
+
+<a name="module_Protean.Record+clear"></a>
+#### record.clear() ⇒ <code>Record</code>
+**Kind**: instance method of <code>[Record](#module_Protean.Record)</code>  
+<a name="module_Protean.Record+key"></a>
+#### record.key(idx) ⇒ <code>String</code>
+**Kind**: instance method of <code>[Record](#module_Protean.Record)</code>  
+
+| Param | Type |
+| --- | --- |
+| idx | <code>Integer</code> | 
+
+<a name="module_Protean.Record+valueOf"></a>
+#### record.valueOf() ⇒ <code>Object</code>
+**Kind**: instance method of <code>[Record](#module_Protean.Record)</code>  
+<a name="module_Protean.Record+clone"></a>
+#### record.clone([values]) ⇒ <code>Record</code>
+**Kind**: instance method of <code>[Record](#module_Protean.Record)</code>  
+
+| Param | Type |
+| --- | --- |
+| [values] | <code>Object</code> | 
 
 <a name="module_Protean.classify"></a>
-#####Protean.classify([subclass], props, [properties])
+### Protean.classify([subclass], props, [properties]) ⇒ <code>[Class](#module_Protean..Class)</code>
 Create a constructor function passing in it's prototype methods.
 
 **file**: protean/function/classify
 
-**Params**
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
 
-- \[subclass\] `function` - The subclass constructor function.  
-- props `Object` - Bare properties for the constructor's prototype.  
-- \[properties\] `Object` - Object.defineProperty property definitions.  
+| Param | Type | Description |
+| --- | --- | --- |
+| [subclass] | <code>function</code> | The subclass constructor function. |
+| props | <code>Object</code> | Bare properties for the constructor's prototype. |
+| [properties] | <code>Object</code> | Object.defineProperty property definitions. |
 
-**Returns**: [Class](#module_Protean..Class)  
 <a name="module_Protean.inherit"></a>
-#####Protean.inherit(superclass, [subclass], [props], [properties])
+### Protean.inherit(superclass, [subclass], [props], [properties]) ⇒ <code>[Class](#module_Protean..Class)</code>
 Create a constructor function that inherits properties and methods from the
 given super constructor.
 
 **file**: protean/function/inherit
 
-**Params**
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
+**Returns**: <code>[Class](#module_Protean..Class)</code> - The constructor function.  
 
-- superclass `function` - The function to inherit from.  
-- \[subclass=Function\] `function` - The Subclass constructor function.
-If omitted, and a `constructor` property is not defined in `props`, defaults
-to a function that calls the superclass' constructor function.  
-- \[props\] `Object` - Bare properties to initialize the prototype with.  
-- \[properties={}\] `Object` - Object.defineProperty property definitions.  
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| superclass | <code>function</code> |  | The function to inherit from. |
+| [subclass] | <code>function</code> | <code>Function</code> | The Subclass constructor function. If omitted, and a `constructor` property is not defined in `props`, defaults to a function that calls the superclass' constructor function. |
+| [props] | <code>Object</code> |  | Bare properties to initialize the prototype with. |
+| [properties] | <code>Object</code> | <code>{}</code> | Object.defineProperty property definitions. |
 
-**Returns**: [Class](#module_Protean..Class) - The constructor function.  
 <a name="module_Protean.instantiate"></a>
-#####Protean.instantiate(fn, [args])
+### Protean.instantiate(fn, [args]) ⇒ <code>Object</code>
 Create a new object and then apply the constructor function with the arguments.
 
 **file**: protean/function/instantiate
 
-**Params**
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
+**Returns**: <code>Object</code> - The new instance  
 
-- fn `function` - The constructor function  
-- \[args\] `Array.<Mixed>` - Arguments to pass to the constructor function  
+| Param | Type | Description |
+| --- | --- | --- |
+| fn | <code>function</code> | The constructor function |
+| [args] | <code>Array.&lt;Mixed&gt;</code> | Arguments to pass to the constructor function |
 
-**Returns**: `Object` - The new instance  
 <a name="module_Protean.augment"></a>
-#####Protean.augment(...obj)
+### Protean.augment(...obj) ⇒ <code>Object</code>
 Like 'extend', but it preserves getters and setters, and will not overwrite
 existing properties defined directly on the source object.
 
-**Params**
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
 
-- ...obj `Object`  
+| Param | Type |
+| --- | --- |
+| ...obj | <code>Object</code> | 
 
-**Returns**: `Object`  
+<a name="module_Protean.traverse"></a>
+### Protean.traverse(obj, visitor, [post])
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| obj | <code>Object</code> |  | 
+| visitor | <code>function</code> |  | 
+| [post] | <code>Boolean</code> | <code>false</code> | 
+
 <a name="module_Protean.enmap"></a>
-#####Protean.enmap(...args)
+### Protean.enmap(...args) ⇒ <code>Object</code>
 Takes a list of alternating key/values and returns an object.
 
-**Params**
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
 
-- ...args `Mixed`  
+| Param | Type |
+| --- | --- |
+| ...args | <code>Mixed</code> | 
 
-**Returns**: `Object`  
 <a name="module_Protean.enumerate"></a>
-#####Protean.enumerate()
+### Protean.enumerate() ⇒ <code>Object</code>
 Takes an argument list of strings and returns an object with those keys, and their
 values being the index of that key plus one.
 
-**Params**
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
 
-- ... `String`  
+| Type |
+| --- |
+| <code>String</code> | 
 
-**Returns**: `Object`  
 <a name="module_Protean.guid"></a>
-#####Protean.guid()
+### Protean.guid() ⇒ <code>String</code>
 Fast GUID generator, RFC4122 version 4 compliant.
 
-**Returns**: `String`  
-**Author**: Jeff Ward (jcward.com).  
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
+**See**: http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript/21963136#21963136  
+**Author:** Jeff Ward (jcward.com).  
 **License**: MIT license  
 <a name="module_Protean..ClassExtend"></a>
-#####callback: Protean~ClassExtend
-**Params**
+### Protean~ClassExtend ⇒ <code>[Class](#module_Protean..Class)</code>
+**Kind**: inner typedef of <code>[Protean](#module_Protean)</code>  
 
-- \[subclass\] `function`  
-- \[props\] `Object`  
-- \[properties\] `Object`  
+| Param | Type |
+| --- | --- |
+| [subclass] | <code>function</code> | 
+| [props] | <code>Object</code> | 
+| [properties] | <code>Object</code> | 
 
-**Scope**: inner typedef of [Protean](#module_Protean)  
-**Type**: `function`  
-**Returns**: [Class](#module_Protean..Class)  
 <a name="module_Protean..ClassExtended"></a>
-#####callback: Protean~ClassExtended
-**Params**
+### Protean~ClassExtended : <code>function</code>
+**Kind**: inner typedef of <code>[Protean](#module_Protean)</code>  
 
-- subclass `function`  
+| Param | Type |
+| --- | --- |
+| subclass | <code>function</code> | 
 
-**Scope**: inner typedef of [Protean](#module_Protean)  
-**Type**: `function`  
 <a name="module_Protean..Class"></a>
-#####callback: Protean~Class
-**Scope**: inner typedef of [Protean](#module_Protean)  
-**Type**: `function`  
+### Protean~Class : <code>function</code>
+**Kind**: inner typedef of <code>[Protean](#module_Protean)</code>  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| extend | <code>[ClassExtend](#module_Protean..ClassExtend)</code> | A function to extend this class into another one |
+| extended | <code>[ClassExtended](#module_Protean..ClassExtended)</code> | A function that will be called when the class is extended into another |
+| superclass | <code>function</code> | A reference to this class' superclass constructor |
+| superproto | <code>Object</code> | A reference to this class' superclass prototype |
+
 
 
 
