@@ -1,4 +1,5 @@
 
 require('lodash/object/assign')(exports, {
-    augment: require('./object/augment')
+    augment: require('./object/augment'),
+    traverse: require('./object/traverse')
 });
