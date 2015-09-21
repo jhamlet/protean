@@ -1,7 +1,7 @@
 {
     "name": "protean",
     "description": "An ever changing set of utilities.",
-    "version": "0.4.3",
+    "version": "0.4.4",
     "keywords": ["utility", "lodash", "rx", "etc..."],
     "main": "./protean.js",
     "dependencies": {
