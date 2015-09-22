@@ -145,11 +145,7 @@ API
         * [.get(paths)](#module_Protean.falcor.ProxiedSource+get) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
         * [.set(envelope)](#module_Protean.falcor.ProxiedSource+set) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
         * [.call(path, args, refSuffixes, thisPaths)](#module_Protean.falcor.ProxiedSource+call) ⇒ <code>externa:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
-        * [.stripPaths(paths)](#module_Protean.falcor.ProxiedSource+stripPaths) ⇒ <code>external:falcor.PathSets</code>
-        * [.stripGraph(graph)](#module_Protean.falcor.ProxiedSource+stripGraph) ⇒ <code>external:falcor.JSONGraph</code>
         * [.stripEnvelope(envelope)](#module_Protean.falcor.ProxiedSource+stripEnvelope) ⇒ <code>external:falcor.JSONGraphEnvelope</code>
-        * [.adjustPaths(paths)](#module_Protean.falcor.ProxiedSource+adjustPaths) ⇒ <code>external:falcor.PathSets</code>
-        * [.adjustGraph(graph)](#module_Protean.falcor.ProxiedSource+adjustGraph) ⇒ <code>external:falcor.JSONGraph</code>
         * [.adjustEnvelope(envelope)](#module_Protean.falcor.ProxiedSource+adjustEnvelope) ⇒ <code>external:falcor.JSONGraphEnvelope</code>
       * [.SessionDataSource](#module_Protean.falcor.SessionDataSource) ⇐ <code>[StorageDataSource](#module_Protean.falcor.StorageDataSource)</code>
         * [new SessionDataSource()](#new_module_Protean.falcor.SessionDataSource_new)
@@ -175,6 +171,12 @@ API
         * [.clear()](#module_Protean.falcor.StorageDataSource+clear)
         * [.serialize()](#module_Protean.falcor.StorageDataSource+serialize)
         * [.deserialize()](#module_Protean.falcor.StorageDataSource+deserialize)
+      * [.graph](#module_Protean.falcor.graph)
+        * [.resolve(root, graph)](#module_Protean.falcor.graph.resolve) ⇒ <code>Object</code>
+      * [.path](#module_Protean.falcor.path)
+        * [.relative(root, paths)](#module_Protean.falcor.path.relative) ⇒ <code>external:falcor.PathSets</code>
+        * [.resolve(root, paths, [opts])](#module_Protean.falcor.path.resolve) ⇒ <code>external:falcor.PathSets</code>
+      * [.syntax](#module_Protean.falcor.syntax)
     * [.Store](#module_Protean.Store)
       * _instance_
         * [.length](#module_Protean.Store+length)
@@ -195,6 +197,7 @@ API
     * [.enmap(...args)](#module_Protean.enmap) ⇒ <code>Object</code>
     * [.enumerate()](#module_Protean.enumerate) ⇒ <code>Object</code>
     * [.guid()](#module_Protean.guid) ⇒ <code>String</code>
+    * [.mergeExports(receiver, supplier)](#module_Protean.mergeExports) ⇒ <code>Object</code>
   * _inner_
     * [~ClassExtend](#module_Protean..ClassExtend) ⇒ <code>[Class](#module_Protean..Class)</code>
     * [~ClassExtended](#module_Protean..ClassExtended) : <code>function</code>
@@ -960,11 +963,7 @@ Remove a state and its transitions
       * [.get(paths)](#module_Protean.falcor.ProxiedSource+get) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
       * [.set(envelope)](#module_Protean.falcor.ProxiedSource+set) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
       * [.call(path, args, refSuffixes, thisPaths)](#module_Protean.falcor.ProxiedSource+call) ⇒ <code>externa:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
-      * [.stripPaths(paths)](#module_Protean.falcor.ProxiedSource+stripPaths) ⇒ <code>external:falcor.PathSets</code>
-      * [.stripGraph(graph)](#module_Protean.falcor.ProxiedSource+stripGraph) ⇒ <code>external:falcor.JSONGraph</code>
       * [.stripEnvelope(envelope)](#module_Protean.falcor.ProxiedSource+stripEnvelope) ⇒ <code>external:falcor.JSONGraphEnvelope</code>
-      * [.adjustPaths(paths)](#module_Protean.falcor.ProxiedSource+adjustPaths) ⇒ <code>external:falcor.PathSets</code>
-      * [.adjustGraph(graph)](#module_Protean.falcor.ProxiedSource+adjustGraph) ⇒ <code>external:falcor.JSONGraph</code>
       * [.adjustEnvelope(envelope)](#module_Protean.falcor.ProxiedSource+adjustEnvelope) ⇒ <code>external:falcor.JSONGraphEnvelope</code>
     * [.SessionDataSource](#module_Protean.falcor.SessionDataSource) ⇐ <code>[StorageDataSource](#module_Protean.falcor.StorageDataSource)</code>
       * [new SessionDataSource()](#new_module_Protean.falcor.SessionDataSource_new)
@@ -990,6 +989,12 @@ Remove a state and its transitions
       * [.clear()](#module_Protean.falcor.StorageDataSource+clear)
       * [.serialize()](#module_Protean.falcor.StorageDataSource+serialize)
       * [.deserialize()](#module_Protean.falcor.StorageDataSource+deserialize)
+    * [.graph](#module_Protean.falcor.graph)
+      * [.resolve(root, graph)](#module_Protean.falcor.graph.resolve) ⇒ <code>Object</code>
+    * [.path](#module_Protean.falcor.path)
+      * [.relative(root, paths)](#module_Protean.falcor.path.relative) ⇒ <code>external:falcor.PathSets</code>
+      * [.resolve(root, paths, [opts])](#module_Protean.falcor.path.resolve) ⇒ <code>external:falcor.PathSets</code>
+    * [.syntax](#module_Protean.falcor.syntax)
 
 <a name="module_Protean.falcor.CollectionSource"></a>
 #### falcor.CollectionSource
@@ -1316,11 +1321,7 @@ atoms to expire immediately.
   * [.get(paths)](#module_Protean.falcor.ProxiedSource+get) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
   * [.set(envelope)](#module_Protean.falcor.ProxiedSource+set) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
   * [.call(path, args, refSuffixes, thisPaths)](#module_Protean.falcor.ProxiedSource+call) ⇒ <code>externa:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
-  * [.stripPaths(paths)](#module_Protean.falcor.ProxiedSource+stripPaths) ⇒ <code>external:falcor.PathSets</code>
-  * [.stripGraph(graph)](#module_Protean.falcor.ProxiedSource+stripGraph) ⇒ <code>external:falcor.JSONGraph</code>
   * [.stripEnvelope(envelope)](#module_Protean.falcor.ProxiedSource+stripEnvelope) ⇒ <code>external:falcor.JSONGraphEnvelope</code>
-  * [.adjustPaths(paths)](#module_Protean.falcor.ProxiedSource+adjustPaths) ⇒ <code>external:falcor.PathSets</code>
-  * [.adjustGraph(graph)](#module_Protean.falcor.ProxiedSource+adjustGraph) ⇒ <code>external:falcor.JSONGraph</code>
   * [.adjustEnvelope(envelope)](#module_Protean.falcor.ProxiedSource+adjustEnvelope) ⇒ <code>external:falcor.JSONGraphEnvelope</code>
 
 <a name="new_module_Protean.falcor.ProxiedSource_new"></a>
@@ -1371,24 +1372,6 @@ and values.
 | refSuffixes | <code>Array.&lt;external:falcor.PathSet&gt;</code> | 
 | thisPaths | <code>Array.&lt;external:falcor.PathSet&gt;</code> | 
 
-<a name="module_Protean.falcor.ProxiedSource+stripPaths"></a>
-##### proxiedSource.stripPaths(paths) ⇒ <code>external:falcor.PathSets</code>
-Strip our leading path from the path(s) given.
-
-**Kind**: instance method of <code>[ProxiedSource](#module_Protean.falcor.ProxiedSource)</code>  
-
-| Param | Type |
-| --- | --- |
-| paths | <code>external:falcor.PathSets</code> | 
-
-<a name="module_Protean.falcor.ProxiedSource+stripGraph"></a>
-##### proxiedSource.stripGraph(graph) ⇒ <code>external:falcor.JSONGraph</code>
-**Kind**: instance method of <code>[ProxiedSource](#module_Protean.falcor.ProxiedSource)</code>  
-
-| Param | Type |
-| --- | --- |
-| graph | <code>external:falcor.JSONGraph</code> | 
-
 <a name="module_Protean.falcor.ProxiedSource+stripEnvelope"></a>
 ##### proxiedSource.stripEnvelope(envelope) ⇒ <code>external:falcor.JSONGraphEnvelope</code>
 Strip our leading path from the envelope's path(s) and jsonGraph object.
@@ -1398,26 +1381,6 @@ Strip our leading path from the envelope's path(s) and jsonGraph object.
 | Param | Type |
 | --- | --- |
 | envelope | <code>external:falcor.JSONGraphEnvelope</code> | 
-
-<a name="module_Protean.falcor.ProxiedSource+adjustPaths"></a>
-##### proxiedSource.adjustPaths(paths) ⇒ <code>external:falcor.PathSets</code>
-Adjust the given paths with our leading path information.
-
-**Kind**: instance method of <code>[ProxiedSource](#module_Protean.falcor.ProxiedSource)</code>  
-
-| Param | Type |
-| --- | --- |
-| paths | <code>external:falcor.PathSets</code> | 
-
-<a name="module_Protean.falcor.ProxiedSource+adjustGraph"></a>
-##### proxiedSource.adjustGraph(graph) ⇒ <code>external:falcor.JSONGraph</code>
-Update the graph to reflect our root path and update any reference values
-
-**Kind**: instance method of <code>[ProxiedSource](#module_Protean.falcor.ProxiedSource)</code>  
-
-| Param | Type |
-| --- | --- |
-| graph | <code>external:falcor.JSONGraph</code> | 
 
 <a name="module_Protean.falcor.ProxiedSource+adjustEnvelope"></a>
 ##### proxiedSource.adjustEnvelope(envelope) ⇒ <code>external:falcor.JSONGraphEnvelope</code>
@@ -1642,6 +1605,49 @@ Write our cache to storage
 Get our cache from storage
 
 **Kind**: instance method of <code>[StorageDataSource](#module_Protean.falcor.StorageDataSource)</code>  
+<a name="module_Protean.falcor.graph"></a>
+#### falcor.graph
+**Kind**: static property of <code>[falcor](#module_Protean.falcor)</code>  
+<a name="module_Protean.falcor.graph.resolve"></a>
+##### graph.resolve(root, graph) ⇒ <code>Object</code>
+**Kind**: static method of <code>[graph](#module_Protean.falcor.graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| root | <code>external:falcor.Path</code> | 
+| graph | <code>Object</code> | 
+
+<a name="module_Protean.falcor.path"></a>
+#### falcor.path
+**Kind**: static property of <code>[falcor](#module_Protean.falcor)</code>  
+
+* [.path](#module_Protean.falcor.path)
+  * [.relative(root, paths)](#module_Protean.falcor.path.relative) ⇒ <code>external:falcor.PathSets</code>
+  * [.resolve(root, paths, [opts])](#module_Protean.falcor.path.resolve) ⇒ <code>external:falcor.PathSets</code>
+
+<a name="module_Protean.falcor.path.relative"></a>
+##### path.relative(root, paths) ⇒ <code>external:falcor.PathSets</code>
+**Kind**: static method of <code>[path](#module_Protean.falcor.path)</code>  
+
+| Param | Type |
+| --- | --- |
+| root | <code>external:falcor.Path</code> | 
+| paths | <code>external:falcor.PathSets</code> | 
+
+<a name="module_Protean.falcor.path.resolve"></a>
+##### path.resolve(root, paths, [opts]) ⇒ <code>external:falcor.PathSets</code>
+**Kind**: static method of <code>[path](#module_Protean.falcor.path)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| root | <code>external:falcor.Path</code> |  | 
+| paths | <code>external:falcor.PathSets</code> |  | 
+| [opts] | <code>Object</code> |  | 
+| [opts.rootKey] | <code>String</code> | <code>&#x27;{/}&#x27;</code> | 
+
+<a name="module_Protean.falcor.syntax"></a>
+#### falcor.syntax
+**Kind**: static property of <code>[falcor](#module_Protean.falcor)</code>  
 <a name="module_Protean.Store"></a>
 ### Protean.Store
 **Kind**: static property of <code>[Protean](#module_Protean)</code>  
@@ -1810,6 +1816,15 @@ Fast GUID generator, RFC4122 version 4 compliant.
 **See**: http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript/21963136#21963136  
 **Author:** Jeff Ward (jcward.com).  
 **License**: MIT license  
+<a name="module_Protean.mergeExports"></a>
+### Protean.mergeExports(receiver, supplier) ⇒ <code>Object</code>
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
+
+| Param | Type |
+| --- | --- |
+| receiver | <code>Object</code> | 
+| supplier | <code>function</code> &#124; <code>Object</code> | 
+
 <a name="module_Protean..ClassExtend"></a>
 ### Protean~ClassExtend ⇒ <code>[Class](#module_Protean..Class)</code>
 **Kind**: inner typedef of <code>[Protean](#module_Protean)</code>  
