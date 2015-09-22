@@ -1,4 +1,4 @@
 /**
  * @member module:Protean.falcor
  */
-exports.falcor = require('falcor');
+module.exports = require('falcor');
