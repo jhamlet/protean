@@ -17,7 +17,7 @@ var BREAK    = 'break';
  * @member module:Protean.traverse
  * @function 
  * @param {Object} obj
- * @param {module:Protan.traverse~visitorFn} visitor
+ * @param {module:Protean.traverse~visitorFn} visitor
  * @param {Boolean} [post=false] Do a post traversal
  */
 function traverse (obj, visitor, post) {

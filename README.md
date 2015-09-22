@@ -136,7 +136,7 @@ API
         * [.serialize()](#module_Protean.falcor.StorageDataSource+serialize)
         * [.deserialize()](#module_Protean.falcor.StorageDataSource+deserialize)
       * [.NoCacheSource](#module_Protean.falcor.NoCacheSource)
-        * [new NoCacheSource(source)](#new_module_Protean.falcor.NoCacheSource_new)
+        * [new NoCacheSource(opts)](#new_module_Protean.falcor.NoCacheSource_new)
         * [.get(paths)](#module_Protean.falcor.NoCacheSource+get) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
         * [.set(envelope)](#module_Protean.falcor.NoCacheSource+set) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
         * [.call(path, args, refSuffixes, thisPaths)](#module_Protean.falcor.NoCacheSource+call) ⇒ <code>externa:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
@@ -172,6 +172,8 @@ API
         * [.serialize()](#module_Protean.falcor.StorageDataSource+serialize)
         * [.deserialize()](#module_Protean.falcor.StorageDataSource+deserialize)
       * [.graph](#module_Protean.falcor.graph)
+        * [.atoms(graph, fn)](#module_Protean.falcor.graph.atoms)
+          * [~visitorFn(path, atom, graph)](#module_Protean.falcor.graph.atoms..visitorFn)
         * [.relative(root, graph)](#module_Protean.falcor.graph.relative) ⇒ <code>Object</code>
         * [.resolve(root, graph, [opts])](#module_Protean.falcor.graph.resolve) ⇒ <code>Object</code>
       * [.path](#module_Protean.falcor.path)
@@ -195,6 +197,12 @@ API
     * [.instantiate(fn, [args])](#module_Protean.instantiate) ⇒ <code>Object</code>
     * [.augment(...obj)](#module_Protean.augment) ⇒ <code>Object</code>
     * [.traverse(obj, visitor, [post])](#module_Protean.traverse)
+      * _static_
+        * [.SKIP](#module_Protean.traverse.SKIP)
+        * [.CONTINUE](#module_Protean.traverse.CONTINUE)
+        * [.BREAK](#module_Protean.traverse.BREAK)
+      * _inner_
+        * [~visitorFn(path, value, context)](#module_Protean.traverse..visitorFn) ⇒ <code>undefined</code> &#124; <code>String</code>
     * [.enmap(...args)](#module_Protean.enmap) ⇒ <code>Object</code>
     * [.enumerate()](#module_Protean.enumerate) ⇒ <code>Object</code>
     * [.guid()](#module_Protean.guid) ⇒ <code>String</code>
@@ -955,7 +963,7 @@ Remove a state and its transitions
       * [.serialize()](#module_Protean.falcor.StorageDataSource+serialize)
       * [.deserialize()](#module_Protean.falcor.StorageDataSource+deserialize)
     * [.NoCacheSource](#module_Protean.falcor.NoCacheSource)
-      * [new NoCacheSource(source)](#new_module_Protean.falcor.NoCacheSource_new)
+      * [new NoCacheSource(opts)](#new_module_Protean.falcor.NoCacheSource_new)
       * [.get(paths)](#module_Protean.falcor.NoCacheSource+get) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
       * [.set(envelope)](#module_Protean.falcor.NoCacheSource+set) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
       * [.call(path, args, refSuffixes, thisPaths)](#module_Protean.falcor.NoCacheSource+call) ⇒ <code>externa:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
@@ -991,6 +999,8 @@ Remove a state and its transitions
       * [.serialize()](#module_Protean.falcor.StorageDataSource+serialize)
       * [.deserialize()](#module_Protean.falcor.StorageDataSource+deserialize)
     * [.graph](#module_Protean.falcor.graph)
+      * [.atoms(graph, fn)](#module_Protean.falcor.graph.atoms)
+        * [~visitorFn(path, atom, graph)](#module_Protean.falcor.graph.atoms..visitorFn)
       * [.relative(root, graph)](#module_Protean.falcor.graph.relative) ⇒ <code>Object</code>
       * [.resolve(root, graph, [opts])](#module_Protean.falcor.graph.resolve) ⇒ <code>Object</code>
     * [.path](#module_Protean.falcor.path)
@@ -1269,13 +1279,13 @@ Get our cache from storage
 **Implements:** <code>external:falcor.DataSource</code>  
 
 * [.NoCacheSource](#module_Protean.falcor.NoCacheSource)
-  * [new NoCacheSource(source)](#new_module_Protean.falcor.NoCacheSource_new)
+  * [new NoCacheSource(opts)](#new_module_Protean.falcor.NoCacheSource_new)
   * [.get(paths)](#module_Protean.falcor.NoCacheSource+get) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
   * [.set(envelope)](#module_Protean.falcor.NoCacheSource+set) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
   * [.call(path, args, refSuffixes, thisPaths)](#module_Protean.falcor.NoCacheSource+call) ⇒ <code>externa:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
 
 <a name="new_module_Protean.falcor.NoCacheSource_new"></a>
-##### new NoCacheSource(source)
+##### new NoCacheSource(opts)
 A Falcor DataSource that proxies another data source and sets all returned
 atoms to expire immediately.
 
@@ -1284,7 +1294,8 @@ atoms to expire immediately.
 
 | Param | Type |
 | --- | --- |
-| source | <code>external:falcor.DataSource</code> | 
+| opts | <code>Object</code> | 
+| opts.source | <code>external:falcor.DataSource</code> | 
 
 <a name="module_Protean.falcor.NoCacheSource+get"></a>
 ##### noCacheSource.get(paths) ⇒ <code>external:Rx.Observable.&lt;external:falcor.JSONGraphEnvelope&gt;</code>
@@ -1612,8 +1623,29 @@ Get our cache from storage
 **Kind**: static property of <code>[falcor](#module_Protean.falcor)</code>  
 
 * [.graph](#module_Protean.falcor.graph)
+  * [.atoms(graph, fn)](#module_Protean.falcor.graph.atoms)
+    * [~visitorFn(path, atom, graph)](#module_Protean.falcor.graph.atoms..visitorFn)
   * [.relative(root, graph)](#module_Protean.falcor.graph.relative) ⇒ <code>Object</code>
   * [.resolve(root, graph, [opts])](#module_Protean.falcor.graph.resolve) ⇒ <code>Object</code>
+
+<a name="module_Protean.falcor.graph.atoms"></a>
+##### graph.atoms(graph, fn)
+**Kind**: static method of <code>[graph](#module_Protean.falcor.graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| graph | <code>Object</code> | 
+| fn | <code>[visitorFn](#module_Protean.falcor.graph.atoms..visitorFn)</code> | 
+
+<a name="module_Protean.falcor.graph.atoms..visitorFn"></a>
+###### atoms~visitorFn(path, atom, graph)
+**Kind**: inner method of <code>[atoms](#module_Protean.falcor.graph.atoms)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>Array.&lt;String&gt;</code> | 
+| atom | <code>external:falcor.Atom</code> | 
+| graph | <code>Object</code> | 
 
 <a name="module_Protean.falcor.graph.relative"></a>
 ##### graph.relative(root, graph) ⇒ <code>Object</code>
@@ -1799,11 +1831,62 @@ existing properties defined directly on the source object.
 ### Protean.traverse(obj, visitor, [post])
 **Kind**: static method of <code>[Protean](#module_Protean)</code>  
 
-| Param | Type | Default |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| obj | <code>Object</code> |  |  |
+| visitor | <code>[visitorFn](#module_Protean.traverse..visitorFn)</code> |  |  |
+| [post] | <code>Boolean</code> | <code>false</code> | Do a post traversal |
+
+
+  * [.traverse(obj, visitor, [post])](#module_Protean.traverse)
+    * _static_
+      * [.SKIP](#module_Protean.traverse.SKIP)
+      * [.CONTINUE](#module_Protean.traverse.CONTINUE)
+      * [.BREAK](#module_Protean.traverse.BREAK)
+    * _inner_
+      * [~visitorFn(path, value, context)](#module_Protean.traverse..visitorFn) ⇒ <code>undefined</code> &#124; <code>String</code>
+
+<a name="module_Protean.traverse.SKIP"></a>
+#### traverse.SKIP
+**Kind**: static property of <code>[traverse](#module_Protean.traverse)</code>  
+**Default**: <code>&#x27;skip&#x27;</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>String</code> | 
+
+<a name="module_Protean.traverse.CONTINUE"></a>
+#### traverse.CONTINUE
+**Kind**: static property of <code>[traverse](#module_Protean.traverse)</code>  
+**Default**: <code>&#x27;continue&#x27;</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>String</code> | 
+
+<a name="module_Protean.traverse.BREAK"></a>
+#### traverse.BREAK
+**Kind**: static property of <code>[traverse](#module_Protean.traverse)</code>  
+**Default**: <code>&#x27;break&#x27;</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>String</code> | 
+
+<a name="module_Protean.traverse..visitorFn"></a>
+#### traverse~visitorFn(path, value, context) ⇒ <code>undefined</code> &#124; <code>String</code>
+**Kind**: inner method of <code>[traverse](#module_Protean.traverse)</code>  
+**Returns**: <code>undefined</code> &#124; <code>String</code> - One of the constants of 'skip', 'continue', or
+'break'. Returning undefined is the same as returing 'continue'.  
+
+| Param | Type | Description |
 | --- | --- | --- |
-| obj | <code>Object</code> |  | 
-| visitor | <code>function</code> |  | 
-| [post] | <code>Boolean</code> | <code>false</code> | 
+| path | <code>Array.&lt;String&gt;</code> | The path to the value |
+| value | <code>Mixed</code> | The value |
+| context | <code>Object</code> | The original object |
 
 <a name="module_Protean.enmap"></a>
 ### Protean.enmap(...args) ⇒ <code>Object</code>
