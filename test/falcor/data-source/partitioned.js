@@ -1,12 +1,12 @@
 /*globals describe, it, before, beforeEach*/
 
 describe('falcor', function () {
-    describe('PartitionedDataSource', function () {
-        var falcor = require('protean/falcor');
-        var Model = falcor.Model;
-        var PartitionedDataSource = require('protean/falcor/data-source/partitioned');
-        var LocalDataSource = require('protean/falcor/data-source/local');
-        var userSource, coreSource, model;
+    describe.skip('PartitionedDataSource', function () {
+        // var falcor = require('protean/falcor');
+        // var Model = falcor.Model;
+        // var PartitionedDataSource = require('protean/falcor/data-source/partitioned');
+        // var LocalDataSource = require('protean/falcor/data-source/local');
+        // var userSource, coreSource, model;
 
         before(function () {
             userSource = new LocalDataSource({ storageKey: 'foo' });

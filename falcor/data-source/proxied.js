@@ -50,7 +50,7 @@ module.exports = classify(ProxiedSource,/** @lends module:Protean.falcor.Proxied
         var preGet = this.preGet;
         var postGet = this.postGet;
 
-        paths = gutil.relative(this.root, paths);
+        paths = putil.relative(this.root, paths);
 
         return source.
             get(preGet ? preGet(paths) : paths).
@@ -85,7 +85,7 @@ module.exports = classify(ProxiedSource,/** @lends module:Protean.falcor.Proxied
         var preCall = this.preCall;
         var postCall = this.postCall;
 
-        path = gutil.relative(this.root, [path])[0];
+        path = putil.relative(this.root, [path])[0];
 
         var observable = preCall ?
                 source.call.apply(source, preCall(path, args, refSuffixes, thisPaths))

@@ -1,6 +1,6 @@
 var putil = require('../path');
-var set      = require('lodash/object/set');
-var get      = require('lodash/object/get');
+var set   = require('lodash/object/set');
+var get   = require('lodash/object/get');
 /**
  * @member module:Protean.falcor.path.relative
  * @function

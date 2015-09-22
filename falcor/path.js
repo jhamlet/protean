@@ -3,7 +3,9 @@ var merge = require('protean/utility/merge-exports');
 /**
  * @member module:Protean.falcor.path
  */
-module.exports = reduce([
-    require('./graph/relative'),
-    require('./graph/resolve')
-], merge, require('falcor-path-utils'));
+exports = module.exports = require('falcor-path-utils');
+
+reduce([
+    require('./path/relative'),
+    require('./path/resolve')
+], merge, exports);

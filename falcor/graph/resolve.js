@@ -1,14 +1,14 @@
 var putil = require('../path');
 var set = require('lodash/object/set');
-var traverse = require('protean/object/traverse');
+var atoms = require('protean/falcor/graph/atoms');
 
-function visitor (accumulator, root, opts, path, value) {
+function visitor (accumulator, root, opts, path, atom) {
     if (path.length) {
         var local = putil.resolve(root, [path], opts)[0];
-        set(accumulator, local, value);
+        set(accumulator, local, atom);
 
-        if (value.$type && value.$type === 'ref') {
-            value.value = putil.resolve([value.value])[0];
+        if (atom.$type && atom.$type === 'ref') {
+            atom.value = putil.resolve(root, [atom.value])[0];
         }
     }
 }
@@ -24,7 +24,7 @@ function visitor (accumulator, root, opts, path, value) {
 module.exports = function resolve (root, graph, opts) {
     var output = {};
 
-    traverse(graph, visitor.bind(null, output, root, opts));
+    atoms(graph, visitor.bind(null, output, root, opts));
 
     return output;
 };
