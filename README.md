@@ -172,7 +172,8 @@ API
         * [.serialize()](#module_Protean.falcor.StorageDataSource+serialize)
         * [.deserialize()](#module_Protean.falcor.StorageDataSource+deserialize)
       * [.graph](#module_Protean.falcor.graph)
-        * [.resolve(root, graph)](#module_Protean.falcor.graph.resolve) ⇒ <code>Object</code>
+        * [.relative(root, graph)](#module_Protean.falcor.graph.relative) ⇒ <code>Object</code>
+        * [.resolve(root, graph, [opts])](#module_Protean.falcor.graph.resolve) ⇒ <code>Object</code>
       * [.path](#module_Protean.falcor.path)
         * [.relative(root, paths)](#module_Protean.falcor.path.relative) ⇒ <code>external:falcor.PathSets</code>
         * [.resolve(root, paths, [opts])](#module_Protean.falcor.path.resolve) ⇒ <code>external:falcor.PathSets</code>
@@ -990,7 +991,8 @@ Remove a state and its transitions
       * [.serialize()](#module_Protean.falcor.StorageDataSource+serialize)
       * [.deserialize()](#module_Protean.falcor.StorageDataSource+deserialize)
     * [.graph](#module_Protean.falcor.graph)
-      * [.resolve(root, graph)](#module_Protean.falcor.graph.resolve) ⇒ <code>Object</code>
+      * [.relative(root, graph)](#module_Protean.falcor.graph.relative) ⇒ <code>Object</code>
+      * [.resolve(root, graph, [opts])](#module_Protean.falcor.graph.resolve) ⇒ <code>Object</code>
     * [.path](#module_Protean.falcor.path)
       * [.relative(root, paths)](#module_Protean.falcor.path.relative) ⇒ <code>external:falcor.PathSets</code>
       * [.resolve(root, paths, [opts])](#module_Protean.falcor.path.resolve) ⇒ <code>external:falcor.PathSets</code>
@@ -1608,14 +1610,30 @@ Get our cache from storage
 <a name="module_Protean.falcor.graph"></a>
 #### falcor.graph
 **Kind**: static property of <code>[falcor](#module_Protean.falcor)</code>  
-<a name="module_Protean.falcor.graph.resolve"></a>
-##### graph.resolve(root, graph) ⇒ <code>Object</code>
+
+* [.graph](#module_Protean.falcor.graph)
+  * [.relative(root, graph)](#module_Protean.falcor.graph.relative) ⇒ <code>Object</code>
+  * [.resolve(root, graph, [opts])](#module_Protean.falcor.graph.resolve) ⇒ <code>Object</code>
+
+<a name="module_Protean.falcor.graph.relative"></a>
+##### graph.relative(root, graph) ⇒ <code>Object</code>
 **Kind**: static method of <code>[graph](#module_Protean.falcor.graph)</code>  
 
 | Param | Type |
 | --- | --- |
 | root | <code>external:falcor.Path</code> | 
 | graph | <code>Object</code> | 
+
+<a name="module_Protean.falcor.graph.resolve"></a>
+##### graph.resolve(root, graph, [opts]) ⇒ <code>Object</code>
+**Kind**: static method of <code>[graph](#module_Protean.falcor.graph)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| root | <code>external:falcor.Path</code> |  | 
+| graph | <code>Object</code> |  | 
+| [opts] | <code>Object</code> |  | 
+| [opts.rootKey] | <code>String</code> | <code>&#x27;{/}&#x27;</code> | 
 
 <a name="module_Protean.falcor.path"></a>
 #### falcor.path

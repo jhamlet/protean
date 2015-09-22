@@ -7,11 +7,11 @@ function visitor (accumulator, root, path, value) {
     set(accumulator, local, value);
 }
 /**
- * @member module:protean.falcor.graph.relative
+ * @member module:Protean.falcor.graph.relative
  * @function
- * @param {external:falcor.path} root
- * @param {object} graph
- * @returns {object}
+ * @param {external:falcor.Path} root
+ * @param {Object} graph
+ * @returns {Object}
  */
 module.exports = function relative (root, graph) {
     var output = {};
