@@ -5,8 +5,11 @@ var gulp     = require('gulp'),
     fs       = require('fs'),
     // path     = require('path'),
     pkgInfo  = require('./package.json'),
-    FACETS   = ['array', 'collection', 'function', 'object', 'string', 'utility'],
-    PATHS    = ['./*.js', './{' + FACETS.join(',') + '}/*.js'],
+    FACETS   = [
+        'array', 'collection', 'falcor', 'function', 'object', 'storage',
+        'string', 'utility'
+    ],
+    PATHS    = ['./*.js', './{' + FACETS.join(',') + '}/**/*.js'],
     LICENSE  = fs.readFileSync('LICENSE', 'utf8'),
     CLOBBER  = [];
 
