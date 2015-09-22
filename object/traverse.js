@@ -5,11 +5,20 @@ var SKIP     = 'skip';
 var CONTINUE = 'continue';
 var BREAK    = 'break';
 /**
+ * @typedef module:Protean.traverse~visitorFn
+ * @function
+ * @param {String[]} path The path to the value
+ * @param {Mixed} value The value
+ * @param {Object} context The original object
+ * @returns {undefined|String} One of the constants of 'skip', 'continue', or
+ * 'break'. Returning undefined is the same as returing 'continue'.
+ */
+/**
  * @member module:Protean.traverse
  * @function 
  * @param {Object} obj
- * @param {Function} visitor
- * @param {Boolean} [post=false]
+ * @param {module:Protan.traverse~visitorFn} visitor
+ * @param {Boolean} [post=false] Do a post traversal
  */
 function traverse (obj, visitor, post) {
     var visit    = [];
@@ -27,7 +36,7 @@ function traverse (obj, visitor, post) {
 
         if (node !== EMPTY) {
             result = !post ?
-                visitor(path.slice(), node) :
+                visitor(path.slice(), node, obj) :
                 CONTINUE;
 
             if (result === BREAK) {
@@ -57,7 +66,7 @@ function traverse (obj, visitor, post) {
             node = visited.pop();
 
             if (node) {
-                result = visitor(traveled.pop(), node);
+                result = visitor(traveled.pop(), node, obj);
 
                 if (result === BREAK) {
                     break;
@@ -67,8 +76,20 @@ function traverse (obj, visitor, post) {
     }
 }
 
-module.exports = assign(traverse, {
+module.exports = assign(traverse,/** @lends module:Protean.traverse */{
+    /**
+     * @property {String}
+     * @default 'skip'
+     */
     SKIP:      SKIP,
+    /**
+     * @property {String}
+     * @default 'continue'
+     */
     CONTINUE:  CONTINUE,
+    /**
+     * @property {String}
+     * @default 'break'
+     */
     BREAK:     BREAK
 });
