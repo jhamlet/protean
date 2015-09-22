@@ -4,7 +4,7 @@ var Collection = require('protean/utility/collection');
 var Rx         = require('rx');
 var Observable = Rx.Observable;
 var gutil      = require('protean/falcor/graph');
-var putil      = require('protean/falcor/util');
+var putil      = require('protean/falcor/path');
 var $ref       = gutil.ref;
 var $atom      = gutil.atom;
 var $pv        = gutil.pathValue;
@@ -16,9 +16,9 @@ var isArray    = Array.isArray;
 /**
  * **file:** protean/falcor/data-source/collection.js
  *
- * @class module:Protean.falcor.CollectionSource
- * @implements external:falcor.DataSource
- * @param {module:Protean.Collection} collection
+ * @class CollectionSource
+ * @implements external:DataSource
+ * @param {Collection} collection
  * @param {Array} [path]
  */
 function CollectionSource (collection, path) {
@@ -35,9 +35,9 @@ function CollectionSource (collection, path) {
     this.keyedPath   = path.concat(['byId']);
 }
 
-module.exports = classify(CollectionSource,/** @lends module:Protean.falcor.CollectionSource# */{
+module.exports = classify(CollectionSource,/** @lends CollectionSource# */{
     /**
-     * @property {external:falcor.Router}
+     * @property {FalcorRouter}
      */
     get router () {
         var router = new (Router.createClass(this.routes));
@@ -76,27 +76,27 @@ module.exports = classify(CollectionSource,/** @lends module:Protean.falcor.Coll
         return routes;
     },
     /**
-     * @param {external:falcor.PathSets[]} paths
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSet[]} paths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     get: function (paths) { return this.router.get(paths); },
     /**
-     * @param {external:falcor.JSONGraphEnvelope} envelope
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {JSONGraphEnvelope} envelope
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     set: function (envelope) { return this.router.set(envelope); },
     /**
-     * @param {external:falcor.PathSet} path
+     * @param {PathSet} path
      * @param {Array<Mixed>} args
-     * @param {external:falcor.PathSet[]} refSuffixes
-     * @param {external:falcor.PathSet[]} thisPaths
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSet[]} refSuffixes
+     * @param {PathSet[]} thisPaths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     call: function (paths, args, refSuffixes, thisPaths) {
         return this.router.call(paths, args, refSuffixes, thisPaths);
     },
     /**
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     getLength: function () {
         var len = this.collection.length;
@@ -104,8 +104,8 @@ module.exports = classify(CollectionSource,/** @lends module:Protean.falcor.Coll
         return Observable.return($pv(path, $atom(len)));
     },
     /**
-     * @param {external:falcor.PathSets[]} paths
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSets[]} paths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     getRecordByIndex: function (pathset) {
         var collection = this.collection;
@@ -123,8 +123,8 @@ module.exports = classify(CollectionSource,/** @lends module:Protean.falcor.Coll
             });
     },
     /**
-     * @param {external:falcor.PathSets[]} paths
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSets[]} paths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     getRecordProps: function (pathset) {
         var collection = this.collection;

@@ -8,9 +8,9 @@ var Rx = require('rx');
 var Observable = Rx.Observable;
 
 /**
- * @class module:Protean.FiniteStateMachine
- * @extends external:Rx.Observable
- * @mixes external:Rx.Observer
+ * @class FiniteStateMachine
+ * @extends Observable
+ * @mixes Observer
  * @param {Object} [opts]
  * @param {String} [opts.initial] The initial state to begin in
  * @param {String} [opts.current] Alias for initial
@@ -42,7 +42,7 @@ function FiniteStateMachine (opts) {
     }
 }
 
-module.exports = inherit(Observable, FiniteStateMachine,/** @lends module:Protean.FiniteStateMachine# */{
+module.exports = inherit(Observable, FiniteStateMachine,/** @lends FiniteStateMachine# */{
     /**
      * Default options
      * @property {Object}
@@ -66,7 +66,7 @@ module.exports = inherit(Observable, FiniteStateMachine,/** @lends module:Protea
         states: null
     },
     /**
-     * @property {external:Rx.ReplaySubject}
+     * @property {Subject}
      */
     transitions: null,
     /**
@@ -210,8 +210,8 @@ module.exports = inherit(Observable, FiniteStateMachine,/** @lends module:Protea
     },
     /**
      * @private
-     * @param {external:Rx.Observer} observer
-     * @returns {external:Rx.Disposable}
+     * @param {Observer} observer
+     * @returns {Disposable}
      */
     _subscribe: function (observer) {
         return this.transitions.subscribe(observer);

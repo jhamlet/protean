@@ -1,7 +1,7 @@
 {
     "name": "protean",
     "description": "An ever changing set of utilities.",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "keywords": [
         "utility",
         "lodash",
@@ -23,13 +23,15 @@
         "del":          "*",
         "gulp":         "3.x",
         "gulp-ejs":     "1.x",
+        "gulp-concat":  "2.x",
         "gulp-jsdoc":   "0.x",
+        "gulp-marked":  "1.x",
         "jsdoc-to-markdown": "1.x"
     },
     "scripts": {
         "build": "./node_modules/.bin/gulp",
         "clean": "./node_modules/.bin/gulp clean",
-        "test": "./node_modules/.bin/mocha -R spec test/*.js test/**/*.js"
+        "test": "./node_modules/.bin/mocha -R spec test/*.js test/**/**/*.js"
     },
     "licenses": [
         {

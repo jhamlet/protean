@@ -3,7 +3,7 @@ var guid     = require('protean/utility/guid');
 var toArray  = require('lodash/lang/toArray');
 var Record   = require('./record');
 /**
- * @class module:Protean.Collection
+ * @class Collection
  * @param {...Record|Object} [rec]
  */
 function Collection () {
@@ -18,7 +18,7 @@ Collection.fromArray = function (list) {
     return coll;
 };
 
-module.exports = classify(Collection,/** @lends module:Protean.Collection# */{
+module.exports = classify(Collection,/** @lends Collection# */{
     /**
      * The unique identifier key to use for records
      * @property {String}

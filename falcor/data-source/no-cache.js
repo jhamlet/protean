@@ -1,37 +1,38 @@
 var classify = require('protean/function/classify');
-var get      = require('lodash/object/get');
+var atoms    = require('protean/falcor/graph/atoms');
 /**
  * A Falcor DataSource that proxies another data source and sets all returned
  * atoms to expire immediately.
  *
  * **file:** protean/falcor/data-source/no-cache.js
  *
- * @class module:Protean.falcor.NoCacheSource
- * @implements external:falcor.DataSource
- * @param {external:falcor.DataSource} source
+ * @class NoCacheSource
+ * @implements external:DataSource
+ * @param {Object} opts
+ * @param {external:DataSource} opts.source
  */
-function NoCacheSource (source) {
-    this.source = source;
-    this._expire = this._expire.bind(this);
+function NoCacheSource (opts) {
+    opts = opts || {};
+    this.source = opts.source;
 }
 
-module.exports = classify(NoCacheSource,/** @lends module:Protean.falcor.NoCacheSource# */{
+module.exports = classify(NoCacheSource,/** @lends NoCacheSource# */{
     /**
-     * @param {external:falcor.PathSets[]} paths
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSets[]} paths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     get: function (paths) { return this.source.get(paths).select(this._expire); },
     /**
-     * @param {external:falcor.JSONGraphEnvelope} envelope
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {JSONGraphEnvelope} envelope
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     set: function (envelope) { return this.source.set(envelope).select(this._expire); },
     /**
-     * @param {external:falcor.PathSet} path
+     * @param {PathSet} path
      * @param {Array<Mixed>} args
-     * @param {external:falcor.PathSet[]} refSuffixes
-     * @param {external:falcor.PathSet[]} thisPaths
-     * @returns {externa:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSet[]} refSuffixes
+     * @param {PathSet[]} thisPaths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     call: function (path, args, refSuffixes, thisPaths) {
         return this.
@@ -45,14 +46,11 @@ module.exports = classify(NoCacheSource,/** @lends module:Protean.falcor.NoCache
      * @returns {JSONGraphEnvelope}
      */
     _expire: function (envelope) {
-        var paths = envelope.paths;
-        var graph = envelope.jsonGraph;
-
-        paths.
-            forEach(function (path) {
-                var atom = get(graph, path);
-                if (atom) { atom.$expires = 0; }
+        if (envelope.jsonGraph) {
+            atoms(envelope.jsonGraph, function (path, atom) {
+                atom.$expires = 0;
             });
+        }
 
         return envelope;
     }

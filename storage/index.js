@@ -1,6 +1,6 @@
 var classify = require('protean/function/classify');
 /**
- * @class module:Protean.Storage
+ * @class Storage
  * @implements external:Storage
  * @param {Object} opts
  * @param {external:Storage} opts.store
@@ -13,7 +13,7 @@ function Storage (opts) {
     this.json = opts.json;
 }
 
-module.exports = classify(Storage,/** @lends module:Protean.Storage# */{
+module.exports = classify(Storage,/** @lends Storage# */{
     /**
      * @param {String} key
      * @returns {Mixed}

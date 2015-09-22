@@ -1,7 +1,7 @@
 var classify = require('protean/function/classify');
 var has = require('lodash/object/has');
 /**
- * @member module:Protean.Store
+ * @class Store
  * @implements external:Storage
  */
 function Store () {
@@ -9,7 +9,7 @@ function Store () {
     this.store = {};
 }
 
-module.exports = classify(Store,/** @lends module:Protean.Store# */{
+module.exports = classify(Store,/** @lends Store# */{
     /**
      * @param {String} key
      * @returns {null|String}

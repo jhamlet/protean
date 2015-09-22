@@ -1,5 +1,13 @@
-var assign = require('lodash/object/assign');
-
-module.exports = assign(require('falcor-path-syntax'), {
-    rootKey: require('./syntax/root-key')
-});
+var reduce = require('lodash/collection/reduce');
+var merge = require('protean/utility/merge-exports');
+/**
+ * @external falcor.Syntax
+ * @see {@link https://github.com/Netflix/falcor-path-syntax}
+ */
+/**
+ * @member module:Falcor.Syntax
+ * @augments external:falcor.Syntax
+ */
+module.exports = reduce([
+    { rootKey: require('./syntax/root-key') }
+], merge, require('falcor-path-syntax'));
