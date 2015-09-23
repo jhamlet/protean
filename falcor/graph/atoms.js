@@ -1,10 +1,10 @@
 var traverse = require('protean/object/traverse');
 /**
- * @typedef module:Protean.falcor.graph.atoms~visitorFn
+ * @typedef Graph.atoms~visitorFn
  * @function
- * @param {String[]} path
- * @param {external:falcor.Atom} atom
- * @param {Object} graph
+ * @param {PathSet[]} path
+ * @param {Graph.Atom} atom
+ * @param {JSONGraph} graph
  */
 function visitor (graph, subject, path, value) {
     if (path.length && value && value.$type) {
@@ -12,10 +12,10 @@ function visitor (graph, subject, path, value) {
     }
 }
 /**
- * @member module:Protean.falcor.graph.atoms
+ * @member Graph.atoms
  * @function
- * @param {Object} graph
- * @param {module:Protean.falcor.graph.atoms~visitorFn} fn
+ * @param {JSONGraph} graph
+ * @param {Graph.atoms~visitorFn} fn
  */
 module.exports = function atoms (graph, fn) {
     traverse(graph, visitor.bind(null, graph, fn));

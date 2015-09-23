@@ -1,11 +1,7 @@
 var assign = require('lodash/object/assign');
 
 assign(exports, {
-    Storage: assign(require('./storage/index'), {
-        Local:    require('./storage/local'),
-        Session:  require('./storage/session'),
-        Memory:   require('./storage/memory'),
-    }),
+    Storage: require('./storage/index'),
     Store: assign(require('./storage/store'), {
         local:    require('./storage/store/local'),
         session:  require('./storage/store/session'),

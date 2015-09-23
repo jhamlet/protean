@@ -6,33 +6,33 @@ var atoms    = require('protean/falcor/graph/atoms');
  *
  * **file:** protean/falcor/data-source/no-cache.js
  *
- * @class module:Protean.falcor.NoCacheSource
- * @implements external:falcor.DataSource
+ * @class NoCacheSource
+ * @implements external:DataSource
  * @param {Object} opts
- * @param {external:falcor.DataSource} opts.source
+ * @param {external:DataSource} opts.source
  */
 function NoCacheSource (opts) {
     opts = opts || {};
     this.source = opts.source;
 }
 
-module.exports = classify(NoCacheSource,/** @lends module:Protean.falcor.NoCacheSource# */{
+module.exports = classify(NoCacheSource,/** @lends NoCacheSource# */{
     /**
-     * @param {external:falcor.PathSets[]} paths
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSets[]} paths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     get: function (paths) { return this.source.get(paths).select(this._expire); },
     /**
-     * @param {external:falcor.JSONGraphEnvelope} envelope
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {JSONGraphEnvelope} envelope
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     set: function (envelope) { return this.source.set(envelope).select(this._expire); },
     /**
-     * @param {external:falcor.PathSet} path
+     * @param {PathSet} path
      * @param {Array<Mixed>} args
-     * @param {external:falcor.PathSet[]} refSuffixes
-     * @param {external:falcor.PathSet[]} thisPaths
-     * @returns {externa:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSet[]} refSuffixes
+     * @param {PathSet[]} thisPaths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     call: function (path, args, refSuffixes, thisPaths) {
         return this.

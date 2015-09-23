@@ -4,8 +4,8 @@ var defaults = require('lodash/object/defaults');
 /**
  * **file:** protean/falcor/data-source/storage.js
  *
- * @class module:Protean.falcor.StorageDataSource
- * @implements external:falcor.DataSource
+ * @class StorageDataSource
+ * @implements external:DataSource
  * @param {Object} opts
  * @param {Object} [opts.cache]
  * @param {external:Storage} [opts.storage]
@@ -24,13 +24,13 @@ function StorageDataSource (opts) {
     this.deserialize();
 }
 
-module.exports = classify(StorageDataSource,/** @lends module:Protean.falcor.StorageDataSource# */{
+module.exports = classify(StorageDataSource,/** @lends StorageDataSource# */{
     /**
      * @property {external:falcor.Model}
      */
     model: null,
     /**
-     * @property {external:faclor.DataSource}
+     * @property {external:DataSource}
      */
     source: null,
     /**
@@ -47,13 +47,13 @@ module.exports = classify(StorageDataSource,/** @lends module:Protean.falcor.Sto
         storage: null
     },
     /**
-     * @param {external:falcor.PathSets[]} paths
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSets[]} paths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     get: function (paths) { return this.dataSource.get(paths); },
     /**
-     * @param {external:falcor.JSONGraphEnvelope} envelope
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {JSONGraphEnvelope} envelope
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     set: function (envelope) {
         return this.
@@ -62,11 +62,11 @@ module.exports = classify(StorageDataSource,/** @lends module:Protean.falcor.Sto
             do(this.serialize.bind(this));
     },
     /**
-     * @param {external:falcor.PathSet} path
+     * @param {PathSet} path
      * @param {Array<Mixed>} args
-     * @param {external:falcor.PathSet[]} refSuffixes
-     * @param {external:falcor.PathSet[]} thisPaths
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSet[]} refSuffixes
+     * @param {PathSet[]} thisPaths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     call: function (paths, args, refSuffixes, thisPaths) {
         return this.

@@ -15,11 +15,11 @@ var CONFIGURABLE = [
  *
  * **file:** protean/falcor/data-source/proxied.js
  *
- * @class module:Protean.falcor.ProxiedSource
- * @implements external:falcor.DataSource
+ * @class ProxiedSource
+ * @implements external:DataSource
  * @param {Object} [opts]
- * @param {external:falcor.DataSource} [opts.source]
- * @param {external:falcor.Path} [opts.root]
+ * @param {external:DataSource} [opts.source]
+ * @param {Path} [opts.root]
  * @param {String} [opts.rootKey] The 'fake' path key that denotes a path that
  * should start at the conceptual root. i.e: do not strip or adjust, just drop
  * the root key.
@@ -42,8 +42,8 @@ function ProxiedSource (opts) {
 
 module.exports = classify(ProxiedSource,/** @lends module:Protean.falcor.ProxiedSource# */{
     /**
-     * @param {external:falcor.PathSets[]} paths
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSets[]} paths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     get: function (paths) {
         var source = this.source;
@@ -58,8 +58,8 @@ module.exports = classify(ProxiedSource,/** @lends module:Protean.falcor.Proxied
             map(function (envelope) { return postGet ? postGet(envelope) : envelope; });
     },
     /**
-     * @param {external:falcor.JSONGraphEnvelope} envelope
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {JSONGraphEnvelope} envelope
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     set: function (envelope) {
         var source = this.source;
@@ -74,11 +74,11 @@ module.exports = classify(ProxiedSource,/** @lends module:Protean.falcor.Proxied
             map(function (envelope) { return postSet ? postSet(envelope) : envelope; });
     },
     /**
-     * @param {external:falcor.PathSet} path
+     * @param {PathSet} path
      * @param {Array<Mixed>} args
-     * @param {external:falcor.PathSet[]} refSuffixes
-     * @param {external:falcor.PathSet[]} thisPaths
-     * @returns {externa:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSet[]} refSuffixes
+     * @param {PathSet[]} thisPaths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     call: function (path, args, refSuffixes, thisPaths) {
         var source = this.source;
@@ -98,8 +98,8 @@ module.exports = classify(ProxiedSource,/** @lends module:Protean.falcor.Proxied
     },
     /**
      * Strip our leading path from the envelope's path(s) and jsonGraph object.
-     * @param {external:falcor.JSONGraphEnvelope} envelope
-     * @returns {external:falcor.JSONGraphEnvelope}
+     * @param {JSONGraphEnvelope} envelope
+     * @returns {JSONGraphEnvelope}
      */
     stripEnvelope: function (envelope) {
         if (envelope.paths) {
@@ -114,8 +114,8 @@ module.exports = classify(ProxiedSource,/** @lends module:Protean.falcor.Proxied
     },
     /**
      * Adjust the JSONGraphEnvelope to reflect our leading path information.
-     * @param {external:falcor.JSONGraphEnvelope} envelope
-     * @returns {external:falcor.JSONGraphEnvelope}
+     * @param {JSONGraphEnvelope} envelope
+     * @returns {JSONGraphEnvelope}
      */
     adjustEnvelope: function (envelope) {
         var root = this.root;

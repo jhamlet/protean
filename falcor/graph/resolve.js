@@ -13,13 +13,13 @@ function visitor (accumulator, root, opts, path, atom) {
     }
 }
 /**
- * @member module:Protean.falcor.graph.resolve
+ * @member Graph.resolve
  * @function
- * @param {external:falcor.Path} root
- * @param {Object} graph
+ * @param {Path} root
+ * @param {JSONGraph} graph
  * @param {Object} [opts]
  * @param {String} [opts.rootKey='{/}']
- * @returns {Object}
+ * @returns {JSONGraph}
  */
 module.exports = function resolve (root, graph, opts) {
     var output = {};

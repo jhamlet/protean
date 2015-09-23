@@ -14,42 +14,42 @@ var set        = require('lodash/object/set');
 /**
  * **file:** protean/falcor/data-source/composite.js
  *
- * @class module:Protean.falcor.CompositeSource
- * @implements external:falcor.DataSource
- * @param {...external:falcor.DataSource} datasources
+ * @class CompositeSource
+ * @implements external:DataSource
+ * @param {...external:DataSource} datasources
  */
 function CompositeSource () {
     this.routes = [];
     this.sources = {};
 }
 
-module.exports = classify(CompositeSource,/** @lends module:Protean.falcor.CompositeSource# */{
+module.exports = classify(CompositeSource,/** @lends CompositeSource# */{
     /**
-     * @param {external:falcor.PathSets[]} paths
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSets[]} paths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     get: function (paths) {
         var pathTree = putil.toTree(paths);
         return this.router.get(paths);
     },
     /**
-     * @param {external:falcor.JSONGraphEnvelope} envelope
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {JSONGraphEnvelope} envelope
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     set: function (envelope) { return this.router.set(envelope); },
     /**
-     * @param {external:falcor.PathSet} path
+     * @param {PathSet} path
      * @param {Array<Mixed>} args
-     * @param {external:falcor.PathSet[]} refSuffixes
-     * @param {external:falcor.PathSet[]} thisPaths
-     * @returns {external:Rx.Observable<external:falcor.JSONGraphEnvelope>}
+     * @param {PathSet[]} refSuffixes
+     * @param {PathSet[]} thisPaths
+     * @returns {Observable<JSONGraphEnvelope>}
      */
     call: function (paths, args, refSuffixes, thisPaths) {
         return this.router.call(paths, args, refSuffixes, thisPaths);
     },
     /**
-     * @param {external:falcor.Path} path
-     * @param {external:falcor.DataSource} source
+     * @param {Path} path
+     * @param {external:DataSource} source
      * @returns {CompositeSource} the CompositeSource instance
      */
     add: function (path, source) {
@@ -70,15 +70,15 @@ module.exports = classify(CompositeSource,/** @lends module:Protean.falcor.Compo
         return this;
     },
     /**
-     * @param {external:falcor.Path} path
-     * @returns {external:falcor.DataSource}
+     * @param {Path} path
+     * @returns {external:DataSource}
      */
     getDataSourceWrapper: function (path) {
         return get(this.sources, syntax.fromPath(path));
     },
     /**
-     * @param {external:falcor.PathSets} paths
-     * @returns {external:Rx.Observable<Object>}
+     * @param {PathSets} paths
+     * @returns {Observable<Object>}
      */
     getDataSources: function (paths) {
         var { sources, routes } = this;
@@ -149,7 +149,7 @@ module.exports = classify(CompositeSource,/** @lends module:Protean.falcor.Compo
             }, {});
     },
     /**
-     * @param {external:falcor.JSONGraphEnvelope} envelope
+     * @param {JSONGraphEnvelope} envelope
      */
     getPathsToDataSources: function (paths) {
     }

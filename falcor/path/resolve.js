@@ -19,13 +19,13 @@ function visitor (accumulator, root, rootKey, path, value) {
     accumulator.push(path);
 };
 /**
- * @member module:Protean.falcor.path.resolve
+ * @member Path.resolve
  * @function
- * @param {external:falcor.Path} root
- * @param {external:falcor.PathSets} paths
+ * @param {Path} root
+ * @param {PathSet[]} paths
  * @param {Object} [opts]
  * @param {String} [opts.rootKey='{/}']
- * @returns {external:falcor.PathSets}
+ * @returns {PathSet[]}
  */
 module.exports = function resolve (root, paths, opts) {
     var rootKey = (opts && opts.rootKey) || ROOT_KEY;
