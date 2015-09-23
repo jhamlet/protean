@@ -7,7 +7,7 @@ function visitor (accumulator, root, path, value) {
     set(accumulator, local, value);
 }
 /**
- * @member Graph.relative
+ * @member module:Falcor.Graph.relative
  * @function
  * @param {Path} root
  * @param {JSONGraph} graph

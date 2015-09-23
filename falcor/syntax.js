@@ -5,7 +5,7 @@ var merge = require('protean/utility/merge-exports');
  * @see {@link https://github.com/Netflix/falcor-path-syntax}
  */
 /**
- * @name Syntax
+ * @member module:Falcor.Syntax
  * @augments external:falcor.Syntax
  */
 module.exports = reduce([

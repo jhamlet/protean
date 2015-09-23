@@ -4,6 +4,7 @@
  */
 
 /**
+ * @module module:Falcor
  * @augments external:falcor
  */
 module.exports = require('falcor');

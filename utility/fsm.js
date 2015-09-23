@@ -9,8 +9,8 @@ var Observable = Rx.Observable;
 
 /**
  * @class FiniteStateMachine
- * @extends external:Rx.Observable
- * @mixes external:Rx.Observer
+ * @extends Observable
+ * @mixes Observer
  * @param {Object} [opts]
  * @param {String} [opts.initial] The initial state to begin in
  * @param {String} [opts.current] Alias for initial
@@ -66,7 +66,7 @@ module.exports = inherit(Observable, FiniteStateMachine,/** @lends FiniteStateMa
         states: null
     },
     /**
-     * @property {external:Rx.ReplaySubject}
+     * @property {Subject}
      */
     transitions: null,
     /**
@@ -210,8 +210,8 @@ module.exports = inherit(Observable, FiniteStateMachine,/** @lends FiniteStateMa
     },
     /**
      * @private
-     * @param {external:Rx.Observer} observer
-     * @returns {external:Rx.Disposable}
+     * @param {Observer} observer
+     * @returns {Disposable}
      */
     _subscribe: function (observer) {
         return this.transitions.subscribe(observer);

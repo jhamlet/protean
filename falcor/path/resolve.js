@@ -19,7 +19,7 @@ function visitor (accumulator, root, rootKey, path, value) {
     accumulator.push(path);
 };
 /**
- * @member Path.resolve
+ * @member module:Falcor.Path.resolve
  * @function
  * @param {Path} root
  * @param {PathSet[]} paths

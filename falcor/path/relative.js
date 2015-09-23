@@ -2,7 +2,7 @@ var putil = require('../path');
 var set   = require('lodash/object/set');
 var get   = require('lodash/object/get');
 /**
- * @member Path.relative
+ * @member module:Falcor.Path.relative
  * @function
  * @param {Path} root
  * @param {PathSet[]} paths

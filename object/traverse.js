@@ -78,18 +78,15 @@ function traverse (obj, visitor, post) {
 
 module.exports = assign(traverse,/** @lends module:Protean.traverse */{
     /**
-     * @property {String}
-     * @default 'skip'
+     * @constant {String}
      */
     SKIP:      SKIP,
     /**
-     * @property {String}
-     * @default 'continue'
+     * @constant {String}
      */
     CONTINUE:  CONTINUE,
     /**
-     * @property {String}
-     * @default 'break'
+     * @constant {String}
      */
     BREAK:     BREAK
 });

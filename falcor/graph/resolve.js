@@ -13,7 +13,7 @@ function visitor (accumulator, root, opts, path, atom) {
     }
 }
 /**
- * @member Graph.resolve
+ * @member module:Falcor.Graph.resolve
  * @function
  * @param {Path} root
  * @param {JSONGraph} graph

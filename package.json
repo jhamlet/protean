@@ -23,7 +23,9 @@
         "del":          "*",
         "gulp":         "3.x",
         "gulp-ejs":     "1.x",
+        "gulp-concat":  "2.x",
         "gulp-jsdoc":   "0.x",
+        "gulp-marked":  "1.x",
         "jsdoc-to-markdown": "1.x"
     },
     "scripts": {

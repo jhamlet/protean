@@ -22,6 +22,8 @@ API
 <dl>
 <dt><a href="#module_Protean">Protean</a></dt>
 <dd></dd>
+<dt><a href="#module_Falcor">Falcor</a> ⇐ <code><a href="http://netflix.github.io/falcor/">falcor</a></code></dt>
+<dd></dd>
 </dl>
 ## Classes
 <dl>
@@ -41,20 +43,9 @@ API
 <dd></dd>
 <dt><a href="#Collection">Collection</a></dt>
 <dd></dd>
-<dt><a href="#FiniteStateMachine">FiniteStateMachine</a> ⇐ <code>external:Rx.Observable</code></dt>
+<dt><a href="#FiniteStateMachine">FiniteStateMachine</a> ⇐ <code><a href="#Observable">Observable</a></code></dt>
 <dd></dd>
 <dt><a href="#Record">Record</a></dt>
-<dd></dd>
-</dl>
-## Members
-<dl>
-<dt><a href="#Graph">Graph</a> ⇐ <code>external:falcor.Graph</code></dt>
-<dd></dd>
-<dt><a href="#Paths">Paths</a> ⇐ <code>external:falcor.Paths</code></dt>
-<dd></dd>
-<dt><a href="#FalcorRouter">FalcorRouter</a> ⇐ <code><a href="https://github.com/Netflix/falcor-router">FalcorRouter</a></code></dt>
-<dd></dd>
-<dt><a href="#Syntax">Syntax</a> ⇐ <code>external:falcor.Syntax</code></dt>
 <dd></dd>
 </dl>
 ## Typedefs
@@ -93,6 +84,8 @@ API
 <dd></dd>
 <dt><a href="#Range">Range</a></dt>
 <dd></dd>
+<dt><a href="#FalcorRouter">FalcorRouter</a></dt>
+<dd></dd>
 </dl>
 <a name="module_Protean"></a>
 ## Protean
@@ -105,9 +98,9 @@ API
     * [.augment(...obj)](#module_Protean.augment) ⇒ <code>Object</code>
     * [.traverse(obj, visitor, [post])](#module_Protean.traverse)
       * _static_
-        * [.SKIP](#module_Protean.traverse.SKIP)
-        * [.CONTINUE](#module_Protean.traverse.CONTINUE)
-        * [.BREAK](#module_Protean.traverse.BREAK)
+        * [.SKIP](#module_Protean.traverse.SKIP) : <code>String</code>
+        * [.CONTINUE](#module_Protean.traverse.CONTINUE) : <code>String</code>
+        * [.BREAK](#module_Protean.traverse.BREAK) : <code>String</code>
       * _inner_
         * [~visitorFn(path, value, context)](#module_Protean.traverse..visitorFn) ⇒ <code>undefined</code> &#124; <code>String</code>
     * [.enmap(...args)](#module_Protean.enmap) ⇒ <code>Object</code>
@@ -188,42 +181,21 @@ existing properties defined directly on the source object.
 
   * [.traverse(obj, visitor, [post])](#module_Protean.traverse)
     * _static_
-      * [.SKIP](#module_Protean.traverse.SKIP)
-      * [.CONTINUE](#module_Protean.traverse.CONTINUE)
-      * [.BREAK](#module_Protean.traverse.BREAK)
+      * [.SKIP](#module_Protean.traverse.SKIP) : <code>String</code>
+      * [.CONTINUE](#module_Protean.traverse.CONTINUE) : <code>String</code>
+      * [.BREAK](#module_Protean.traverse.BREAK) : <code>String</code>
     * _inner_
       * [~visitorFn(path, value, context)](#module_Protean.traverse..visitorFn) ⇒ <code>undefined</code> &#124; <code>String</code>
 
 <a name="module_Protean.traverse.SKIP"></a>
-#### traverse.SKIP
-**Kind**: static property of <code>[traverse](#module_Protean.traverse)</code>  
-**Default**: <code>&#x27;skip&#x27;</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>String</code> | 
-
+#### traverse.SKIP : <code>String</code>
+**Kind**: static constant of <code>[traverse](#module_Protean.traverse)</code>  
 <a name="module_Protean.traverse.CONTINUE"></a>
-#### traverse.CONTINUE
-**Kind**: static property of <code>[traverse](#module_Protean.traverse)</code>  
-**Default**: <code>&#x27;continue&#x27;</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>String</code> | 
-
+#### traverse.CONTINUE : <code>String</code>
+**Kind**: static constant of <code>[traverse](#module_Protean.traverse)</code>  
 <a name="module_Protean.traverse.BREAK"></a>
-#### traverse.BREAK
-**Kind**: static property of <code>[traverse](#module_Protean.traverse)</code>  
-**Default**: <code>&#x27;break&#x27;</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>String</code> | 
-
+#### traverse.BREAK : <code>String</code>
+**Kind**: static constant of <code>[traverse](#module_Protean.traverse)</code>  
 <a name="module_Protean.traverse..visitorFn"></a>
 #### traverse~visitorFn(path, value, context) ⇒ <code>undefined</code> &#124; <code>String</code>
 **Kind**: inner method of <code>[traverse](#module_Protean.traverse)</code>  
@@ -304,6 +276,103 @@ Fast GUID generator, RFC4122 version 4 compliant.
 | superclass | <code>function</code> | A reference to this class' superclass constructor |
 | superproto | <code>Object</code> | A reference to this class' superclass prototype |
 
+<a name="module_Falcor"></a>
+## Falcor ⇐ <code>[falcor](http://netflix.github.io/falcor/)</code>
+**Extends:** <code>[falcor](http://netflix.github.io/falcor/)</code>  
+
+* [Falcor](#module_Falcor) ⇐ <code>[falcor](http://netflix.github.io/falcor/)</code>
+  * [.Graph](#module_Falcor.Graph) ⇐ <code>external:falcor.Graph</code>
+    * [.atoms(graph, fn)](#module_Falcor.Graph.atoms)
+    * [.relative(root, graph)](#module_Falcor.Graph.relative) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+    * [.resolve(root, graph, [opts])](#module_Falcor.Graph.resolve) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+  * [.Path](#module_Falcor.Path) ⇐ <code>external:falcor.Path</code>
+    * [.relative(root, paths)](#module_Falcor.Path.relative) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
+    * [.resolve(root, paths, [opts])](#module_Falcor.Path.resolve) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
+  * [.Router](#module_Falcor.Router) ⇐ <code>[FalcorRouter](https://github.com/Netflix/falcor-router)</code>
+  * [.Syntax](#module_Falcor.Syntax) ⇐ <code>external:falcor.Syntax</code>
+    * [.rootKey](#module_Falcor.Syntax.rootKey)
+
+<a name="module_Falcor.Graph"></a>
+### Falcor.Graph ⇐ <code>external:falcor.Graph</code>
+**Kind**: static property of <code>[Falcor](#module_Falcor)</code>  
+**Extends:** <code>external:falcor.Graph</code>  
+
+* [.Graph](#module_Falcor.Graph) ⇐ <code>external:falcor.Graph</code>
+  * [.atoms(graph, fn)](#module_Falcor.Graph.atoms)
+  * [.relative(root, graph)](#module_Falcor.Graph.relative) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+  * [.resolve(root, graph, [opts])](#module_Falcor.Graph.resolve) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+
+<a name="module_Falcor.Graph.atoms"></a>
+#### Graph.atoms(graph, fn)
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| graph | <code>[JSONGraph](#JSONGraph)</code> | 
+| fn | <code>Graph.atoms~visitorFn</code> | 
+
+<a name="module_Falcor.Graph.relative"></a>
+#### Graph.relative(root, graph) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| root | <code>[Path](#Path)</code> | 
+| graph | <code>[JSONGraph](#JSONGraph)</code> | 
+
+<a name="module_Falcor.Graph.resolve"></a>
+#### Graph.resolve(root, graph, [opts]) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| root | <code>[Path](#Path)</code> |  | 
+| graph | <code>[JSONGraph](#JSONGraph)</code> |  | 
+| [opts] | <code>Object</code> |  | 
+| [opts.rootKey] | <code>String</code> | <code>&#x27;{/}&#x27;</code> | 
+
+<a name="module_Falcor.Path"></a>
+### Falcor.Path ⇐ <code>external:falcor.Path</code>
+**Kind**: static property of <code>[Falcor](#module_Falcor)</code>  
+**Extends:** <code>external:falcor.Path</code>  
+
+* [.Path](#module_Falcor.Path) ⇐ <code>external:falcor.Path</code>
+  * [.relative(root, paths)](#module_Falcor.Path.relative) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
+  * [.resolve(root, paths, [opts])](#module_Falcor.Path.resolve) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
+
+<a name="module_Falcor.Path.relative"></a>
+#### Path.relative(root, paths) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
+**Kind**: static method of <code>[Path](#module_Falcor.Path)</code>  
+
+| Param | Type |
+| --- | --- |
+| root | <code>[Path](#Path)</code> | 
+| paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="module_Falcor.Path.resolve"></a>
+#### Path.resolve(root, paths, [opts]) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
+**Kind**: static method of <code>[Path](#module_Falcor.Path)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| root | <code>[Path](#Path)</code> |  | 
+| paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> |  | 
+| [opts] | <code>Object</code> |  | 
+| [opts.rootKey] | <code>String</code> | <code>&#x27;{/}&#x27;</code> | 
+
+<a name="module_Falcor.Router"></a>
+### Falcor.Router ⇐ <code>[FalcorRouter](https://github.com/Netflix/falcor-router)</code>
+**Kind**: static property of <code>[Falcor](#module_Falcor)</code>  
+**Extends:** <code>[FalcorRouter](https://github.com/Netflix/falcor-router)</code>  
+<a name="module_Falcor.Syntax"></a>
+### Falcor.Syntax ⇐ <code>external:falcor.Syntax</code>
+**Kind**: static property of <code>[Falcor](#module_Falcor)</code>  
+**Extends:** <code>external:falcor.Syntax</code>  
+<a name="module_Falcor.Syntax.rootKey"></a>
+#### Syntax.rootKey
+**Kind**: static property of <code>[Syntax](#module_Falcor.Syntax)</code>  
+**Default**: <code>&#x27;{/}&#x27;</code>  
+**Read only**: true  
 <a name="CollectionSource"></a>
 ## CollectionSource
 **Kind**: global class  
@@ -1042,12 +1111,12 @@ Returns a Collection with all records cloned.
 
 **Kind**: instance method of <code>[Collection](#Collection)</code>  
 <a name="FiniteStateMachine"></a>
-## FiniteStateMachine ⇐ <code>external:Rx.Observable</code>
+## FiniteStateMachine ⇐ <code>[Observable](#Observable)</code>
 **Kind**: global class  
-**Extends:** <code>external:Rx.Observable</code>  
-**Mixes**: <code>external:Rx.Observer</code>  
+**Extends:** <code>[Observable](#Observable)</code>  
+**Mixes**: <code>[Observer](#Observer)</code>  
 
-* [FiniteStateMachine](#FiniteStateMachine) ⇐ <code>external:Rx.Observable</code>
+* [FiniteStateMachine](#FiniteStateMachine) ⇐ <code>[Observable](#Observable)</code>
   * [new FiniteStateMachine([opts])](#new_FiniteStateMachine_new)
   * [.options](#FiniteStateMachine+options)
     * [.initial](#FiniteStateMachine+options.initial)
@@ -1070,6 +1139,7 @@ Returns a Collection with all records cloned.
   * [.enter(name)](#FiniteStateMachine+enter) ⇒ <code>Boolean</code>
   * [.transition(input, from, to)](#FiniteStateMachine+transition) ⇒ <code>[FiniteStateMachine](#FiniteStateMachine)</code>
   * [.valueOf()](#FiniteStateMachine+valueOf) ⇒ <code>Object</code>
+  * [.subscribe(onNextOrObserver, [onError], [onCompleted])](#Observable+subscribe) ⇒ <code>[Disposable](#Disposable)</code>
 
 <a name="new_FiniteStateMachine_new"></a>
 ### new FiniteStateMachine([opts])
@@ -1148,7 +1218,7 @@ Default options
 
 | Type |
 | --- |
-| <code>external:Rx.ReplaySubject</code> | 
+| <code>[Subject](#Subject)</code> | 
 
 <a name="FiniteStateMachine+currentState"></a>
 ### finiteStateMachine.currentState
@@ -1270,6 +1340,16 @@ Remove a state and its transitions
 <a name="FiniteStateMachine+valueOf"></a>
 ### finiteStateMachine.valueOf() ⇒ <code>Object</code>
 **Kind**: instance method of <code>[FiniteStateMachine](#FiniteStateMachine)</code>  
+<a name="Observable+subscribe"></a>
+### finiteStateMachine.subscribe(onNextOrObserver, [onError], [onCompleted]) ⇒ <code>[Disposable](#Disposable)</code>
+**Kind**: instance method of <code>[FiniteStateMachine](#FiniteStateMachine)</code>  
+
+| Param | Type |
+| --- | --- |
+| onNextOrObserver | <code>[onNextFunction](#onNextFunction)</code> &#124; <code>[Observer](#Observer)</code> | 
+| [onError] | <code>[onErrorFunction](#onErrorFunction)</code> | 
+| [onCompleted] | <code>[onCompletedFunction](#onCompletedFunction)</code> | 
+
 <a name="Record"></a>
 ## Record
 **Kind**: global class  
@@ -1367,73 +1447,6 @@ Remove a state and its transitions
 | --- | --- |
 | [values] | <code>Object</code> | 
 
-<a name="Graph"></a>
-## Graph ⇐ <code>external:falcor.Graph</code>
-**Kind**: global variable  
-**Extends:** <code>external:falcor.Graph</code>  
-
-* [Graph](#Graph) ⇐ <code>external:falcor.Graph</code>
-  * [.atoms(graph, fn)](#Graph.atoms)
-    * [~visitorFn(path, atom, graph)](#Graph.atoms..visitorFn)
-  * [.relative(root, graph)](#Graph.relative) ⇒ <code>[JSONGraph](#JSONGraph)</code>
-  * [.resolve(root, graph, [opts])](#Graph.resolve) ⇒ <code>[JSONGraph](#JSONGraph)</code>
-
-<a name="Graph.atoms"></a>
-### Graph.atoms(graph, fn)
-**Kind**: static method of <code>[Graph](#Graph)</code>  
-
-| Param | Type |
-| --- | --- |
-| graph | <code>[JSONGraph](#JSONGraph)</code> | 
-| fn | <code>[visitorFn](#Graph.atoms..visitorFn)</code> | 
-
-<a name="Graph.atoms..visitorFn"></a>
-#### atoms~visitorFn(path, atom, graph)
-**Kind**: inner method of <code>[atoms](#Graph.atoms)</code>  
-
-| Param | Type |
-| --- | --- |
-| path | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
-| atom | <code>Graph.Atom</code> | 
-| graph | <code>[JSONGraph](#JSONGraph)</code> | 
-
-<a name="Graph.relative"></a>
-### Graph.relative(root, graph) ⇒ <code>[JSONGraph](#JSONGraph)</code>
-**Kind**: static method of <code>[Graph](#Graph)</code>  
-
-| Param | Type |
-| --- | --- |
-| root | <code>[Path](#Path)</code> | 
-| graph | <code>[JSONGraph](#JSONGraph)</code> | 
-
-<a name="Graph.resolve"></a>
-### Graph.resolve(root, graph, [opts]) ⇒ <code>[JSONGraph](#JSONGraph)</code>
-**Kind**: static method of <code>[Graph](#Graph)</code>  
-
-| Param | Type | Default |
-| --- | --- | --- |
-| root | <code>[Path](#Path)</code> |  | 
-| graph | <code>[JSONGraph](#JSONGraph)</code> |  | 
-| [opts] | <code>Object</code> |  | 
-| [opts.rootKey] | <code>String</code> | <code>&#x27;{/}&#x27;</code> | 
-
-<a name="Paths"></a>
-## Paths ⇐ <code>external:falcor.Paths</code>
-**Kind**: global variable  
-**Extends:** <code>external:falcor.Paths</code>  
-<a name="FalcorRouter"></a>
-## FalcorRouter ⇐ <code>[FalcorRouter](https://github.com/Netflix/falcor-router)</code>
-**Kind**: global variable  
-**Extends:** <code>[FalcorRouter](https://github.com/Netflix/falcor-router)</code>  
-<a name="Syntax"></a>
-## Syntax ⇐ <code>external:falcor.Syntax</code>
-**Kind**: global variable  
-**Extends:** <code>external:falcor.Syntax</code>  
-<a name="Syntax.rootKey"></a>
-### Syntax.rootKey
-**Kind**: static property of <code>[Syntax](#Syntax)</code>  
-**Default**: <code>&#x27;{/}&#x27;</code>  
-**Read only**: true  
 <a name="onNextFunction"></a>
 ## onNextFunction : <code>function</code>
 **Kind**: global typedef  
@@ -1501,7 +1514,6 @@ Remove a state and its transitions
 <a name="Atom"></a>
 ## Atom
 **Kind**: global typedef  
-**Implements:** <code>external:falcor.Graph.Atom</code>  
 **See**: [http://netflix.github.io/falcor/doc/global.html#Atom](http://netflix.github.io/falcor/doc/global.html#Atom)  
 **Properties**
 
@@ -1514,7 +1526,6 @@ Remove a state and its transitions
 <a name="JSONEnvelope"></a>
 ## JSONEnvelope
 **Kind**: global typedef  
-**Implements:** <code>external:falcor.Graph.JSONEnvelope</code>  
 **See**: [http://netflix.github.io/falcor/doc/global.html#JSONGraph](http://netflix.github.io/falcor/doc/global.html#JSONGraph)  
 **Properties**
 
@@ -1525,12 +1536,10 @@ Remove a state and its transitions
 <a name="JSONGraph"></a>
 ## JSONGraph
 **Kind**: global typedef  
-**Implements:** <code>external:falcor.Graph.JSONGraph</code>  
 **See**: [http://netflix.github.io/falcor/doc/global.html#JSONGraph](http://netflix.github.io/falcor/doc/global.html#JSONGraph)  
 <a name="JSONGraphEnvelope"></a>
 ## JSONGraphEnvelope
 **Kind**: global typedef  
-**Implements:** <code>external:falcor.Graph.JSONGraphEnvelope</code>  
 **See**: [http://netflix.github.io/falcor/doc/global.html#JSONGraphEnvelope](http://netflix.github.io/falcor/doc/global.html#JSONGraphEnvelope)  
 **Properties**
 
@@ -1543,52 +1552,22 @@ Remove a state and its transitions
 <a name="Key"></a>
 ## Key
 **Kind**: global typedef  
-**Implements:** <code>external:falcor.Paths.Key</code>  
 **See**: [http://netflix.github.io/falcor/doc/global.html#Key](http://netflix.github.io/falcor/doc/global.html#Key)  
 <a name="KeySet"></a>
 ## KeySet
 **Kind**: global typedef  
-**Implements:** <code>external:falcor.Paths.KeySet</code>  
 **See**: [http://netflix.github.io/falcor/doc/global.html#KeySet](http://netflix.github.io/falcor/doc/global.html#KeySet)  
 <a name="Path"></a>
 ## Path
 **Kind**: global typedef  
-**Implements:** <code>external:falcor.Paths.Path</code>  
 **See**: [http://netflix.github.io/falcor/doc/global.html#Path](http://netflix.github.io/falcor/doc/global.html#Path)  
-
-* [Path](#Path)
-  * [.relative(root, paths)](#Path.relative) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
-  * [.resolve(root, paths, [opts])](#Path.resolve) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
-
-<a name="Path.relative"></a>
-### Path.relative(root, paths) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
-**Kind**: static method of <code>[Path](#Path)</code>  
-
-| Param | Type |
-| --- | --- |
-| root | <code>[Path](#Path)</code> | 
-| paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
-
-<a name="Path.resolve"></a>
-### Path.resolve(root, paths, [opts]) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
-**Kind**: static method of <code>[Path](#Path)</code>  
-
-| Param | Type | Default |
-| --- | --- | --- |
-| root | <code>[Path](#Path)</code> |  | 
-| paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> |  | 
-| [opts] | <code>Object</code> |  | 
-| [opts.rootKey] | <code>String</code> | <code>&#x27;{/}&#x27;</code> | 
-
 <a name="PathSet"></a>
 ## PathSet
 **Kind**: global typedef  
-**Implements:** <code>external:falcor.Paths.PathSet</code>  
 **See**: [http://netflix.github.io/falcor/doc/global.html#PathSet](http://netflix.github.io/falcor/doc/global.html#PathSet)  
 <a name="PathValue"></a>
 ## PathValue
 **Kind**: global typedef  
-**Implements:** <code>external:falcor.Paths.PathValue</code>  
 **See**: [http://netflix.github.io/falcor/doc/global.html#PathValue](http://netflix.github.io/falcor/doc/global.html#PathValue)  
 **Properties**
 
@@ -1600,7 +1579,6 @@ Remove a state and its transitions
 <a name="Range"></a>
 ## Range
 **Kind**: global typedef  
-**Implements:** <code>external:falcor.Paths.Range</code>  
 **See**: [http://netflix.github.io/falcor/doc/global.html#Range](http://netflix.github.io/falcor/doc/global.html#Range)  
 **Properties**
 
@@ -1610,6 +1588,10 @@ Remove a state and its transitions
 | to | <code>Integer</code> | 
 | length | <code>Integer</code> | 
 
+<a name="FalcorRouter"></a>
+## FalcorRouter
+**Kind**: global typedef  
+**Implements:** <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code>  
 
 
 

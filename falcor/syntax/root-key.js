@@ -1,5 +1,5 @@
 /**
- * @member Syntax.rootKey
+ * @member module:Falcor.Syntax.rootKey
  * @readonly
  * @default '{/}'
  */
