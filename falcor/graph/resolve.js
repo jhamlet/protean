@@ -1,5 +1,5 @@
 var putil = require('../path');
-var set = require('lodash/object/set');
+var set = require('./set');
 var atoms = require('protean/falcor/graph/atoms');
 
 function visitor (accumulator, root, opts, path, atom) {
