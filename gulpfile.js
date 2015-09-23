@@ -8,8 +8,8 @@ var gulp     = require('gulp'),
     // path     = require('path'),
     pkgInfo  = require('./package.json'),
     FACETS   = [
-        'array', 'collection', 'falcor', 'function', 'object', 'rx', 'storage',
-        'string', 'utility'
+        'array', 'collection', 'dom', 'falcor', 'function', 'object', 'rx',
+        'storage', 'string', 'utility'
     ],
     PATHS    = ['./*.js', './{' + FACETS.join(',') + '}/**/*.js'],
     LICENSE  = fs.readFileSync('LICENSE', 'utf8'),

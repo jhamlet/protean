@@ -92,6 +92,7 @@ API
 
 * [Protean](#module_Protean)
   * _static_
+    * [.classnames(arg)](#module_Protean.classnames) ⇒ <code>String</code>
     * [.classify([subclass], props, [properties])](#module_Protean.classify) ⇒ <code>[Class](#module_Protean..Class)</code>
     * [.inherit(superclass, [subclass], [props], [properties])](#module_Protean.inherit) ⇒ <code>[Class](#module_Protean..Class)</code>
     * [.instantiate(fn, [args])](#module_Protean.instantiate) ⇒ <code>Object</code>
@@ -111,6 +112,20 @@ API
     * [~ClassExtend](#module_Protean..ClassExtend) ⇒ <code>[Class](#module_Protean..Class)</code>
     * [~ClassExtended](#module_Protean..ClassExtended) : <code>function</code>
     * [~Class](#module_Protean..Class) : <code>function</code>
+
+<a name="module_Protean.classnames"></a>
+### Protean.classnames(arg) ⇒ <code>String</code>
+Utility function to get a className string.
+
+Supply a list of strings, or objects with class names -> boolean indicating
+whether that class should be used. The returned string will contain all the
+class names indicated without duplicates, and separated by spaces.
+
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
+
+| Param | Type |
+| --- | --- |
+| arg | <code>String</code> &#124; <code>Object.&lt;String, Boolean&gt;</code> | 
 
 <a name="module_Protean.classify"></a>
 ### Protean.classify([subclass], props, [properties]) ⇒ <code>[Class](#module_Protean..Class)</code>
@@ -282,7 +297,6 @@ Fast GUID generator, RFC4122 version 4 compliant.
 
 * [Falcor](#module_Falcor) ⇐ <code>[falcor](http://netflix.github.io/falcor/)</code>
   * [.Graph](#module_Falcor.Graph) ⇐ <code>external:falcor.Graph</code>
-    * [.set](#module_Falcor.Graph.set) ⇒ <code>Object</code>
     * [.atoms(graph, fn)](#module_Falcor.Graph.atoms)
     * [.relative(root, graph)](#module_Falcor.Graph.relative) ⇒ <code>[JSONGraph](#JSONGraph)</code>
     * [.resolve(root, graph, [opts])](#module_Falcor.Graph.resolve) ⇒ <code>[JSONGraph](#JSONGraph)</code>
@@ -299,20 +313,9 @@ Fast GUID generator, RFC4122 version 4 compliant.
 **Extends:** <code>external:falcor.Graph</code>  
 
 * [.Graph](#module_Falcor.Graph) ⇐ <code>external:falcor.Graph</code>
-  * [.set](#module_Falcor.Graph.set) ⇒ <code>Object</code>
   * [.atoms(graph, fn)](#module_Falcor.Graph.atoms)
   * [.relative(root, graph)](#module_Falcor.Graph.relative) ⇒ <code>[JSONGraph](#JSONGraph)</code>
   * [.resolve(root, graph, [opts])](#module_Falcor.Graph.resolve) ⇒ <code>[JSONGraph](#JSONGraph)</code>
-
-<a name="module_Falcor.Graph.set"></a>
-#### Graph.set ⇒ <code>Object</code>
-**Kind**: static property of <code>[Graph](#module_Falcor.Graph)</code>  
-
-| Param | Type |
-| --- | --- |
-| source | <code>Object</code> | 
-| path | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> | 
-| value | <code>\*</code> | 
 
 <a name="module_Falcor.Graph.atoms"></a>
 #### Graph.atoms(graph, fn)
