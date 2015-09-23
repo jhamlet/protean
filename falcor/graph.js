@@ -12,6 +12,7 @@ var merge = require('protean/utility/merge-exports');
 exports = module.exports = require('falcor-json-graph');
 
 reduce([
+    require('./graph/set'),
     require('./graph/atoms'),
     require('./graph/relative'),
     require('./graph/resolve')

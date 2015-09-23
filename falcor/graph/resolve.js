@@ -1,10 +1,10 @@
 var putil = require('../path');
-var set = require('lodash/object/set');
+var set = require('./set');
 var atoms = require('protean/falcor/graph/atoms');
 
 function visitor (accumulator, root, opts, path, atom) {
     if (path.length) {
-        var local = putil.resolve(root, [path], opts)[0];
+        var local = putil.resolve(root, [path], opts)[0].join('.');
         set(accumulator, local, atom);
 
         if (atom.$type && atom.$type === 'ref') {
