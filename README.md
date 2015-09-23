@@ -92,6 +92,7 @@ API
 
 * [Protean](#module_Protean)
   * _static_
+    * [.classnames(arg)](#module_Protean.classnames) ⇒ <code>String</code>
     * [.classify([subclass], props, [properties])](#module_Protean.classify) ⇒ <code>[Class](#module_Protean..Class)</code>
     * [.inherit(superclass, [subclass], [props], [properties])](#module_Protean.inherit) ⇒ <code>[Class](#module_Protean..Class)</code>
     * [.instantiate(fn, [args])](#module_Protean.instantiate) ⇒ <code>Object</code>
@@ -111,6 +112,20 @@ API
     * [~ClassExtend](#module_Protean..ClassExtend) ⇒ <code>[Class](#module_Protean..Class)</code>
     * [~ClassExtended](#module_Protean..ClassExtended) : <code>function</code>
     * [~Class](#module_Protean..Class) : <code>function</code>
+
+<a name="module_Protean.classnames"></a>
+### Protean.classnames(arg) ⇒ <code>String</code>
+Utility function to get a className string.
+
+Supply a list of strings, or objects with class names -> boolean indicating
+whether that class should be used. The returned string will contain all the
+class names indicated without duplicates, and separated by spaces.
+
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
+
+| Param | Type |
+| --- | --- |
+| arg | <code>String</code> &#124; <code>Object.&lt;String, Boolean&gt;</code> | 
 
 <a name="module_Protean.classify"></a>
 ### Protean.classify([subclass], props, [properties]) ⇒ <code>[Class](#module_Protean..Class)</code>

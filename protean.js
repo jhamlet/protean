@@ -6,6 +6,7 @@ var reduce = require('lodash/collection/reduce'),
 reduce([
     require('./array'),
     require('./collection'),
+    require('./dom'),
     require('./function'),
     require('./object'),
     require('./string'),
