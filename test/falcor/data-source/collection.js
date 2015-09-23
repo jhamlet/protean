@@ -34,11 +34,40 @@ describe('falcor.DataSource', function () {
 
         describe('#get(paths)', function () {
             it('byId', function (done) {
+                var expected = {
+                    jsonGraph: {
+                        test: {
+                            byId: {
+                                foo: {
+                                    value: {
+                                        $type: 'atom',
+                                        value: 'foo'
+                                    }
+                                },
+                                bar: {
+                                    value: {
+                                        $type: 'atom',
+                                        value: 'bar'
+                                    }
+                                },
+                                baz: {
+                                    value: {
+                                        $type: 'atom',
+                                        value: 'baz'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+
                 ds.
                 get([['test', 'byId', ['foo', 'bar', 'baz'], 'value']]).
                     subscribe(
                         function (json) {
-                            console.log(JSON.stringify(json, null, 4));
+                            json.
+                                should.
+                                eql(expected);
                         },
                         function (error) {
                             throw error;
@@ -48,11 +77,64 @@ describe('falcor.DataSource', function () {
             });
 
             it('byIndex', function (done) {
+                var expected = {
+                    jsonGraph: {
+                        test: {
+                            byIndex: {
+                                0: {
+                                    $type: 'ref',
+                                    value: ['test', 'byId', 'foo']
+                                },
+                                1: {
+                                    $type: 'ref',
+                                    value: ['test', 'byId', 'bar']
+                                },
+                                2: {
+                                    $type: 'ref',
+                                    value: ['test', 'byId', 'baz']
+                                }
+                            },
+                            byId: {
+                                foo: {
+                                    id: {
+                                        $type: 'atom',
+                                        value: 'foo'
+                                    },
+                                    value: {
+                                        $type: 'atom',
+                                        value: 'foo'
+                                    }
+                                },
+                                bar: {
+                                    id: {
+                                        $type: 'atom',
+                                        value: 'bar'
+                                    },
+                                    value: {
+                                        $type: 'atom',
+                                        value: 'bar'
+                                    }
+                                },
+                                baz: {
+                                    id: {
+                                        $type: 'atom',
+                                        value: 'baz'
+                                    },
+                                    value: {
+                                        $type: 'atom',
+                                        value: 'baz'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+
                 ds.
                 get([['test', 'byIndex', { to: 2 }, ['id', 'value']]]).
                     subscribe(
                         function (json) {
-                            console.log(JSON.stringify(json, null, 4));
+                            json.should.eql(expected);
                         },
                         function (error) {
                             throw error;
@@ -62,11 +144,24 @@ describe('falcor.DataSource', function () {
             });
 
             it('length', function (done) {
+                var expected = {
+                    jsonGraph: {
+                        test: {
+                            byIndex: {
+                                length: {
+                                    $type: 'atom',
+                                    value: 3
+                                }
+                            }
+                        }
+                    }
+                };
+
                 ds.
                 get([['test', 'byIndex', 'length']]).
                     subscribe(
                         function (json) {
-                            console.log(JSON.stringify(json, null, 4));
+                            json.should.eql(expected);
                         },
                         function (error) {
                             throw error;
@@ -100,13 +195,8 @@ describe('falcor.DataSource', function () {
                     }
                 }).
                     subscribe(
-                        function (json) {
-                            var rec = collection.get('foo');
-
-                            var value = rec.get('value');
-                            
-                            value.should.equal('foo-2');
-
+                        function () {
+                            collection.get('foo').get('value').should.equal('foo-2');
                             collection.get('bar').get('value').should.equal('bar-2');
                             collection.get('baz').get('value').should.equal('baz-2');
                         },
@@ -140,11 +230,10 @@ describe('falcor.DataSource', function () {
                     }
                 }).
                     subscribe(
-                        function (json) {
+                        function () {
                             collection.get('foo').get('value').should.equal('foo-3');
                             collection.get('bar').get('value').should.equal('bar-3');
                             collection.get('baz').get('value').should.equal('baz-3');
-                            console.log(JSON.stringify(json, null, 4));
                         },
                         function (error) {
                             throw error;
