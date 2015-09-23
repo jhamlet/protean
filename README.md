@@ -59,6 +59,20 @@ API
 </dl>
 ## Typedefs
 <dl>
+<dt><a href="#onNextFunction">onNextFunction</a> : <code>function</code></dt>
+<dd></dd>
+<dt><a href="#onErrorFunction">onErrorFunction</a> : <code>function</code></dt>
+<dd></dd>
+<dt><a href="#onCompletedFunction">onCompletedFunction</a> : <code>function</code></dt>
+<dd></dd>
+<dt><a href="#Observable">Observable</a></dt>
+<dd></dd>
+<dt><a href="#Observer">Observer</a></dt>
+<dd></dd>
+<dt><a href="#Disposable">Disposable</a></dt>
+<dd></dd>
+<dt><a href="#Subject">Subject</a> ⇐ <code><a href="#Observable">Observable</a></code></dt>
+<dd></dd>
 <dt><a href="#Atom">Atom</a></dt>
 <dd></dd>
 <dt><a href="#JSONEnvelope">JSONEnvelope</a></dt>
@@ -1420,6 +1434,70 @@ Remove a state and its transitions
 **Kind**: static property of <code>[Syntax](#Syntax)</code>  
 **Default**: <code>&#x27;{/}&#x27;</code>  
 **Read only**: true  
+<a name="onNextFunction"></a>
+## onNextFunction : <code>function</code>
+**Kind**: global typedef  
+
+| Param | Type |
+| --- | --- |
+| value | <code>Mixed</code> | 
+
+<a name="onErrorFunction"></a>
+## onErrorFunction : <code>function</code>
+**Kind**: global typedef  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Error</code> | 
+
+<a name="onCompletedFunction"></a>
+## onCompletedFunction : <code>function</code>
+**Kind**: global typedef  
+<a name="Observable"></a>
+## Observable
+**Kind**: global typedef  
+**Implements:** <code>[Observable]({@link })</code>  
+<a name="Observable+subscribe"></a>
+### observable.subscribe(onNextOrObserver, [onError], [onCompleted]) ⇒ <code>[Disposable](#Disposable)</code>
+**Kind**: instance method of <code>[Observable](#Observable)</code>  
+
+| Param | Type |
+| --- | --- |
+| onNextOrObserver | <code>[onNextFunction](#onNextFunction)</code> &#124; <code>[Observer](#Observer)</code> | 
+| [onError] | <code>[onErrorFunction](#onErrorFunction)</code> | 
+| [onCompleted] | <code>[onCompletedFunction](#onCompletedFunction)</code> | 
+
+<a name="Observer"></a>
+## Observer
+**Kind**: global typedef  
+**Implements:** <code>[Observer]({@link })</code>  
+
+* [Observer](#Observer)
+  * [.onNext](#Observer+onNext) : <code>[onNextFunction](#onNextFunction)</code>
+  * [.onError](#Observer+onError) : <code>[onErrorFunction](#onErrorFunction)</code>
+  * [.onCompleted](#Observer+onCompleted) : <code>[onCompletedFunction](#onCompletedFunction)</code>
+
+<a name="Observer+onNext"></a>
+### observer.onNext : <code>[onNextFunction](#onNextFunction)</code>
+**Kind**: instance property of <code>[Observer](#Observer)</code>  
+<a name="Observer+onError"></a>
+### observer.onError : <code>[onErrorFunction](#onErrorFunction)</code>
+**Kind**: instance property of <code>[Observer](#Observer)</code>  
+<a name="Observer+onCompleted"></a>
+### observer.onCompleted : <code>[onCompletedFunction](#onCompletedFunction)</code>
+**Kind**: instance property of <code>[Observer](#Observer)</code>  
+<a name="Disposable"></a>
+## Disposable
+**Kind**: global typedef  
+**Implements:** <code>[Disposable]({@link })</code>  
+<a name="Disposable+dispose"></a>
+### disposable.dispose()
+**Kind**: instance method of <code>[Disposable](#Disposable)</code>  
+<a name="Subject"></a>
+## Subject ⇐ <code>[Observable](#Observable)</code>
+**Kind**: global typedef  
+**Extends:** <code>[Observable](#Observable)</code>  
+**Mixes**: <code>[Observer](#Observer)</code>, <code>[Disposable](#Disposable)</code>  
 <a name="Atom"></a>
 ## Atom
 **Kind**: global typedef  
