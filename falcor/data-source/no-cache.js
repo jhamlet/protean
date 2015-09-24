@@ -4,12 +4,12 @@ var atoms    = require('protean/falcor/graph/atoms');
  * A Falcor DataSource that proxies another data source and sets all returned
  * atoms to expire immediately.
  *
- * **file:** protean/falcor/data-source/no-cache.js
+ * **file:** [falcor/data-source/no-cache.js](falcor/data-source/no-cache.js)
  *
  * @class NoCacheSource
- * @implements external:DataSource
+ * @implements DataSource
  * @param {Object} opts
- * @param {external:DataSource} opts.source
+ * @param {DataSource} opts.source
  */
 function NoCacheSource (opts) {
     opts = opts || {};

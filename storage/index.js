@@ -1,5 +1,7 @@
 var classify = require('protean/function/classify');
 /**
+ * **File:** [storage/index.js](storage/index.js)
+ *
  * @class Storage
  * @implements external:Storage
  * @param {Object} opts

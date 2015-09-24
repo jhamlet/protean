@@ -1,4 +1,6 @@
 /**
+ * **File:** [storage/store/session.js](storage/store/session.js)
+ *
  * @member Store.session
  * @type {external:Storage}
  */

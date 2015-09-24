@@ -1,6 +1,8 @@
 var classify = require('protean/function/classify');
 var keys = require('lodash/object/keys');
 /**
+ * **File:** [utility/record.js](utility/record.js)
+ *
  * @class Record
  * @param {Object} [data]
  */

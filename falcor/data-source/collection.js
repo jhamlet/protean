@@ -1,4 +1,4 @@
-var Router     = require('protean/falcor/router');
+var Router     = require('falcor-router');
 var classify   = require('protean/function/classify');
 var Collection = require('protean/utility/collection');
 var Rx         = require('rx');
@@ -14,10 +14,10 @@ var set        = require('lodash/object/set');
 var isArray    = Array.isArray;
 
 /**
- * **file:** protean/falcor/data-source/collection.js
+ * **file:** [falcor/data-source/collection.js](falcor/data-source/collection.js)
  *
  * @class CollectionSource
- * @implements external:DataSource
+ * @implements DataSource
  * @param {Collection} collection
  * @param {Array} [path]
  */
@@ -48,6 +48,7 @@ module.exports = classify(CollectionSource,/** @lends CollectionSource# */{
      * @property {Array<Object>}
      */
     get routes () {
+        var path = this.path.join('.');
         var indexed = this.indexedPath.join('.');
         var keyed   = this.keyedPath.join('.');
 
@@ -66,7 +67,7 @@ module.exports = classify(CollectionSource,/** @lends CollectionSource# */{
                 get: this.getRecordByIndex.bind(this)
             },
             {
-                route: indexed + '.add',
+                route: (path ? path + '.' : '') + 'add',
                 call: this.addRecord.bind(this)
             }
         ];
@@ -79,7 +80,9 @@ module.exports = classify(CollectionSource,/** @lends CollectionSource# */{
      * @param {PathSet[]} paths
      * @returns {Observable<JSONGraphEnvelope>}
      */
-    get: function (paths) { return this.router.get(paths); },
+    get: function (paths) {
+        return this.router.get(paths);
+    },
     /**
      * @param {JSONGraphEnvelope} envelope
      * @returns {Observable<JSONGraphEnvelope>}

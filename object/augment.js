@@ -3,6 +3,9 @@ var rest = require('lodash/array/rest'),
 /**
  * Like 'extend', but it preserves getters and setters, and will not overwrite
  * existing properties defined directly on the source object.
+ *
+ * **File:** [object/augment.js](object/augment.js)
+ *
  * @member module:Protean.augment
  * @function
  * @param {...Object} obj

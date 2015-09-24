@@ -3,6 +3,8 @@ var guid     = require('protean/utility/guid');
 var toArray  = require('lodash/lang/toArray');
 var Record   = require('./record');
 /**
+ * **File:** [utility/collection.js](utility/collection.js)
+ *
  * @class Collection
  * @param {...Record|Object} [rec]
  */

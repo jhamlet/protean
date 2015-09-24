@@ -1,10 +1,3 @@
 /**
- * @external falcor
- * @see {@link http://netflix.github.io/falcor/}
+ * @module Falcor
  */
-
-/**
- * @module module:Falcor
- * @augments external:falcor
- */
-module.exports = require('falcor');

@@ -4,7 +4,7 @@ var augment = require('protean/object/augment'),
  * Create a constructor function that inherits properties and methods from the
  * given super constructor.
  *
- * **file**: protean/function/inherit
+ * **File**: [function/inherit.js](function/inherit.js)
  *
  * @member module:Protean.inherit
  * @function
@@ -14,7 +14,7 @@ var augment = require('protean/object/augment'),
  * to a function that calls the superclass' constructor function.
  * @param {Object} [props] Bare properties to initialize the prototype with.
  * @param {Object} [properties={}] Object.defineProperty property definitions.
- * @returns {module:Protean~Class} The constructor function.
+ * @returns {ProteanClass} The constructor function.
  */
 function inherit (superclass, subclass, props, properties) {
     var hasCtor, superproto, proto;

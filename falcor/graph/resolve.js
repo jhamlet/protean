@@ -13,6 +13,8 @@ function visitor (accumulator, root, opts, path, atom) {
     }
 }
 /**
+ * **File:** [falcor/graph/resolve.js](falcor/graph/resolve.js)
+ *
  * @member module:Falcor.Graph.resolve
  * @function
  * @param {Path} root

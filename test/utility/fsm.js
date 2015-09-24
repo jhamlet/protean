@@ -26,48 +26,44 @@ function createFSM (start, states, stateless) {
     });
 }
 
-describe('Protean', function () {
-
-    describe('FiniteStateMachine', function () {
-        describe('#constructor(opts)', function () {
-            it('should have an initial state', function () {
-                createFSM('start').currentState.should.equal('start');
-            });
-
-            it('should throw an error if no initial state', function () {
-                (function () { createFSM(); }).
-                    should.throw();
-            });
-
-            it('should not throw an error if stateless', function () {
-                (function () { createFSM(null, null, true); }).
-                    should.not.throw();
-            });
+describe('FiniteStateMachine', function () {
+    describe('#constructor(opts)', function () {
+        it('should have an initial state', function () {
+            createFSM('start').currentState.should.equal('start');
         });
 
-        describe('#transitions', function () {
-            it('should emit transition objects', function (done) {
-                var fsm = createFSM('start');
+        it('should throw an error if no initial state', function () {
+            (function () { createFSM(); }).
+                should.throw();
+        });
 
-                fsm.
-                transitions.
-                    subscribe(
-                        function (t) {
-                            // console.log(JSON.stringify(t));
-                        },
-                        function (error) {
-                            throw error;
-                        },
-                        done
-                    );
-
-                fsm.input('foo');
-                fsm.input('bar');
-                fsm.input('done');
-                fsm.input('restart');
-                fsm.onCompleted();
-            });
+        it('should not throw an error if stateless', function () {
+            (function () { createFSM(null, null, true); }).
+                should.not.throw();
         });
     });
 
+    describe('#transitions', function () {
+        it('should emit transition objects', function (done) {
+            var fsm = createFSM('start');
+
+            fsm.
+            transitions.
+                subscribe(
+                    function (t) {
+                        // console.log(JSON.stringify(t));
+                    },
+                    function (error) {
+                        throw error;
+                    },
+                    done
+                );
+
+            fsm.input('foo');
+            fsm.input('bar');
+            fsm.input('done');
+            fsm.input('restart');
+            fsm.onCompleted();
+        });
+    });
 });

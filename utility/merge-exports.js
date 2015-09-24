@@ -1,5 +1,7 @@
 var assign = require('lodash/object/assign');
 /**
+ * **File:** [utility/merge-exports.js](utility/merge-exports.js)
+ *
  * @member module:Protean.mergeExports
  * @function
  * @param {Object} receiver

@@ -6,6 +6,9 @@ for (; i<256; i++) {
 }
 /**
  * Fast GUID generator, RFC4122 version 4 compliant.
+ *
+ * **File:** [utility/guid.js](utility/guid.js)
+ *
  * @member module:Protean.guid
  * @function
  * @returns {String}

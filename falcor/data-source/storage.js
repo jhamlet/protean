@@ -1,14 +1,14 @@
-var falcor   = require('protean/falcor');
+var falcor   = require('falcor');
 var classify = require('protean/function/classify');
 var defaults = require('lodash/object/defaults');
 /**
- * **file:** protean/falcor/data-source/storage.js
+ * **file:** [falcor/data-source/storage.js](falcor/data-source/storage.js)
  *
  * @class StorageDataSource
- * @implements external:DataSource
+ * @implements DataSource
  * @param {Object} opts
  * @param {Object} [opts.cache]
- * @param {external:Storage} [opts.storage]
+ * @param {Storage} [opts.storage]
  * @param {String} opts.storageKey
  */
 function StorageDataSource (opts) {
@@ -26,11 +26,11 @@ function StorageDataSource (opts) {
 
 module.exports = classify(StorageDataSource,/** @lends StorageDataSource# */{
     /**
-     * @property {external:falcor.Model}
+     * @property {FalcorFModel}
      */
     model: null,
     /**
-     * @property {external:DataSource}
+     * @property {DataSource}
      */
     source: null,
     /**

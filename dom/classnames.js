@@ -10,6 +10,8 @@ var uniq     = require('lodash/array/uniq');
  * whether that class should be used. The returned string will contain all the
  * class names indicated without duplicates, and separated by spaces.
  *
+ * **File**: [dom/classnames.js](dom/classnames.js)
+ *
  * @static
  * @member module:Protean.classnames
  * @function

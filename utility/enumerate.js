@@ -2,6 +2,9 @@ var reduce = require('lodash/collection/reduce');
 /**
  * Takes an argument list of strings and returns an object with those keys, and their
  * values being the index of that key plus one.
+ *
+ * **File:** [utility/enumerate.js](utility/enumerate.js)
+ *
  * @member module:Protean.enumerate
  * @function
  * @param {...String}

@@ -1,5 +1,7 @@
 var toPath = require('lodash/internal/toPath');
 /**
+ * **File:** [falcor/graph/set.js](falcor/graph/set.js)
+ *
  * @static
  * @member module:Falcor.Graph.set
  * @param {Object} source

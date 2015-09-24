@@ -1,7 +1,7 @@
 /**
  * Create a new object and then apply the constructor function with the arguments.
  *
- * **file**: protean/function/instantiate
+ * **File**: [function/instantiate.js](function/instantiate.js)
  *
  * @member module:Protean.instantiate
  * @function

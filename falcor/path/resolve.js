@@ -19,6 +19,8 @@ function visitor (accumulator, root, rootKey, path, value) {
     accumulator.push(path);
 };
 /**
+ * **File:** [falcor/path/resolve.js](falcor/path/resolve.js)
+ *
  * @member module:Falcor.Path.resolve
  * @function
  * @param {Path} root

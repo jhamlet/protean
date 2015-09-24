@@ -11,6 +11,7 @@ var gulp     = require('gulp'),
         'array', 'collection', 'dom', 'falcor', 'function', 'object', 'rx',
         'storage', 'string', 'utility'
     ],
+    // FACETS = ['falcor'],
     PATHS    = ['./*.js', './{' + FACETS.join(',') + '}/**/*.js'],
     LICENSE  = fs.readFileSync('LICENSE', 'utf8'),
     CLOBBER  = [];

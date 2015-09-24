@@ -22,7 +22,7 @@ API
 <dl>
 <dt><a href="#module_Protean">Protean</a></dt>
 <dd></dd>
-<dt><a href="#module_Falcor">Falcor</a> ⇐ <code><a href="http://netflix.github.io/falcor/">falcor</a></code></dt>
+<dt><a href="#module_Falcor">Falcor</a></dt>
 <dd></dd>
 </dl>
 ## Classes
@@ -43,7 +43,7 @@ API
 <dd></dd>
 <dt><a href="#Collection">Collection</a></dt>
 <dd></dd>
-<dt><a href="#FiniteStateMachine">FiniteStateMachine</a> ⇐ <code><a href="#Observable">Observable</a></code></dt>
+<dt><a href="#FiniteStateMachine">FiniteStateMachine</a> ⇐ <code><a href="#Subject">Subject</a></code></dt>
 <dd></dd>
 <dt><a href="#Record">Record</a></dt>
 <dd></dd>
@@ -64,54 +64,57 @@ API
 <dd></dd>
 <dt><a href="#Subject">Subject</a> ⇐ <code><a href="#Observable">Observable</a></code></dt>
 <dd></dd>
-<dt><a href="#Atom">Atom</a></dt>
+<dt><a href="#DataSource">DataSource</a></dt>
 <dd></dd>
-<dt><a href="#JSONEnvelope">JSONEnvelope</a></dt>
+<dt><a href="#Atom">Atom</a> : <code>Object</code></dt>
 <dd></dd>
-<dt><a href="#JSONGraph">JSONGraph</a></dt>
+<dt><a href="#JSONEnvelope">JSONEnvelope</a> : <code>Object</code></dt>
 <dd></dd>
-<dt><a href="#JSONGraphEnvelope">JSONGraphEnvelope</a></dt>
+<dt><a href="#JSONGraph">JSONGraph</a> : <code>Object</code></dt>
 <dd></dd>
-<dt><a href="#Key">Key</a></dt>
+<dt><a href="#JSONGraphEnvelope">JSONGraphEnvelope</a> : <code>Object</code></dt>
 <dd></dd>
-<dt><a href="#KeySet">KeySet</a></dt>
+<dt><a href="#FalcorModel">FalcorModel</a></dt>
 <dd></dd>
-<dt><a href="#Path">Path</a></dt>
+<dt><a href="#Key">Key</a> : <code>String</code> | <code>null</code></dt>
 <dd></dd>
-<dt><a href="#PathSet">PathSet</a></dt>
+<dt><a href="#KeySet">KeySet</a> : <code><a href="#Key">Key</a></code> | <code><a href="#Range">Range</a></code> | <code>Array.&lt;(Key|Range)&gt;</code></dt>
 <dd></dd>
-<dt><a href="#PathValue">PathValue</a></dt>
+<dt><a href="#Path">Path</a> : <code><a href="#Key">Array.&lt;Key&gt;</a></code></dt>
 <dd></dd>
-<dt><a href="#Range">Range</a></dt>
+<dt><a href="#PathSet">PathSet</a> : <code><a href="#KeySet">Array.&lt;KeySet&gt;</a></code></dt>
 <dd></dd>
-<dt><a href="#FalcorRouter">FalcorRouter</a></dt>
+<dt><a href="#PathValue">PathValue</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#Range">Range</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#ProteanClassExtend">ProteanClassExtend</a> ⇒ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
+<dd></dd>
+<dt><a href="#ProteanClassExtended">ProteanClassExtended</a> : <code>function</code></dt>
+<dd></dd>
+<dt><a href="#ProteanClass">ProteanClass</a> : <code>function</code></dt>
 <dd></dd>
 </dl>
 <a name="module_Protean"></a>
 ## Protean
 
 * [Protean](#module_Protean)
-  * _static_
-    * [.classnames(arg)](#module_Protean.classnames) ⇒ <code>String</code>
-    * [.classify([subclass], props, [properties])](#module_Protean.classify) ⇒ <code>[Class](#module_Protean..Class)</code>
-    * [.inherit(superclass, [subclass], [props], [properties])](#module_Protean.inherit) ⇒ <code>[Class](#module_Protean..Class)</code>
-    * [.instantiate(fn, [args])](#module_Protean.instantiate) ⇒ <code>Object</code>
-    * [.augment(...obj)](#module_Protean.augment) ⇒ <code>Object</code>
-    * [.traverse(obj, visitor, [post])](#module_Protean.traverse)
-      * _static_
-        * [.SKIP](#module_Protean.traverse.SKIP) : <code>String</code>
-        * [.CONTINUE](#module_Protean.traverse.CONTINUE) : <code>String</code>
-        * [.BREAK](#module_Protean.traverse.BREAK) : <code>String</code>
-      * _inner_
-        * [~visitorFn(path, value, context)](#module_Protean.traverse..visitorFn) ⇒ <code>undefined</code> &#124; <code>String</code>
-    * [.enmap(...args)](#module_Protean.enmap) ⇒ <code>Object</code>
-    * [.enumerate()](#module_Protean.enumerate) ⇒ <code>Object</code>
-    * [.guid()](#module_Protean.guid) ⇒ <code>String</code>
-    * [.mergeExports(receiver, supplier)](#module_Protean.mergeExports) ⇒ <code>Object</code>
-  * _inner_
-    * [~ClassExtend](#module_Protean..ClassExtend) ⇒ <code>[Class](#module_Protean..Class)</code>
-    * [~ClassExtended](#module_Protean..ClassExtended) : <code>function</code>
-    * [~Class](#module_Protean..Class) : <code>function</code>
+  * [.classnames(arg)](#module_Protean.classnames) ⇒ <code>String</code>
+  * [.classify([subclass], props, [properties])](#module_Protean.classify) ⇒ <code>[ProteanClass](#ProteanClass)</code>
+  * [.inherit(superclass, [subclass], [props], [properties])](#module_Protean.inherit) ⇒ <code>[ProteanClass](#ProteanClass)</code>
+  * [.instantiate(fn, [args])](#module_Protean.instantiate) ⇒ <code>Object</code>
+  * [.augment(...obj)](#module_Protean.augment) ⇒ <code>Object</code>
+  * [.traverse(obj, visitor, [post])](#module_Protean.traverse)
+    * _static_
+      * [.SKIP](#module_Protean.traverse.SKIP) : <code>String</code>
+      * [.CONTINUE](#module_Protean.traverse.CONTINUE) : <code>String</code>
+      * [.BREAK](#module_Protean.traverse.BREAK) : <code>String</code>
+    * _inner_
+      * [~visitorFn(path, value, context)](#module_Protean.traverse..visitorFn) ⇒ <code>undefined</code> &#124; <code>String</code>
+  * [.enmap(...args)](#module_Protean.enmap) ⇒ <code>Object</code>
+  * [.enumerate()](#module_Protean.enumerate) ⇒ <code>Object</code>
+  * [.guid()](#module_Protean.guid) ⇒ <code>String</code>
+  * [.mergeExports(receiver, supplier)](#module_Protean.mergeExports) ⇒ <code>Object</code>
 
 <a name="module_Protean.classnames"></a>
 ### Protean.classnames(arg) ⇒ <code>String</code>
@@ -121,6 +124,8 @@ Supply a list of strings, or objects with class names -> boolean indicating
 whether that class should be used. The returned string will contain all the
 class names indicated without duplicates, and separated by spaces.
 
+**File**: [dom/classnames.js](dom/classnames.js)
+
 **Kind**: static method of <code>[Protean](#module_Protean)</code>  
 
 | Param | Type |
@@ -128,10 +133,10 @@ class names indicated without duplicates, and separated by spaces.
 | arg | <code>String</code> &#124; <code>Object.&lt;String, Boolean&gt;</code> | 
 
 <a name="module_Protean.classify"></a>
-### Protean.classify([subclass], props, [properties]) ⇒ <code>[Class](#module_Protean..Class)</code>
+### Protean.classify([subclass], props, [properties]) ⇒ <code>[ProteanClass](#ProteanClass)</code>
 Create a constructor function passing in it's prototype methods.
 
-**file**: protean/function/classify
+**File**: [function/classify](function/classify.js)
 
 **Kind**: static method of <code>[Protean](#module_Protean)</code>  
 
@@ -142,14 +147,14 @@ Create a constructor function passing in it's prototype methods.
 | [properties] | <code>Object</code> | Object.defineProperty property definitions. |
 
 <a name="module_Protean.inherit"></a>
-### Protean.inherit(superclass, [subclass], [props], [properties]) ⇒ <code>[Class](#module_Protean..Class)</code>
+### Protean.inherit(superclass, [subclass], [props], [properties]) ⇒ <code>[ProteanClass](#ProteanClass)</code>
 Create a constructor function that inherits properties and methods from the
 given super constructor.
 
-**file**: protean/function/inherit
+**File**: [function/inherit.js](function/inherit.js)
 
 **Kind**: static method of <code>[Protean](#module_Protean)</code>  
-**Returns**: <code>[Class](#module_Protean..Class)</code> - The constructor function.  
+**Returns**: <code>[ProteanClass](#ProteanClass)</code> - The constructor function.  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -162,7 +167,7 @@ given super constructor.
 ### Protean.instantiate(fn, [args]) ⇒ <code>Object</code>
 Create a new object and then apply the constructor function with the arguments.
 
-**file**: protean/function/instantiate
+**File**: [function/instantiate.js](function/instantiate.js)
 
 **Kind**: static method of <code>[Protean](#module_Protean)</code>  
 **Returns**: <code>Object</code> - The new instance  
@@ -176,6 +181,8 @@ Create a new object and then apply the constructor function with the arguments.
 ### Protean.augment(...obj) ⇒ <code>Object</code>
 Like 'extend', but it preserves getters and setters, and will not overwrite
 existing properties defined directly on the source object.
+
+**File:** [object/augment.js](object/augment.js)
 
 **Kind**: static method of <code>[Protean](#module_Protean)</code>  
 
@@ -194,13 +201,13 @@ existing properties defined directly on the source object.
 | [post] | <code>Boolean</code> | <code>false</code> | Do a post traversal |
 
 
-  * [.traverse(obj, visitor, [post])](#module_Protean.traverse)
-    * _static_
-      * [.SKIP](#module_Protean.traverse.SKIP) : <code>String</code>
-      * [.CONTINUE](#module_Protean.traverse.CONTINUE) : <code>String</code>
-      * [.BREAK](#module_Protean.traverse.BREAK) : <code>String</code>
-    * _inner_
-      * [~visitorFn(path, value, context)](#module_Protean.traverse..visitorFn) ⇒ <code>undefined</code> &#124; <code>String</code>
+* [.traverse(obj, visitor, [post])](#module_Protean.traverse)
+  * _static_
+    * [.SKIP](#module_Protean.traverse.SKIP) : <code>String</code>
+    * [.CONTINUE](#module_Protean.traverse.CONTINUE) : <code>String</code>
+    * [.BREAK](#module_Protean.traverse.BREAK) : <code>String</code>
+  * _inner_
+    * [~visitorFn(path, value, context)](#module_Protean.traverse..visitorFn) ⇒ <code>undefined</code> &#124; <code>String</code>
 
 <a name="module_Protean.traverse.SKIP"></a>
 #### traverse.SKIP : <code>String</code>
@@ -213,6 +220,8 @@ existing properties defined directly on the source object.
 **Kind**: static constant of <code>[traverse](#module_Protean.traverse)</code>  
 <a name="module_Protean.traverse..visitorFn"></a>
 #### traverse~visitorFn(path, value, context) ⇒ <code>undefined</code> &#124; <code>String</code>
+**File:** [object/traverse.js](object/traverse.js)
+
 **Kind**: inner method of <code>[traverse](#module_Protean.traverse)</code>  
 **Returns**: <code>undefined</code> &#124; <code>String</code> - One of the constants of 'skip', 'continue', or
 'break'. Returning undefined is the same as returing 'continue'.  
@@ -227,6 +236,8 @@ existing properties defined directly on the source object.
 ### Protean.enmap(...args) ⇒ <code>Object</code>
 Takes a list of alternating key/values and returns an object.
 
+**File:** [utility/enmap.js](utility/enmap.js)
+
 **Kind**: static method of <code>[Protean](#module_Protean)</code>  
 
 | Param | Type |
@@ -238,6 +249,8 @@ Takes a list of alternating key/values and returns an object.
 Takes an argument list of strings and returns an object with those keys, and their
 values being the index of that key plus one.
 
+**File:** [utility/enumerate.js](utility/enumerate.js)
+
 **Kind**: static method of <code>[Protean](#module_Protean)</code>  
 
 | Type |
@@ -248,12 +261,16 @@ values being the index of that key plus one.
 ### Protean.guid() ⇒ <code>String</code>
 Fast GUID generator, RFC4122 version 4 compliant.
 
+**File:** [utility/guid.js](utility/guid.js)
+
 **Kind**: static method of <code>[Protean](#module_Protean)</code>  
 **See**: http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript/21963136#21963136  
 **Author:** Jeff Ward (jcward.com).  
 **License**: MIT license  
 <a name="module_Protean.mergeExports"></a>
 ### Protean.mergeExports(receiver, supplier) ⇒ <code>Object</code>
+**File:** [utility/merge-exports.js](utility/merge-exports.js)
+
 **Kind**: static method of <code>[Protean](#module_Protean)</code>  
 
 | Param | Type |
@@ -261,66 +278,42 @@ Fast GUID generator, RFC4122 version 4 compliant.
 | receiver | <code>Object</code> | 
 | supplier | <code>function</code> &#124; <code>Object</code> | 
 
-<a name="module_Protean..ClassExtend"></a>
-### Protean~ClassExtend ⇒ <code>[Class](#module_Protean..Class)</code>
-**Kind**: inner typedef of <code>[Protean](#module_Protean)</code>  
-
-| Param | Type |
-| --- | --- |
-| [subclass] | <code>function</code> | 
-| [props] | <code>Object</code> | 
-| [properties] | <code>Object</code> | 
-
-<a name="module_Protean..ClassExtended"></a>
-### Protean~ClassExtended : <code>function</code>
-**Kind**: inner typedef of <code>[Protean](#module_Protean)</code>  
-
-| Param | Type |
-| --- | --- |
-| subclass | <code>function</code> | 
-
-<a name="module_Protean..Class"></a>
-### Protean~Class : <code>function</code>
-**Kind**: inner typedef of <code>[Protean](#module_Protean)</code>  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| extend | <code>[ClassExtend](#module_Protean..ClassExtend)</code> | A function to extend this class into another one |
-| extended | <code>[ClassExtended](#module_Protean..ClassExtended)</code> | A function that will be called when the class is extended into another |
-| superclass | <code>function</code> | A reference to this class' superclass constructor |
-| superproto | <code>Object</code> | A reference to this class' superclass prototype |
-
 <a name="module_Falcor"></a>
-## Falcor ⇐ <code>[falcor](http://netflix.github.io/falcor/)</code>
-**Extends:** <code>[falcor](http://netflix.github.io/falcor/)</code>  
+## Falcor
 
-* [Falcor](#module_Falcor) ⇐ <code>[falcor](http://netflix.github.io/falcor/)</code>
-  * [.Graph](#module_Falcor.Graph) ⇐ <code>external:falcor.Graph</code>
+* [Falcor](#module_Falcor)
+  * [.Graph](#module_Falcor.Graph) ⇐ <code>[FalcorJSONGraph](https://github.com/Netflix/falcor-json-graph)</code>
     * [.set](#module_Falcor.Graph.set) ⇒ <code>Object</code>
     * [.atoms(graph, fn)](#module_Falcor.Graph.atoms)
+      * [~visitorFn(path, atom, graph)](#module_Falcor.Graph.atoms..visitorFn)
+    * [.mergeEnvelope(receiver, supplier)](#module_Falcor.Graph.mergeEnvelope) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
     * [.relative(root, graph)](#module_Falcor.Graph.relative) ⇒ <code>[JSONGraph](#JSONGraph)</code>
     * [.resolve(root, graph, [opts])](#module_Falcor.Graph.resolve) ⇒ <code>[JSONGraph](#JSONGraph)</code>
-  * [.Path](#module_Falcor.Path) ⇐ <code>external:falcor.Path</code>
+  * [.Path](#module_Falcor.Path) ⇐ <code>[FalcorPathUtils](https://github.com/Netflix/falcor-path-utils)</code>
     * [.relative(root, paths)](#module_Falcor.Path.relative) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
     * [.resolve(root, paths, [opts])](#module_Falcor.Path.resolve) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
-  * [.Router](#module_Falcor.Router) ⇐ <code>[FalcorRouter](https://github.com/Netflix/falcor-router)</code>
-  * [.Syntax](#module_Falcor.Syntax) ⇐ <code>external:falcor.Syntax</code>
+  * [.Syntax](#module_Falcor.Syntax) ⇐ <code>[FalcorPathSyntax](https://github.com/Netflix/falcor-path-syntax)</code>
     * [.rootKey](#module_Falcor.Syntax.rootKey)
 
 <a name="module_Falcor.Graph"></a>
-### Falcor.Graph ⇐ <code>external:falcor.Graph</code>
-**Kind**: static property of <code>[Falcor](#module_Falcor)</code>  
-**Extends:** <code>external:falcor.Graph</code>  
+### Falcor.Graph ⇐ <code>[FalcorJSONGraph](https://github.com/Netflix/falcor-json-graph)</code>
+**File:** [falcor/graph.js](falcor/graph.js)
 
-* [.Graph](#module_Falcor.Graph) ⇐ <code>external:falcor.Graph</code>
+**Kind**: static property of <code>[Falcor](#module_Falcor)</code>  
+**Extends:** <code>[FalcorJSONGraph](https://github.com/Netflix/falcor-json-graph)</code>  
+
+* [.Graph](#module_Falcor.Graph) ⇐ <code>[FalcorJSONGraph](https://github.com/Netflix/falcor-json-graph)</code>
   * [.set](#module_Falcor.Graph.set) ⇒ <code>Object</code>
   * [.atoms(graph, fn)](#module_Falcor.Graph.atoms)
+    * [~visitorFn(path, atom, graph)](#module_Falcor.Graph.atoms..visitorFn)
+  * [.mergeEnvelope(receiver, supplier)](#module_Falcor.Graph.mergeEnvelope) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
   * [.relative(root, graph)](#module_Falcor.Graph.relative) ⇒ <code>[JSONGraph](#JSONGraph)</code>
   * [.resolve(root, graph, [opts])](#module_Falcor.Graph.resolve) ⇒ <code>[JSONGraph](#JSONGraph)</code>
 
 <a name="module_Falcor.Graph.set"></a>
 #### Graph.set ⇒ <code>Object</code>
+**File:** [falcor/graph/set.js](falcor/graph/set.js)
+
 **Kind**: static property of <code>[Graph](#module_Falcor.Graph)</code>  
 
 | Param | Type |
@@ -331,6 +324,8 @@ Fast GUID generator, RFC4122 version 4 compliant.
 
 <a name="module_Falcor.Graph.atoms"></a>
 #### Graph.atoms(graph, fn)
+**File:** [falcor/graph/atoms.js](falcor/graph/atoms.js)
+
 **Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
 
 | Param | Type |
@@ -338,8 +333,31 @@ Fast GUID generator, RFC4122 version 4 compliant.
 | graph | <code>[JSONGraph](#JSONGraph)</code> | 
 | fn | <code>Graph.atoms~visitorFn</code> | 
 
+<a name="module_Falcor.Graph.atoms..visitorFn"></a>
+##### atoms~visitorFn(path, atom, graph)
+**Kind**: inner method of <code>[atoms](#module_Falcor.Graph.atoms)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>[Path](#Path)</code> | 
+| atom | <code>[Atom](#Atom)</code> | 
+| graph | <code>[JSONGraph](#JSONGraph)</code> | 
+
+<a name="module_Falcor.Graph.mergeEnvelope"></a>
+#### Graph.mergeEnvelope(receiver, supplier) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+**File:** [falcor/graph/merge.js](falcor/graph/merge.js)
+
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| receiver | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
+| supplier | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
+
 <a name="module_Falcor.Graph.relative"></a>
 #### Graph.relative(root, graph) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+**File:** [falcor/graph/relative.js](falcor/graph/relative.js)
+
 **Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
 
 | Param | Type |
@@ -349,6 +367,8 @@ Fast GUID generator, RFC4122 version 4 compliant.
 
 <a name="module_Falcor.Graph.resolve"></a>
 #### Graph.resolve(root, graph, [opts]) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+**File:** [falcor/graph/resolve.js](falcor/graph/resolve.js)
+
 **Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
 
 | Param | Type | Default |
@@ -359,16 +379,18 @@ Fast GUID generator, RFC4122 version 4 compliant.
 | [opts.rootKey] | <code>String</code> | <code>&#x27;{/}&#x27;</code> | 
 
 <a name="module_Falcor.Path"></a>
-### Falcor.Path ⇐ <code>external:falcor.Path</code>
+### Falcor.Path ⇐ <code>[FalcorPathUtils](https://github.com/Netflix/falcor-path-utils)</code>
 **Kind**: static property of <code>[Falcor](#module_Falcor)</code>  
-**Extends:** <code>external:falcor.Path</code>  
+**Extends:** <code>[FalcorPathUtils](https://github.com/Netflix/falcor-path-utils)</code>  
 
-* [.Path](#module_Falcor.Path) ⇐ <code>external:falcor.Path</code>
+* [.Path](#module_Falcor.Path) ⇐ <code>[FalcorPathUtils](https://github.com/Netflix/falcor-path-utils)</code>
   * [.relative(root, paths)](#module_Falcor.Path.relative) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
   * [.resolve(root, paths, [opts])](#module_Falcor.Path.resolve) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
 
 <a name="module_Falcor.Path.relative"></a>
 #### Path.relative(root, paths) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
+**File:** [falcor/path/relative.js](falcor/path/relative.js)
+
 **Kind**: static method of <code>[Path](#module_Falcor.Path)</code>  
 
 | Param | Type |
@@ -378,6 +400,8 @@ Fast GUID generator, RFC4122 version 4 compliant.
 
 <a name="module_Falcor.Path.resolve"></a>
 #### Path.resolve(root, paths, [opts]) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
+**File:** [falcor/path/resolve.js](falcor/path/resolve.js)
+
 **Kind**: static method of <code>[Path](#module_Falcor.Path)</code>  
 
 | Param | Type | Default |
@@ -387,14 +411,10 @@ Fast GUID generator, RFC4122 version 4 compliant.
 | [opts] | <code>Object</code> |  | 
 | [opts.rootKey] | <code>String</code> | <code>&#x27;{/}&#x27;</code> | 
 
-<a name="module_Falcor.Router"></a>
-### Falcor.Router ⇐ <code>[FalcorRouter](https://github.com/Netflix/falcor-router)</code>
-**Kind**: static property of <code>[Falcor](#module_Falcor)</code>  
-**Extends:** <code>[FalcorRouter](https://github.com/Netflix/falcor-router)</code>  
 <a name="module_Falcor.Syntax"></a>
-### Falcor.Syntax ⇐ <code>external:falcor.Syntax</code>
+### Falcor.Syntax ⇐ <code>[FalcorPathSyntax](https://github.com/Netflix/falcor-path-syntax)</code>
 **Kind**: static property of <code>[Falcor](#module_Falcor)</code>  
-**Extends:** <code>external:falcor.Syntax</code>  
+**Extends:** <code>[FalcorPathSyntax](https://github.com/Netflix/falcor-path-syntax)</code>  
 <a name="module_Falcor.Syntax.rootKey"></a>
 #### Syntax.rootKey
 **Kind**: static property of <code>[Syntax](#module_Falcor.Syntax)</code>  
@@ -403,7 +423,7 @@ Fast GUID generator, RFC4122 version 4 compliant.
 <a name="CollectionSource"></a>
 ## CollectionSource
 **Kind**: global class  
-**Implements:** <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code>  
+**Implements:** <code>[DataSource](#DataSource)</code>  
 
 * [CollectionSource](#CollectionSource)
   * [new CollectionSource(collection, [path])](#new_CollectionSource_new)
@@ -418,7 +438,7 @@ Fast GUID generator, RFC4122 version 4 compliant.
 
 <a name="new_CollectionSource_new"></a>
 ### new CollectionSource(collection, [path])
-**file:** protean/falcor/data-source/collection.js
+**file:** [falcor/data-source/collection.js](falcor/data-source/collection.js)
 
 
 | Param | Type |
@@ -433,7 +453,7 @@ Fast GUID generator, RFC4122 version 4 compliant.
 
 | Type |
 | --- |
-| <code>[FalcorRouter](#FalcorRouter)</code> | 
+| <code>FalcorRouter</code> | 
 
 <a name="CollectionSource+routes"></a>
 ### collectionSource.routes
@@ -447,6 +467,7 @@ Fast GUID generator, RFC4122 version 4 compliant.
 <a name="CollectionSource+get"></a>
 ### collectionSource.get(paths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[CollectionSource](#CollectionSource)</code>  
+**Implements:** <code>[get](#DataSource+get)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -455,6 +476,7 @@ Fast GUID generator, RFC4122 version 4 compliant.
 <a name="CollectionSource+set"></a>
 ### collectionSource.set(envelope) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[CollectionSource](#CollectionSource)</code>  
+**Implements:** <code>[set](#DataSource+set)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -463,6 +485,7 @@ Fast GUID generator, RFC4122 version 4 compliant.
 <a name="CollectionSource+call"></a>
 ### collectionSource.call(path, args, refSuffixes, thisPaths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[CollectionSource](#CollectionSource)</code>  
+**Implements:** <code>[call](#DataSource+call)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -493,30 +516,38 @@ Fast GUID generator, RFC4122 version 4 compliant.
 <a name="CompositeSource"></a>
 ## CompositeSource
 **Kind**: global class  
-**Implements:** <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code>  
+**Implements:** <code>[DataSource](#DataSource)</code>  
 
 * [CompositeSource](#CompositeSource)
-  * [new CompositeSource(...datasources)](#new_CompositeSource_new)
+  * [new CompositeSource(...args)](#new_CompositeSource_new)
+  * [.sources](#CompositeSource+sources)
   * [.get(paths)](#CompositeSource+get) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
   * [.set(envelope)](#CompositeSource+set) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
   * [.call(path, args, refSuffixes, thisPaths)](#CompositeSource+call) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
   * [.add(path, source)](#CompositeSource+add) ⇒ <code>[CompositeSource](#CompositeSource)</code>
-  * [.getDataSourceWrapper(path)](#CompositeSource+getDataSourceWrapper) ⇒ <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code>
-  * [.getDataSources(paths)](#CompositeSource+getDataSources) ⇒ <code>Observable.&lt;Object&gt;</code>
-  * [.getPathsToDataSources(envelope)](#CompositeSource+getPathsToDataSources)
 
 <a name="new_CompositeSource_new"></a>
-### new CompositeSource(...datasources)
-**file:** protean/falcor/data-source/composite.js
+### new CompositeSource(...args)
+**File:** [falcor/data-source/composite.js](falcor/data-source/composite.js)
 
 
 | Param | Type |
 | --- | --- |
-| ...datasources | <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code> | 
+| ...args | <code>Array.&lt;Path, DataSource&gt;</code> | 
+
+<a name="CompositeSource+sources"></a>
+### compositeSource.sources
+**Kind**: instance property of <code>[CompositeSource](#CompositeSource)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>Object.&lt;Path, CompositeSoure~SourceWrapper&gt;</code> | 
 
 <a name="CompositeSource+get"></a>
 ### compositeSource.get(paths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[CompositeSource](#CompositeSource)</code>  
+**Implements:** <code>[get](#DataSource+get)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -525,6 +556,7 @@ Fast GUID generator, RFC4122 version 4 compliant.
 <a name="CompositeSource+set"></a>
 ### compositeSource.set(envelope) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[CompositeSource](#CompositeSource)</code>  
+**Implements:** <code>[set](#DataSource+set)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -533,10 +565,11 @@ Fast GUID generator, RFC4122 version 4 compliant.
 <a name="CompositeSource+call"></a>
 ### compositeSource.call(path, args, refSuffixes, thisPaths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[CompositeSource](#CompositeSource)</code>  
+**Implements:** <code>[call](#DataSource+call)</code>  
 
 | Param | Type |
 | --- | --- |
-| path | <code>[PathSet](#PathSet)</code> | 
+| path | <code>[Path](#Path)</code> | 
 | args | <code>Array.&lt;Mixed&gt;</code> | 
 | refSuffixes | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 | thisPaths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
@@ -549,36 +582,12 @@ Fast GUID generator, RFC4122 version 4 compliant.
 | Param | Type |
 | --- | --- |
 | path | <code>[Path](#Path)</code> | 
-| source | <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code> | 
-
-<a name="CompositeSource+getDataSourceWrapper"></a>
-### compositeSource.getDataSourceWrapper(path) ⇒ <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code>
-**Kind**: instance method of <code>[CompositeSource](#CompositeSource)</code>  
-
-| Param | Type |
-| --- | --- |
-| path | <code>[Path](#Path)</code> | 
-
-<a name="CompositeSource+getDataSources"></a>
-### compositeSource.getDataSources(paths) ⇒ <code>Observable.&lt;Object&gt;</code>
-**Kind**: instance method of <code>[CompositeSource](#CompositeSource)</code>  
-
-| Param | Type |
-| --- | --- |
-| paths | <code>PathSets</code> | 
-
-<a name="CompositeSource+getPathsToDataSources"></a>
-### compositeSource.getPathsToDataSources(envelope)
-**Kind**: instance method of <code>[CompositeSource](#CompositeSource)</code>  
-
-| Param | Type |
-| --- | --- |
-| envelope | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
+| source | <code>[DataSource](#DataSource)</code> | 
 
 <a name="NoCacheSource"></a>
 ## NoCacheSource
 **Kind**: global class  
-**Implements:** <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code>  
+**Implements:** <code>[DataSource](#DataSource)</code>  
 
 * [NoCacheSource](#NoCacheSource)
   * [new NoCacheSource(opts)](#new_NoCacheSource_new)
@@ -591,17 +600,18 @@ Fast GUID generator, RFC4122 version 4 compliant.
 A Falcor DataSource that proxies another data source and sets all returned
 atoms to expire immediately.
 
-**file:** protean/falcor/data-source/no-cache.js
+**file:** [falcor/data-source/no-cache.js](falcor/data-source/no-cache.js)
 
 
 | Param | Type |
 | --- | --- |
 | opts | <code>Object</code> | 
-| opts.source | <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code> | 
+| opts.source | <code>[DataSource](#DataSource)</code> | 
 
 <a name="NoCacheSource+get"></a>
 ### noCacheSource.get(paths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[NoCacheSource](#NoCacheSource)</code>  
+**Implements:** <code>[get](#DataSource+get)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -610,6 +620,7 @@ atoms to expire immediately.
 <a name="NoCacheSource+set"></a>
 ### noCacheSource.set(envelope) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[NoCacheSource](#NoCacheSource)</code>  
+**Implements:** <code>[set](#DataSource+set)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -618,6 +629,7 @@ atoms to expire immediately.
 <a name="NoCacheSource+call"></a>
 ### noCacheSource.call(path, args, refSuffixes, thisPaths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[NoCacheSource](#NoCacheSource)</code>  
+**Implements:** <code>[call](#DataSource+call)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -629,19 +641,40 @@ atoms to expire immediately.
 <a name="ProxiedSource"></a>
 ## ProxiedSource
 **Kind**: global class  
-**Implements:** <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code>  
+**Implements:** <code>[DataSource](#DataSource)</code>  
+
+* [ProxiedSource](#ProxiedSource)
+  * [new ProxiedSource([opts])](#new_ProxiedSource_new)
+  * [.source](#ProxiedSource+source)
+  * [.root](#ProxiedSource+root)
+  * [.rootKey](#ProxiedSource+rootKey)
+  * [.preGet](#ProxiedSource+preGet)
+  * [.postGet](#ProxiedSource+postGet)
+  * [.preSet](#ProxiedSource+preSet)
+  * [.postSet](#ProxiedSource+postSet)
+  * [.preCall](#ProxiedSource+preCall)
+  * [.postCall](#ProxiedSource+postCall)
+  * [.get(paths)](#ProxiedSource+get) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.set(envelope)](#ProxiedSource+set) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.call(path, args, refSuffixes, thisPaths)](#ProxiedSource+call) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.willGet(paths)](#ProxiedSource+willGet) ⇒ <code>Boolean</code>
+  * [.willSet(envelope)](#ProxiedSource+willSet) ⇒ <code>Boolean</code>
+  * [.willCall(path)](#ProxiedSource+willCall) ⇒ <code>Boolean</code>
+  * [.getRelativeEnvelope(envelope)](#ProxiedSource+getRelativeEnvelope) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+  * [.getResolvedEnvelope(envelope)](#ProxiedSource+getResolvedEnvelope) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+
 <a name="new_ProxiedSource_new"></a>
 ### new ProxiedSource([opts])
-A Falcor DataSource that proxies to another source, re-writing returned paths
-and values.
+A Falcor DataSource that proxies to another source, re-writing the returned
+paths, and the paths to the atom values within the JSONGraph.
 
-**file:** protean/falcor/data-source/proxied.js
+**File:** [falcor/data-source/proxied.js](falcor/data-source/proxied.js)
 
 
 | Param | Type | Description |
 | --- | --- | --- |
 | [opts] | <code>Object</code> |  |
-| [opts.source] | <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code> |  |
+| [opts.source] | <code>[DataSource](#DataSource)</code> |  |
 | [opts.root] | <code>[Path](#Path)</code> |  |
 | [opts.rootKey] | <code>String</code> | The 'fake' path key that denotes a path that should start at the conceptual root. i.e: do not strip or adjust, just drop the root key. |
 | [opts.preGet] | <code>function</code> |  |
@@ -651,10 +684,175 @@ and values.
 | [opts.postSet] | <code>function</code> |  |
 | [opts.postCall] | <code>function</code> |  |
 
+<a name="ProxiedSource+source"></a>
+### proxiedSource.source
+**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[DataSource](#DataSource)</code> | 
+
+<a name="ProxiedSource+root"></a>
+### proxiedSource.root
+**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Path](#Path)</code> | 
+
+<a name="ProxiedSource+rootKey"></a>
+### proxiedSource.rootKey
+**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
+**Default**: <code>&#x27;{/}&#x27;</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>String</code> | 
+
+<a name="ProxiedSource+preGet"></a>
+### proxiedSource.preGet
+**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>function</code> | 
+
+<a name="ProxiedSource+postGet"></a>
+### proxiedSource.postGet
+**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>function</code> | 
+
+<a name="ProxiedSource+preSet"></a>
+### proxiedSource.preSet
+**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>function</code> | 
+
+<a name="ProxiedSource+postSet"></a>
+### proxiedSource.postSet
+**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>function</code> | 
+
+<a name="ProxiedSource+preCall"></a>
+### proxiedSource.preCall
+**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>function</code> | 
+
+<a name="ProxiedSource+postCall"></a>
+### proxiedSource.postCall
+**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>function</code> | 
+
+<a name="ProxiedSource+get"></a>
+### proxiedSource.get(paths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[ProxiedSource](#ProxiedSource)</code>  
+**Implements:** <code>[get](#DataSource+get)</code>  
+
+| Param | Type |
+| --- | --- |
+| paths | <code>Array.&lt;PathSets&gt;</code> | 
+
+<a name="ProxiedSource+set"></a>
+### proxiedSource.set(envelope) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[ProxiedSource](#ProxiedSource)</code>  
+**Implements:** <code>[set](#DataSource+set)</code>  
+
+| Param | Type |
+| --- | --- |
+| envelope | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
+
+<a name="ProxiedSource+call"></a>
+### proxiedSource.call(path, args, refSuffixes, thisPaths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[ProxiedSource](#ProxiedSource)</code>  
+**Implements:** <code>[call](#DataSource+call)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>[PathSet](#PathSet)</code> | 
+| args | <code>Array.&lt;Mixed&gt;</code> | 
+| refSuffixes | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+| thisPaths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="ProxiedSource+willGet"></a>
+### proxiedSource.willGet(paths) ⇒ <code>Boolean</code>
+Will the given paths be consumed by a get request against this
+datasource?
+
+**Kind**: instance method of <code>[ProxiedSource](#ProxiedSource)</code>  
+
+| Param | Type |
+| --- | --- |
+| paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="ProxiedSource+willSet"></a>
+### proxiedSource.willSet(envelope) ⇒ <code>Boolean</code>
+Will the given JSONGraphEnvelope be consumed by a set request against
+this datasource?
+
+**Kind**: instance method of <code>[ProxiedSource](#ProxiedSource)</code>  
+
+| Param | Type |
+| --- | --- |
+| envelope | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
+
+<a name="ProxiedSource+willCall"></a>
+### proxiedSource.willCall(path) ⇒ <code>Boolean</code>
+Will the given path be consumed by a call request against this
+datasource?
+
+**Kind**: instance method of <code>[ProxiedSource](#ProxiedSource)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>[Path](#Path)</code> | 
+
+<a name="ProxiedSource+getRelativeEnvelope"></a>
+### proxiedSource.getRelativeEnvelope(envelope) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+Strip our leading path from the envelope's path(s) and jsonGraph object.
+
+**Kind**: instance method of <code>[ProxiedSource](#ProxiedSource)</code>  
+
+| Param | Type |
+| --- | --- |
+| envelope | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
+
+<a name="ProxiedSource+getResolvedEnvelope"></a>
+### proxiedSource.getResolvedEnvelope(envelope) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+Adjust the JSONGraphEnvelope to reflect our leading path information.
+
+**Kind**: instance method of <code>[ProxiedSource](#ProxiedSource)</code>  
+
+| Param | Type |
+| --- | --- |
+| envelope | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
+
 <a name="StorageDataSource"></a>
 ## StorageDataSource
 **Kind**: global class  
-**Implements:** <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code>  
+**Implements:** <code>[DataSource](#DataSource)</code>  
 
 * [StorageDataSource](#StorageDataSource)
   * [new StorageDataSource(opts)](#new_StorageDataSource_new)
@@ -672,14 +870,14 @@ and values.
 
 <a name="new_StorageDataSource_new"></a>
 ### new StorageDataSource(opts)
-**file:** protean/falcor/data-source/storage.js
+**file:** [falcor/data-source/storage.js](falcor/data-source/storage.js)
 
 
 | Param | Type |
 | --- | --- |
 | opts | <code>Object</code> | 
 | [opts.cache] | <code>Object</code> | 
-| [opts.storage] | <code>external:Storage</code> | 
+| [opts.storage] | <code>[Storage](#Storage)</code> | 
 | opts.storageKey | <code>String</code> | 
 
 <a name="StorageDataSource+model"></a>
@@ -689,7 +887,7 @@ and values.
 
 | Type |
 | --- |
-| <code>external:falcor.Model</code> | 
+| <code>FalcorFModel</code> | 
 
 <a name="StorageDataSource+source"></a>
 ### storageDataSource.source
@@ -698,7 +896,7 @@ and values.
 
 | Type |
 | --- |
-| <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code> | 
+| <code>[DataSource](#DataSource)</code> | 
 
 <a name="StorageDataSource+options"></a>
 ### storageDataSource.options
@@ -735,6 +933,7 @@ and values.
 <a name="StorageDataSource+get"></a>
 ### storageDataSource.get(paths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[StorageDataSource](#StorageDataSource)</code>  
+**Implements:** <code>[get](#DataSource+get)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -743,6 +942,7 @@ and values.
 <a name="StorageDataSource+set"></a>
 ### storageDataSource.set(envelope) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[StorageDataSource](#StorageDataSource)</code>  
+**Implements:** <code>[set](#DataSource+set)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -751,6 +951,7 @@ and values.
 <a name="StorageDataSource+call"></a>
 ### storageDataSource.call(path, args, refSuffixes, thisPaths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[StorageDataSource](#StorageDataSource)</code>  
+**Implements:** <code>[call](#DataSource+call)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -792,6 +993,8 @@ Get our cache from storage
 
 <a name="new_Storage_new"></a>
 ### new Storage(opts)
+**File:** [storage/index.js](storage/index.js)
+
 
 | Param | Type |
 | --- | --- |
@@ -868,6 +1071,7 @@ Get our cache from storage
 **Implements:** <code>external:Storage</code>  
 
 * [Store](#Store)
+  * [new Store()](#new_Store_new)
   * _instance_
     * [.length](#Store+length)
     * [.getItem(key)](#Store+getItem) ⇒ <code>null</code> &#124; <code>String</code>
@@ -879,6 +1083,10 @@ Get our cache from storage
     * [.local](#Store.local) : <code>external:Storage</code>
     * [.memory](#Store.memory) : <code>module:Protean.Store</code>
     * [.session](#Store.session) : <code>external:Storage</code>
+
+<a name="new_Store_new"></a>
+### new Store()
+**File:** [storage/store/index.js](storage/store/index.js)
 
 <a name="Store+length"></a>
 ### store.length
@@ -928,12 +1136,18 @@ Get our cache from storage
 
 <a name="Store.local"></a>
 ### Store.local : <code>external:Storage</code>
+**File:** [storage/store/local.js](storage/store/local.js)
+
 **Kind**: static property of <code>[Store](#Store)</code>  
 <a name="Store.memory"></a>
 ### Store.memory : <code>module:Protean.Store</code>
+**File:** [storage/store/memory.js](storage/store/memory.js)
+
 **Kind**: static property of <code>[Store](#Store)</code>  
 <a name="Store.session"></a>
 ### Store.session : <code>external:Storage</code>
+**File:** [storage/store/session.js](storage/store/session.js)
+
 **Kind**: static property of <code>[Store](#Store)</code>  
 <a name="Collection"></a>
 ## Collection
@@ -965,6 +1179,8 @@ Get our cache from storage
 
 <a name="new_Collection_new"></a>
 ### new Collection([rec])
+**File:** [utility/collection.js](utility/collection.js)
+
 
 | Param | Type |
 | --- | --- |
@@ -1138,12 +1354,11 @@ Returns a Collection with all records cloned.
 
 **Kind**: instance method of <code>[Collection](#Collection)</code>  
 <a name="FiniteStateMachine"></a>
-## FiniteStateMachine ⇐ <code>[Observable](#Observable)</code>
+## FiniteStateMachine ⇐ <code>[Subject](#Subject)</code>
 **Kind**: global class  
-**Extends:** <code>[Observable](#Observable)</code>  
-**Mixes**: <code>[Observer](#Observer)</code>  
+**Extends:** <code>[Subject](#Subject)</code>, <code>[ProteanClass](#ProteanClass)</code>  
 
-* [FiniteStateMachine](#FiniteStateMachine) ⇐ <code>[Observable](#Observable)</code>
+* [FiniteStateMachine](#FiniteStateMachine) ⇐ <code>[Subject](#Subject)</code>
   * [new FiniteStateMachine([opts])](#new_FiniteStateMachine_new)
   * [.options](#FiniteStateMachine+options)
     * [.initial](#FiniteStateMachine+options.initial)
@@ -1166,10 +1381,11 @@ Returns a Collection with all records cloned.
   * [.enter(name)](#FiniteStateMachine+enter) ⇒ <code>Boolean</code>
   * [.transition(input, from, to)](#FiniteStateMachine+transition) ⇒ <code>[FiniteStateMachine](#FiniteStateMachine)</code>
   * [.valueOf()](#FiniteStateMachine+valueOf) ⇒ <code>Object</code>
-  * [.subscribe(onNextOrObserver, [onError], [onCompleted])](#Observable+subscribe) ⇒ <code>[Disposable](#Disposable)</code>
 
 <a name="new_FiniteStateMachine_new"></a>
 ### new FiniteStateMachine([opts])
+**File:** [utility/fsm.js](utility/fsm.js)
+
 **Throws**:
 
 - <code>Error</code> "ProteanFiniteStateMachine needs an initial state" If no
@@ -1367,16 +1583,6 @@ Remove a state and its transitions
 <a name="FiniteStateMachine+valueOf"></a>
 ### finiteStateMachine.valueOf() ⇒ <code>Object</code>
 **Kind**: instance method of <code>[FiniteStateMachine](#FiniteStateMachine)</code>  
-<a name="Observable+subscribe"></a>
-### finiteStateMachine.subscribe(onNextOrObserver, [onError], [onCompleted]) ⇒ <code>[Disposable](#Disposable)</code>
-**Kind**: instance method of <code>[FiniteStateMachine](#FiniteStateMachine)</code>  
-
-| Param | Type |
-| --- | --- |
-| onNextOrObserver | <code>[onNextFunction](#onNextFunction)</code> &#124; <code>[Observer](#Observer)</code> | 
-| [onError] | <code>[onErrorFunction](#onErrorFunction)</code> | 
-| [onCompleted] | <code>[onCompletedFunction](#onCompletedFunction)</code> | 
-
 <a name="Record"></a>
 ## Record
 **Kind**: global class  
@@ -1396,6 +1602,8 @@ Remove a state and its transitions
 
 <a name="new_Record_new"></a>
 ### new Record([data])
+**File:** [utility/record.js](utility/record.js)
+
 
 | Param | Type |
 | --- | --- |
@@ -1538,8 +1746,45 @@ Remove a state and its transitions
 **Kind**: global typedef  
 **Extends:** <code>[Observable](#Observable)</code>  
 **Mixes**: <code>[Observer](#Observer)</code>, <code>[Disposable](#Disposable)</code>  
+<a name="DataSource"></a>
+## DataSource
+**Kind**: global typedef  
+**Implements:** <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code>  
+
+* [DataSource](#DataSource)
+  * [.get(paths)](#DataSource+get) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.set(envelope)](#DataSource+set) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.call(path, args, refSuffixes, thisPaths)](#DataSource+call) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+
+<a name="DataSource+get"></a>
+### dataSource.get(paths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[DataSource](#DataSource)</code>  
+
+| Param | Type |
+| --- | --- |
+| paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="DataSource+set"></a>
+### dataSource.set(envelope) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[DataSource](#DataSource)</code>  
+
+| Param | Type |
+| --- | --- |
+| envelope | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
+
+<a name="DataSource+call"></a>
+### dataSource.call(path, args, refSuffixes, thisPaths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[DataSource](#DataSource)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>[PathSet](#PathSet)</code> | 
+| args | <code>Array.&lt;Mixed&gt;</code> | 
+| refSuffixes | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+| thisPaths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
 <a name="Atom"></a>
-## Atom
+## Atom : <code>Object</code>
 **Kind**: global typedef  
 **See**: [http://netflix.github.io/falcor/doc/global.html#Atom](http://netflix.github.io/falcor/doc/global.html#Atom)  
 **Properties**
@@ -1551,7 +1796,7 @@ Remove a state and its transitions
 | $expires | <code>Integer</code> | 
 
 <a name="JSONEnvelope"></a>
-## JSONEnvelope
+## JSONEnvelope : <code>Object</code>
 **Kind**: global typedef  
 **See**: [http://netflix.github.io/falcor/doc/global.html#JSONGraph](http://netflix.github.io/falcor/doc/global.html#JSONGraph)  
 **Properties**
@@ -1561,11 +1806,11 @@ Remove a state and its transitions
 | json | <code>Object</code> | 
 
 <a name="JSONGraph"></a>
-## JSONGraph
+## JSONGraph : <code>Object</code>
 **Kind**: global typedef  
 **See**: [http://netflix.github.io/falcor/doc/global.html#JSONGraph](http://netflix.github.io/falcor/doc/global.html#JSONGraph)  
 <a name="JSONGraphEnvelope"></a>
-## JSONGraphEnvelope
+## JSONGraphEnvelope : <code>Object</code>
 **Kind**: global typedef  
 **See**: [http://netflix.github.io/falcor/doc/global.html#JSONGraphEnvelope](http://netflix.github.io/falcor/doc/global.html#JSONGraphEnvelope)  
 **Properties**
@@ -1576,24 +1821,28 @@ Remove a state and its transitions
 | paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 | invalidated | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 
+<a name="FalcorModel"></a>
+## FalcorModel
+**Kind**: global typedef  
+**Implements:** <code>[FalcorModel](http://netflix.github.io/falcor/doc/Model.html)</code>  
 <a name="Key"></a>
-## Key
+## Key : <code>String</code> &#124; <code>null</code>
 **Kind**: global typedef  
 **See**: [http://netflix.github.io/falcor/doc/global.html#Key](http://netflix.github.io/falcor/doc/global.html#Key)  
 <a name="KeySet"></a>
-## KeySet
+## KeySet : <code>[Key](#Key)</code> &#124; <code>[Range](#Range)</code> &#124; <code>Array.&lt;(Key\|Range)&gt;</code>
 **Kind**: global typedef  
 **See**: [http://netflix.github.io/falcor/doc/global.html#KeySet](http://netflix.github.io/falcor/doc/global.html#KeySet)  
 <a name="Path"></a>
-## Path
+## Path : <code>[Array.&lt;Key&gt;](#Key)</code>
 **Kind**: global typedef  
 **See**: [http://netflix.github.io/falcor/doc/global.html#Path](http://netflix.github.io/falcor/doc/global.html#Path)  
 <a name="PathSet"></a>
-## PathSet
+## PathSet : <code>[Array.&lt;KeySet&gt;](#KeySet)</code>
 **Kind**: global typedef  
 **See**: [http://netflix.github.io/falcor/doc/global.html#PathSet](http://netflix.github.io/falcor/doc/global.html#PathSet)  
 <a name="PathValue"></a>
-## PathValue
+## PathValue : <code>Object</code>
 **Kind**: global typedef  
 **See**: [http://netflix.github.io/falcor/doc/global.html#PathValue](http://netflix.github.io/falcor/doc/global.html#PathValue)  
 **Properties**
@@ -1604,7 +1853,7 @@ Remove a state and its transitions
 | value | <code>Mixed</code> | 
 
 <a name="Range"></a>
-## Range
+## Range : <code>Object</code>
 **Kind**: global typedef  
 **See**: [http://netflix.github.io/falcor/doc/global.html#Range](http://netflix.github.io/falcor/doc/global.html#Range)  
 **Properties**
@@ -1615,10 +1864,36 @@ Remove a state and its transitions
 | to | <code>Integer</code> | 
 | length | <code>Integer</code> | 
 
-<a name="FalcorRouter"></a>
-## FalcorRouter
+<a name="ProteanClassExtend"></a>
+## ProteanClassExtend ⇒ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global typedef  
-**Implements:** <code>[DataSource](http://netflix.github.io/falcor/doc/DataSource.html)</code>  
+
+| Param | Type |
+| --- | --- |
+| [subclass] | <code>function</code> | 
+| [props] | <code>Object</code> | 
+| [properties] | <code>Object</code> | 
+
+<a name="ProteanClassExtended"></a>
+## ProteanClassExtended : <code>function</code>
+**Kind**: global typedef  
+
+| Param | Type |
+| --- | --- |
+| subclass | <code>function</code> | 
+
+<a name="ProteanClass"></a>
+## ProteanClass : <code>function</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| extend | <code>[ProteanClassExtend](#ProteanClassExtend)</code> | A function to extend this class into another one |
+| extended | <code>[ProteanClassExtended](#ProteanClassExtended)</code> | A function that will be called when the class is extended into another |
+| superclass | <code>function</code> | A reference to this class' superclass constructor |
+| superproto | <code>Object</code> | A reference to this class' superclass prototype |
+
 
 
 

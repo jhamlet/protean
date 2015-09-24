@@ -8,9 +8,11 @@ var Rx = require('rx');
 var Observable = Rx.Observable;
 
 /**
+ * **File:** [utility/fsm.js](utility/fsm.js)
+ *
  * @class FiniteStateMachine
- * @extends Observable
- * @mixes Observer
+ * @extends Subject
+ * @extends ProteanClass
  * @param {Object} [opts]
  * @param {String} [opts.initial] The initial state to begin in
  * @param {String} [opts.current] Alias for initial

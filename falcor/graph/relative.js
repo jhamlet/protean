@@ -7,6 +7,8 @@ function visitor (accumulator, root, path, value) {
     set(accumulator, local, value);
 }
 /**
+ * **File:** [falcor/graph/relative.js](falcor/graph/relative.js)
+ *
  * @member module:Falcor.Graph.relative
  * @function
  * @param {Path} root

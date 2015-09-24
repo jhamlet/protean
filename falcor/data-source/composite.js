@@ -1,156 +1,110 @@
-var classify   = require('protean/function/classify');
-// var Rx         = require('rx');
-// var Observable = Rx.Observable;
-// var gutil      = require('protean/falcor/graph');
-// var $ref       = gutil.ref;
-// var $atom      = gutil.atom;
-// var $pv        = gutil.pathValue;
-var syntax     = require('protean/falcor/syntax');
-var putil      = require('protean/falcor/path');
-// var assign     = require('lodash/object/assign');
-var get        = require('lodash/object/get');
-var set        = require('lodash/object/set');
+var classify      = require('protean/function/classify');
+var Rx            = require('rx');
+var Observable    = Rx.Observable;
+var ProxiedSource = require('./proxied');
+var syntax        = require('protean/falcor/syntax');
+var gutil         = require('protean/falcor/graph');
+var toArray       = require('lodash/lang/toArray');
+var spread        = require('lodash/function/spread');
+var get           = require('lodash/object/get');
+// lodash likes to turn integer keys into arrays, so we use one that doesn't do
+// that
+var set           = gutil.set;
 
 /**
- * **file:** protean/falcor/data-source/composite.js
+ * **File:** [falcor/data-source/composite.js](falcor/data-source/composite.js)
  *
  * @class CompositeSource
- * @implements external:DataSource
- * @param {...external:DataSource} datasources
+ * @implements DataSource
+ * @param {...Array<Path,DataSource>} args
  */
 function CompositeSource () {
     this.routes = [];
     this.sources = {};
+    toArray(arguments).forEach(spread(this.add.bind(this)));
 }
 
 module.exports = classify(CompositeSource,/** @lends CompositeSource# */{
+    /**
+     * @property {Object<Path,CompositeSoure~SourceWrapper>}
+     */
+    sources: null,
     /**
      * @param {PathSets[]} paths
      * @returns {Observable<JSONGraphEnvelope>}
      */
     get: function (paths) {
-        var pathTree = putil.toTree(paths);
-        return this.router.get(paths);
+        var routes = this.routes;
+        var sources = this.sources;
+
+        return Observable.
+            fromArray(routes).
+            map(function (route) { return get(sources, route); }).
+            where(function (src) { return src && src.willGet(paths); }).
+            flatMap(function (src) { return src.get(paths); }).
+            reduce(gutil.mergeEnvelope, {});
     },
     /**
      * @param {JSONGraphEnvelope} envelope
      * @returns {Observable<JSONGraphEnvelope>}
      */
-    set: function (envelope) { return this.router.set(envelope); },
+    set: function (envelope) {
+        var routes = this.routes;
+        var sources = this.sources;
+
+        return Observable.
+            fromArray(routes).
+            map(function (route) { return get(sources, route); }).
+            where(function (src) { return src && src.willSet(envelope); }).
+            flatMap(function (src) { return src.set(envelope); }).
+            reduce(gutil.mergeEnvelope, {});
+    },
     /**
-     * @param {PathSet} path
+     * @param {Path} path
      * @param {Array<Mixed>} args
      * @param {PathSet[]} refSuffixes
      * @param {PathSet[]} thisPaths
      * @returns {Observable<JSONGraphEnvelope>}
      */
-    call: function (paths, args, refSuffixes, thisPaths) {
-        return this.router.call(paths, args, refSuffixes, thisPaths);
+    call: function (path, args, refSuffixes, thisPaths) {
+        var routes = this.routes;
+        var sources = this.sources;
+
+        return Observable.
+            fromArray(routes).
+            map(function (route) { return get(sources, route); }).
+            where(function (src) { return src && src.willCall(path); }).
+            flatMap(function (src) {
+                return src.call(path, args, refSuffixes, thisPaths);
+            }).
+            reduce(gutil.mergeEnvelope, {});
     },
     /**
      * @param {Path} path
-     * @param {external:DataSource} source
+     * @param {DataSource} source
      * @returns {CompositeSource} the CompositeSource instance
      */
     add: function (path, source) {
-        var { sources, routes } = this;
-        var route = syntax.fromPath(path);
+        var routes  = this.routes;
+        var sources = this.sources;
+        var route   = syntax.fromPath(path);
+        var wrapper = get(sources, route);
 
-        if (get(sources, route)) {
+        if (wrapper) {
             throw new Error(
-                'CompositeSource: DataSource for path \'' +
+                'CompositeSource: path \'' +
                 JSON.stringify(path) + 
                 '\' already exists!'
             );
         }
 
-        set(sources, route, { path: route, source: source });
+        set(sources, route, new ProxiedSource({
+            root: route,
+            source: source
+        }));
+
         routes.push(route);
 
         return this;
-    },
-    /**
-     * @param {Path} path
-     * @returns {external:DataSource}
-     */
-    getDataSourceWrapper: function (path) {
-        return get(this.sources, syntax.fromPath(path));
-    },
-    /**
-     * @param {PathSets} paths
-     * @returns {Observable<Object>}
-     */
-    getDataSources: function (paths) {
-        var { sources, routes } = this;
-        var pathsLen = paths.length;
-        var pathTree = putil.toTree(paths);
-
-        routes.
-            // get our available routes than can possibly match
-            filter(function (r) { return r.length < paths.length; }).
-            // sort those from longest to shortest route
-            sort(function (a, b) { return b.length - a.length; }).
-            // filter out routes that would not return part of the tree
-            filter(function (r) { return get(pathTree, r); }).
-            map(function (r) {
-                var len = r.length;
-                var diff = pathsLen - len;
-                var remainder = putil.toPaths(set({}, diff, get(pathTree, r)));
-
-                return [r, get(sources, r).source, remainder];
-            }).
-            map(function (arg) {
-                var route = arg[0];
-                var src = arg[1];
-                var remainder = arg[2];
-
-                return src.
-                    get(remainder).
-                    map(function (resp) { return [route, resp]; })
-            }).
-            reduce(function (envelope, args) {
-                var route = args[0];
-                var resp = args[1];
-                var paths = resp.paths;
-                var graph = resp.jsonGraph;
-                var invalid = resp.invalidate;
-                var routeTree = putil.toTree(
-                    set({}, route, putil.toTree(paths))
-                );
-                var routePaths = putil.toPaths(
-                    set(
-                        {},
-                        route.length + paths.length,
-                        routeTree
-                    )
-                );
-
-                if (!envelope.paths) {
-                    envelope.paths = [];
-                }
-                envelope.paths.push.apply(envelope.paths, routePaths);
-
-                if (!envelope.jsonGraph) {
-                    envelope.jsonGraph = {};
-                }
-                set(envelope.jsonGraph, route, graph);
-
-                if (invalid) {
-                    routeTree = putil.toTree(
-                        set({}, route, putil.toTree(paths))
-                    );
-                    routePaths = putil.toPaths(
-                        set({}, route.length + invalid.length, putil.toTree(invalid))
-                    );
-                    envelope.invalidate.push.apply(envelope.invalidate, invalid);
-                }
-
-                return envelope;
-            }, {});
-    },
-    /**
-     * @param {JSONGraphEnvelope} envelope
-     */
-    getPathsToDataSources: function (paths) {
     }
 });

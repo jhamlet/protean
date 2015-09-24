@@ -1,6 +1,8 @@
 var classify = require('protean/function/classify');
 var has = require('lodash/object/has');
 /**
+ * **File:** [storage/store/index.js](storage/store/index.js)
+ *
  * @class Store
  * @implements external:Storage
  */

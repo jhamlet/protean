@@ -5,6 +5,8 @@ var SKIP     = 'skip';
 var CONTINUE = 'continue';
 var BREAK    = 'break';
 /**
+ * **File:** [object/traverse.js](object/traverse.js)
+ *
  * @typedef module:Protean.traverse~visitorFn
  * @function
  * @param {String[]} path The path to the value
