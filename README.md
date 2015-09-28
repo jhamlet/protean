@@ -45,6 +45,8 @@ API
 <dd></dd>
 <dt><a href="#FiniteStateMachine">FiniteStateMachine</a> ⇐ <code><a href="#Subject">Subject</a></code></dt>
 <dd></dd>
+<dt><a href="#LinkedList">LinkedList</a> ⇐ <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#Record">Record</a></dt>
 <dd></dd>
 </dl>
@@ -1583,6 +1585,179 @@ Remove a state and its transitions
 <a name="FiniteStateMachine+valueOf"></a>
 ### finiteStateMachine.valueOf() ⇒ <code>Object</code>
 **Kind**: instance method of <code>[FiniteStateMachine](#FiniteStateMachine)</code>  
+<a name="LinkedList"></a>
+## LinkedList ⇐ <code>Object</code>
+**Kind**: global class  
+**Extends:** <code>Object</code>  
+
+* [LinkedList](#LinkedList) ⇐ <code>Object</code>
+  * [new LinkedList([...items])](#new_LinkedList_new)
+  * _instance_
+    * [.head](#LinkedList+head)
+    * [.tail](#LinkedList+tail)
+    * [.push(...value)](#LinkedList+push) ⇒ <code>Integer</code>
+    * [.pop()](#LinkedList+pop) ⇒ <code>\*</code>
+    * [.unshift(...value)](#LinkedList+unshift) ⇒ <code>Integer</code>
+    * [.shift()](#LinkedList+shift) ⇒ <code>\*</code>
+    * [.reset()](#LinkedList+reset)
+    * [.forEach(fn, [scope])](#LinkedList+forEach)
+    * [.map(fn, [scope])](#LinkedList+map) ⇒ <code>[LinkedList](#LinkedList)</code>
+    * [.filter(fn, [scope])](#LinkedList+filter) ⇒ <code>[LinkedList](#LinkedList)</code>
+    * [.reduce(fn, [value], [scope])](#LinkedList+reduce) ⇒ <code>\*</code>
+  * _static_
+    * [.Item](#LinkedList.Item) ⇐ <code>Object</code>
+      * [new Item(data, [prev], [next])](#new_LinkedList.Item_new)
+      * [.next](#LinkedList.Item+next)
+      * [.prev](#LinkedList.Item+prev)
+      * [.data](#LinkedList.Item+data)
+      * [.insert(prev, next)](#LinkedList.Item+insert)
+
+<a name="new_LinkedList_new"></a>
+### new LinkedList([...items])
+
+| Param | Type |
+| --- | --- |
+| [...items] | <code>\*</code> | 
+
+<a name="LinkedList+head"></a>
+### linkedList.head
+**Kind**: instance property of <code>[LinkedList](#LinkedList)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Item](#LinkedList.Item)</code> | 
+
+<a name="LinkedList+tail"></a>
+### linkedList.tail
+**Kind**: instance property of <code>[LinkedList](#LinkedList)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Item](#LinkedList.Item)</code> | 
+
+<a name="LinkedList+push"></a>
+### linkedList.push(...value) ⇒ <code>Integer</code>
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+
+| Param | Type |
+| --- | --- |
+| ...value | <code>\*</code> | 
+
+<a name="LinkedList+pop"></a>
+### linkedList.pop() ⇒ <code>\*</code>
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+<a name="LinkedList+unshift"></a>
+### linkedList.unshift(...value) ⇒ <code>Integer</code>
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+
+| Param | Type |
+| --- | --- |
+| ...value | <code>\*</code> | 
+
+<a name="LinkedList+shift"></a>
+### linkedList.shift() ⇒ <code>\*</code>
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+<a name="LinkedList+reset"></a>
+### linkedList.reset()
+Reset the list
+
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+<a name="LinkedList+forEach"></a>
+### linkedList.forEach(fn, [scope])
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+
+| Param | Type |
+| --- | --- |
+| fn | <code>function</code> | 
+| [scope] | <code>Object</code> | 
+
+<a name="LinkedList+map"></a>
+### linkedList.map(fn, [scope]) ⇒ <code>[LinkedList](#LinkedList)</code>
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+
+| Param | Type |
+| --- | --- |
+| fn | <code>function</code> | 
+| [scope] | <code>Object</code> | 
+
+<a name="LinkedList+filter"></a>
+### linkedList.filter(fn, [scope]) ⇒ <code>[LinkedList](#LinkedList)</code>
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+
+| Param | Type |
+| --- | --- |
+| fn | <code>function</code> | 
+| [scope] | <code>Object</code> | 
+
+<a name="LinkedList+reduce"></a>
+### linkedList.reduce(fn, [value], [scope]) ⇒ <code>\*</code>
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fn | <code>function</code> |  |
+| [value] | <code>\*</code> | Initial value |
+| [scope] | <code>Object</code> | Scope to apply to the `fn` passed |
+
+<a name="LinkedList.Item"></a>
+### LinkedList.Item ⇐ <code>Object</code>
+**Kind**: static class of <code>[LinkedList](#LinkedList)</code>  
+**Extends:** <code>Object</code>  
+
+  * [.Item](#LinkedList.Item) ⇐ <code>Object</code>
+    * [new Item(data, [prev], [next])](#new_LinkedList.Item_new)
+    * [.next](#LinkedList.Item+next)
+    * [.prev](#LinkedList.Item+prev)
+    * [.data](#LinkedList.Item+data)
+    * [.insert(prev, next)](#LinkedList.Item+insert)
+
+<a name="new_LinkedList.Item_new"></a>
+#### new Item(data, [prev], [next])
+
+| Param | Type |
+| --- | --- |
+| data | <code>Mixed</code> | 
+| [prev] | <code>[Item](#LinkedList.Item)</code> | 
+| [next] | <code>[Item](#LinkedList.Item)</code> | 
+
+<a name="LinkedList.Item+next"></a>
+#### item.next
+**Kind**: instance property of <code>[Item](#LinkedList.Item)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Item](#LinkedList.Item)</code> | 
+
+<a name="LinkedList.Item+prev"></a>
+#### item.prev
+**Kind**: instance property of <code>[Item](#LinkedList.Item)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Item](#LinkedList.Item)</code> | 
+
+<a name="LinkedList.Item+data"></a>
+#### item.data
+**Kind**: instance property of <code>[Item](#LinkedList.Item)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>\*</code> | 
+
+<a name="LinkedList.Item+insert"></a>
+#### item.insert(prev, next)
+**Kind**: instance method of <code>[Item](#LinkedList.Item)</code>  
+
+| Param | Type |
+| --- | --- |
+| prev | <code>[Item](#LinkedList.Item)</code> | 
+| next | <code>[Item](#LinkedList.Item)</code> | 
+
 <a name="Record"></a>
 ## Record
 **Kind**: global class  
