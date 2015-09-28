@@ -1,6 +1,6 @@
 /*globals describe, it */
 
-var enmap = require('protean/utility/enmap');
+var enmap = require('protean/object/enmap');
 
 require('should');
 

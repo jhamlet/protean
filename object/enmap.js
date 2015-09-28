@@ -6,7 +6,7 @@ function isEven (a, i) { return i % 2 === 0; }
 /**
  * Takes a list of alternating key/values and returns an object.
  *
- * **File:** [utility/enmap.js](utility/enmap.js)
+ * **File:** [object/enmap.js](object/enmap.js)
  *
  * @member module:Protean.enmap
  * @function

@@ -1,6 +1,6 @@
 /*globals describe, it */
 
-var enumerate = require('protean/utility/enumerate');
+var enumerate = require('protean/object/enumerate');
 
 require('should');
 

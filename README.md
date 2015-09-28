@@ -106,6 +106,8 @@ API
   * [.inherit(superclass, [subclass], [props], [properties])](#module_Protean.inherit) ⇒ <code>[ProteanClass](#ProteanClass)</code>
   * [.instantiate(fn, [args])](#module_Protean.instantiate) ⇒ <code>Object</code>
   * [.augment(...obj)](#module_Protean.augment) ⇒ <code>Object</code>
+  * [.enmap(...args)](#module_Protean.enmap) ⇒ <code>Object</code>
+  * [.enumerate()](#module_Protean.enumerate) ⇒ <code>Object</code>
   * [.traverse(obj, visitor, [post])](#module_Protean.traverse)
     * _static_
       * [.SKIP](#module_Protean.traverse.SKIP) : <code>String</code>
@@ -113,8 +115,6 @@ API
       * [.BREAK](#module_Protean.traverse.BREAK) : <code>String</code>
     * _inner_
       * [~visitorFn(path, value, context)](#module_Protean.traverse..visitorFn) ⇒ <code>undefined</code> &#124; <code>String</code>
-  * [.enmap(...args)](#module_Protean.enmap) ⇒ <code>Object</code>
-  * [.enumerate()](#module_Protean.enumerate) ⇒ <code>Object</code>
   * [.guid()](#module_Protean.guid) ⇒ <code>String</code>
   * [.mergeExports(receiver, supplier)](#module_Protean.mergeExports) ⇒ <code>Object</code>
 
@@ -192,6 +192,31 @@ existing properties defined directly on the source object.
 | --- | --- |
 | ...obj | <code>Object</code> | 
 
+<a name="module_Protean.enmap"></a>
+### Protean.enmap(...args) ⇒ <code>Object</code>
+Takes a list of alternating key/values and returns an object.
+
+**File:** [object/enmap.js](object/enmap.js)
+
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
+
+| Param | Type |
+| --- | --- |
+| ...args | <code>Mixed</code> | 
+
+<a name="module_Protean.enumerate"></a>
+### Protean.enumerate() ⇒ <code>Object</code>
+Takes an argument list of strings and returns an object with those keys, and their
+values being the index of that key plus one.
+
+**File:** [object/enumerate.js](object/enumerate.js)
+
+**Kind**: static method of <code>[Protean](#module_Protean)</code>  
+
+| Type |
+| --- |
+| <code>String</code> | 
+
 <a name="module_Protean.traverse"></a>
 ### Protean.traverse(obj, visitor, [post])
 **Kind**: static method of <code>[Protean](#module_Protean)</code>  
@@ -233,31 +258,6 @@ existing properties defined directly on the source object.
 | path | <code>Array.&lt;String&gt;</code> | The path to the value |
 | value | <code>Mixed</code> | The value |
 | context | <code>Object</code> | The original object |
-
-<a name="module_Protean.enmap"></a>
-### Protean.enmap(...args) ⇒ <code>Object</code>
-Takes a list of alternating key/values and returns an object.
-
-**File:** [utility/enmap.js](utility/enmap.js)
-
-**Kind**: static method of <code>[Protean](#module_Protean)</code>  
-
-| Param | Type |
-| --- | --- |
-| ...args | <code>Mixed</code> | 
-
-<a name="module_Protean.enumerate"></a>
-### Protean.enumerate() ⇒ <code>Object</code>
-Takes an argument list of strings and returns an object with those keys, and their
-values being the index of that key plus one.
-
-**File:** [utility/enumerate.js](utility/enumerate.js)
-
-**Kind**: static method of <code>[Protean](#module_Protean)</code>  
-
-| Type |
-| --- |
-| <code>String</code> | 
 
 <a name="module_Protean.guid"></a>
 ### Protean.guid() ⇒ <code>String</code>

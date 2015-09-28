@@ -1,6 +1,3 @@
-
-require('lodash/object/assign')(exports, {
-    enmap:         require('./utility/enmap'),
-    enumerate:     require('./utility/enumerate'),
-    guid:          require('./utility/guid')
-});
+require('lodash/collection/reduce')([
+    require('./utility/guid')
+], require('protean/utility/merge-exports'), exports);
