@@ -35,6 +35,8 @@ API
 <dd></dd>
 <dt><a href="#NoCacheSource">NoCacheSource</a></dt>
 <dd></dd>
+<dt><a href="#PartitionedSource">PartitionedSource</a></dt>
+<dd></dd>
 <dt><a href="#ProxiedSource">ProxiedSource</a></dt>
 <dd></dd>
 <dt><a href="#StorageDataSource">StorageDataSource</a></dt>
@@ -606,6 +608,7 @@ Fast GUID generator, RFC4122 version 4 compliant.
 **Extends:** <code>Object</code>  
 
 * [JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy) ⇐ <code>Object</code>
+  * [new JSONGraphEnvelopeProxy([paths])](#new_JSONGraphEnvelopeProxy_new)
   * [.paths](#JSONGraphEnvelopeProxy.paths)
   * [.jsonGraph](#JSONGraphEnvelopeProxy.jsonGraph)
   * [.invalidated](#JSONGraphEnvelopeProxy.invalidated)
@@ -617,8 +620,16 @@ Fast GUID generator, RFC4122 version 4 compliant.
   * [.fulfill(path)](#JSONGraphEnvelopeProxy.fulfill)
   * [.expect(paths)](#JSONGraphEnvelopeProxy.expect)
   * [.merge(other)](#JSONGraphEnvelopeProxy.merge)
+  * [.destroy()](#JSONGraphEnvelopeProxy.destroy)
   * [.valueOf()](#JSONGraphEnvelopeProxy.valueOf) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
   * [.finalize()](#JSONGraphEnvelopeProxy.finalize) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+
+<a name="new_JSONGraphEnvelopeProxy_new"></a>
+### new JSONGraphEnvelopeProxy([paths])
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [paths] | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | Paths to expect |
 
 <a name="JSONGraphEnvelopeProxy.paths"></a>
 ### JSONGraphEnvelopeProxy.paths
@@ -724,6 +735,11 @@ Merge another JSONGraphEnvelope into this one
 | --- | --- |
 | other | <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code> &#124; <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
 
+<a name="JSONGraphEnvelopeProxy.destroy"></a>
+### JSONGraphEnvelopeProxy.destroy()
+Clear out our data so we do not have any dangling memory.
+
+**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 <a name="JSONGraphEnvelopeProxy.valueOf"></a>
 ### JSONGraphEnvelopeProxy.valueOf() ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
 **Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
@@ -775,6 +791,116 @@ atoms to expire immediately.
 <a name="NoCacheSource+call"></a>
 ### noCacheSource.call(path, args, refSuffixes, thisPaths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 **Kind**: instance method of <code>[NoCacheSource](#NoCacheSource)</code>  
+**Implements:** <code>[call](#DataSource+call)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>[PathSet](#PathSet)</code> | 
+| args | <code>Array.&lt;Mixed&gt;</code> | 
+| refSuffixes | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+| thisPaths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="PartitionedSource"></a>
+## PartitionedSource
+**Kind**: global class  
+**Implements:** <code>[DataSource](#DataSource)</code>  
+
+* [PartitionedSource](#PartitionedSource)
+  * [new PartitionedSource([opts])](#new_PartitionedSource_new)
+  * [.options](#PartitionedSource+options)
+    * [.reads](#PartitionedSource+options.reads)
+    * [.writes](#PartitionedSource+options.writes)
+    * [.partitions](#PartitionedSource+options.partitions)
+  * [.get(paths)](#PartitionedSource+get) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.set(envelope)](#PartitionedSource+set) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.call(path, args, refSuffixes, thisPaths)](#PartitionedSource+call) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+
+<a name="new_PartitionedSource_new"></a>
+### new PartitionedSource([opts])
+A falcor DataSource that optionally reads from and writes to a variety of
+'partitions' of other DataSources.
+
+When reading (get) it will try the partitions in the order set by the 'reads'
+option. Any paths gone unfilled by the first, will be requested by the
+second, and so on. The final graph is a merge of all returned values from
+those partitions.
+
+When writing (set/call) it will send the request to all given partitions in
+the 'writes' option. Again, returning a merged graph of all values writen.
+
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [opts] | <code>Object</code> |  | 
+| [opts.reads] | <code>Array.&lt;String&gt;</code> | <code>[]</code> | 
+| [opts.writes] | <code>Array.&lt;String&gt;</code> | <code>[]</code> | 
+| [opts.partitions] | <code>Object.&lt;String, DataSource&gt;</code> | <code>{}</code> | 
+
+<a name="PartitionedSource+options"></a>
+### partitionedSource.options
+Default options
+
+**Kind**: instance property of <code>[PartitionedSource](#PartitionedSource)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>Object</code> | 
+
+
+* [.options](#PartitionedSource+options)
+  * [.reads](#PartitionedSource+options.reads)
+  * [.writes](#PartitionedSource+options.writes)
+  * [.partitions](#PartitionedSource+options.partitions)
+
+<a name="PartitionedSource+options.reads"></a>
+#### options.reads
+**Kind**: static property of <code>[options](#PartitionedSource+options)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>Array.&lt;String&gt;</code> | 
+
+<a name="PartitionedSource+options.writes"></a>
+#### options.writes
+**Kind**: static property of <code>[options](#PartitionedSource+options)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>Array.&lt;String&gt;</code> | 
+
+<a name="PartitionedSource+options.partitions"></a>
+#### options.partitions
+**Kind**: static property of <code>[options](#PartitionedSource+options)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>Object.&lt;String, DataSource&gt;</code> | 
+
+<a name="PartitionedSource+get"></a>
+### partitionedSource.get(paths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[PartitionedSource](#PartitionedSource)</code>  
+**Implements:** <code>[get](#DataSource+get)</code>  
+
+| Param | Type |
+| --- | --- |
+| paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="PartitionedSource+set"></a>
+### partitionedSource.set(envelope) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[PartitionedSource](#PartitionedSource)</code>  
+**Implements:** <code>[set](#DataSource+set)</code>  
+
+| Param | Type |
+| --- | --- |
+| envelope | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
+
+<a name="PartitionedSource+call"></a>
+### partitionedSource.call(path, args, refSuffixes, thisPaths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[PartitionedSource](#PartitionedSource)</code>  
 **Implements:** <code>[call](#DataSource+call)</code>  
 
 | Param | Type |

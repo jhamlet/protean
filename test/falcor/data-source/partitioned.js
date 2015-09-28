@@ -1,41 +1,90 @@
 /*globals describe, it, before, beforeEach*/
 
-describe.skip('PartitionedDataSource', function () {
-    // var falcor = require('falcor');
-    // var Model = falcor.Model;
-    // var PartitionedDataSource = require('protean/falcor/data-source/partitioned');
-    // var LocalDataSource = require('protean/falcor/data-source/local');
-    // var userSource, coreSource, model;
+require('should');
+
+describe('PartitionedDataSource', function () {
+    var Storage           = require('protean/storage');
+    var StorageSource     = require('protean/falcor/data-source/storage');
+    var PartitionedSource = require('protean/falcor/data-source/partitioned');
+    var userSource, coreSource, source;
 
     before(function () {
-        userSource = new LocalDataSource({ storageKey: 'foo' });
-        coreSource = new LocalDataSource({ storageKey: 'bar' });
+        userSource = new StorageSource({
+            storageKey: 'foo',
+            storage: new Storage({
+                store: Storage.Store.local,
+                json: JSON
+            })
+        });
+
+        coreSource = new StorageSource({
+            storageKey: 'bar',
+            storage: new Storage({
+                store: Storage.Store.local,
+                json: JSON
+            })
+        });
 
         userSource.clear();
         coreSource.clear();
     });
 
     beforeEach(function () {
-        model = new Model({
-            source: new PartitionedDataSource({
-                partitions: {
-                    user: userSource,
-                    core: coreSource
-                },
-                reads: ['user', 'core'],
-                writes: ['user', 'core']
-            })
+        source = new PartitionedSource({
+            partitions: {
+                user: userSource,
+                core: coreSource
+            },
+            reads: ['user', 'core'],
+            writes: ['user']
         });
     });
 
     describe('#set', function () {
-        it('should set the local storage key', function (done) {
-            model.
-                setValue(['henry'], { id: 'henry' }).
+        it('should set the user source', function (done) {
+            source.
+            set({
+                paths: [
+                    ['henry', 'id']
+                ],
+                jsonGraph: {
+                    henry: {
+                        id: {
+                            $type: 'atom',
+                            value: 'henry'
+                        }
+                    }
+                }
+            }).
                 subscribe(
                     function () {
-                        // console.log(JSON.parse(localStorage.getItem('foo')));
-                        // console.log(JSON.parse(localStorage.getItem('bar')));
+                        var foo =
+                            userSource.
+                            options.
+                            storage.
+                                getJSON('foo');
+
+                        var bar =
+                            coreSource.
+                            options.
+                            storage.
+                                getJSON('bar');
+
+                        foo.
+                        henry.
+                        id.
+                        $type.
+                            should.
+                            eql('atom');
+                        
+                        foo.
+                        henry.
+                        id.
+                        value.
+                            should.
+                            eql('henry');
+
+                        (!bar).should.be.true;
                     },
                     null,
                     done
@@ -45,17 +94,27 @@ describe.skip('PartitionedDataSource', function () {
 
     describe('#get', function () {
         it('should get the local storage key', function (done) {
-            model.
-                boxValues().
-                get(['henry']).
+            source.
+            get([['henry', 'id']]).
                 subscribe(
-                    function (value) {
-                        console.log(JSON.stringify(value, null, 4));
+                    function (envelope) {
+                        envelope.
+                        jsonGraph.
+                        henry.
+                        id.
+                        $type.
+                            should.
+                            equal('atom');
+
+                        envelope.
+                        jsonGraph.
+                        henry.
+                        id.
+                        value.
+                            should.
+                            equal('henry');
                     },
-                    function (error) {
-                        throw error;
-                        done();
-                    },
+                    null,
                     done
                 );
         });

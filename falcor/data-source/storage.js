@@ -50,7 +50,7 @@ module.exports = classify(StorageDataSource,/** @lends StorageDataSource# */{
      * @param {PathSets[]} paths
      * @returns {Observable<JSONGraphEnvelope>}
      */
-    get: function (paths) { return this.dataSource.get(paths); },
+    get: function (paths) { return this.source.get(paths); },
     /**
      * @param {JSONGraphEnvelope} envelope
      * @returns {Observable<JSONGraphEnvelope>}

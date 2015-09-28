@@ -1,28 +1,29 @@
 var classify   = require('protean/function/classify');
-var toArray    = require('lodash/lang/toArray');
-var get        = require('lodash/object/get');
-var negate     = require('lodash/function/negate');
+var bindAll    = require('lodash/function/bindAll');
 var pluck      = require('protean/object/pluck');
 var set        = require('protean/falcor/graph/set');
 var traverse   = require('protean/object/traverse');
 var atoms      = require('protean/falcor/graph/atoms');
 var putil      = require('protean/falcor/path');
 var LinkedList = require('protean/utility/linked-list');
-var pluckFulfilled = pluck('fulfilled');
 var pluckPath      = pluck('path');
 /**
  * @class JSONGraphEnvelopeProxy
  * @extends {Object}
+ * @param {PathSet[]} [paths] Paths to expect
  */
-function JSONGraphEnvelopeProxy () {
+function JSONGraphEnvelopeProxy (paths) {
     this.paths       = [];
     this.jsonGraph   = {};
     this.invalidated = [];
     this.expecting   = {};
     this.queue       = new LinkedList();
 
-    toArray(arguments).
-        forEach(this.merge.bind(this));
+    bindAll(this);
+
+    if (paths) {
+        this.expect(paths);
+    }
 }
 
 module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopeProxy */{
@@ -53,7 +54,7 @@ module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopePro
     set: function (pathOrGraph, atom) {
         var path      = Array.isArray(pathOrGraph) && pathOrGraph;
         var graph     = !path && pathOrGraph;
-        var fulfill   = this.fulfill.bind(this);
+        var fulfill   = this.fulfill;
 
         if (path) {
             fulfill(path, atom);
@@ -78,12 +79,10 @@ module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopePro
      */
     fulfill: function (path, value) {
         var queue = this.queue;
-        var node = get(this.expecting, path);
+        var node = this.expecting[path.join('.')];
 
         if (node) {
-            node.data.fulfilled = true;
             queue.remove(node);
-            queue.insert(node, queue.tail);
         }
 
         this.paths.push(path);
@@ -99,11 +98,8 @@ module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopePro
 
         traverse(putil.toTree(paths), function (path, value) {
             if (path.length && value === null) {
-                queue.push({
-                    path: path,
-                    fulfilled: false
-                });
-                set(expecting, path, queue.tail);
+                queue.push({ path: path });
+                expecting[path.join('.')] = queue.tail;
             }
         });
     },
@@ -115,9 +111,8 @@ module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopePro
     get pending () {
         return this.
             queue.
-            filter(negate(pluckFulfilled)).
-            toArray().
-            map(pluckPath);
+            map(pluckPath).
+            toArray();
     },
     /**
      * Merge another JSONGraphEnvelope into this one
@@ -137,6 +132,18 @@ module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopePro
         }
     },
     /**
+     * Clear out our data so we do not have any dangling memory.
+     */
+    destroy: function () {
+        this.queue.reset();
+
+        this.paths =
+            this.jsonGraph =
+            this.invalidated =
+            this.expecting =
+            this.queue = null;
+    },
+    /**
      * @returns {JSONGraphEnvelope}
      */
     valueOf: function () {
@@ -154,6 +161,10 @@ module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopePro
     /**
      * @returns {JSONGraphEnvelope}
      */
-    finalize: function () { return this.valueOf(); }
+    finalize: function () {
+        var envelope = this.valueOf();
+        this.destroy();
+        return envelope;
+    }
 });
 

@@ -3,9 +3,9 @@
 require('should');
 
 describe('Storage', function () {
-    var Storage = require('protean/storage').Storage;
+    var Storage = require('protean/storage');
     var storage = new Storage({
-        store: require('protean/storage/store/memory'),
+        store: Storage.Store.memory,
         json: JSON
     });
 
