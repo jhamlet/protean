@@ -15,22 +15,22 @@ function LinkedList () {
 // statics
 augment(LinkedList,/** @lends LinkedList */{
     /**
-     * @class LinkedList.Item
+     * @class LinkedList.Node
      * @extends {Object}
      * @param {Mixed} data
-     * @param {LinkedList.Item} [prev]
-     * @param {LinkedList.Item} [next]
+     * @param {LinkedList.Node} [prev]
+     * @param {LinkedList.Node} [next]
      */
-    Item: classify(function (data, prev, next) {
+    Node: classify(function (data, prev, next) {
         this.data = data;
         this.insert(prev, next);
-    },/** @lends LinkedList.Item# */{
+    },/** @lends LinkedList.Node# */{
         /**
-         * @property {LinkedList.Item}
+         * @property {LinkedList.Node}
          */
         next: null,
         /**
-         * @property {LinkedList.Item}
+         * @property {LinkedList.Node}
          */
         prev: null,
         /**
@@ -38,8 +38,8 @@ augment(LinkedList,/** @lends LinkedList */{
          */
         data: null,
         /**
-         * @param {LinkedList.Item} prev
-         * @param {LinkedList.Item} next
+         * @param {LinkedList.Node} prev
+         * @param {LinkedList.Node} next
          */
         insert: function (prev, next) {
             this.next = next;
@@ -51,6 +51,23 @@ augment(LinkedList,/** @lends LinkedList */{
             if (prev) {
                 prev.next = this;
             }
+        },
+        /**
+         * Remove the given node, nulling out its prev and next pointers
+         */
+        remove: function () {
+            var n = this.next;
+            var p = this.prev;
+
+            if (n) {
+                n.prev = p;
+            }
+
+            if (p) {
+                p.next = n;
+            }
+
+            this.next = this.prev = null;
         }
     })
 });
@@ -58,11 +75,11 @@ augment(LinkedList,/** @lends LinkedList */{
 // instance
 module.exports = classify(LinkedList,/** @lends LinkedList# */{
     /**
-     * @property {LinkedList.Item}
+     * @property {LinkedList.Node}
      */
     head: null,
     /**
-     * @property {LinkedList.Item}
+     * @property {LinkedList.Node}
      */
     tail: null,
     /**
@@ -73,7 +90,7 @@ module.exports = classify(LinkedList,/** @lends LinkedList# */{
         var args = toArray(arguments).reverse();
 
         while (args.length) {
-            this.tail = new LinkedList.Item(args.pop(), this.tail, null);
+            this.tail = new LinkedList.Node(args.pop(), this.tail, null);
             if (!this.head) {
                 this.head = this.tail;
             }
@@ -115,7 +132,7 @@ module.exports = classify(LinkedList,/** @lends LinkedList# */{
         var args = toArray(arguments);
 
         while (args.length) {
-            this.head = new LinkedList.Item(args.pop(), null, this.head);
+            this.head = new LinkedList.Node(args.pop(), null, this.head);
             if (!this.tail) {
                 this.tail = this.head;
             }
@@ -147,6 +164,84 @@ module.exports = classify(LinkedList,/** @lends LinkedList# */{
         }
 
         return h.data;
+    },
+    /**
+     * @param {Integer} idx
+     * @returns {LinkdList.Node}
+     */
+    nodeAt: function (idx) {
+        var n = this.head;
+        var i = 0;
+
+        while (i < idx && n) {
+            n = n.next;
+            i++;
+        }
+
+        if (i === idx) {
+            return n;
+        }
+    },
+    /**
+     * @param {Integer} idx
+     * @returns {*}
+     */
+    at: function (idx) {
+        var n = this.nodeAt(idx);
+        return n && n.data;
+    },
+    /**
+     * Insert a new value (or an existing node) after the given sibling or
+     * index.
+     * @param {LinkedList.Node|*} nodeOrValue
+     * @param {LinkdeList.Node|Integer} siblingOrIndex
+     */
+    insert: function (nodeOrValue, siblingOrIndex) {
+        var isNum = typeof siblingOrIndex === 'number';
+        var s = isNum ? this.nodeAt(siblingOrIndex) : siblingOrIndex;
+        var n = nodeOrValue instanceof LinkedList.Node ?
+                nodeOrValue :
+                new LinkedList.Node(nodeOrValue);
+
+        n.insert(s, s && s.next);
+        this.length++;
+
+        if (s === this.tail) {
+            this.tail = n;
+        }
+
+        if (this.length === 1) {
+            this.head = this.tail = n;
+        }
+    },
+    /**
+     * @param {LinkedList.Node|Integer} nodeOrIndex
+     */
+    remove: function (nodeOrIndex) {
+        var isNum = typeof nodeOrIndex === 'number';
+        var n = isNum ? this.nodeAt(nodeOrIndex) : nodeOrIndex;
+
+        if (!n) {
+            return;
+        }
+
+        if (n == this.head) {
+            this.head = this.head.next;
+        }
+
+        if (n === this.tail) {
+            this.tail = this.tail.prev;
+        }
+
+        n.remove();
+        this.length--;
+
+        if (this.length === 1) {
+            this.head = this.tail;
+        }
+        else if (this.length === 0) {
+            this.head = this.tail = null;
+        }
     },
     /**
      * Reset the list
@@ -218,6 +313,14 @@ module.exports = classify(LinkedList,/** @lends LinkedList# */{
         }
 
         return value;
+    },
+    /**
+     * @returns {Array<*>}
+     */
+    toArray: function () {
+        var list = [];
+        this.forEach(function (v) { list.push(v); });
+        return list;
     }
 });
 

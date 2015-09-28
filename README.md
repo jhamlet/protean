@@ -37,6 +37,8 @@ API
 <dd></dd>
 <dt><a href="#StorageDataSource">StorageDataSource</a></dt>
 <dd></dd>
+<dt><a href="#JSONGraphEnvelopeWrapper">JSONGraphEnvelopeWrapper</a> ⇐ <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#Storage">Storage</a></dt>
 <dd></dd>
 <dt><a href="#Store">Store</a></dt>
@@ -101,6 +103,7 @@ API
 ## Protean
 
 * [Protean](#module_Protean)
+  * [.pluck](#module_Protean.pluck) ⇒ <code>Object</code> &#124; <code>\*</code>
   * [.classnames(arg)](#module_Protean.classnames) ⇒ <code>String</code>
   * [.classify([subclass], props, [properties])](#module_Protean.classify) ⇒ <code>[ProteanClass](#ProteanClass)</code>
   * [.inherit(superclass, [subclass], [props], [properties])](#module_Protean.inherit) ⇒ <code>[ProteanClass](#ProteanClass)</code>
@@ -117,6 +120,19 @@ API
       * [~visitorFn(path, value, context)](#module_Protean.traverse..visitorFn) ⇒ <code>undefined</code> &#124; <code>String</code>
   * [.guid()](#module_Protean.guid) ⇒ <code>String</code>
   * [.mergeExports(receiver, supplier)](#module_Protean.mergeExports) ⇒ <code>Object</code>
+
+<a name="module_Protean.pluck"></a>
+### Protean.pluck ⇒ <code>Object</code> &#124; <code>\*</code>
+**File:** [object/pluck.js](object/pluck.js)
+
+**Kind**: static property of <code>[Protean](#module_Protean)</code>  
+**Returns**: <code>Object</code> &#124; <code>\*</code> - If more than one key, returns an object of key -> value,
+otherwise returns the value for key from obj  
+
+| Param | Type |
+| --- | --- |
+| keys | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> | 
+| obj | <code>Object</code> | 
 
 <a name="module_Protean.classnames"></a>
 ### Protean.classnames(arg) ⇒ <code>String</code>
@@ -977,6 +993,129 @@ Write our cache to storage
 Get our cache from storage
 
 **Kind**: instance method of <code>[StorageDataSource](#StorageDataSource)</code>  
+<a name="JSONGraphEnvelopeWrapper"></a>
+## JSONGraphEnvelopeWrapper ⇐ <code>Object</code>
+**Kind**: global class  
+**Extends:** <code>Object</code>  
+
+* [JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper) ⇐ <code>Object</code>
+  * [.paths](#JSONGraphEnvelopeWrapper.paths)
+  * [.jsonGraph](#JSONGraphEnvelopeWrapper.jsonGraph)
+  * [.invalidated](#JSONGraphEnvelopeWrapper.invalidated)
+  * [.expecting](#JSONGraphEnvelopeWrapper.expecting)
+  * [.queue](#JSONGraphEnvelopeWrapper.queue)
+  * [.set(pathOrGraph, atom)](#JSONGraphEnvelopeWrapper.set)
+  * [.invalidate(...path)](#JSONGraphEnvelopeWrapper.invalidate)
+  * [.fulfill(path)](#JSONGraphEnvelopeWrapper.fulfill)
+  * [.expect(paths)](#JSONGraphEnvelopeWrapper.expect)
+  * [.pending()](#JSONGraphEnvelopeWrapper.pending) ⇒ <code>[Array.&lt;Path&gt;](#Path)</code>
+  * [.merge(other)](#JSONGraphEnvelopeWrapper.merge)
+  * [.valueOf()](#JSONGraphEnvelopeWrapper.valueOf) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+  * [.finalize()](#JSONGraphEnvelopeWrapper.finalize) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+
+<a name="JSONGraphEnvelopeWrapper.paths"></a>
+### JSONGraphEnvelopeWrapper.paths
+**Kind**: static property of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="JSONGraphEnvelopeWrapper.jsonGraph"></a>
+### JSONGraphEnvelopeWrapper.jsonGraph
+**Kind**: static property of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[JSONGraph](#JSONGraph)</code> | 
+
+<a name="JSONGraphEnvelopeWrapper.invalidated"></a>
+### JSONGraphEnvelopeWrapper.invalidated
+**Kind**: static property of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="JSONGraphEnvelopeWrapper.expecting"></a>
+### JSONGraphEnvelopeWrapper.expecting
+**Kind**: static property of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>Object</code> | 
+
+<a name="JSONGraphEnvelopeWrapper.queue"></a>
+### JSONGraphEnvelopeWrapper.queue
+**Kind**: static property of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[LinkedList](#LinkedList)</code> | 
+
+<a name="JSONGraphEnvelopeWrapper.set"></a>
+### JSONGraphEnvelopeWrapper.set(pathOrGraph, atom)
+**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
+
+| Param | Type |
+| --- | --- |
+| pathOrGraph | <code>[Path](#Path)</code> &#124; <code>[JSONGraph](#JSONGraph)</code> | 
+| atom | <code>[Atom](#Atom)</code> | 
+
+<a name="JSONGraphEnvelopeWrapper.invalidate"></a>
+### JSONGraphEnvelopeWrapper.invalidate(...path)
+**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
+
+| Param | Type |
+| --- | --- |
+| ...path | <code>[Path](#Path)</code> | 
+
+<a name="JSONGraphEnvelopeWrapper.fulfill"></a>
+### JSONGraphEnvelopeWrapper.fulfill(path)
+Mark a path as fulfilled and set the given value on our jsonGraph
+
+**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>[Path](#Path)</code> | 
+
+<a name="JSONGraphEnvelopeWrapper.expect"></a>
+### JSONGraphEnvelopeWrapper.expect(paths)
+Prepare this envelope to expect to fulfill a certain set of paths.
+
+**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
+
+| Param | Type |
+| --- | --- |
+| paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="JSONGraphEnvelopeWrapper.pending"></a>
+### JSONGraphEnvelopeWrapper.pending() ⇒ <code>[Array.&lt;Path&gt;](#Path)</code>
+Get a list of paths this envelope is still expecting to fulfill
+
+**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
+<a name="JSONGraphEnvelopeWrapper.merge"></a>
+### JSONGraphEnvelopeWrapper.merge(other)
+Merge another JSONGraphEnvelope into this one
+
+**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
+
+| Param | Type |
+| --- | --- |
+| other | <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code> &#124; <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
+
+<a name="JSONGraphEnvelopeWrapper.valueOf"></a>
+### JSONGraphEnvelopeWrapper.valueOf() ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
+<a name="JSONGraphEnvelopeWrapper.finalize"></a>
+### JSONGraphEnvelopeWrapper.finalize() ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
 <a name="Storage"></a>
 ## Storage
 **Kind**: global class  
@@ -1599,18 +1738,24 @@ Remove a state and its transitions
     * [.pop()](#LinkedList+pop) ⇒ <code>\*</code>
     * [.unshift(...value)](#LinkedList+unshift) ⇒ <code>Integer</code>
     * [.shift()](#LinkedList+shift) ⇒ <code>\*</code>
+    * [.nodeAt(idx)](#LinkedList+nodeAt) ⇒ <code>LinkdList.Node</code>
+    * [.at(idx)](#LinkedList+at) ⇒ <code>\*</code>
+    * [.insert(nodeOrValue, siblingOrIndex)](#LinkedList+insert)
+    * [.remove(nodeOrIndex)](#LinkedList+remove)
     * [.reset()](#LinkedList+reset)
     * [.forEach(fn, [scope])](#LinkedList+forEach)
     * [.map(fn, [scope])](#LinkedList+map) ⇒ <code>[LinkedList](#LinkedList)</code>
     * [.filter(fn, [scope])](#LinkedList+filter) ⇒ <code>[LinkedList](#LinkedList)</code>
     * [.reduce(fn, [value], [scope])](#LinkedList+reduce) ⇒ <code>\*</code>
+    * [.toArray()](#LinkedList+toArray) ⇒ <code>Array.&lt;\*&gt;</code>
   * _static_
-    * [.Item](#LinkedList.Item) ⇐ <code>Object</code>
-      * [new Item(data, [prev], [next])](#new_LinkedList.Item_new)
-      * [.next](#LinkedList.Item+next)
-      * [.prev](#LinkedList.Item+prev)
-      * [.data](#LinkedList.Item+data)
-      * [.insert(prev, next)](#LinkedList.Item+insert)
+    * [.Node](#LinkedList.Node) ⇐ <code>Object</code>
+      * [new Node(data, [prev], [next])](#new_LinkedList.Node_new)
+      * [.next](#LinkedList.Node+next)
+      * [.prev](#LinkedList.Node+prev)
+      * [.data](#LinkedList.Node+data)
+      * [.insert(prev, next)](#LinkedList.Node+insert)
+      * [.remove()](#LinkedList.Node+remove)
 
 <a name="new_LinkedList_new"></a>
 ### new LinkedList([...items])
@@ -1626,7 +1771,7 @@ Remove a state and its transitions
 
 | Type |
 | --- |
-| <code>[Item](#LinkedList.Item)</code> | 
+| <code>[Node](#LinkedList.Node)</code> | 
 
 <a name="LinkedList+tail"></a>
 ### linkedList.tail
@@ -1635,7 +1780,7 @@ Remove a state and its transitions
 
 | Type |
 | --- |
-| <code>[Item](#LinkedList.Item)</code> | 
+| <code>[Node](#LinkedList.Node)</code> | 
 
 <a name="LinkedList+push"></a>
 ### linkedList.push(...value) ⇒ <code>Integer</code>
@@ -1659,6 +1804,42 @@ Remove a state and its transitions
 <a name="LinkedList+shift"></a>
 ### linkedList.shift() ⇒ <code>\*</code>
 **Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+<a name="LinkedList+nodeAt"></a>
+### linkedList.nodeAt(idx) ⇒ <code>LinkdList.Node</code>
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+
+| Param | Type |
+| --- | --- |
+| idx | <code>Integer</code> | 
+
+<a name="LinkedList+at"></a>
+### linkedList.at(idx) ⇒ <code>\*</code>
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+
+| Param | Type |
+| --- | --- |
+| idx | <code>Integer</code> | 
+
+<a name="LinkedList+insert"></a>
+### linkedList.insert(nodeOrValue, siblingOrIndex)
+Insert a new value (or an existing node) after the given sibling or
+index.
+
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+
+| Param | Type |
+| --- | --- |
+| nodeOrValue | <code>[Node](#LinkedList.Node)</code> &#124; <code>\*</code> | 
+| siblingOrIndex | <code>LinkdeList.Node</code> &#124; <code>Integer</code> | 
+
+<a name="LinkedList+remove"></a>
+### linkedList.remove(nodeOrIndex)
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+
+| Param | Type |
+| --- | --- |
+| nodeOrIndex | <code>[Node](#LinkedList.Node)</code> &#124; <code>Integer</code> | 
+
 <a name="LinkedList+reset"></a>
 ### linkedList.reset()
 Reset the list
@@ -1701,63 +1882,72 @@ Reset the list
 | [value] | <code>\*</code> | Initial value |
 | [scope] | <code>Object</code> | Scope to apply to the `fn` passed |
 
-<a name="LinkedList.Item"></a>
-### LinkedList.Item ⇐ <code>Object</code>
+<a name="LinkedList+toArray"></a>
+### linkedList.toArray() ⇒ <code>Array.&lt;\*&gt;</code>
+**Kind**: instance method of <code>[LinkedList](#LinkedList)</code>  
+<a name="LinkedList.Node"></a>
+### LinkedList.Node ⇐ <code>Object</code>
 **Kind**: static class of <code>[LinkedList](#LinkedList)</code>  
 **Extends:** <code>Object</code>  
 
-  * [.Item](#LinkedList.Item) ⇐ <code>Object</code>
-    * [new Item(data, [prev], [next])](#new_LinkedList.Item_new)
-    * [.next](#LinkedList.Item+next)
-    * [.prev](#LinkedList.Item+prev)
-    * [.data](#LinkedList.Item+data)
-    * [.insert(prev, next)](#LinkedList.Item+insert)
+  * [.Node](#LinkedList.Node) ⇐ <code>Object</code>
+    * [new Node(data, [prev], [next])](#new_LinkedList.Node_new)
+    * [.next](#LinkedList.Node+next)
+    * [.prev](#LinkedList.Node+prev)
+    * [.data](#LinkedList.Node+data)
+    * [.insert(prev, next)](#LinkedList.Node+insert)
+    * [.remove()](#LinkedList.Node+remove)
 
-<a name="new_LinkedList.Item_new"></a>
-#### new Item(data, [prev], [next])
+<a name="new_LinkedList.Node_new"></a>
+#### new Node(data, [prev], [next])
 
 | Param | Type |
 | --- | --- |
 | data | <code>Mixed</code> | 
-| [prev] | <code>[Item](#LinkedList.Item)</code> | 
-| [next] | <code>[Item](#LinkedList.Item)</code> | 
+| [prev] | <code>[Node](#LinkedList.Node)</code> | 
+| [next] | <code>[Node](#LinkedList.Node)</code> | 
 
-<a name="LinkedList.Item+next"></a>
-#### item.next
-**Kind**: instance property of <code>[Item](#LinkedList.Item)</code>  
+<a name="LinkedList.Node+next"></a>
+#### node.next
+**Kind**: instance property of <code>[Node](#LinkedList.Node)</code>  
 **Properties**
 
 | Type |
 | --- |
-| <code>[Item](#LinkedList.Item)</code> | 
+| <code>[Node](#LinkedList.Node)</code> | 
 
-<a name="LinkedList.Item+prev"></a>
-#### item.prev
-**Kind**: instance property of <code>[Item](#LinkedList.Item)</code>  
+<a name="LinkedList.Node+prev"></a>
+#### node.prev
+**Kind**: instance property of <code>[Node](#LinkedList.Node)</code>  
 **Properties**
 
 | Type |
 | --- |
-| <code>[Item](#LinkedList.Item)</code> | 
+| <code>[Node](#LinkedList.Node)</code> | 
 
-<a name="LinkedList.Item+data"></a>
-#### item.data
-**Kind**: instance property of <code>[Item](#LinkedList.Item)</code>  
+<a name="LinkedList.Node+data"></a>
+#### node.data
+**Kind**: instance property of <code>[Node](#LinkedList.Node)</code>  
 **Properties**
 
 | Type |
 | --- |
 | <code>\*</code> | 
 
-<a name="LinkedList.Item+insert"></a>
-#### item.insert(prev, next)
-**Kind**: instance method of <code>[Item](#LinkedList.Item)</code>  
+<a name="LinkedList.Node+insert"></a>
+#### node.insert(prev, next)
+**Kind**: instance method of <code>[Node](#LinkedList.Node)</code>  
 
 | Param | Type |
 | --- | --- |
-| prev | <code>[Item](#LinkedList.Item)</code> | 
-| next | <code>[Item](#LinkedList.Item)</code> | 
+| prev | <code>[Node](#LinkedList.Node)</code> | 
+| next | <code>[Node](#LinkedList.Node)</code> | 
 
+<a name="LinkedList.Node+remove"></a>
+#### node.remove()
+Remove the given node, nulling out its prev and next pointers
+
+**Kind**: instance method of <code>[Node](#LinkedList.Node)</code>  
 <a name="Record"></a>
 ## Record
 **Kind**: global class  
