@@ -31,13 +31,13 @@ API
 <dd></dd>
 <dt><a href="#CompositeSource">CompositeSource</a></dt>
 <dd></dd>
+<dt><a href="#JSONGraphEnvelopeProxy">JSONGraphEnvelopeProxy</a> ⇐ <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#NoCacheSource">NoCacheSource</a></dt>
 <dd></dd>
 <dt><a href="#ProxiedSource">ProxiedSource</a></dt>
 <dd></dd>
 <dt><a href="#StorageDataSource">StorageDataSource</a></dt>
-<dd></dd>
-<dt><a href="#JSONGraphEnvelopeWrapper">JSONGraphEnvelopeWrapper</a> ⇐ <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#Storage">Storage</a></dt>
 <dd></dd>
@@ -103,7 +103,7 @@ API
 ## Protean
 
 * [Protean](#module_Protean)
-  * [.pluck](#module_Protean.pluck) ⇒ <code>Object</code> &#124; <code>\*</code>
+  * [.pluck](#module_Protean.pluck) ⇒ <code>\*</code> &#124; <code>function</code>
   * [.classnames(arg)](#module_Protean.classnames) ⇒ <code>String</code>
   * [.classify([subclass], props, [properties])](#module_Protean.classify) ⇒ <code>[ProteanClass](#ProteanClass)</code>
   * [.inherit(superclass, [subclass], [props], [properties])](#module_Protean.inherit) ⇒ <code>[ProteanClass](#ProteanClass)</code>
@@ -122,17 +122,15 @@ API
   * [.mergeExports(receiver, supplier)](#module_Protean.mergeExports) ⇒ <code>Object</code>
 
 <a name="module_Protean.pluck"></a>
-### Protean.pluck ⇒ <code>Object</code> &#124; <code>\*</code>
+### Protean.pluck ⇒ <code>\*</code> &#124; <code>function</code>
 **File:** [object/pluck.js](object/pluck.js)
 
 **Kind**: static property of <code>[Protean](#module_Protean)</code>  
-**Returns**: <code>Object</code> &#124; <code>\*</code> - If more than one key, returns an object of key -> value,
-otherwise returns the value for key from obj  
 
 | Param | Type |
 | --- | --- |
-| keys | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> | 
-| obj | <code>Object</code> | 
+| key | <code>String</code> | 
+| [obj] | <code>Object</code> | 
 
 <a name="module_Protean.classnames"></a>
 ### Protean.classnames(arg) ⇒ <code>String</code>
@@ -602,6 +600,136 @@ Fast GUID generator, RFC4122 version 4 compliant.
 | path | <code>[Path](#Path)</code> | 
 | source | <code>[DataSource](#DataSource)</code> | 
 
+<a name="JSONGraphEnvelopeProxy"></a>
+## JSONGraphEnvelopeProxy ⇐ <code>Object</code>
+**Kind**: global class  
+**Extends:** <code>Object</code>  
+
+* [JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy) ⇐ <code>Object</code>
+  * [.paths](#JSONGraphEnvelopeProxy.paths)
+  * [.jsonGraph](#JSONGraphEnvelopeProxy.jsonGraph)
+  * [.invalidated](#JSONGraphEnvelopeProxy.invalidated)
+  * [.expecting](#JSONGraphEnvelopeProxy.expecting)
+  * [.queue](#JSONGraphEnvelopeProxy.queue)
+  * [.pending](#JSONGraphEnvelopeProxy.pending)
+  * [.set(pathOrGraph, atom)](#JSONGraphEnvelopeProxy.set)
+  * [.invalidate(...path)](#JSONGraphEnvelopeProxy.invalidate)
+  * [.fulfill(path)](#JSONGraphEnvelopeProxy.fulfill)
+  * [.expect(paths)](#JSONGraphEnvelopeProxy.expect)
+  * [.merge(other)](#JSONGraphEnvelopeProxy.merge)
+  * [.valueOf()](#JSONGraphEnvelopeProxy.valueOf) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+  * [.finalize()](#JSONGraphEnvelopeProxy.finalize) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+
+<a name="JSONGraphEnvelopeProxy.paths"></a>
+### JSONGraphEnvelopeProxy.paths
+**Kind**: static property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="JSONGraphEnvelopeProxy.jsonGraph"></a>
+### JSONGraphEnvelopeProxy.jsonGraph
+**Kind**: static property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[JSONGraph](#JSONGraph)</code> | 
+
+<a name="JSONGraphEnvelopeProxy.invalidated"></a>
+### JSONGraphEnvelopeProxy.invalidated
+**Kind**: static property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="JSONGraphEnvelopeProxy.expecting"></a>
+### JSONGraphEnvelopeProxy.expecting
+**Kind**: static property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>Object</code> | 
+
+<a name="JSONGraphEnvelopeProxy.queue"></a>
+### JSONGraphEnvelopeProxy.queue
+**Kind**: static property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[LinkedList](#LinkedList)</code> | 
+
+<a name="JSONGraphEnvelopeProxy.pending"></a>
+### JSONGraphEnvelopeProxy.pending
+Get a list of paths this envelope is still expecting to fulfill
+
+**Kind**: static property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Read only**: true  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Array.&lt;Path&gt;](#Path)</code> | 
+
+<a name="JSONGraphEnvelopeProxy.set"></a>
+### JSONGraphEnvelopeProxy.set(pathOrGraph, atom)
+**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+
+| Param | Type |
+| --- | --- |
+| pathOrGraph | <code>[Path](#Path)</code> &#124; <code>[JSONGraph](#JSONGraph)</code> | 
+| atom | <code>[Atom](#Atom)</code> | 
+
+<a name="JSONGraphEnvelopeProxy.invalidate"></a>
+### JSONGraphEnvelopeProxy.invalidate(...path)
+**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+
+| Param | Type |
+| --- | --- |
+| ...path | <code>[Path](#Path)</code> | 
+
+<a name="JSONGraphEnvelopeProxy.fulfill"></a>
+### JSONGraphEnvelopeProxy.fulfill(path)
+Mark a path as fulfilled and set the given value on our jsonGraph
+
+**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>[Path](#Path)</code> | 
+
+<a name="JSONGraphEnvelopeProxy.expect"></a>
+### JSONGraphEnvelopeProxy.expect(paths)
+Prepare this envelope to expect to fulfill a certain set of paths.
+
+**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+
+| Param | Type |
+| --- | --- |
+| paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="JSONGraphEnvelopeProxy.merge"></a>
+### JSONGraphEnvelopeProxy.merge(other)
+Merge another JSONGraphEnvelope into this one
+
+**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+
+| Param | Type |
+| --- | --- |
+| other | <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code> &#124; <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
+
+<a name="JSONGraphEnvelopeProxy.valueOf"></a>
+### JSONGraphEnvelopeProxy.valueOf() ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+<a name="JSONGraphEnvelopeProxy.finalize"></a>
+### JSONGraphEnvelopeProxy.finalize() ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 <a name="NoCacheSource"></a>
 ## NoCacheSource
 **Kind**: global class  
@@ -993,129 +1121,6 @@ Write our cache to storage
 Get our cache from storage
 
 **Kind**: instance method of <code>[StorageDataSource](#StorageDataSource)</code>  
-<a name="JSONGraphEnvelopeWrapper"></a>
-## JSONGraphEnvelopeWrapper ⇐ <code>Object</code>
-**Kind**: global class  
-**Extends:** <code>Object</code>  
-
-* [JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper) ⇐ <code>Object</code>
-  * [.paths](#JSONGraphEnvelopeWrapper.paths)
-  * [.jsonGraph](#JSONGraphEnvelopeWrapper.jsonGraph)
-  * [.invalidated](#JSONGraphEnvelopeWrapper.invalidated)
-  * [.expecting](#JSONGraphEnvelopeWrapper.expecting)
-  * [.queue](#JSONGraphEnvelopeWrapper.queue)
-  * [.set(pathOrGraph, atom)](#JSONGraphEnvelopeWrapper.set)
-  * [.invalidate(...path)](#JSONGraphEnvelopeWrapper.invalidate)
-  * [.fulfill(path)](#JSONGraphEnvelopeWrapper.fulfill)
-  * [.expect(paths)](#JSONGraphEnvelopeWrapper.expect)
-  * [.pending()](#JSONGraphEnvelopeWrapper.pending) ⇒ <code>[Array.&lt;Path&gt;](#Path)</code>
-  * [.merge(other)](#JSONGraphEnvelopeWrapper.merge)
-  * [.valueOf()](#JSONGraphEnvelopeWrapper.valueOf) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
-  * [.finalize()](#JSONGraphEnvelopeWrapper.finalize) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
-
-<a name="JSONGraphEnvelopeWrapper.paths"></a>
-### JSONGraphEnvelopeWrapper.paths
-**Kind**: static property of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
-
-<a name="JSONGraphEnvelopeWrapper.jsonGraph"></a>
-### JSONGraphEnvelopeWrapper.jsonGraph
-**Kind**: static property of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>[JSONGraph](#JSONGraph)</code> | 
-
-<a name="JSONGraphEnvelopeWrapper.invalidated"></a>
-### JSONGraphEnvelopeWrapper.invalidated
-**Kind**: static property of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
-
-<a name="JSONGraphEnvelopeWrapper.expecting"></a>
-### JSONGraphEnvelopeWrapper.expecting
-**Kind**: static property of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>Object</code> | 
-
-<a name="JSONGraphEnvelopeWrapper.queue"></a>
-### JSONGraphEnvelopeWrapper.queue
-**Kind**: static property of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>[LinkedList](#LinkedList)</code> | 
-
-<a name="JSONGraphEnvelopeWrapper.set"></a>
-### JSONGraphEnvelopeWrapper.set(pathOrGraph, atom)
-**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
-
-| Param | Type |
-| --- | --- |
-| pathOrGraph | <code>[Path](#Path)</code> &#124; <code>[JSONGraph](#JSONGraph)</code> | 
-| atom | <code>[Atom](#Atom)</code> | 
-
-<a name="JSONGraphEnvelopeWrapper.invalidate"></a>
-### JSONGraphEnvelopeWrapper.invalidate(...path)
-**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
-
-| Param | Type |
-| --- | --- |
-| ...path | <code>[Path](#Path)</code> | 
-
-<a name="JSONGraphEnvelopeWrapper.fulfill"></a>
-### JSONGraphEnvelopeWrapper.fulfill(path)
-Mark a path as fulfilled and set the given value on our jsonGraph
-
-**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
-
-| Param | Type |
-| --- | --- |
-| path | <code>[Path](#Path)</code> | 
-
-<a name="JSONGraphEnvelopeWrapper.expect"></a>
-### JSONGraphEnvelopeWrapper.expect(paths)
-Prepare this envelope to expect to fulfill a certain set of paths.
-
-**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
-
-| Param | Type |
-| --- | --- |
-| paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
-
-<a name="JSONGraphEnvelopeWrapper.pending"></a>
-### JSONGraphEnvelopeWrapper.pending() ⇒ <code>[Array.&lt;Path&gt;](#Path)</code>
-Get a list of paths this envelope is still expecting to fulfill
-
-**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
-<a name="JSONGraphEnvelopeWrapper.merge"></a>
-### JSONGraphEnvelopeWrapper.merge(other)
-Merge another JSONGraphEnvelope into this one
-
-**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
-
-| Param | Type |
-| --- | --- |
-| other | <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code> &#124; <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
-
-<a name="JSONGraphEnvelopeWrapper.valueOf"></a>
-### JSONGraphEnvelopeWrapper.valueOf() ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
-**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
-<a name="JSONGraphEnvelopeWrapper.finalize"></a>
-### JSONGraphEnvelopeWrapper.finalize() ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
-**Kind**: static method of <code>[JSONGraphEnvelopeWrapper](#JSONGraphEnvelopeWrapper)</code>  
 <a name="Storage"></a>
 ## Storage
 **Kind**: global class  
