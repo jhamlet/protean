@@ -2,16 +2,19 @@ var falcor   = require('falcor');
 var classify = require('protean/function/classify');
 var defaults = require('lodash/object/defaults');
 /**
- * **file:** [falcor/data-source/storage.js](falcor/data-source/storage.js)
+ * **File:** [falcor/data-source/storage.js](falcor/data-source/storage.js)
  *
- * @class StorageDataSource
+ * @class StorageSource
+ * @extends ProteanClass
  * @implements DataSource
  * @param {Object} opts
- * @param {Object} [opts.cache]
- * @param {Storage} [opts.storage]
+ * @param {Storage} opts.storage
  * @param {String} opts.storageKey
+ * @param {Object} [opts.cache]
+ * @param {Function} [opts.serializer]
+ * @param {Function} [opts.deserializer]
  */
-function StorageDataSource (opts) {
+function StorageSource (opts) {
     opts = this.options = defaults({}, opts || {}, this.options);
 
     this.model = new falcor.Model({ cache: opts.cache });
@@ -24,7 +27,7 @@ function StorageDataSource (opts) {
     this.deserialize();
 }
 
-module.exports = classify(StorageDataSource,/** @lends StorageDataSource# */{
+module.exports = classify(StorageSource,/** @lends StorageSource# */{
     /**
      * @property {FalcorFModel}
      */
@@ -38,13 +41,28 @@ module.exports = classify(StorageDataSource,/** @lends StorageDataSource# */{
      */
     options: {
         /**
+         * The key to use when accessing the Storage object to serialize the
+         * graph to.
          * @property {String}
          */
         storageKey: null,
         /**
-         * @property {external:Storage}
+         * The storage source
+         * @property {Storage}
          */
-        storage: null
+        storage: null,
+        /**
+         * A function to convert a JSONGraph to a String.
+         * @param {JSONGraph} graph
+         * @returns {String}
+         */
+        serializer: function (graph) { return JSON.stringify(graph); },
+        /**
+         * A function to convert a String to a JSONGraph.
+         * @param {String} src
+         * @returns {JSONGraph}
+         */
+        deserializer: function (src) { return JSON.parse(src); }
     },
     /**
      * @param {PathSets[]} paths
@@ -78,9 +96,9 @@ module.exports = classify(StorageDataSource,/** @lends StorageDataSource# */{
      * Clear our storage item
      */
     clear: function () {
-        var opts = this.options;
+        var opts    = this.options;
         var storage = opts.storage;
-        var key = opts.storageKey;
+        var key     = opts.storageKey;
 
         if (storage) {
             storage.removeItem(key);
@@ -90,28 +108,30 @@ module.exports = classify(StorageDataSource,/** @lends StorageDataSource# */{
      * Write our cache to storage
      */
     serialize: function () {
-        var opts    = this.options;
-        var storage = opts.storage;
-        var key     = opts.storageKey;
-        var model   = this.model;
-        var graph   = model && model.getCache();
+        var opts       = this.options;
+        var storage    = opts.storage;
+        var key        = opts.storageKey;
+        var serializer = opts.serializer;
+        var model      = this.model;
+        var graph      = model && model.getCache();
 
         if (storage && graph) {
-            storage.setItem(key, JSON.stringify(graph));
+            storage.setItem(key, serializer(graph));
         }
     },
     /**
      * Get our cache from storage
      */
     deserialize: function () {
-        var opts    = this.options;
-        var storage = opts.storage;
-        var key     = opts.storageKey;
-        var json    = storage && storage.getItem(key);
-        var model   = this.model;
+        var opts         = this.options;
+        var storage      = opts.storage;
+        var key          = opts.storageKey;
+        var deserializer = opts.deserializer;
+        var json         = storage && storage.getItem(key);
+        var model        = this.model;
 
         if (model && json) {
-            model.setCache(JSON.parse(json));
+            model.setCache(deserializer(json));
         }
     }
 });

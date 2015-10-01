@@ -4,6 +4,7 @@ var keys = require('lodash/object/keys');
  * **File:** [utility/record.js](utility/record.js)
  *
  * @class Record
+ * @extends ProteanClass
  * @param {Object} [data]
  */
 function Record (data) {

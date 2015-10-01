@@ -31,3 +31,13 @@
  * @param {PathSet[]} thisPaths
  * @returns {Observable<JSONGraphEnvelope>}
  */
+
+require('lodash/collection/reduce')([
+    require('./collection'),
+    require('./composite'),
+    require('./json-graph-envelope-proxy'),
+    require('./no-cache'),
+    require('./partitioned'),
+    require('./proxied'),
+    require('./storage')
+], require('protean/utility/merge-exports'), exports);

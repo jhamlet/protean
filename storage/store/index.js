@@ -4,6 +4,7 @@ var has = require('lodash/object/has');
  * **File:** [storage/store/index.js](storage/store/index.js)
  *
  * @class Store
+ * @extends ProteanClass
  * @implements external:Storage
  */
 function Store () {

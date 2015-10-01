@@ -1,9 +1,9 @@
-var putil    = require('../path');
+var relative = require('protean/falcor/path/relative');
 var traverse = require('protean/object/traverse');
 var set      = require('lodash/object/set');
 
 function visitor (accumulator, root, path, value) {
-    var local = putil.relative(root, path);
+    var local = relative(root, path);
     set(accumulator, local, value);
 }
 /**

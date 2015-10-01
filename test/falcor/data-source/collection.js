@@ -5,10 +5,9 @@ require('should');
 describe('CollectionSource', function () {
     var Collection = require('protean/utility/collection');
     var CollectionSource = require('protean/falcor/data-source/collection');
-    var collection, path, ds;
+    var collection, ds;
 
     before(function () {
-        path = ['test'];
         collection = new Collection(
             {
                 id: 'foo',
@@ -23,7 +22,7 @@ describe('CollectionSource', function () {
                 value: 'baz'
             }
         );
-        ds = new CollectionSource(collection, path);
+        ds = new CollectionSource(collection);
     });
 
     describe('#routes', function () {
@@ -35,25 +34,23 @@ describe('CollectionSource', function () {
         it('byId', function (done) {
             var expected = {
                 jsonGraph: {
-                    test: {
-                        byId: {
-                            foo: {
-                                value: {
-                                    $type: 'atom',
-                                    value: 'foo'
-                                }
-                            },
-                            bar: {
-                                value: {
-                                    $type: 'atom',
-                                    value: 'bar'
-                                }
-                            },
-                            baz: {
-                                value: {
-                                    $type: 'atom',
-                                    value: 'baz'
-                                }
+                    byId: {
+                        foo: {
+                            value: {
+                                $type: 'atom',
+                                value: 'foo'
+                            }
+                        },
+                        bar: {
+                            value: {
+                                $type: 'atom',
+                                value: 'bar'
+                            }
+                        },
+                        baz: {
+                            value: {
+                                $type: 'atom',
+                                value: 'baz'
                             }
                         }
                     }
@@ -61,7 +58,7 @@ describe('CollectionSource', function () {
             };
 
             ds.
-            get([['test', 'byId', ['foo', 'bar', 'baz'], 'value']]).
+            get([['byId', ['foo', 'bar', 'baz'], 'value']]).
                 subscribe(
                     function (json) {
                         json.
@@ -78,51 +75,49 @@ describe('CollectionSource', function () {
         it('byIndex', function (done) {
             var expected = {
                 jsonGraph: {
-                    test: {
-                        byIndex: {
-                            0: {
-                                $type: 'ref',
-                                value: ['test', 'byId', 'foo']
+                    byIndex: {
+                        0: {
+                            $type: 'ref',
+                            value: ['byId', 'foo']
+                        },
+                        1: {
+                            $type: 'ref',
+                            value: ['byId', 'bar']
+                        },
+                        2: {
+                            $type: 'ref',
+                            value: ['byId', 'baz']
+                        }
+                    },
+                    byId: {
+                        foo: {
+                            id: {
+                                $type: 'atom',
+                                value: 'foo'
                             },
-                            1: {
-                                $type: 'ref',
-                                value: ['test', 'byId', 'bar']
-                            },
-                            2: {
-                                $type: 'ref',
-                                value: ['test', 'byId', 'baz']
+                            value: {
+                                $type: 'atom',
+                                value: 'foo'
                             }
                         },
-                        byId: {
-                            foo: {
-                                id: {
-                                    $type: 'atom',
-                                    value: 'foo'
-                                },
-                                value: {
-                                    $type: 'atom',
-                                    value: 'foo'
-                                }
+                        bar: {
+                            id: {
+                                $type: 'atom',
+                                value: 'bar'
                             },
-                            bar: {
-                                id: {
-                                    $type: 'atom',
-                                    value: 'bar'
-                                },
-                                value: {
-                                    $type: 'atom',
-                                    value: 'bar'
-                                }
+                            value: {
+                                $type: 'atom',
+                                value: 'bar'
+                            }
+                        },
+                        baz: {
+                            id: {
+                                $type: 'atom',
+                                value: 'baz'
                             },
-                            baz: {
-                                id: {
-                                    $type: 'atom',
-                                    value: 'baz'
-                                },
-                                value: {
-                                    $type: 'atom',
-                                    value: 'baz'
-                                }
+                            value: {
+                                $type: 'atom',
+                                value: 'baz'
                             }
                         }
                     }
@@ -130,7 +125,7 @@ describe('CollectionSource', function () {
             };
 
             ds.
-            get([['test', 'byIndex', { to: 2 }, ['id', 'value']]]).
+            get([['byIndex', { to: 2 }, ['id', 'value']]]).
                 subscribe(
                     function (json) {
                         json.should.eql(expected);
@@ -145,19 +140,15 @@ describe('CollectionSource', function () {
         it('length', function (done) {
             var expected = {
                 jsonGraph: {
-                    test: {
-                        byIndex: {
-                            length: {
-                                $type: 'atom',
-                                value: 3
-                            }
-                        }
+                    length: {
+                        $type: 'atom',
+                        value: 3
                     }
                 }
             };
 
             ds.
-            get([['test', 'byIndex', 'length']]).
+            get([['length']]).
                 subscribe(
                     function (json) {
                         json.should.eql(expected);
@@ -175,20 +166,18 @@ describe('CollectionSource', function () {
             ds.
             set({
                 paths: [
-                    ['test', 'byId', ['foo', 'bar', 'baz'], 'value']
+                    ['byId', ['foo', 'bar', 'baz'], 'value']
                 ],
                 jsonGraph: {
-                    test: {
-                        byId: {
-                            foo: {
-                                value: 'foo-2'
-                            },
-                            bar: {
-                                value: 'bar-2'
-                            },
-                            baz: {
-                                value: 'baz-2'
-                            }
+                    byId: {
+                        foo: {
+                            value: 'foo-2'
+                        },
+                        bar: {
+                            value: 'bar-2'
+                        },
+                        baz: {
+                            value: 'baz-2'
                         }
                     }
                 }
@@ -198,6 +187,7 @@ describe('CollectionSource', function () {
                         collection.get('foo').get('value').should.equal('foo-2');
                         collection.get('bar').get('value').should.equal('bar-2');
                         collection.get('baz').get('value').should.equal('baz-2');
+                        // console.log('%j', arguments[0]);
                     },
                     function (error) {
                         throw error;
@@ -210,20 +200,18 @@ describe('CollectionSource', function () {
             ds.
             set({
                 paths: [
-                    ['test', 'byIndex', [0, 1, 2], 'value']
+                    ['byIndex', [0, 1, 2], 'value']
                 ],
                 jsonGraph: {
-                    test: {
-                        byIndex: {
-                            0: {
-                                value: 'foo-3'
-                            },
-                            1: {
-                                value: 'bar-3'
-                            },
-                            2: {
-                                value: 'baz-3'
-                            }
+                    byIndex: {
+                        0: {
+                            value: 'foo-3'
+                        },
+                        1: {
+                            value: 'bar-3'
+                        },
+                        2: {
+                            value: 'baz-3'
                         }
                     }
                 }
@@ -239,6 +227,39 @@ describe('CollectionSource', function () {
                     },
                     done
                 );
+        });
+    });
+
+    describe('#call(path, args, refSuffixes, thisPaths)', function () {
+        describe('#call([\'add\'], [{}])', function () {
+            it('should add a record', function (done) {
+                ds.
+                call(['add'], [{ id: 'fud', value: 'fud' }]).
+                    subscribe(
+                        function () {
+                            collection.get('fud').should.exist;
+                            collection.get('fud').get('value').should.equal('fud');
+                            collection.length.should.equal(4);
+                        },
+                        null,
+                        done
+                    );
+            });
+        });
+
+        describe('#call([\'remove\'], [\'fud\'])', function () {
+            it('should remove that record', function (done) {
+                ds.
+                call(['remove'], ['fud']).
+                    subscribe(
+                        function () {
+                            (!collection.get('fud')).should.be.true;
+                            collection.length.should.equal(3);
+                        },
+                        null,
+                        done
+                    );
+            });
         });
     });
 });

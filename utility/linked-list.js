@@ -4,7 +4,7 @@ var toArray = require('lodash/lang/toArray');
 
 /**
  * @class LinkedList
- * @extends {Object}
+ * @extends ProteanClass
  * @param {...*} [items]
  */
 function LinkedList () {

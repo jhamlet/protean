@@ -1,32 +1,45 @@
-var classify   = require('protean/function/classify');
-var bindAll    = require('lodash/function/bindAll');
-var pluck      = require('protean/object/pluck');
-var set        = require('protean/falcor/graph/set');
-var traverse   = require('protean/object/traverse');
-var atoms      = require('protean/falcor/graph/atoms');
-var putil      = require('protean/falcor/path');
-var LinkedList = require('protean/utility/linked-list');
-var pluckPath      = pluck('path');
+var classify  = require('protean/function/classify');
+var bindAll   = require('lodash/function/bindAll');
+var keys      = require('lodash/object/keys');
+var set       = require('protean/falcor/graph/set');
+var traverse  = require('protean/object/traverse');
+var sentinels = require('protean/falcor/graph/sentinels');
+var putil     = require('falcor-path-utils');
+var syntax    = require('falcor-path-syntax');
+var relativePaths = require('protean/falcor/path/relative');
+var resolvePaths = require('protean/falcor/path/resolve');
+var relativeGraph = require('protean/falcor/graph/relative');
+var resolveGraph = require('protean/falcor/graph/resolve');
 /**
  * @class JSONGraphEnvelopeProxy
- * @extends {Object}
- * @param {PathSet[]} [paths] Paths to expect
+ * @extends ProteanClass
+ * @implements JSONGraphEnevelope
+ * @param {Object} [opts]
+ * @param {PathSet[]} [opts.expect] Paths to expect
+ * @param {PathSet[]} [opts.paths] A starting set of paths
+ * @param {JSONGraph} [opts.jsonGraph] A starting JSONGraph
+ * @param {PathSet[]} [opts.invalidated] A starting set of paths to invalidate
  */
-function JSONGraphEnvelopeProxy (paths) {
-    this.paths       = [];
-    this.jsonGraph   = {};
-    this.invalidated = [];
+function JSONGraphEnvelopeProxy (opts) {
+    opts = opts || {};
+
+    if (opts instanceof JSONGraphEnvelopeProxy) {
+        return opts;
+    }
+
+    this.paths       = opts.paths || [];
+    this.jsonGraph   = opts.jsonGraph || {};
+    this.invalidated = opts.invalidated || [];
     this.expecting   = {};
-    this.queue       = new LinkedList();
 
     bindAll(this);
 
-    if (paths) {
-        this.expect(paths);
+    if (opts.expect) {
+        this.expect(opts.expect);
     }
 }
 
-module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopeProxy */{
+module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopeProxy# */{
     /**
      * @property {PathSet[]}
      */
@@ -44,12 +57,8 @@ module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopePro
      */
     expecting: null,
     /**
-     * @property {LinkedList}
-     */
-    queue: null,
-    /**
      * @param {Path|JSONGraph} pathOrGraph
-     * @param {Atom} atom
+     * @param {Atom} [atom]
      */
     set: function (pathOrGraph, atom) {
         var path      = Array.isArray(pathOrGraph) && pathOrGraph;
@@ -60,9 +69,9 @@ module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopePro
             fulfill(path, atom);
         }
         else if (graph) {
-            atoms(graph, function (path, atom) {
+            sentinels(graph, function (path, sentinel) {
                 if (path.length) {
-                    fulfill(path, atom);
+                    fulfill(path, sentinel);
                 }
             });
         }
@@ -78,11 +87,11 @@ module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopePro
      * @param {Path} path
      */
     fulfill: function (path, value) {
-        var queue = this.queue;
-        var node = this.expecting[path.join('.')];
+        var key = path.join('.');
+        var node = this.expecting[key];
 
         if (node) {
-            queue.remove(node);
+            delete this.expecting[key];
         }
 
         this.paths.push(path);
@@ -93,15 +102,45 @@ module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopePro
      * @param {PathSet[]} paths
      */
     expect: function (paths) {
-        var queue = this.queue;
         var expecting = this.expecting;
 
         traverse(putil.toTree(paths), function (path, value) {
             if (path.length && value === null) {
-                queue.push({ path: path });
-                expecting[path.join('.')] = queue.tail;
+                expecting[path.join('.')] = path;
             }
         });
+    },
+    /**
+     * @param {Path} from
+     * @returns {JSONGraphEnvelopeProxy} A copy
+     */
+    relativeFrom: function (from) {
+        var copy = this.clone();
+
+        copy.paths = relativePaths(from, copy.paths);
+        copy.jsonGraph = relativeGraph(from, copy.jsonGraph);
+
+        if (copy.invalidated) {
+            copy.invalidated = relativePaths(from, copy.invalidated);
+        }
+
+        return copy;
+    },
+    /**
+     * @param {Path} from
+     * @returns {JSONGraphEnvelopeProxy} A copy
+     */
+    resolvedFrom: function (from) {
+        var copy = this.clone();
+
+        copy.paths = resolvePaths(from, copy.paths);
+        copy.jsonGraph = resolveGraph(from, copy.jsonGraph);
+
+        if (copy.invalidated) {
+            copy.invalidated = resolvePaths(from, copy.invalidated);
+        }
+
+        return copy;
     },
     /**
      * Get a list of paths this envelope is still expecting to fulfill
@@ -109,10 +148,8 @@ module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopePro
      * @readonly
      */
     get pending () {
-        return this.
-            queue.
-            map(pluckPath).
-            toArray();
+        return keys(this.expecting).
+            map(syntax.fromPath);
     },
     /**
      * Merge another JSONGraphEnvelope into this one
@@ -135,22 +172,36 @@ module.exports = classify(JSONGraphEnvelopeProxy,/** @lends JSONGraphEnvelopePro
      * Clear out our data so we do not have any dangling memory.
      */
     destroy: function () {
-        this.queue.reset();
-
         this.paths =
             this.jsonGraph =
             this.invalidated =
-            this.expecting =
-            this.queue = null;
+            this.expecting = null;
+    },
+    /**
+     * Get a copy of this proxy
+     * @returns {JSONGraphEnvelopeProxy}
+     */
+    clone: function () {
+        var copy = new JSONGraphEnvelopeProxy(this.valueOf());
+        var expecting = this.expecting;
+
+        keys(expecting).
+            reduce(function (acc, cur) {
+                acc[cur] = expecting[cur].slice();
+                return acc;
+            }, copy.expecting);
+
+        return copy;
     },
     /**
      * @returns {JSONGraphEnvelope}
      */
     valueOf: function () {
-        var envelope = {
-            paths: putil.collapse(this.paths),
-            jsonGraph: this.jsonGraph
-        };
+        var envelope = { jsonGraph: this.jsonGraph };
+
+        if (this.paths.length) {
+            envelope.paths = putil.collapse(this.paths);
+        }
 
         if (this.invalidated.length) {
             envelope.invalidated = putil.collapse(this.invalidated);

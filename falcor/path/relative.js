@@ -1,4 +1,4 @@
-var putil = require('../path');
+var putil = require('falcor-path-utils');
 var set   = require('protean/falcor/graph/set');
 var get   = require('lodash/object/get');
 /**

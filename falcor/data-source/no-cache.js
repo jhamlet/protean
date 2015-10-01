@@ -7,6 +7,7 @@ var atoms    = require('protean/falcor/graph/atoms');
  * **file:** [falcor/data-source/no-cache.js](falcor/data-source/no-cache.js)
  *
  * @class NoCacheSource
+ * @extends ProteanClass
  * @implements DataSource
  * @param {Object} opts
  * @param {DataSource} opts.source

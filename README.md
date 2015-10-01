@@ -27,31 +27,33 @@ API
 </dl>
 ## Classes
 <dl>
-<dt><a href="#CollectionSource">CollectionSource</a></dt>
+<dt><a href="#CollectionSource">CollectionSource</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
 <dd></dd>
-<dt><a href="#CompositeSource">CompositeSource</a></dt>
+<dt><a href="#CompositeSource">CompositeSource</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
 <dd></dd>
-<dt><a href="#JSONGraphEnvelopeProxy">JSONGraphEnvelopeProxy</a> ⇐ <code>Object</code></dt>
+<dt><a href="#JSONGraphEnvelopeProxy">JSONGraphEnvelopeProxy</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
 <dd></dd>
-<dt><a href="#NoCacheSource">NoCacheSource</a></dt>
+<dt><a href="#NoCacheSource">NoCacheSource</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
 <dd></dd>
-<dt><a href="#PartitionedSource">PartitionedSource</a></dt>
+<dt><a href="#PartitionedSource">PartitionedSource</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
 <dd></dd>
-<dt><a href="#ProxiedSource">ProxiedSource</a></dt>
+<dt><a href="#ProxiedSource">ProxiedSource</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
 <dd></dd>
-<dt><a href="#StorageDataSource">StorageDataSource</a></dt>
+<dt><a href="#StorageSource">StorageSource</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
 <dd></dd>
-<dt><a href="#Storage">Storage</a></dt>
+<dt><a href="#ProteanClass">ProteanClass</a> : <code>function</code></dt>
 <dd></dd>
-<dt><a href="#Store">Store</a></dt>
+<dt><a href="#Storage">Storage</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
 <dd></dd>
-<dt><a href="#Collection">Collection</a></dt>
+<dt><a href="#Store">Store</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
+<dd></dd>
+<dt><a href="#Collection">Collection</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
 <dd></dd>
 <dt><a href="#FiniteStateMachine">FiniteStateMachine</a> ⇐ <code><a href="#Subject">Subject</a></code></dt>
 <dd></dd>
-<dt><a href="#LinkedList">LinkedList</a> ⇐ <code>Object</code></dt>
+<dt><a href="#LinkedList">LinkedList</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
 <dd></dd>
-<dt><a href="#Record">Record</a></dt>
+<dt><a href="#Record">Record</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
 <dd></dd>
 </dl>
 ## Typedefs
@@ -72,15 +74,19 @@ API
 <dd></dd>
 <dt><a href="#DataSource">DataSource</a></dt>
 <dd></dd>
-<dt><a href="#Atom">Atom</a> : <code>Object</code></dt>
+<dt><a href="#Sentinel">Sentinel</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#Reference">Reference</a> : <code><a href="#Sentinel">Sentinel</a></code></dt>
+<dd></dd>
+<dt><a href="#RootReference">RootReference</a> : <code><a href="#Reference">Reference</a></code></dt>
+<dd></dd>
+<dt><a href="#Atom">Atom</a> : <code><a href="#Sentinel">Sentinel</a></code></dt>
 <dd></dd>
 <dt><a href="#JSONEnvelope">JSONEnvelope</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#JSONGraph">JSONGraph</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#JSONGraphEnvelope">JSONGraphEnvelope</a> : <code>Object</code></dt>
-<dd></dd>
-<dt><a href="#FalcorModel">FalcorModel</a></dt>
 <dd></dd>
 <dt><a href="#Key">Key</a> : <code>String</code> | <code>null</code></dt>
 <dd></dd>
@@ -93,12 +99,6 @@ API
 <dt><a href="#PathValue">PathValue</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#Range">Range</a> : <code>Object</code></dt>
-<dd></dd>
-<dt><a href="#ProteanClassExtend">ProteanClassExtend</a> ⇒ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
-<dd></dd>
-<dt><a href="#ProteanClassExtended">ProteanClassExtended</a> : <code>function</code></dt>
-<dd></dd>
-<dt><a href="#ProteanClass">ProteanClass</a> : <code>function</code></dt>
 <dd></dd>
 </dl>
 <a name="module_Protean"></a>
@@ -300,33 +300,53 @@ Fast GUID generator, RFC4122 version 4 compliant.
 ## Falcor
 
 * [Falcor](#module_Falcor)
-  * [.Graph](#module_Falcor.Graph) ⇐ <code>[FalcorJSONGraph](https://github.com/Netflix/falcor-json-graph)</code>
+  * [.Graph](#module_Falcor.Graph)
     * [.set](#module_Falcor.Graph.set) ⇒ <code>Object</code>
     * [.atoms(graph, fn)](#module_Falcor.Graph.atoms)
       * [~visitorFn(path, atom, graph)](#module_Falcor.Graph.atoms..visitorFn)
-    * [.mergeEnvelope(receiver, supplier)](#module_Falcor.Graph.mergeEnvelope) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+    * [.fromObject(obj, [opts])](#module_Falcor.Graph.fromObject) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+    * [.isAtom(sentinel)](#module_Falcor.Graph.isAtom) ⇒ <code>Boolean</code>
+    * [.isError(sentinel)](#module_Falcor.Graph.isError) ⇒ <code>Boolean</code>
+    * [.isRef(sentinel)](#module_Falcor.Graph.isRef) ⇒ <code>Boolean</code>
+    * [.isRootRef(sentinel)](#module_Falcor.Graph.isRootRef) ⇒ <code>Boolean</code>
+    * [.isSentinel(sentinel)](#module_Falcor.Graph.isSentinel) ⇒ <code>Boolean</code>
+    * [.refs(graph, fn)](#module_Falcor.Graph.refs)
+      * [~visitorFn(path, ref, graph)](#module_Falcor.Graph.refs..visitorFn)
     * [.relative(root, graph)](#module_Falcor.Graph.relative) ⇒ <code>[JSONGraph](#JSONGraph)</code>
-    * [.resolve(root, graph, [opts])](#module_Falcor.Graph.resolve) ⇒ <code>[JSONGraph](#JSONGraph)</code>
-  * [.Path](#module_Falcor.Path) ⇐ <code>[FalcorPathUtils](https://github.com/Netflix/falcor-path-utils)</code>
+    * [.resolve(root, graph)](#module_Falcor.Graph.resolve) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+    * [.rootRef(path, value, props)](#module_Falcor.Graph.rootRef) ⇒ <code>[Reference](#Reference)</code>
+    * [.sentinels(graph, fn)](#module_Falcor.Graph.sentinels)
+      * [~visitorFn(path, sentinel, graph)](#module_Falcor.Graph.sentinels..visitorFn)
+    * [.toObject(graph, [opts])](#module_Falcor.Graph.toObject) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+  * [.Path](#module_Falcor.Path)
     * [.relative(root, paths)](#module_Falcor.Path.relative) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
-    * [.resolve(root, paths, [opts])](#module_Falcor.Path.resolve) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
-  * [.Syntax](#module_Falcor.Syntax) ⇐ <code>[FalcorPathSyntax](https://github.com/Netflix/falcor-path-syntax)</code>
-    * [.rootKey](#module_Falcor.Syntax.rootKey)
+    * [.resolve(root, paths)](#module_Falcor.Path.resolve) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
 
 <a name="module_Falcor.Graph"></a>
-### Falcor.Graph ⇐ <code>[FalcorJSONGraph](https://github.com/Netflix/falcor-json-graph)</code>
+### Falcor.Graph
 **File:** [falcor/graph.js](falcor/graph.js)
 
 **Kind**: static property of <code>[Falcor](#module_Falcor)</code>  
-**Extends:** <code>[FalcorJSONGraph](https://github.com/Netflix/falcor-json-graph)</code>  
+**See**: [https://github.com/Netflix/falcor-json-graph](https://github.com/Netflix/falcor-json-graph)  
 
-* [.Graph](#module_Falcor.Graph) ⇐ <code>[FalcorJSONGraph](https://github.com/Netflix/falcor-json-graph)</code>
+* [.Graph](#module_Falcor.Graph)
   * [.set](#module_Falcor.Graph.set) ⇒ <code>Object</code>
   * [.atoms(graph, fn)](#module_Falcor.Graph.atoms)
     * [~visitorFn(path, atom, graph)](#module_Falcor.Graph.atoms..visitorFn)
-  * [.mergeEnvelope(receiver, supplier)](#module_Falcor.Graph.mergeEnvelope) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+  * [.fromObject(obj, [opts])](#module_Falcor.Graph.fromObject) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+  * [.isAtom(sentinel)](#module_Falcor.Graph.isAtom) ⇒ <code>Boolean</code>
+  * [.isError(sentinel)](#module_Falcor.Graph.isError) ⇒ <code>Boolean</code>
+  * [.isRef(sentinel)](#module_Falcor.Graph.isRef) ⇒ <code>Boolean</code>
+  * [.isRootRef(sentinel)](#module_Falcor.Graph.isRootRef) ⇒ <code>Boolean</code>
+  * [.isSentinel(sentinel)](#module_Falcor.Graph.isSentinel) ⇒ <code>Boolean</code>
+  * [.refs(graph, fn)](#module_Falcor.Graph.refs)
+    * [~visitorFn(path, ref, graph)](#module_Falcor.Graph.refs..visitorFn)
   * [.relative(root, graph)](#module_Falcor.Graph.relative) ⇒ <code>[JSONGraph](#JSONGraph)</code>
-  * [.resolve(root, graph, [opts])](#module_Falcor.Graph.resolve) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+  * [.resolve(root, graph)](#module_Falcor.Graph.resolve) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+  * [.rootRef(path, value, props)](#module_Falcor.Graph.rootRef) ⇒ <code>[Reference](#Reference)</code>
+  * [.sentinels(graph, fn)](#module_Falcor.Graph.sentinels)
+    * [~visitorFn(path, sentinel, graph)](#module_Falcor.Graph.sentinels..visitorFn)
+  * [.toObject(graph, [opts])](#module_Falcor.Graph.toObject) ⇒ <code>[JSONGraph](#JSONGraph)</code>
 
 <a name="module_Falcor.Graph.set"></a>
 #### Graph.set ⇒ <code>Object</code>
@@ -361,16 +381,91 @@ Fast GUID generator, RFC4122 version 4 compliant.
 | atom | <code>[Atom](#Atom)</code> | 
 | graph | <code>[JSONGraph](#JSONGraph)</code> | 
 
-<a name="module_Falcor.Graph.mergeEnvelope"></a>
-#### Graph.mergeEnvelope(receiver, supplier) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
-**File:** [falcor/graph/merge.js](falcor/graph/merge.js)
+<a name="module_Falcor.Graph.fromObject"></a>
+#### Graph.fromObject(obj, [opts]) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+Takes a normal javascript object and returns a JSONGraph.
+
+**File:** [falcor/graph/from-object.js](falcor/graph/from-object.js)
+
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| obj | <code>Object</code> |  | 
+| [opts] | <code>Object</code> |  | 
+| [opts.arrayIsRef] | <code>Boolean</code> | <code>true</code> | 
+| [opts.root] | <code>[Path](#Path)</code> | <code>[]</code> | 
+
+<a name="module_Falcor.Graph.isAtom"></a>
+#### Graph.isAtom(sentinel) ⇒ <code>Boolean</code>
+**File:** [falcor/graph/is-atom.js](falcor/graph/is-atom.js)
 
 **Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
 
 | Param | Type |
 | --- | --- |
-| receiver | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
-| supplier | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
+| sentinel | <code>\*</code> | 
+
+<a name="module_Falcor.Graph.isError"></a>
+#### Graph.isError(sentinel) ⇒ <code>Boolean</code>
+**File:** [falcor/graph/is-error.js](falcor/graph/is-error.js)
+
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| sentinel | <code>\*</code> | 
+
+<a name="module_Falcor.Graph.isRef"></a>
+#### Graph.isRef(sentinel) ⇒ <code>Boolean</code>
+**File:** [falcor/graph/is-ref.js](falcor/graph/is-ref.js)
+
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| sentinel | <code>\*</code> | 
+
+<a name="module_Falcor.Graph.isRootRef"></a>
+#### Graph.isRootRef(sentinel) ⇒ <code>Boolean</code>
+**File:** [falcor/graph/is-root-ref.js](falcor/graph/is-root-ref.js)
+
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| sentinel | <code>\*</code> | 
+
+<a name="module_Falcor.Graph.isSentinel"></a>
+#### Graph.isSentinel(sentinel) ⇒ <code>Boolean</code>
+**File:** [falcor/graph/is-sentinel.js](falcor/graph/is-sentinel.js)
+
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| sentinel | <code>\*</code> | 
+
+<a name="module_Falcor.Graph.refs"></a>
+#### Graph.refs(graph, fn)
+**File:** [falcor/graph/refs.js](falcor/graph/refs.js)
+
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| graph | <code>[JSONGraph](#JSONGraph)</code> | 
+| fn | <code>Graph.atoms~visitorFn</code> | 
+
+<a name="module_Falcor.Graph.refs..visitorFn"></a>
+##### refs~visitorFn(path, ref, graph)
+**Kind**: inner method of <code>[refs](#module_Falcor.Graph.refs)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>[Path](#Path)</code> | 
+| ref | <code>[Reference](#Reference)</code> | 
+| graph | <code>[JSONGraph](#JSONGraph)</code> | 
 
 <a name="module_Falcor.Graph.relative"></a>
 #### Graph.relative(root, graph) ⇒ <code>[JSONGraph](#JSONGraph)</code>
@@ -384,26 +479,70 @@ Fast GUID generator, RFC4122 version 4 compliant.
 | graph | <code>[JSONGraph](#JSONGraph)</code> | 
 
 <a name="module_Falcor.Graph.resolve"></a>
-#### Graph.resolve(root, graph, [opts]) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+#### Graph.resolve(root, graph) ⇒ <code>[JSONGraph](#JSONGraph)</code>
 **File:** [falcor/graph/resolve.js](falcor/graph/resolve.js)
 
 **Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| root | <code>[Path](#Path)</code> |  | 
-| graph | <code>[JSONGraph](#JSONGraph)</code> |  | 
-| [opts] | <code>Object</code> |  | 
-| [opts.rootKey] | <code>String</code> | <code>&#x27;{/}&#x27;</code> | 
+| Param | Type |
+| --- | --- |
+| root | <code>[Path](#Path)</code> | 
+| graph | <code>[JSONGraph](#JSONGraph)</code> | 
+
+<a name="module_Falcor.Graph.rootRef"></a>
+#### Graph.rootRef(path, value, props) ⇒ <code>[Reference](#Reference)</code>
+**File:** [falcor/graph/root-ref.js](falcor/graph/root-ref.js)
+
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>[Path](#Path)</code> | 
+| value | <code>[Path](#Path)</code> | 
+| props | <code>Object</code> | 
+
+<a name="module_Falcor.Graph.sentinels"></a>
+#### Graph.sentinels(graph, fn)
+**File:** [falcor/graph/sentinels.js](falcor/graph/sentinels.js)
+
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| graph | <code>[JSONGraph](#JSONGraph)</code> | 
+| fn | <code>Graph.sentinels~visitorFn</code> | 
+
+<a name="module_Falcor.Graph.sentinels..visitorFn"></a>
+##### sentinels~visitorFn(path, sentinel, graph)
+**Kind**: inner method of <code>[sentinels](#module_Falcor.Graph.sentinels)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>[Path](#Path)</code> | 
+| sentinel | <code>[Sentinel](#Sentinel)</code> | 
+| graph | <code>[JSONGraph](#JSONGraph)</code> | 
+
+<a name="module_Falcor.Graph.toObject"></a>
+#### Graph.toObject(graph, [opts]) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+Takes a JSONGraph and returns a Javascript Object.
+
+**File:** [falcor/graph/to-object.js](falcor/graph/to-object.js)
+
+**Kind**: static method of <code>[Graph](#module_Falcor.Graph)</code>  
+
+| Param | Type |
+| --- | --- |
+| graph | <code>[JSONGraph](#JSONGraph)</code> | 
+| [opts] | <code>Object</code> | 
 
 <a name="module_Falcor.Path"></a>
-### Falcor.Path ⇐ <code>[FalcorPathUtils](https://github.com/Netflix/falcor-path-utils)</code>
+### Falcor.Path
 **Kind**: static property of <code>[Falcor](#module_Falcor)</code>  
-**Extends:** <code>[FalcorPathUtils](https://github.com/Netflix/falcor-path-utils)</code>  
+**See**: [https://github.com/Netflix/falcor-path-utils](https://github.com/Netflix/falcor-path-utils)  
 
-* [.Path](#module_Falcor.Path) ⇐ <code>[FalcorPathUtils](https://github.com/Netflix/falcor-path-utils)</code>
+* [.Path](#module_Falcor.Path)
   * [.relative(root, paths)](#module_Falcor.Path.relative) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
-  * [.resolve(root, paths, [opts])](#module_Falcor.Path.resolve) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
+  * [.resolve(root, paths)](#module_Falcor.Path.resolve) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
 
 <a name="module_Falcor.Path.relative"></a>
 #### Path.relative(root, paths) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
@@ -417,34 +556,30 @@ Fast GUID generator, RFC4122 version 4 compliant.
 | paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 
 <a name="module_Falcor.Path.resolve"></a>
-#### Path.resolve(root, paths, [opts]) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
+#### Path.resolve(root, paths) ⇒ <code>[Array.&lt;PathSet&gt;](#PathSet)</code>
 **File:** [falcor/path/resolve.js](falcor/path/resolve.js)
 
 **Kind**: static method of <code>[Path](#module_Falcor.Path)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| root | <code>[Path](#Path)</code> |  | 
-| paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> |  | 
-| [opts] | <code>Object</code> |  | 
-| [opts.rootKey] | <code>String</code> | <code>&#x27;{/}&#x27;</code> | 
+| Param | Type |
+| --- | --- |
+| root | <code>[Path](#Path)</code> | 
+| paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 
-<a name="module_Falcor.Syntax"></a>
-### Falcor.Syntax ⇐ <code>[FalcorPathSyntax](https://github.com/Netflix/falcor-path-syntax)</code>
-**Kind**: static property of <code>[Falcor](#module_Falcor)</code>  
-**Extends:** <code>[FalcorPathSyntax](https://github.com/Netflix/falcor-path-syntax)</code>  
-<a name="module_Falcor.Syntax.rootKey"></a>
-#### Syntax.rootKey
-**Kind**: static property of <code>[Syntax](#module_Falcor.Syntax)</code>  
-**Default**: <code>&#x27;{/}&#x27;</code>  
-**Read only**: true  
 <a name="CollectionSource"></a>
-## CollectionSource
+## CollectionSource ⇐ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global class  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
 **Implements:** <code>[DataSource](#DataSource)</code>  
 
-* [CollectionSource](#CollectionSource)
-  * [new CollectionSource(collection, [path])](#new_CollectionSource_new)
+* [CollectionSource](#CollectionSource) ⇐ <code>[ProteanClass](#ProteanClass)</code>
+  * [new CollectionSource([collection], [opts])](#new_CollectionSource_new)
+  * [.options](#CollectionSource+options)
+    * [.indexedPath](#CollectionSource+options.indexedPath)
+    * [.keyedPath](#CollectionSource+options.keyedPath)
+    * [.lengthPath](#CollectionSource+options.lengthPath)
+    * [.addPath](#CollectionSource+options.addPath)
+    * [.removePath](#CollectionSource+options.removePath)
   * [.router](#CollectionSource+router)
   * [.routes](#CollectionSource+routes)
   * [.get(paths)](#CollectionSource+get) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
@@ -453,25 +588,95 @@ Fast GUID generator, RFC4122 version 4 compliant.
   * [.getLength()](#CollectionSource+getLength) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
   * [.getRecordByIndex(paths)](#CollectionSource+getRecordByIndex) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
   * [.getRecordProps(paths)](#CollectionSource+getRecordProps) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.setRecordProps(graph)](#CollectionSource+setRecordProps) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.addRecord(path, args, refSuffixes, thisPaths)](#CollectionSource+addRecord) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.removeRecord(path, args, refSuffixes, thisPaths)](#CollectionSource+removeRecord) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
 
 <a name="new_CollectionSource_new"></a>
-### new CollectionSource(collection, [path])
+### new CollectionSource([collection], [opts])
 **file:** [falcor/data-source/collection.js](falcor/data-source/collection.js)
 
 
-| Param | Type |
-| --- | --- |
-| collection | <code>[Collection](#Collection)</code> | 
-| [path] | <code>Array</code> | 
+| Param | Type | Default |
+| --- | --- | --- |
+| [collection] | <code>[Collection](#Collection)</code> |  | 
+| [opts] | <code>Object</code> |  | 
+| [opts.indexedPath] | <code>[Path](#Path)</code> | <code>[&#x27;byIndex&#x27;]</code> | 
+| [opts.keyedPath] | <code>[Path](#Path)</code> | <code>[&#x27;byId&#x27;]</code> | 
 
-<a name="CollectionSource+router"></a>
-### collectionSource.router
+<a name="CollectionSource+options"></a>
+### collectionSource.options
+Default options
+
 **Kind**: instance property of <code>[CollectionSource](#CollectionSource)</code>  
 **Properties**
 
 | Type |
 | --- |
-| <code>FalcorRouter</code> | 
+| <code>Object</code> | 
+
+
+* [.options](#CollectionSource+options)
+  * [.indexedPath](#CollectionSource+options.indexedPath)
+  * [.keyedPath](#CollectionSource+options.keyedPath)
+  * [.lengthPath](#CollectionSource+options.lengthPath)
+  * [.addPath](#CollectionSource+options.addPath)
+  * [.removePath](#CollectionSource+options.removePath)
+
+<a name="CollectionSource+options.indexedPath"></a>
+#### options.indexedPath
+**Kind**: static property of <code>[options](#CollectionSource+options)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Path](#Path)</code> | 
+
+<a name="CollectionSource+options.keyedPath"></a>
+#### options.keyedPath
+**Kind**: static property of <code>[options](#CollectionSource+options)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Path](#Path)</code> | 
+
+<a name="CollectionSource+options.lengthPath"></a>
+#### options.lengthPath
+**Kind**: static property of <code>[options](#CollectionSource+options)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Path](#Path)</code> | 
+
+<a name="CollectionSource+options.addPath"></a>
+#### options.addPath
+**Kind**: static property of <code>[options](#CollectionSource+options)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Path](#Path)</code> | 
+
+<a name="CollectionSource+options.removePath"></a>
+#### options.removePath
+**Kind**: static property of <code>[options](#CollectionSource+options)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Path](#Path)</code> | 
+
+<a name="CollectionSource+router"></a>
+### collectionSource.router
+**Kind**: instance property of <code>[CollectionSource](#CollectionSource)</code>  
+**See**: [http://netflix.github.io/falcor/documentation/router.html](http://netflix.github.io/falcor/documentation/router.html)  
+**Properties**
+
+| Type |
+| --- |
+| <code>external:FalcorRouter</code> | 
 
 <a name="CollectionSource+routes"></a>
 ### collectionSource.routes
@@ -531,12 +736,43 @@ Fast GUID generator, RFC4122 version 4 compliant.
 | --- | --- |
 | paths | <code>Array.&lt;PathSets&gt;</code> | 
 
+<a name="CollectionSource+setRecordProps"></a>
+### collectionSource.setRecordProps(graph) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[CollectionSource](#CollectionSource)</code>  
+
+| Param | Type |
+| --- | --- |
+| graph | <code>[JSONGraph](#JSONGraph)</code> | 
+
+<a name="CollectionSource+addRecord"></a>
+### collectionSource.addRecord(path, args, refSuffixes, thisPaths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[CollectionSource](#CollectionSource)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>[PathSet](#PathSet)</code> | 
+| args | <code>Array.&lt;Mixed&gt;</code> | 
+| refSuffixes | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+| thisPaths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
+<a name="CollectionSource+removeRecord"></a>
+### collectionSource.removeRecord(path, args, refSuffixes, thisPaths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[CollectionSource](#CollectionSource)</code>  
+
+| Param | Type |
+| --- | --- |
+| path | <code>[PathSet](#PathSet)</code> | 
+| args | <code>Array.&lt;Mixed&gt;</code> | 
+| refSuffixes | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+| thisPaths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
+
 <a name="CompositeSource"></a>
-## CompositeSource
+## CompositeSource ⇐ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global class  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
 **Implements:** <code>[DataSource](#DataSource)</code>  
 
-* [CompositeSource](#CompositeSource)
+* [CompositeSource](#CompositeSource) ⇐ <code>[ProteanClass](#ProteanClass)</code>
   * [new CompositeSource(...args)](#new_CompositeSource_new)
   * [.sources](#CompositeSource+sources)
   * [.get(paths)](#CompositeSource+get) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
@@ -546,7 +782,31 @@ Fast GUID generator, RFC4122 version 4 compliant.
 
 <a name="new_CompositeSource_new"></a>
 ### new CompositeSource(...args)
+A [DataSource] that allows for composing several different [DataSource]s
+together through different [Path]s.
+
+This allows individual [DataSource]s to be constructed, used, and tested in
+their own domain. Then later you can compose them into a larger [Graph].
+
+The CompositeSource manages the re-writing of [Path]s and the resulting
+[Graph] so it appears that everything comes from a larger [Graph].
+
+Basically, all returned [Path]s/[Graph]s are updated to have any references
+relative to their [Path]s in the CompositeSource.
+
+As a result, there was a need to create a new [Falcor] data type to express
+when a sub [DataSource] wanted to reference another part of the larger
+[Graph]. [RootReference](#RootReference) represents a [Reference] in the
+[Graph] that should not be kept local to the underlying [DataSource], but
+should be interpreted from the root of the CompositeSource.
+
 **File:** [falcor/data-source/composite.js](falcor/data-source/composite.js)
+
+[Falcor]:      http://netflix.github.io/falcor/doc/DataSource.html                     "Falcor"
+[DataSource]:  http://netflix.github.io/falcor/doc/DataSource.html                     "DataSource"
+[Path]:        http://netflix.github.io/falcor/doc/global.html#Path                    "Path"
+[Graph]:       http://netflix.github.io/falcor/documentation/jsongraph.html            "Graph"
+[Reference]:   http://netflix.github.io/falcor/documentation/jsongraph.html#reference  "Reference"
 
 
 | Param | Type |
@@ -560,7 +820,7 @@ Fast GUID generator, RFC4122 version 4 compliant.
 
 | Type |
 | --- |
-| <code>Object.&lt;Path, CompositeSoure~SourceWrapper&gt;</code> | 
+| <code>Object.&lt;Path, ProxiedSource&gt;</code> | 
 
 <a name="CompositeSource+get"></a>
 ### compositeSource.get(paths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
@@ -603,84 +863,82 @@ Fast GUID generator, RFC4122 version 4 compliant.
 | source | <code>[DataSource](#DataSource)</code> | 
 
 <a name="JSONGraphEnvelopeProxy"></a>
-## JSONGraphEnvelopeProxy ⇐ <code>Object</code>
+## JSONGraphEnvelopeProxy ⇐ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global class  
-**Extends:** <code>Object</code>  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
+**Implements:** <code>JSONGraphEnevelope</code>  
 
-* [JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy) ⇐ <code>Object</code>
-  * [new JSONGraphEnvelopeProxy([paths])](#new_JSONGraphEnvelopeProxy_new)
-  * [.paths](#JSONGraphEnvelopeProxy.paths)
-  * [.jsonGraph](#JSONGraphEnvelopeProxy.jsonGraph)
-  * [.invalidated](#JSONGraphEnvelopeProxy.invalidated)
-  * [.expecting](#JSONGraphEnvelopeProxy.expecting)
-  * [.queue](#JSONGraphEnvelopeProxy.queue)
-  * [.pending](#JSONGraphEnvelopeProxy.pending)
-  * [.set(pathOrGraph, atom)](#JSONGraphEnvelopeProxy.set)
-  * [.invalidate(...path)](#JSONGraphEnvelopeProxy.invalidate)
-  * [.fulfill(path)](#JSONGraphEnvelopeProxy.fulfill)
-  * [.expect(paths)](#JSONGraphEnvelopeProxy.expect)
-  * [.merge(other)](#JSONGraphEnvelopeProxy.merge)
-  * [.destroy()](#JSONGraphEnvelopeProxy.destroy)
-  * [.valueOf()](#JSONGraphEnvelopeProxy.valueOf) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
-  * [.finalize()](#JSONGraphEnvelopeProxy.finalize) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+* [JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy) ⇐ <code>[ProteanClass](#ProteanClass)</code>
+  * [new JSONGraphEnvelopeProxy([opts])](#new_JSONGraphEnvelopeProxy_new)
+  * [.paths](#JSONGraphEnvelopeProxy+paths)
+  * [.jsonGraph](#JSONGraphEnvelopeProxy+jsonGraph)
+  * [.invalidated](#JSONGraphEnvelopeProxy+invalidated)
+  * [.expecting](#JSONGraphEnvelopeProxy+expecting)
+  * [.pending](#JSONGraphEnvelopeProxy+pending)
+  * [.set(pathOrGraph, [atom])](#JSONGraphEnvelopeProxy+set)
+  * [.invalidate(...path)](#JSONGraphEnvelopeProxy+invalidate)
+  * [.fulfill(path)](#JSONGraphEnvelopeProxy+fulfill)
+  * [.expect(paths)](#JSONGraphEnvelopeProxy+expect)
+  * [.relativeFrom(from)](#JSONGraphEnvelopeProxy+relativeFrom) ⇒ <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>
+  * [.resolvedFrom(from)](#JSONGraphEnvelopeProxy+resolvedFrom) ⇒ <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>
+  * [.merge(other)](#JSONGraphEnvelopeProxy+merge)
+  * [.destroy()](#JSONGraphEnvelopeProxy+destroy)
+  * [.clone()](#JSONGraphEnvelopeProxy+clone) ⇒ <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>
+  * [.valueOf()](#JSONGraphEnvelopeProxy+valueOf) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+  * [.finalize()](#JSONGraphEnvelopeProxy+finalize) ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
 
 <a name="new_JSONGraphEnvelopeProxy_new"></a>
-### new JSONGraphEnvelopeProxy([paths])
+### new JSONGraphEnvelopeProxy([opts])
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [paths] | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | Paths to expect |
+| [opts] | <code>Object</code> |  |
+| [opts.expect] | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | Paths to expect |
+| [opts.paths] | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | A starting set of paths |
+| [opts.jsonGraph] | <code>[JSONGraph](#JSONGraph)</code> | A starting JSONGraph |
+| [opts.invalidated] | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | A starting set of paths to invalidate |
 
-<a name="JSONGraphEnvelopeProxy.paths"></a>
-### JSONGraphEnvelopeProxy.paths
-**Kind**: static property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+<a name="JSONGraphEnvelopeProxy+paths"></a>
+### jsonGraphEnvelopeProxy.paths
+**Kind**: instance property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 **Properties**
 
 | Type |
 | --- |
 | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 
-<a name="JSONGraphEnvelopeProxy.jsonGraph"></a>
-### JSONGraphEnvelopeProxy.jsonGraph
-**Kind**: static property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+<a name="JSONGraphEnvelopeProxy+jsonGraph"></a>
+### jsonGraphEnvelopeProxy.jsonGraph
+**Kind**: instance property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 **Properties**
 
 | Type |
 | --- |
 | <code>[JSONGraph](#JSONGraph)</code> | 
 
-<a name="JSONGraphEnvelopeProxy.invalidated"></a>
-### JSONGraphEnvelopeProxy.invalidated
-**Kind**: static property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+<a name="JSONGraphEnvelopeProxy+invalidated"></a>
+### jsonGraphEnvelopeProxy.invalidated
+**Kind**: instance property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 **Properties**
 
 | Type |
 | --- |
 | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 
-<a name="JSONGraphEnvelopeProxy.expecting"></a>
-### JSONGraphEnvelopeProxy.expecting
-**Kind**: static property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+<a name="JSONGraphEnvelopeProxy+expecting"></a>
+### jsonGraphEnvelopeProxy.expecting
+**Kind**: instance property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 **Properties**
 
 | Type |
 | --- |
 | <code>Object</code> | 
 
-<a name="JSONGraphEnvelopeProxy.queue"></a>
-### JSONGraphEnvelopeProxy.queue
-**Kind**: static property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>[LinkedList](#LinkedList)</code> | 
-
-<a name="JSONGraphEnvelopeProxy.pending"></a>
-### JSONGraphEnvelopeProxy.pending
+<a name="JSONGraphEnvelopeProxy+pending"></a>
+### jsonGraphEnvelopeProxy.pending
 Get a list of paths this envelope is still expecting to fulfill
 
-**Kind**: static property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Kind**: instance property of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 **Read only**: true  
 **Properties**
 
@@ -688,70 +946,94 @@ Get a list of paths this envelope is still expecting to fulfill
 | --- |
 | <code>[Array.&lt;Path&gt;](#Path)</code> | 
 
-<a name="JSONGraphEnvelopeProxy.set"></a>
-### JSONGraphEnvelopeProxy.set(pathOrGraph, atom)
-**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+<a name="JSONGraphEnvelopeProxy+set"></a>
+### jsonGraphEnvelopeProxy.set(pathOrGraph, [atom])
+**Kind**: instance method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 
 | Param | Type |
 | --- | --- |
 | pathOrGraph | <code>[Path](#Path)</code> &#124; <code>[JSONGraph](#JSONGraph)</code> | 
-| atom | <code>[Atom](#Atom)</code> | 
+| [atom] | <code>[Atom](#Atom)</code> | 
 
-<a name="JSONGraphEnvelopeProxy.invalidate"></a>
-### JSONGraphEnvelopeProxy.invalidate(...path)
-**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+<a name="JSONGraphEnvelopeProxy+invalidate"></a>
+### jsonGraphEnvelopeProxy.invalidate(...path)
+**Kind**: instance method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 
 | Param | Type |
 | --- | --- |
 | ...path | <code>[Path](#Path)</code> | 
 
-<a name="JSONGraphEnvelopeProxy.fulfill"></a>
-### JSONGraphEnvelopeProxy.fulfill(path)
+<a name="JSONGraphEnvelopeProxy+fulfill"></a>
+### jsonGraphEnvelopeProxy.fulfill(path)
 Mark a path as fulfilled and set the given value on our jsonGraph
 
-**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Kind**: instance method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 
 | Param | Type |
 | --- | --- |
 | path | <code>[Path](#Path)</code> | 
 
-<a name="JSONGraphEnvelopeProxy.expect"></a>
-### JSONGraphEnvelopeProxy.expect(paths)
+<a name="JSONGraphEnvelopeProxy+expect"></a>
+### jsonGraphEnvelopeProxy.expect(paths)
 Prepare this envelope to expect to fulfill a certain set of paths.
 
-**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Kind**: instance method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 
 | Param | Type |
 | --- | --- |
 | paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 
-<a name="JSONGraphEnvelopeProxy.merge"></a>
-### JSONGraphEnvelopeProxy.merge(other)
+<a name="JSONGraphEnvelopeProxy+relativeFrom"></a>
+### jsonGraphEnvelopeProxy.relativeFrom(from) ⇒ <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>
+**Kind**: instance method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Returns**: <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code> - A copy  
+
+| Param | Type |
+| --- | --- |
+| from | <code>[Path](#Path)</code> | 
+
+<a name="JSONGraphEnvelopeProxy+resolvedFrom"></a>
+### jsonGraphEnvelopeProxy.resolvedFrom(from) ⇒ <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>
+**Kind**: instance method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Returns**: <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code> - A copy  
+
+| Param | Type |
+| --- | --- |
+| from | <code>[Path](#Path)</code> | 
+
+<a name="JSONGraphEnvelopeProxy+merge"></a>
+### jsonGraphEnvelopeProxy.merge(other)
 Merge another JSONGraphEnvelope into this one
 
-**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Kind**: instance method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 
 | Param | Type |
 | --- | --- |
 | other | <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code> &#124; <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
 
-<a name="JSONGraphEnvelopeProxy.destroy"></a>
-### JSONGraphEnvelopeProxy.destroy()
+<a name="JSONGraphEnvelopeProxy+destroy"></a>
+### jsonGraphEnvelopeProxy.destroy()
 Clear out our data so we do not have any dangling memory.
 
-**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
-<a name="JSONGraphEnvelopeProxy.valueOf"></a>
-### JSONGraphEnvelopeProxy.valueOf() ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
-**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
-<a name="JSONGraphEnvelopeProxy.finalize"></a>
-### JSONGraphEnvelopeProxy.finalize() ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
-**Kind**: static method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+**Kind**: instance method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+<a name="JSONGraphEnvelopeProxy+clone"></a>
+### jsonGraphEnvelopeProxy.clone() ⇒ <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>
+Get a copy of this proxy
+
+**Kind**: instance method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+<a name="JSONGraphEnvelopeProxy+valueOf"></a>
+### jsonGraphEnvelopeProxy.valueOf() ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
+<a name="JSONGraphEnvelopeProxy+finalize"></a>
+### jsonGraphEnvelopeProxy.finalize() ⇒ <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[JSONGraphEnvelopeProxy](#JSONGraphEnvelopeProxy)</code>  
 <a name="NoCacheSource"></a>
-## NoCacheSource
+## NoCacheSource ⇐ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global class  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
 **Implements:** <code>[DataSource](#DataSource)</code>  
 
-* [NoCacheSource](#NoCacheSource)
+* [NoCacheSource](#NoCacheSource) ⇐ <code>[ProteanClass](#ProteanClass)</code>
   * [new NoCacheSource(opts)](#new_NoCacheSource_new)
   * [.get(paths)](#NoCacheSource+get) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
   * [.set(envelope)](#NoCacheSource+set) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
@@ -801,11 +1083,12 @@ atoms to expire immediately.
 | thisPaths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 
 <a name="PartitionedSource"></a>
-## PartitionedSource
+## PartitionedSource ⇐ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global class  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
 **Implements:** <code>[DataSource](#DataSource)</code>  
 
-* [PartitionedSource](#PartitionedSource)
+* [PartitionedSource](#PartitionedSource) ⇐ <code>[ProteanClass](#ProteanClass)</code>
   * [new PartitionedSource([opts])](#new_PartitionedSource_new)
   * [.options](#PartitionedSource+options)
     * [.reads](#PartitionedSource+options.reads)
@@ -911,21 +1194,15 @@ Default options
 | thisPaths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 
 <a name="ProxiedSource"></a>
-## ProxiedSource
+## ProxiedSource ⇐ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global class  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
 **Implements:** <code>[DataSource](#DataSource)</code>  
 
-* [ProxiedSource](#ProxiedSource)
+* [ProxiedSource](#ProxiedSource) ⇐ <code>[ProteanClass](#ProteanClass)</code>
   * [new ProxiedSource([opts])](#new_ProxiedSource_new)
   * [.source](#ProxiedSource+source)
   * [.root](#ProxiedSource+root)
-  * [.rootKey](#ProxiedSource+rootKey)
-  * [.preGet](#ProxiedSource+preGet)
-  * [.postGet](#ProxiedSource+postGet)
-  * [.preSet](#ProxiedSource+preSet)
-  * [.postSet](#ProxiedSource+postSet)
-  * [.preCall](#ProxiedSource+preCall)
-  * [.postCall](#ProxiedSource+postCall)
   * [.get(paths)](#ProxiedSource+get) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
   * [.set(envelope)](#ProxiedSource+set) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
   * [.call(path, args, refSuffixes, thisPaths)](#ProxiedSource+call) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
@@ -938,23 +1215,16 @@ Default options
 <a name="new_ProxiedSource_new"></a>
 ### new ProxiedSource([opts])
 A Falcor DataSource that proxies to another source, re-writing the returned
-paths, and the paths to the atom values within the JSONGraph.
+paths, and the paths to the values within the JSONGraph.
 
 **File:** [falcor/data-source/proxied.js](falcor/data-source/proxied.js)
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| [opts] | <code>Object</code> |  |
-| [opts.source] | <code>[DataSource](#DataSource)</code> |  |
-| [opts.root] | <code>[Path](#Path)</code> |  |
-| [opts.rootKey] | <code>String</code> | The 'fake' path key that denotes a path that should start at the conceptual root. i.e: do not strip or adjust, just drop the root key. |
-| [opts.preGet] | <code>function</code> |  |
-| [opts.preSet] | <code>function</code> |  |
-| [opts.preCall] | <code>function</code> |  |
-| [opts.postGet] | <code>function</code> |  |
-| [opts.postSet] | <code>function</code> |  |
-| [opts.postCall] | <code>function</code> |  |
+| Param | Type |
+| --- | --- |
+| [opts] | <code>Object</code> | 
+| [opts.source] | <code>[DataSource](#DataSource)</code> | 
+| [opts.root] | <code>[Path](#Path)</code> | 
 
 <a name="ProxiedSource+source"></a>
 ### proxiedSource.source
@@ -973,70 +1243,6 @@ paths, and the paths to the atom values within the JSONGraph.
 | Type |
 | --- |
 | <code>[Path](#Path)</code> | 
-
-<a name="ProxiedSource+rootKey"></a>
-### proxiedSource.rootKey
-**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
-**Default**: <code>&#x27;{/}&#x27;</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>String</code> | 
-
-<a name="ProxiedSource+preGet"></a>
-### proxiedSource.preGet
-**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>function</code> | 
-
-<a name="ProxiedSource+postGet"></a>
-### proxiedSource.postGet
-**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>function</code> | 
-
-<a name="ProxiedSource+preSet"></a>
-### proxiedSource.preSet
-**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>function</code> | 
-
-<a name="ProxiedSource+postSet"></a>
-### proxiedSource.postSet
-**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>function</code> | 
-
-<a name="ProxiedSource+preCall"></a>
-### proxiedSource.preCall
-**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>function</code> | 
-
-<a name="ProxiedSource+postCall"></a>
-### proxiedSource.postCall
-**Kind**: instance property of <code>[ProxiedSource](#ProxiedSource)</code>  
-**Properties**
-
-| Type |
-| --- |
-| <code>function</code> | 
 
 <a name="ProxiedSource+get"></a>
 ### proxiedSource.get(paths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
@@ -1121,58 +1327,63 @@ Adjust the JSONGraphEnvelope to reflect our leading path information.
 | --- | --- |
 | envelope | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
 
-<a name="StorageDataSource"></a>
-## StorageDataSource
+<a name="StorageSource"></a>
+## StorageSource ⇐ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global class  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
 **Implements:** <code>[DataSource](#DataSource)</code>  
 
-* [StorageDataSource](#StorageDataSource)
-  * [new StorageDataSource(opts)](#new_StorageDataSource_new)
-  * [.model](#StorageDataSource+model)
-  * [.source](#StorageDataSource+source)
-  * [.options](#StorageDataSource+options)
-    * [.storageKey](#StorageDataSource+options.storageKey)
-    * [.storage](#StorageDataSource+options.storage)
-  * [.get(paths)](#StorageDataSource+get) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
-  * [.set(envelope)](#StorageDataSource+set) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
-  * [.call(path, args, refSuffixes, thisPaths)](#StorageDataSource+call) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
-  * [.clear()](#StorageDataSource+clear)
-  * [.serialize()](#StorageDataSource+serialize)
-  * [.deserialize()](#StorageDataSource+deserialize)
+* [StorageSource](#StorageSource) ⇐ <code>[ProteanClass](#ProteanClass)</code>
+  * [new StorageSource(opts)](#new_StorageSource_new)
+  * [.model](#StorageSource+model)
+  * [.source](#StorageSource+source)
+  * [.options](#StorageSource+options)
+    * [.storageKey](#StorageSource+options.storageKey)
+    * [.storage](#StorageSource+options.storage)
+    * [.serializer(graph)](#StorageSource+options.serializer) ⇒ <code>String</code>
+    * [.deserializer(src)](#StorageSource+options.deserializer) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+  * [.get(paths)](#StorageSource+get) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.set(envelope)](#StorageSource+set) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.call(path, args, refSuffixes, thisPaths)](#StorageSource+call) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+  * [.clear()](#StorageSource+clear)
+  * [.serialize()](#StorageSource+serialize)
+  * [.deserialize()](#StorageSource+deserialize)
 
-<a name="new_StorageDataSource_new"></a>
-### new StorageDataSource(opts)
-**file:** [falcor/data-source/storage.js](falcor/data-source/storage.js)
+<a name="new_StorageSource_new"></a>
+### new StorageSource(opts)
+**File:** [falcor/data-source/storage.js](falcor/data-source/storage.js)
 
 
 | Param | Type |
 | --- | --- |
 | opts | <code>Object</code> | 
-| [opts.cache] | <code>Object</code> | 
-| [opts.storage] | <code>[Storage](#Storage)</code> | 
+| opts.storage | <code>[Storage](#Storage)</code> | 
 | opts.storageKey | <code>String</code> | 
+| [opts.cache] | <code>Object</code> | 
+| [opts.serializer] | <code>function</code> | 
+| [opts.deserializer] | <code>function</code> | 
 
-<a name="StorageDataSource+model"></a>
-### storageDataSource.model
-**Kind**: instance property of <code>[StorageDataSource](#StorageDataSource)</code>  
+<a name="StorageSource+model"></a>
+### storageSource.model
+**Kind**: instance property of <code>[StorageSource](#StorageSource)</code>  
 **Properties**
 
 | Type |
 | --- |
 | <code>FalcorFModel</code> | 
 
-<a name="StorageDataSource+source"></a>
-### storageDataSource.source
-**Kind**: instance property of <code>[StorageDataSource](#StorageDataSource)</code>  
+<a name="StorageSource+source"></a>
+### storageSource.source
+**Kind**: instance property of <code>[StorageSource](#StorageSource)</code>  
 **Properties**
 
 | Type |
 | --- |
 | <code>[DataSource](#DataSource)</code> | 
 
-<a name="StorageDataSource+options"></a>
-### storageDataSource.options
-**Kind**: instance property of <code>[StorageDataSource](#StorageDataSource)</code>  
+<a name="StorageSource+options"></a>
+### storageSource.options
+**Kind**: instance property of <code>[StorageSource](#StorageSource)</code>  
 **Properties**
 
 | Type |
@@ -1180,49 +1391,76 @@ Adjust the JSONGraphEnvelope to reflect our leading path information.
 | <code>Object</code> | 
 
 
-* [.options](#StorageDataSource+options)
-  * [.storageKey](#StorageDataSource+options.storageKey)
-  * [.storage](#StorageDataSource+options.storage)
+* [.options](#StorageSource+options)
+  * [.storageKey](#StorageSource+options.storageKey)
+  * [.storage](#StorageSource+options.storage)
+  * [.serializer(graph)](#StorageSource+options.serializer) ⇒ <code>String</code>
+  * [.deserializer(src)](#StorageSource+options.deserializer) ⇒ <code>[JSONGraph](#JSONGraph)</code>
 
-<a name="StorageDataSource+options.storageKey"></a>
+<a name="StorageSource+options.storageKey"></a>
 #### options.storageKey
-**Kind**: static property of <code>[options](#StorageDataSource+options)</code>  
+The key to use when accessing the Storage object to serialize the
+graph to.
+
+**Kind**: static property of <code>[options](#StorageSource+options)</code>  
 **Properties**
 
 | Type |
 | --- |
 | <code>String</code> | 
 
-<a name="StorageDataSource+options.storage"></a>
+<a name="StorageSource+options.storage"></a>
 #### options.storage
-**Kind**: static property of <code>[options](#StorageDataSource+options)</code>  
+The storage source
+
+**Kind**: static property of <code>[options](#StorageSource+options)</code>  
 **Properties**
 
 | Type |
 | --- |
-| <code>external:Storage</code> | 
+| <code>[Storage](#Storage)</code> | 
 
-<a name="StorageDataSource+get"></a>
-### storageDataSource.get(paths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
-**Kind**: instance method of <code>[StorageDataSource](#StorageDataSource)</code>  
+<a name="StorageSource+options.serializer"></a>
+#### options.serializer(graph) ⇒ <code>String</code>
+A function to convert a JSONGraph to a String.
+
+**Kind**: static method of <code>[options](#StorageSource+options)</code>  
+
+| Param | Type |
+| --- | --- |
+| graph | <code>[JSONGraph](#JSONGraph)</code> | 
+
+<a name="StorageSource+options.deserializer"></a>
+#### options.deserializer(src) ⇒ <code>[JSONGraph](#JSONGraph)</code>
+A function to convert a String to a JSONGraph.
+
+**Kind**: static method of <code>[options](#StorageSource+options)</code>  
+
+| Param | Type |
+| --- | --- |
+| src | <code>String</code> | 
+
+<a name="StorageSource+get"></a>
+### storageSource.get(paths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[StorageSource](#StorageSource)</code>  
 **Implements:** <code>[get](#DataSource+get)</code>  
 
 | Param | Type |
 | --- | --- |
 | paths | <code>Array.&lt;PathSets&gt;</code> | 
 
-<a name="StorageDataSource+set"></a>
-### storageDataSource.set(envelope) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
-**Kind**: instance method of <code>[StorageDataSource](#StorageDataSource)</code>  
+<a name="StorageSource+set"></a>
+### storageSource.set(envelope) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[StorageSource](#StorageSource)</code>  
 **Implements:** <code>[set](#DataSource+set)</code>  
 
 | Param | Type |
 | --- | --- |
 | envelope | <code>[JSONGraphEnvelope](#JSONGraphEnvelope)</code> | 
 
-<a name="StorageDataSource+call"></a>
-### storageDataSource.call(path, args, refSuffixes, thisPaths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
-**Kind**: instance method of <code>[StorageDataSource](#StorageDataSource)</code>  
+<a name="StorageSource+call"></a>
+### storageSource.call(path, args, refSuffixes, thisPaths) ⇒ <code>[Observable.&lt;JSONGraphEnvelope&gt;](#JSONGraphEnvelope)</code>
+**Kind**: instance method of <code>[StorageSource](#StorageSource)</code>  
 **Implements:** <code>[call](#DataSource+call)</code>  
 
 | Param | Type |
@@ -1232,27 +1470,70 @@ Adjust the JSONGraphEnvelope to reflect our leading path information.
 | refSuffixes | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 | thisPaths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 
-<a name="StorageDataSource+clear"></a>
-### storageDataSource.clear()
+<a name="StorageSource+clear"></a>
+### storageSource.clear()
 Clear our storage item
 
-**Kind**: instance method of <code>[StorageDataSource](#StorageDataSource)</code>  
-<a name="StorageDataSource+serialize"></a>
-### storageDataSource.serialize()
+**Kind**: instance method of <code>[StorageSource](#StorageSource)</code>  
+<a name="StorageSource+serialize"></a>
+### storageSource.serialize()
 Write our cache to storage
 
-**Kind**: instance method of <code>[StorageDataSource](#StorageDataSource)</code>  
-<a name="StorageDataSource+deserialize"></a>
-### storageDataSource.deserialize()
+**Kind**: instance method of <code>[StorageSource](#StorageSource)</code>  
+<a name="StorageSource+deserialize"></a>
+### storageSource.deserialize()
 Get our cache from storage
 
-**Kind**: instance method of <code>[StorageDataSource](#StorageDataSource)</code>  
-<a name="Storage"></a>
-## Storage
+**Kind**: instance method of <code>[StorageSource](#StorageSource)</code>  
+<a name="ProteanClass"></a>
+## ProteanClass : <code>function</code>
 **Kind**: global class  
+
+* [ProteanClass](#ProteanClass) : <code>function</code>
+  * [.superproto](#ProteanClass.superproto) : <code>Object</code>
+  * [.extend([subclass], [props], [properties])](#ProteanClass.extend) ⇒ <code>[ProteanClass](#ProteanClass)</code>
+  * [.extended(subclass)](#ProteanClass.extended)
+  * [.superclass()](#ProteanClass.superclass)
+
+<a name="ProteanClass.superproto"></a>
+### ProteanClass.superproto : <code>Object</code>
+A reference to this class' superclass prototype
+
+**Kind**: static property of <code>[ProteanClass](#ProteanClass)</code>  
+<a name="ProteanClass.extend"></a>
+### ProteanClass.extend([subclass], [props], [properties]) ⇒ <code>[ProteanClass](#ProteanClass)</code>
+A function to extend this class into another one
+
+**Kind**: static method of <code>[ProteanClass](#ProteanClass)</code>  
+
+| Param | Type |
+| --- | --- |
+| [subclass] | <code>function</code> | 
+| [props] | <code>Object</code> | 
+| [properties] | <code>Object</code> | 
+
+<a name="ProteanClass.extended"></a>
+### ProteanClass.extended(subclass)
+A function that will be called when the class is extended into another
+
+**Kind**: static method of <code>[ProteanClass](#ProteanClass)</code>  
+
+| Param | Type |
+| --- | --- |
+| subclass | <code>function</code> | 
+
+<a name="ProteanClass.superclass"></a>
+### ProteanClass.superclass()
+A reference to this class' superclass constructor
+
+**Kind**: static method of <code>[ProteanClass](#ProteanClass)</code>  
+<a name="Storage"></a>
+## Storage ⇐ <code>[ProteanClass](#ProteanClass)</code>
+**Kind**: global class  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
 **Implements:** <code>external:Storage</code>  
 
-* [Storage](#Storage)
+* [Storage](#Storage) ⇐ <code>[ProteanClass](#ProteanClass)</code>
   * [new Storage(opts)](#new_Storage_new)
   * [.length](#Storage+length)
   * [.getItem(key)](#Storage+getItem) ⇒ <code>Mixed</code>
@@ -1338,11 +1619,12 @@ Get our cache from storage
 | idx | <code>Integer</code> | 
 
 <a name="Store"></a>
-## Store
+## Store ⇐ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global class  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
 **Implements:** <code>external:Storage</code>  
 
-* [Store](#Store)
+* [Store](#Store) ⇐ <code>[ProteanClass](#ProteanClass)</code>
   * [new Store()](#new_Store_new)
   * _instance_
     * [.length](#Store+length)
@@ -1422,17 +1704,18 @@ Get our cache from storage
 
 **Kind**: static property of <code>[Store](#Store)</code>  
 <a name="Collection"></a>
-## Collection
+## Collection ⇐ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global class  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
 
-* [Collection](#Collection)
+* [Collection](#Collection) ⇐ <code>[ProteanClass](#ProteanClass)</code>
   * [new Collection([rec])](#new_Collection_new)
   * [.idKey](#Collection+idKey)
   * [.comparator](#Collection+comparator)
   * [.length](#Collection+length)
   * [.records](#Collection+records)
   * [.has(id)](#Collection+has) ⇒ <code>Boolean</code>
-  * [.add(obj)](#Collection+add) ⇒ <code>[Collection](#Collection)</code>
+  * [.add(obj)](#Collection+add) ⇒ <code>[Record](#Record)</code>
   * [.remove(id)](#Collection+remove) ⇒ <code>[Record](#Record)</code>
   * [.at(idx)](#Collection+at) ⇒ <code>[Record](#Record)</code>
   * [.removeAt(idx)](#Collection+removeAt) ⇒ <code>[Record](#Record)</code>
@@ -1510,8 +1793,9 @@ Used to keep the collection ordered when adding items
 | id | <code>String</code> | 
 
 <a name="Collection+add"></a>
-### collection.add(obj) ⇒ <code>[Collection](#Collection)</code>
+### collection.add(obj) ⇒ <code>[Record](#Record)</code>
 **Kind**: instance method of <code>[Collection](#Collection)</code>  
+**Returns**: <code>[Record](#Record)</code> - The record just created  
 
 | Param | Type |
 | --- | --- |
@@ -1856,11 +2140,11 @@ Remove a state and its transitions
 ### finiteStateMachine.valueOf() ⇒ <code>Object</code>
 **Kind**: instance method of <code>[FiniteStateMachine](#FiniteStateMachine)</code>  
 <a name="LinkedList"></a>
-## LinkedList ⇐ <code>Object</code>
+## LinkedList ⇐ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global class  
-**Extends:** <code>Object</code>  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
 
-* [LinkedList](#LinkedList) ⇐ <code>Object</code>
+* [LinkedList](#LinkedList) ⇐ <code>[ProteanClass](#ProteanClass)</code>
   * [new LinkedList([...items])](#new_LinkedList_new)
   * _instance_
     * [.head](#LinkedList+head)
@@ -2080,10 +2364,11 @@ Remove the given node, nulling out its prev and next pointers
 
 **Kind**: instance method of <code>[Node](#LinkedList.Node)</code>  
 <a name="Record"></a>
-## Record
+## Record ⇐ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global class  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
 
-* [Record](#Record)
+* [Record](#Record) ⇐ <code>[ProteanClass](#ProteanClass)</code>
   * [new Record([data])](#new_Record_new)
   * [.length](#Record+length)
   * [.get(key)](#Record+get) ⇒ <code>Mixed</code>
@@ -2200,7 +2485,7 @@ Remove the given node, nulling out its prev and next pointers
 <a name="Observable"></a>
 ## Observable
 **Kind**: global typedef  
-**Implements:** <code>[Observable]({@link })</code>  
+**Implements:** <code>[Observable](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md)</code>  
 <a name="Observable+subscribe"></a>
 ### observable.subscribe(onNextOrObserver, [onError], [onCompleted]) ⇒ <code>[Disposable](#Disposable)</code>
 **Kind**: instance method of <code>[Observable](#Observable)</code>  
@@ -2214,7 +2499,7 @@ Remove the given node, nulling out its prev and next pointers
 <a name="Observer"></a>
 ## Observer
 **Kind**: global typedef  
-**Implements:** <code>[Observer]({@link })</code>  
+**Implements:** <code>[Observer](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observer.md)</code>  
 
 * [Observer](#Observer)
   * [.onNext](#Observer+onNext) : <code>[onNextFunction](#onNextFunction)</code>
@@ -2233,7 +2518,7 @@ Remove the given node, nulling out its prev and next pointers
 <a name="Disposable"></a>
 ## Disposable
 **Kind**: global typedef  
-**Implements:** <code>[Disposable]({@link })</code>  
+**Implements:** <code>[Disposable](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/disposables/disposable.md)</code>  
 <a name="Disposable+dispose"></a>
 ### disposable.dispose()
 **Kind**: instance method of <code>[Disposable](#Disposable)</code>  
@@ -2242,6 +2527,7 @@ Remove the given node, nulling out its prev and next pointers
 **Kind**: global typedef  
 **Extends:** <code>[Observable](#Observable)</code>  
 **Mixes**: <code>[Observer](#Observer)</code>, <code>[Disposable](#Disposable)</code>  
+**See**: [https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/subjects/subject.md](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/subjects/subject.md)  
 <a name="DataSource"></a>
 ## DataSource
 **Kind**: global typedef  
@@ -2279,17 +2565,45 @@ Remove the given node, nulling out its prev and next pointers
 | refSuffixes | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 | thisPaths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 
-<a name="Atom"></a>
-## Atom : <code>Object</code>
+<a name="Sentinel"></a>
+## Sentinel : <code>Object</code>
 **Kind**: global typedef  
-**See**: [http://netflix.github.io/falcor/doc/global.html#Atom](http://netflix.github.io/falcor/doc/global.html#Atom)  
 **Properties**
 
 | Name | Type |
 | --- | --- |
 | $type | <code>String</code> | 
 | value | <code>Mixed</code> | 
-| $expires | <code>Integer</code> | 
+
+<a name="Reference"></a>
+## Reference : <code>[Sentinel](#Sentinel)</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Default |
+| --- | --- | --- |
+| $type | <code>String</code> | <code>&#x27;ref&#x27;</code> | 
+| value | <code>[Path](#Path)</code> |  | 
+
+<a name="RootReference"></a>
+## RootReference : <code>[Reference](#Reference)</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Default |
+| --- | --- | --- |
+| $root | <code>Boolean</code> | <code>true</code> | 
+
+<a name="Atom"></a>
+## Atom : <code>[Sentinel](#Sentinel)</code>
+**Kind**: global typedef  
+**See**: [http://netflix.github.io/falcor/doc/global.html#Atom](http://netflix.github.io/falcor/doc/global.html#Atom)  
+**Properties**
+
+| Name | Type | Default |
+| --- | --- | --- |
+| $type | <code>String</code> | <code>&#x27;atom&#x27;</code> | 
+| $expires | <code>Integer</code> |  | 
 
 <a name="JSONEnvelope"></a>
 ## JSONEnvelope : <code>Object</code>
@@ -2317,10 +2631,6 @@ Remove the given node, nulling out its prev and next pointers
 | paths | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 | invalidated | <code>[Array.&lt;PathSet&gt;](#PathSet)</code> | 
 
-<a name="FalcorModel"></a>
-## FalcorModel
-**Kind**: global typedef  
-**Implements:** <code>[FalcorModel](http://netflix.github.io/falcor/doc/Model.html)</code>  
 <a name="Key"></a>
 ## Key : <code>String</code> &#124; <code>null</code>
 **Kind**: global typedef  
@@ -2345,8 +2655,8 @@ Remove the given node, nulling out its prev and next pointers
 
 | Name | Type |
 | --- | --- |
-| path | <code>[PathSet](#PathSet)</code> | 
-| value | <code>Mixed</code> | 
+| path | <code>[Path](#Path)</code> | 
+| value | <code>\*</code> | 
 
 <a name="Range"></a>
 ## Range : <code>Object</code>
@@ -2359,36 +2669,6 @@ Remove the given node, nulling out its prev and next pointers
 | from | <code>Integer</code> | 
 | to | <code>Integer</code> | 
 | length | <code>Integer</code> | 
-
-<a name="ProteanClassExtend"></a>
-## ProteanClassExtend ⇒ <code>[ProteanClass](#ProteanClass)</code>
-**Kind**: global typedef  
-
-| Param | Type |
-| --- | --- |
-| [subclass] | <code>function</code> | 
-| [props] | <code>Object</code> | 
-| [properties] | <code>Object</code> | 
-
-<a name="ProteanClassExtended"></a>
-## ProteanClassExtended : <code>function</code>
-**Kind**: global typedef  
-
-| Param | Type |
-| --- | --- |
-| subclass | <code>function</code> | 
-
-<a name="ProteanClass"></a>
-## ProteanClass : <code>function</code>
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| extend | <code>[ProteanClassExtend](#ProteanClassExtend)</code> | A function to extend this class into another one |
-| extended | <code>[ProteanClassExtended](#ProteanClassExtended)</code> | A function that will be called when the class is extended into another |
-| superclass | <code>function</code> | A reference to this class' superclass constructor |
-| superproto | <code>Object</code> | A reference to this class' superclass prototype |
 
 
 

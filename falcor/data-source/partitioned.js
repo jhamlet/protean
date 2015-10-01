@@ -1,5 +1,4 @@
 var classify   = require('protean/function/classify');
-// var gutil      = require('protean/falcor/graph');
 var defaults   = require('lodash/object/defaults');
 var GraphProxy = require('./json-graph-envelope-proxy');
 var Rx         = require('rx');
@@ -17,6 +16,7 @@ var Observable = Rx.Observable;
  * the 'writes' option. Again, returning a merged graph of all values writen.
  *
  * @class PartitionedSource
+ * @extends ProteanClass
  * @implements DataSource
  * @param {Object} [opts]
  * @param {String[]} [opts.reads=[]]

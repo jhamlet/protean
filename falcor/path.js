@@ -1,19 +1,11 @@
-var reduce = require('lodash/collection/reduce');
-var merge = require('protean/utility/merge-exports');
-/**
- * @external FalcorPathUtils
- * @see {@link https://github.com/Netflix/falcor-path-utils}
- */
 /**
  * @member module:Falcor.Path
- * @augments external:FalcorPathUtils
+ * @see {@link https://github.com/Netflix/falcor-path-utils}
  */
-exports = module.exports = require('falcor-path-utils');
-
-reduce([
+require('lodash/collection/reduce')([
     require('./path/relative'),
     require('./path/resolve')
-], merge, exports);
+], require('protean/utility/merge-exports'), exports);
 
 /**
  * @typedef Key
@@ -43,8 +35,8 @@ reduce([
  * @typedef PathValue
  * @type {Object}
  * @see {@link http://netflix.github.io/falcor/doc/global.html#PathValue}
- * @property {PathSet} path
- * @property {Mixed} value
+ * @property {Path} path
+ * @property {*} value
  */
 
 /**

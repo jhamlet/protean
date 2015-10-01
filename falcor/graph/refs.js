@@ -1,15 +1,15 @@
 var sentinels = require('./sentinels');
-var isAtom = require('./is-atom');
+var isRef = require('./is-ref');
 
 function visitor (graph, subject, path, sentinel) {
-    if (isAtom(sentinel)) {
+    if (isRef(sentinel)) {
         subject(path, sentinel, graph);
     }
 }
 /**
- * **File:** [falcor/graph/atoms.js](falcor/graph/atoms.js)
+ * **File:** [falcor/graph/refs.js](falcor/graph/refs.js)
  *
- * @member module:Falcor.Graph.atoms
+ * @member module:Falcor.Graph.refs
  * @function
  * @param {JSONGraph} graph
  * @param {Graph.atoms~visitorFn} fn
@@ -19,9 +19,9 @@ module.exports = function atoms (graph, fn) {
 };
 
 /**
- * @typedef module:Falcor.Graph.atoms~visitorFn
+ * @typedef module:Falcor.Graph.refs~visitorFn
  * @function
  * @param {Path} path
- * @param {Atom} atom
+ * @param {Reference} ref
  * @param {JSONGraph} graph
  */

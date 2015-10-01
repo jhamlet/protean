@@ -6,6 +6,7 @@ var Record   = require('./record');
  * **File:** [utility/collection.js](utility/collection.js)
  *
  * @class Collection
+ * @extends ProteanClass
  * @param {...Record|Object} [rec]
  */
 function Collection () {
@@ -54,7 +55,7 @@ module.exports = classify(Collection,/** @lends Collection# */{
     has: function (id) { return this.values.hasOwnProperty(id); },
     /**
      * @param {Object|Record} obj
-     * @returns {Collection}
+     * @returns {Record} The record just created
      */
     add: function (obj) {
         var keys     = this.keys;
@@ -78,7 +79,7 @@ module.exports = classify(Collection,/** @lends Collection# */{
 
         this.comparator && this.sort();
 
-        return this;
+        return record;
     },
     /**
      * @param {String} id

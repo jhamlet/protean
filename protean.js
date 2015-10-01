@@ -9,6 +9,7 @@ reduce([
     require('./dom'),
     require('./function'),
     require('./object'),
+    require('./predicates'),
     require('./string'),
     require('./utility')
 ], assign, exports);

@@ -20,52 +20,50 @@ describe('CompositeSource', function () {
 
     describe('#get', function () {
         it('should get', function (done) {
-            this.timeout(0);
             source.
                 get([[['foo', 'bar'], 'byIndex', 0, ['id', 'value']]]).
                 subscribe(
                     function (resp) {
                         resp.
+                        jsonGraph.
                         should.
                         eql({
-                            jsonGraph: {
-                                foo: {
-                                    byIndex: {
-                                        0: {
-                                            $type: 'ref',
-                                            value: ['foo', 'byId', 'foo']
-                                        }
-                                    },
-                                    byId: {
-                                        foo: {
-                                            id: {
-                                                $type: 'atom',
-                                                value: 'foo'
-                                            },
-                                            value: {
-                                                $type: 'atom',
-                                                value: 'foo'
-                                            }
-                                        }
+                            foo: {
+                                byIndex: {
+                                    0: {
+                                        $type: 'ref',
+                                        value: ['foo', 'byId', 'foo']
                                     }
                                 },
-                                bar: {
-                                    byIndex: {
-                                        0: {
-                                            $type: 'ref',
-                                            value: ['bar', 'byId', 'bar']
+                                byId: {
+                                    foo: {
+                                        id: {
+                                            $type: 'atom',
+                                            value: 'foo'
+                                        },
+                                        value: {
+                                            $type: 'atom',
+                                            value: 'foo'
                                         }
-                                    },
-                                    byId: {
-                                        bar: {
-                                            id: {
-                                                $type: 'atom',
-                                                value: 'bar'
-                                            },
-                                            value: {
-                                                $type: 'atom',
-                                                value: 'bar'
-                                            }
+                                    }
+                                }
+                            },
+                            bar: {
+                                byIndex: {
+                                    0: {
+                                        $type: 'ref',
+                                        value: ['bar', 'byId', 'bar']
+                                    }
+                                },
+                                byId: {
+                                    bar: {
+                                        id: {
+                                            $type: 'atom',
+                                            value: 'bar'
+                                        },
+                                        value: {
+                                            $type: 'atom',
+                                            value: 'bar'
                                         }
                                     }
                                 }

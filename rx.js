@@ -1,21 +1,21 @@
 /**
  * @external Rx
- * @see {@link }
+ * @see {@link https://github.com/Reactive-Extensions/RxJS/tree/master/doc}
  */
 
 /**
  * @external Observable
- * @see {@link }
+ * @see {@link https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md}
  */
 
 /**
  * @external Observer
- * @see {@link }
+ * @see {@link https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observer.md}
  */
 
 /**
  * @external Disposable
- * @see {@link }
+ * @see {@link https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/disposables/disposable.md}
  */
 
 /**
@@ -81,6 +81,7 @@
 
 /**
  * @typedef Subject
+ * @see {@link https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/subjects/subject.md}
  * @extends Observable
  * @mixes Observer
  * @mixes Disposable

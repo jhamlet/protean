@@ -1,26 +1,32 @@
 /**
- * @typedef ProteanClassExtend
+ * @typedef ProteanClass
  * @type {Function}
+ * @constructor
+ */
+/**
+ * A function to extend this class into another one
+ * @member ProteanClass.extend
+ * @function
  * @param {Function} [subclass]
  * @param {Object} [props]
  * @param {Object} [properties]
  * @returns {ProteanClass}
  */
 /**
- * @typedef ProteanClassExtended
- * @type {Function}
+ * A function that will be called when the class is extended into another
+ * @member ProteanClass.extended
+ * @function
  * @param {Function} subclass
  */
 /**
- * @typedef ProteanClass
- * @type {Function}
- * @property {ProteanClassExtend} extend A function to extend this class
- * into another one
- * @property {ProteanClassExtended} [extended] A function that will be
- * called when the class is extended into another
- * @property {Function} superclass A reference to this class' superclass
- * constructor
- * @property {Object} superproto A reference to this class' superclass prototype
+ * A reference to this class' superclass constructor
+ * @member ProteanClass.superclass
+ * @function
+ */
+/**
+ * A reference to this class' superclass prototype
+ * @member ProteanClass.superproto
+ * @type {Object}
  */
 /**
  * Create a constructor function passing in it's prototype methods.
