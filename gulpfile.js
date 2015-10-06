@@ -38,8 +38,12 @@ gulp.task('api.html', ['api.md'], function () {
 });
 CLOBBER.push('api.html');
 
+gulp.task('changelog', function () {
+});
+CLOBBER.push('CHANGELOG.md');
+
 gulp.task('readme', ['api.md'], function () {
-    return gulp.src('src/tmpl/README.ejs').
+    return gulp.src('tmpl/README.ejs').
         pipe(ejs({
             pkg: pkgInfo,
             documentation: fs.readFileSync('api.md', 'utf8'),
