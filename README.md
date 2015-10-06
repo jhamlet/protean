@@ -43,6 +43,8 @@ API
 <dd></dd>
 <dt><a href="#ProteanClass">ProteanClass</a> : <code>function</code></dt>
 <dd></dd>
+<dt><a href="#ProteanSubject">ProteanSubject</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
+<dd></dd>
 <dt><a href="#Storage">Storage</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
 <dd></dd>
 <dt><a href="#Store">Store</a> ⇐ <code><a href="#ProteanClass">ProteanClass</a></code></dt>
@@ -1527,6 +1529,142 @@ A function that will be called when the class is extended into another
 A reference to this class' superclass constructor
 
 **Kind**: static method of <code>[ProteanClass](#ProteanClass)</code>  
+<a name="ProteanSubject"></a>
+## ProteanSubject ⇐ <code>[ProteanClass](#ProteanClass)</code>
+**Kind**: global class  
+**Extends:** <code>[ProteanClass](#ProteanClass)</code>  
+**Implements:** <code>[Subject](#Subject)</code>  
+
+* [ProteanSubject](#ProteanSubject) ⇐ <code>[ProteanClass](#ProteanClass)</code>
+  * [new ProteanSubject(opts)](#new_ProteanSubject_new)
+  * [.options](#ProteanSubject+options)
+    * [.subject](#ProteanSubject+options.subject)
+    * [.observable](#ProteanSubject+options.observable)
+  * [.isStopped](#ProteanSubject+isStopped)
+  * [.isDisposed](#ProteanSubject+isDisposed)
+  * [.observers](#ProteanSubject+observers)
+  * [.subscribe](#ProteanSubject+subscribe) ⇒ <code>[Disposable](#Disposable)</code>
+  * [.hasObservers()](#ProteanSubject+hasObservers) ⇒ <code>Boolean</code>
+  * [.onNext(input)](#ProteanSubject+onNext)
+  * [.onError(error)](#ProteanSubject+onError)
+  * [.onCompleted()](#ProteanSubject+onCompleted)
+  * [.dispose()](#ProteanSubject+dispose)
+
+<a name="new_ProteanSubject_new"></a>
+### new ProteanSubject(opts)
+A convenience class for munging together a Subject and an Observable from
+separate sources.
+
+**File:** [rx/subject.js](rx/subject.js)
+
+
+| Param | Type | Default |
+| --- | --- | --- |
+| opts | <code>Object</code> |  | 
+| [opts.subject] | <code>String</code> &#124; <code>[Subject](#Subject)</code> | <code>&#x27;subject&#x27;</code> | 
+| [opts.observable] | <code>String</code> &#124; <code>[Observable](#Observable)</code> | <code>&#x27;subject&#x27;</code> | 
+
+<a name="ProteanSubject+options"></a>
+### proteanSubject.options
+Default options
+
+**Kind**: instance property of <code>[ProteanSubject](#ProteanSubject)</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>Object</code> | 
+
+
+* [.options](#ProteanSubject+options)
+  * [.subject](#ProteanSubject+options.subject)
+  * [.observable](#ProteanSubject+options.observable)
+
+<a name="ProteanSubject+options.subject"></a>
+#### options.subject
+**Kind**: static property of <code>[options](#ProteanSubject+options)</code>  
+**Default**: <code>&#x27;subject&#x27;</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>String</code> | 
+
+<a name="ProteanSubject+options.observable"></a>
+#### options.observable
+**Kind**: static property of <code>[options](#ProteanSubject+options)</code>  
+**Default**: <code>&#x27;subject&#x27;</code>  
+**Properties**
+
+| Type |
+| --- |
+| <code>String</code> | 
+
+<a name="ProteanSubject+isStopped"></a>
+### proteanSubject.isStopped
+**Kind**: instance property of <code>[ProteanSubject](#ProteanSubject)</code>  
+**Read only**: true  
+**Properties**
+
+| Type |
+| --- |
+| <code>Boolean</code> | 
+
+<a name="ProteanSubject+isDisposed"></a>
+### proteanSubject.isDisposed
+**Kind**: instance property of <code>[ProteanSubject](#ProteanSubject)</code>  
+**Read only**: true  
+**Properties**
+
+| Type |
+| --- |
+| <code>Boolean</code> | 
+
+<a name="ProteanSubject+observers"></a>
+### proteanSubject.observers
+**Kind**: instance property of <code>[ProteanSubject](#ProteanSubject)</code>  
+**Read only**: true  
+**Properties**
+
+| Type |
+| --- |
+| <code>[Array.&lt;Observer&gt;](#Observer)</code> | 
+
+<a name="ProteanSubject+subscribe"></a>
+### proteanSubject.subscribe ⇒ <code>[Disposable](#Disposable)</code>
+**Kind**: instance property of <code>[ProteanSubject](#ProteanSubject)</code>  
+
+| Param | Type |
+| --- | --- |
+| onNextOrObserver | <code>[Observer](#Observer)</code> &#124; <code>function</code> | 
+| [onError] | <code>function</code> | 
+| [onCompleted] | <code>function</code> | 
+
+<a name="ProteanSubject+hasObservers"></a>
+### proteanSubject.hasObservers() ⇒ <code>Boolean</code>
+**Kind**: instance method of <code>[ProteanSubject](#ProteanSubject)</code>  
+<a name="ProteanSubject+onNext"></a>
+### proteanSubject.onNext(input)
+**Kind**: instance method of <code>[ProteanSubject](#ProteanSubject)</code>  
+
+| Param | Type |
+| --- | --- |
+| input | <code>String</code> | 
+
+<a name="ProteanSubject+onError"></a>
+### proteanSubject.onError(error)
+**Kind**: instance method of <code>[ProteanSubject](#ProteanSubject)</code>  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Error</code> | 
+
+<a name="ProteanSubject+onCompleted"></a>
+### proteanSubject.onCompleted()
+**Kind**: instance method of <code>[ProteanSubject](#ProteanSubject)</code>  
+<a name="ProteanSubject+dispose"></a>
+### proteanSubject.dispose()
+**Kind**: instance method of <code>[ProteanSubject](#ProteanSubject)</code>  
 <a name="Storage"></a>
 ## Storage ⇐ <code>[ProteanClass](#ProteanClass)</code>
 **Kind**: global class  
