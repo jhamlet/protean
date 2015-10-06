@@ -1,12 +1,21 @@
 {
     "name": "protean",
     "description": "An ever changing set of utilities.",
-    "version": "0.5.5",
+    "version": "0.5.6",
     "keywords": [
         "utility",
         "lodash",
         "falcor",
-        "datasource"
+        "datasource",
+        "rx",
+        "subject",
+        "finite",
+        "state",
+        "machine",
+        "functional",
+        "classical",
+        "class",
+        "reactive"
     ],
     "main": "./protean.js",
     "dependencies": {
