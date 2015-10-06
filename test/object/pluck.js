@@ -15,4 +15,13 @@ describe('Protean.pluck(key, [obj])', function () {
         var value = pluck('foo', { foo: 'foo' });
         value.should.equal('foo');
     });
+
+    it('should return undefined if the key does not exist', function () {
+        var obj = {};
+        var value = pluck('foo', obj);
+        (value === undefined).should.be.true;
+
+        value = pluck('foo')(obj);
+        (value === undefined).should.be.true;
+    });
 });

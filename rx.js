@@ -87,3 +87,6 @@
  * @mixes Disposable
  */
 
+/**
+ * @member module:Protean.Rx
+ */

@@ -1,7 +1,7 @@
 var R          = require('ramda');
 var denominate = require('protean/object/denominate');
 var isString   = require('protean/predicates/is-string');
-var production =
+var classnames =
         R.pipe(
             R.filter(Boolean),
             R.chain(R.ifElse(isString, R.split(' '), R.identity)),
@@ -26,4 +26,4 @@ var production =
  * @param {...String|Object<String, Boolean>} arg
  * @returns {String}
  */
-module.exports = denominate(R.unapply(production), 'classnames');
+module.exports = denominate(R.unapply(classnames), 'classnames');

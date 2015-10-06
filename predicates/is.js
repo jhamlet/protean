@@ -8,8 +8,8 @@ var partial = require('lodash/function/partial');
  * Function that will compare the `left` argument given to it, otherwise it
  * returns whether or not `right` strictly equals `left`
  */
-module.exports = function is () {
+module.exports = function is (left) {
     return arguments.length === 1 ?
-        partial(is, arguments[0]) :
-        arguments[0] === arguments[1];
+        partial(is, left) :
+        left === arguments[1];
 };
