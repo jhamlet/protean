@@ -3,6 +3,7 @@ var isString = require('lodash/lang/isString');
 var pairs    = require('lodash/object/pairs');
 var set      = require('lodash/object/set');
 var uniq     = require('lodash/array/uniq');
+var WHITESPACE = /\s+/g;
 /**
  * Utility function to get a className string.
  *
@@ -29,10 +30,15 @@ module.exports = function classnames () {
         map(pairs).
         // flatten out the stream
         reduce(function (acc, cur, idx, context) {
-            cur.forEach(function (i) { i[1] && acc.push(i[0]); });
+            cur.
+            forEach(function (i) {
+                i[1] && acc.push.apply(acc, i[0].split(WHITESPACE));
+            });
+
             if (idx === context.length - 1) {
                 acc = uniq(acc);
             }
+
             return acc;
         }, []).
         join(' ');

@@ -36,4 +36,10 @@ describe('Protean.classnames(...args)', function () {
             should.
             eql('foo bar');
     });
+
+    it('should split string arguments on whitespace', function () {
+        classnames('foo bar foo').
+            should.
+            equal('foo bar');
+    });
 });
