@@ -20,6 +20,7 @@
     "main": "./protean.js",
     "dependencies": {
         "lodash":              "3.x",
+        "ramda":               "0.x",
         "falcor":              "0.x",
         "falcor-router":       "0.x",
         "falcor-json-graph":   "1.x",
