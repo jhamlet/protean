@@ -1,4 +1,4 @@
-var reduce = require('lodash/collection/reduce');
+var R = require('ramda');
 /**
  * Takes an argument list of strings and returns an object with those keys, and their
  * values being the index of that key plus one.
@@ -11,9 +11,6 @@ var reduce = require('lodash/collection/reduce');
  * @returns {Object}
  */
 module.exports = function enumerate () {
-    return reduce(arguments, function (acc, cur, idx) {
-        acc[cur] = idx + 1;
-        return acc;
-    }, {});
+    return R.zipObj(arguments, R.range(1, arguments.length + 1));
 };
 

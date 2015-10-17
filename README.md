@@ -105,6 +105,24 @@ API
 ## Protean
 
 * [Protean](#module_Protean)
+  * [.Rx](#module_Protean.Rx)
+    * [.append](#module_Protean.Rx.append) ⇒ <code>Observable.&lt;String&gt;</code>
+    * [.mv](#module_Protean.Rx.mv) ⇒ <code>Observable.&lt;String&gt;</code>
+    * [.fsWrapper](#module_Protean.Rx.fsWrapper) ⇒ <code>function</code>
+    * [.write](#module_Protean.Rx.write) ⇒ <code>Observable.&lt;String&gt;</code>
+    * [.from(arg)](#module_Protean.Rx.from) ⇒ <code>[Observable](#Observable)</code>
+    * [.cp(from, to, [opts])](#module_Protean.Rx.cp) ⇒ <code>Observable.&lt;fs.Stats&gt;</code>
+    * [.glob(pattern, [opts])](#module_Protean.Rx.glob) ⇒ <code>Observable.&lt;String&gt;</code>
+    * [.isDirectory(paths)](#module_Protean.Rx.isDirectory) ⇒ <code>Observable.&lt;Boolean&gt;</code>
+    * [.isFile(paths)](#module_Protean.Rx.isFile) ⇒ <code>Observable.&lt;Boolean&gt;</code>
+    * [.mkdir(paths, [opts])](#module_Protean.Rx.mkdir) ⇒ <code>Observable.&lt;String&gt;</code>
+    * [.read(patterns, [enc])](#module_Protean.Rx.read) ⇒ <code>Observable.&lt;(String\|Buffer)&gt;</code>
+    * [.rm(patterns, [recursive])](#module_Protean.Rx.rm) ⇒ <code>Observable.&lt;String&gt;</code>
+    * [.stat(patterns)](#module_Protean.Rx.stat) ⇒ <code>Observable.&lt;external:fs.Stats&gt;</code>
+      * [.link(patterns)](#module_Protean.Rx.stat.link) ⇒ <code>Observable.&lt;external:fs.Stats&gt;</code>
+      * [.fd(fds)](#module_Protean.Rx.stat.fd) ⇒ <code>Observable.&lt;external:fs.Stats&gt;</code>
+  * [.denominate](#module_Protean.denominate) ⇒ <code>Object</code>
+  * [.invoke](#module_Protean.invoke) ⇒ <code>\*</code>
   * [.pluck](#module_Protean.pluck) ⇒ <code>\*</code> &#124; <code>function</code>
   * [.classnames(arg)](#module_Protean.classnames) ⇒ <code>String</code>
   * [.classify([subclass], props, [properties])](#module_Protean.classify) ⇒ <code>[ProteanClass](#ProteanClass)</code>
@@ -122,6 +140,214 @@ API
       * [~visitorFn(path, value, context)](#module_Protean.traverse..visitorFn) ⇒ <code>undefined</code> &#124; <code>String</code>
   * [.guid()](#module_Protean.guid) ⇒ <code>String</code>
   * [.mergeExports(receiver, supplier)](#module_Protean.mergeExports) ⇒ <code>Object</code>
+
+<a name="module_Protean.Rx"></a>
+### Protean.Rx
+**Kind**: static property of <code>[Protean](#module_Protean)</code>  
+
+* [.Rx](#module_Protean.Rx)
+  * [.append](#module_Protean.Rx.append) ⇒ <code>Observable.&lt;String&gt;</code>
+  * [.mv](#module_Protean.Rx.mv) ⇒ <code>Observable.&lt;String&gt;</code>
+  * [.fsWrapper](#module_Protean.Rx.fsWrapper) ⇒ <code>function</code>
+  * [.write](#module_Protean.Rx.write) ⇒ <code>Observable.&lt;String&gt;</code>
+  * [.from(arg)](#module_Protean.Rx.from) ⇒ <code>[Observable](#Observable)</code>
+  * [.cp(from, to, [opts])](#module_Protean.Rx.cp) ⇒ <code>Observable.&lt;fs.Stats&gt;</code>
+  * [.glob(pattern, [opts])](#module_Protean.Rx.glob) ⇒ <code>Observable.&lt;String&gt;</code>
+  * [.isDirectory(paths)](#module_Protean.Rx.isDirectory) ⇒ <code>Observable.&lt;Boolean&gt;</code>
+  * [.isFile(paths)](#module_Protean.Rx.isFile) ⇒ <code>Observable.&lt;Boolean&gt;</code>
+  * [.mkdir(paths, [opts])](#module_Protean.Rx.mkdir) ⇒ <code>Observable.&lt;String&gt;</code>
+  * [.read(patterns, [enc])](#module_Protean.Rx.read) ⇒ <code>Observable.&lt;(String\|Buffer)&gt;</code>
+  * [.rm(patterns, [recursive])](#module_Protean.Rx.rm) ⇒ <code>Observable.&lt;String&gt;</code>
+  * [.stat(patterns)](#module_Protean.Rx.stat) ⇒ <code>Observable.&lt;external:fs.Stats&gt;</code>
+    * [.link(patterns)](#module_Protean.Rx.stat.link) ⇒ <code>Observable.&lt;external:fs.Stats&gt;</code>
+    * [.fd(fds)](#module_Protean.Rx.stat.fd) ⇒ <code>Observable.&lt;external:fs.Stats&gt;</code>
+
+<a name="module_Protean.Rx.append"></a>
+#### Rx.append ⇒ <code>Observable.&lt;String&gt;</code>
+**Kind**: static property of <code>[Rx](#module_Protean.Rx)</code>  
+
+| Param | Type |
+| --- | --- |
+| filepath | <code>String</code> | 
+| data | <code>Buffer</code> &#124; <code>String</code> | 
+| [opts] | <code>Object</code> &#124; <code>String</code> | 
+
+<a name="module_Protean.Rx.mv"></a>
+#### Rx.mv ⇒ <code>Observable.&lt;String&gt;</code>
+**File:** [rx/fs/mv.js](rx/fs/mv.js)
+
+**Kind**: static property of <code>[Rx](#module_Protean.Rx)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| from | <code>String</code> |  | 
+| to | <code>String</code> |  | 
+| opts | <code>Object</code> |  | 
+| [opts.mkdirp] | <code>Boolean</code> | <code>false</code> | 
+| [opts.clobber] | <code>Boolean</code> | <code>false</code> | 
+
+<a name="module_Protean.Rx.fsWrapper"></a>
+#### Rx.fsWrapper ⇒ <code>function</code>
+**Kind**: static property of <code>[Rx](#module_Protean.Rx)</code>  
+
+| Param | Type |
+| --- | --- |
+| method | <code>String</code> | 
+
+<a name="module_Protean.Rx.write"></a>
+#### Rx.write ⇒ <code>Observable.&lt;String&gt;</code>
+**Kind**: static property of <code>[Rx](#module_Protean.Rx)</code>  
+
+| Param | Type |
+| --- | --- |
+| filepath | <code>String</code> | 
+| data | <code>Buffer</code> &#124; <code>String</code> | 
+| [opts] | <code>Object</code> &#124; <code>String</code> | 
+
+<a name="module_Protean.Rx.from"></a>
+#### Rx.from(arg) ⇒ <code>[Observable](#Observable)</code>
+**File:** [rx/from.js](rx/from.js)
+
+**Kind**: static method of <code>[Rx](#module_Protean.Rx)</code>  
+
+| Param | Type |
+| --- | --- |
+| arg | <code>[Observable](#Observable)</code> &#124; <code>Promise</code> &#124; <code>Array</code> &#124; <code>Object</code> | 
+
+<a name="module_Protean.Rx.cp"></a>
+#### Rx.cp(from, to, [opts]) ⇒ <code>Observable.&lt;fs.Stats&gt;</code>
+**File:** [rx/fs/cp.js](rx/fs/cp.js)
+
+**Kind**: static method of <code>[Rx](#module_Protean.Rx)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| from | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> &#124; <code>Observable.&lt;String&gt;</code> &#124; <code>Promise.&lt;String&gt;</code> |  | 
+| to | <code>String</code> |  | 
+| [opts] | <code>Object</code> |  | 
+| [opts.recursive] | <code>Boolean</code> | <code>true</code> | 
+| [opts.force] | <code>Boolean</code> | <code>false</code> | 
+
+<a name="module_Protean.Rx.glob"></a>
+#### Rx.glob(pattern, [opts]) ⇒ <code>Observable.&lt;String&gt;</code>
+**File:** [rx/glob.js](rx/glob.js)
+
+**Kind**: static method of <code>[Rx](#module_Protean.Rx)</code>  
+**Returns**: <code>Observable.&lt;String&gt;</code> - An Observable emiting the paths found  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| pattern | <code>String</code> | The glob pattern |
+| [opts] | <code>Object</code> | [https://github.com/isaacs/node-glob#options](https://github.com/isaacs/node-glob#options) |
+
+<a name="module_Protean.Rx.isDirectory"></a>
+#### Rx.isDirectory(paths) ⇒ <code>Observable.&lt;Boolean&gt;</code>
+**File:** [rx/is-directory.js](rx/is-directory.js)
+
+**Kind**: static method of <code>[Rx](#module_Protean.Rx)</code>  
+**Returns**: <code>Observable.&lt;Boolean&gt;</code> - An Observable emiting the paths found  
+
+| Param | Type |
+| --- | --- |
+| paths | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> &#124; <code>Observable.&lt;String&gt;</code> | 
+
+<a name="module_Protean.Rx.isFile"></a>
+#### Rx.isFile(paths) ⇒ <code>Observable.&lt;Boolean&gt;</code>
+**File:** [rx/is-file.js](rx/is-file.js)
+
+**Kind**: static method of <code>[Rx](#module_Protean.Rx)</code>  
+
+| Param | Type |
+| --- | --- |
+| paths | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> &#124; <code>Observable.&lt;String&gt;</code> | 
+
+<a name="module_Protean.Rx.mkdir"></a>
+#### Rx.mkdir(paths, [opts]) ⇒ <code>Observable.&lt;String&gt;</code>
+Create the given paths in the file system.
+
+**File:** [rx/mkdir.js](rx/mkdir.js)
+
+**Kind**: static method of <code>[Rx](#module_Protean.Rx)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| paths | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> &#124; <code>Observable.&lt;String&gt;</code> |  | 
+| [opts] | <code>Object</code> |  | 
+| [opts.mode] | <code>String</code> | <code>&#x27;0777&#x27;</code> | 
+
+<a name="module_Protean.Rx.read"></a>
+#### Rx.read(patterns, [enc]) ⇒ <code>Observable.&lt;(String\|Buffer)&gt;</code>
+**File:** [rx/read.js](rx/read.js)
+
+**Kind**: static method of <code>[Rx](#module_Protean.Rx)</code>  
+
+| Param | Type |
+| --- | --- |
+| patterns | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> &#124; <code>Observable.&lt;String&gt;</code> &#124; <code>Promise.&lt;String&gt;</code> | 
+| [enc] | <code>String</code> | 
+
+<a name="module_Protean.Rx.rm"></a>
+#### Rx.rm(patterns, [recursive]) ⇒ <code>Observable.&lt;String&gt;</code>
+**File:** [rx/rm.js](rx/rm.js)
+
+**Kind**: static method of <code>[Rx](#module_Protean.Rx)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| patterns | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> &#124; <code>Observable.&lt;String&gt;</code> &#124; <code>Promise.&lt;String&gt;</code> |  | 
+| [recursive] | <code>Boolean</code> | <code>true</code> | 
+
+<a name="module_Protean.Rx.stat"></a>
+#### Rx.stat(patterns) ⇒ <code>Observable.&lt;external:fs.Stats&gt;</code>
+**File:** [rx/stat.js](rx/stat.js)
+
+**Kind**: static method of <code>[Rx](#module_Protean.Rx)</code>  
+**Returns**: <code>Observable.&lt;external:fs.Stats&gt;</code> - An Observable emiting the paths found  
+
+| Param | Type |
+| --- | --- |
+| patterns | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> &#124; <code>Observable.&lt;String&gt;</code> &#124; <code>Promise.&lt;String&gt;</code> | 
+
+
+* [.stat(patterns)](#module_Protean.Rx.stat) ⇒ <code>Observable.&lt;external:fs.Stats&gt;</code>
+  * [.link(patterns)](#module_Protean.Rx.stat.link) ⇒ <code>Observable.&lt;external:fs.Stats&gt;</code>
+  * [.fd(fds)](#module_Protean.Rx.stat.fd) ⇒ <code>Observable.&lt;external:fs.Stats&gt;</code>
+
+<a name="module_Protean.Rx.stat.link"></a>
+##### stat.link(patterns) ⇒ <code>Observable.&lt;external:fs.Stats&gt;</code>
+**Kind**: static method of <code>[stat](#module_Protean.Rx.stat)</code>  
+
+| Param | Type |
+| --- | --- |
+| patterns | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> &#124; <code>Observable.&lt;String&gt;</code> &#124; <code>Promise.&lt;String&gt;</code> | 
+
+<a name="module_Protean.Rx.stat.fd"></a>
+##### stat.fd(fds) ⇒ <code>Observable.&lt;external:fs.Stats&gt;</code>
+**Kind**: static method of <code>[stat](#module_Protean.Rx.stat)</code>  
+
+| Param | Type |
+| --- | --- |
+| fds | <code>Integer</code> &#124; <code>Array.&lt;Integer&gt;</code> &#124; <code>Observable.&lt;Integer&gt;</code> &#124; <code>Promise.&lt;Integer&gt;</code> | 
+
+<a name="module_Protean.denominate"></a>
+### Protean.denominate ⇒ <code>Object</code>
+**Kind**: static property of <code>[Protean](#module_Protean)</code>  
+**Returns**: <code>Object</code> - The object now with a immutable 'name' property of the
+given name value  
+
+| Param | Type |
+| --- | --- |
+| obj | <code>Object</code> | 
+| name | <code>String</code> | 
+
+<a name="module_Protean.invoke"></a>
+### Protean.invoke ⇒ <code>\*</code>
+**Kind**: static property of <code>[Protean](#module_Protean)</code>  
+
+| Param | Type |
+| --- | --- |
+| property | <code>String</code> | 
+| subject | <code>Object</code> | 
 
 <a name="module_Protean.pluck"></a>
 ### Protean.pluck ⇒ <code>\*</code> &#124; <code>function</code>

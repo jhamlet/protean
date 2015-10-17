@@ -1,9 +1,16 @@
-var toArray  = require('lodash/lang/toArray');
-var isString = require('lodash/lang/isString');
-var pairs    = require('lodash/object/pairs');
-var set      = require('lodash/object/set');
-var uniq     = require('lodash/array/uniq');
-var WHITESPACE = /\s+/g;
+var R          = require('ramda');
+var denominate = require('protean/object/denominate');
+var isString   = require('protean/predicates/is-string');
+var classnames =
+        R.pipe(
+            R.filter(Boolean),
+            R.chain(R.ifElse(isString, R.split(' '), R.identity)),
+            R.map(R.ifElse(isString, R.objOf(R.__, true), R.identity)),
+            R.reduce(R.merge, {}),
+            R.pickBy(Boolean),
+            R.keys,
+            R.join(' ')
+        );
 /**
  * Utility function to get a className string.
  *
@@ -19,27 +26,4 @@ var WHITESPACE = /\s+/g;
  * @param {...String|Object<String, Boolean>} arg
  * @returns {String}
  */
-module.exports = function classnames () {
-    return toArray(arguments).
-        filter(Boolean).
-        // convert to objects
-        map(function (arg) {
-            return !isString(arg) ? arg : set({}, arg, true);
-        }).
-        // convert to pairs
-        map(pairs).
-        // flatten out the stream
-        reduce(function (acc, cur, idx, context) {
-            cur.
-            forEach(function (i) {
-                i[1] && acc.push.apply(acc, i[0].split(WHITESPACE));
-            });
-
-            if (idx === context.length - 1) {
-                acc = uniq(acc);
-            }
-
-            return acc;
-        }, []).
-        join(' ');
-};
+module.exports = denominate(R.unapply(classnames), 'classnames');

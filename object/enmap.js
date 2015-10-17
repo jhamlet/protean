@@ -1,7 +1,6 @@
-var partition = require('lodash/collection/partition'),
-    object = require('lodash/array/object');
-
-function isEven (a, i) { return i % 2 === 0; }
+var R = require('ramda');
+var denominate = require('protean/object/denominate');
+var enmap = R.pipe(R.splitEvery(2), R.fromPairs);
 
 /**
  * Takes a list of alternating key/values and returns an object.
@@ -13,7 +12,4 @@ function isEven (a, i) { return i % 2 === 0; }
  * @param {...Mixed} args
  * @returns {Object}
  */
-module.exports = function enmap () {
-    var keyValues = partition(arguments, isEven);
-    return object.apply(null, keyValues);
-};
+module.exports = denominate(R.unapply(enmap), 'enmap');
