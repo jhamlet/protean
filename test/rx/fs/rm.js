@@ -62,7 +62,7 @@ describe('Protean.Rx.rm(paths, [recursive=true])', function () {
             );
     });
 
-    it('should throw an error when trying to empty a non-empty directory (recursive=false)', function (done) {
+    it('should through an error when trying to empty a non-empty directory (recursive=false)', function (done) {
         var expected = 'tmp-test/foo';
 
         rm(expected, false).

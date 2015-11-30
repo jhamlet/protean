@@ -1,7 +1,8 @@
-var R          = require('ramda');
 var Rx         = require('rx');
 var Observable = Rx.Observable;
 var rimraf     = Observable.fromNodeCallback(require('rimraf'));
+var identity   = require('lodash/utility/identity');
+var partial    = require('lodash/function/partial');
 var rmdir      = require('./wrapper')('rmdir');
 var glob       = require('./glob');
 var stat       = require('./stat');
@@ -28,7 +29,7 @@ module.exports = function rm (patterns, recursive) {
                 result = rimraf(path);
             }
 
-            result = result ? result.map(R.always(path)) : result;
+            result = result ? result.map(partial(identity, path)) : result;
 
             return result;
         });

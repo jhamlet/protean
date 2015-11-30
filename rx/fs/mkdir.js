@@ -1,5 +1,6 @@
-var R          = require('ramda');
 var Rx         = require('rx');
+var identity   = require('lodash/utility/identity');
+var partial    = require('lodash/function/partial');
 var Observable = Rx.Observable;
 var from       = require('protean/rx/from');
 var mkdirp     = Observable.fromNodeCallback(require('mkdirp'));
@@ -19,6 +20,6 @@ module.exports = function mkdir (paths, opts) {
     return from(paths).
         flatMap(function (path) {
             return mkdirp(path, opts).
-                map(R.always(path));
+                map(partial(identity, path));
         });
 };

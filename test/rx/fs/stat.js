@@ -14,9 +14,8 @@ describe('Protean.Rx.stat(paths)', function () {
     });
 
     it('should get stats for globs of things', function (done) {
-        stat('rx/**/*.js').
+        stat('rx/*.js').
             subscribe(function (stats) {
-                // console.log('%j', stats);
                 stats.should.be.an.object;
                 stats.filepath.should.be.a.string;
             }, null, done);

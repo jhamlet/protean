@@ -1,6 +1,7 @@
 var Rx         = require('rx');
 var Observable = Rx.Observable;
-var globRx     = Observable.fromNodeCallback(require('glob'));
+var identity   = require('lodash/utility/identity');
+var globRx     = Observable.fromNodeCallback(require('glob'), null, identity);
 /**
  * **File:** [rx/glob.js](rx/glob.js)
  *

@@ -3,6 +3,7 @@ var fswrap     = require('./wrapper');
 var realpath   = fswrap('realpath');
 var readfile   = fswrap('readFile');
 var glob       = require('./glob');
+var from       = require('protean/rx/from');
 var stat       = require('./stat');
 /**
  * **File:** [rx/read.js](rx/read.js)
@@ -21,7 +22,8 @@ module.exports = function read (patterns, enc) {
             var result;
 
             if (stats.isDirectory()) {
-                result = glob(npath.join(path, '*'));
+                result = glob(npath.join(path, '*')).
+                    flatMap(from);
             }
             else if (stats.isSymbolicLink()) {
                 result = realpath(path).
